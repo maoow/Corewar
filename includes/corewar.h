@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/20 16:41:08 by starrit          ###   ########.fr       */
+/*   Updated: 2017/07/20 17:14:42 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct			s_process
 ** t_process **process: liste chainee des processus
 ** t_champ **champs : liste chainee des champions
 ** int checks : compteur de verifications de cycle_to_die
+** int total_cycle : nombre de cycle total pour les option d'affichage tous les
+** N cycles (modulo)
 */
 
 typedef struct			s_cor
@@ -60,6 +62,7 @@ typedef struct			s_cor
 	t_process			*process;
 	char				*last_champ_alive;
 	int					checks;
+	int					total_cycle;
 }						t_cor;
 
 #endif
