@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/20 13:58:46 by starrit          ###   ########.fr       */
+/*   Updated: 2017/07/20 14:49:28 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,27 @@
 # define CYCLE_DELTA 50
 # define MAX_CHECKS 10
 
-typedef struct		champ
+typedef struct			s_champ
 {
-	char			*name;
-	char			*comment;
-	int				ID;
-}					t_champ;
+	char				*name;
+	char				*comment;
+	int					ID;
+	struct s_champ		*next;
+}						t_champ;
 
 /*
 ** int *registres : size de REG_NUMBER
 ** int live : nombre d'instruction live pour calculer la decrementation
 */
 
-typedef struct		process
+typedef struct			s_process
 {
-	int				*registres;
-	int				PC;
-	bool			carry;
-	int				live;
-}					t_process
+	int					*registres;
+	int					PC;
+	bool				carry;
+	int					live;
+	struct s_process	*next;
+}						t_process
 
 /*
 ** char *last_champ_alive : dernier champion rapporte en vie
@@ -50,11 +52,11 @@ typedef struct		process
 ** t_champ **champs : liste chainee des champions
 */
 
-typedef struct		cor
+typedef struct			s_cor
 {
-	t_champ			**champs;
-	t_process		**process;
-	char			*last_champ_alive;
-}
+	t_champ				*champs;
+	t_process			*process;
+	char				*last_champ_alive;
+}						t_cor;
 
 #endif
