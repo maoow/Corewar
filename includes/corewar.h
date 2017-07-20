@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/20 14:49:28 by starrit          ###   ########.fr       */
+/*   Updated: 2017/07/20 16:41:08 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct			s_champ
 
 typedef struct			s_process
 {
+	int					ID;
 	int					*registres;
 	int					PC;
 	bool				carry;
@@ -50,6 +51,7 @@ typedef struct			s_process
 ** char *last_champ_alive : dernier champion rapporte en vie
 ** t_process **process: liste chainee des processus
 ** t_champ **champs : liste chainee des champions
+** int checks : compteur de verifications de cycle_to_die
 */
 
 typedef struct			s_cor
@@ -57,6 +59,7 @@ typedef struct			s_cor
 	t_champ				*champs;
 	t_process			*process;
 	char				*last_champ_alive;
+	int					checks;
 }						t_cor;
 
 #endif
