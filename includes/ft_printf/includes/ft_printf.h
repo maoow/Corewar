@@ -6,13 +6,13 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 13:08:37 by cbinet            #+#    #+#             */
-/*   Updated: 2017/03/20 13:11:00 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/21 11:54:02 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdarg.h>
 # include <limits.h>
 # define FLAGS buffer->flags

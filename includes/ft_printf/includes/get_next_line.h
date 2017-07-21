@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:19:37 by cbinet            #+#    #+#             */
-/*   Updated: 2017/03/20 13:14:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/21 11:55:07 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # ifndef BUFF_SIZE
 #  define BUFF_SIZE 2048
 # endif
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>

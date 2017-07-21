@@ -6,18 +6,18 @@
 #    By: cbinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/13 14:45:18 by cbinet            #+#    #+#              #
-#    Updated: 2017/03/15 16:28:36 by cbinet           ###   ########.fr        #
+#    Updated: 2017/07/21 11:53:41 by cbinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FLAG = -Wall -Wextra -Werror -g
+FLAG = -Wall -Wextra -Werror -g -I includes
 
 NAME = libftprintf.a
 
 SRC_PATH = srcs/
 OBJ_PATH = obj/
-LIB_PATH = includes/libft/
-LIBO_PATH = includes/libft/obj/
+LIB_PATH = srcs/
+LIBO_PATH = lobj/
 
 LIB_NAME = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		   ft_isdigit.c ft_isprint.c ft_itoa.c ft_itoabase.c ft_litoa.c \
