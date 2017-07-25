@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/25 13:32:41 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:58:18 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct			s_process
 	// int					*registres;
 	unsigned char		registres[REG_NUMBER];
 	size_t				PC;
+	size_t				next_jump;
 	size_t				cycles_before_execute;
 	void				*next_op;
 	bool				carry;
@@ -69,6 +70,7 @@ typedef struct			s_cor
 	size_t				checks;
 	size_t				last_check;
 	size_t				total_cycle;
+	unsigned char		*arena;
 }						t_cor;
 
 void	ft_browseprocess(t_cor *core);
