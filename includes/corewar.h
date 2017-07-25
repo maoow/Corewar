@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/25 13:25:50 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:32:41 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,7 @@ typedef struct			s_cor
 	size_t				total_cycle;
 }						t_cor;
 
+void	ft_browseprocess(t_cor *core);
+void		usage(void);
+void		ft_warcycle(t_cor *core);
 #endif
