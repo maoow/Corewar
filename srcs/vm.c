@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/25 13:20:48 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:00:19 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		ft_parse(t_cor *core, int ac, char **av)
 {
-
+	// TO DO
 }
 
 static void		ft_init(t_cor *core)
@@ -23,11 +23,14 @@ static void		ft_init(t_cor *core)
 	core->checks = 0;
 	core->last_check = 0;
 	core->total_cycle = 0;
+	core->champs = NULL;
+	core->process = NULL;
+	core->last_champ_alive = NULL;
 }
 
 static void		ft_clean(t_cor *core)
 {
-
+	// TO DO
 }
 
 int				main(int ac, char **av)
