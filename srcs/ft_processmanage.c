@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/25 14:00:00 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:27:24 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 static void		ft_executeprocess(t_cor *core, t_process *proc)
 {
 	// TO DO
+
+	proc->PC += proc->next_jump % MEM_SIZE;
+	free_op(proc);
 }
 
 static void		ft_getop(t_cor *core, t_process *proc)
@@ -29,9 +32,9 @@ void			ft_browseprocess(t_cor *core)
 	proc = core->process;
 	while (proc)
 	{
-		if (proc->cycles_before_execute == 0 && next_op)
+		if (proc->cycles_before_execute == 0 && proc->next_op)
 			ft_executeprocess(core, proc);
-		if (!next_op)
+		if (!proc->next_op)
 			ft_getop(core, proc);
 		proc->cycles_before_execute--;
 		proc = proc->next;
