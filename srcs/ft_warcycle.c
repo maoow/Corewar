@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/25 13:32:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:23:45 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static bool		ft_checklives(t_cor *core)
 		core->checks = 0;
 	}
 	core->checks++;
-	core->last_check = core->total_cycle;
 	return (true);
 }
 
