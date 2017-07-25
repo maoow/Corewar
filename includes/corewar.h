@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/20 17:14:42 by starrit          ###   ########.fr       */
+/*   Updated: 2017/07/25 13:05:15 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct			s_champ
 {
 	char				*name;
 	char				*comment;
-	int					ID;
+	size_t				ID;
 	struct s_champ		*next;
 }						t_champ;
 
@@ -39,11 +39,15 @@ typedef struct			s_champ
 
 typedef struct			s_process
 {
-	int					ID;
-	int					*registres;
-	int					PC;
+	size_t				ID;
+
+	// int					*registres;
+	unsigned char		registres[REG_NUMBER];
+	size_t				PC;
+	size_t				cycles_before_execute;
+	void				*next_op;
 	bool				carry;
-	int					live;
+	size_t				live;
 	struct s_process	*next;
 }						t_process
 
@@ -61,8 +65,9 @@ typedef struct			s_cor
 	t_champ				*champs;
 	t_process			*process;
 	char				*last_champ_alive;
-	int					checks;
-	int					total_cycle;
+	size_t				checks;
+	size_t				last_check;
+	size_t				total_cycle;
 }						t_cor;
 
 #endif
