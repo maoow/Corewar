@@ -6,11 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/25 13:25:42 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:32:34 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-bool		ft_checklives(t_cor *core)
+static bool		ft_checklives(t_cor *core)
 {
 	t_process	*proc;
 	size_t		lives;
@@ -25,6 +25,8 @@ bool		ft_checklives(t_cor *core)
 		proc->live = 0;
 		proc = proc->next;
 	}
+	if (!lives)
+		return (false);
 	if (core->checks >= MAX_CHECKS || lives > NBR_LIVE)
 	{
 		core->cycle_to_die -= CYCLE_DELTA;
@@ -32,15 +34,15 @@ bool		ft_checklives(t_cor *core)
 	}
 	core->checks++;
 	core->last_check = core->total_cycle;
-
+	return (true);
 }
 
-void		ft_warcycle(t_cor *core)
+void			ft_warcycle(t_cor *core)
 {
 	bool	b_alive;
 
-	b_alive = false;
-	while (!b_alive)
+	b_alive = true;
+	while (b_alive)
 	{
 		while (core->total_cycle - last_check < core->cycle_to_die)
 		{
@@ -49,5 +51,5 @@ void		ft_warcycle(t_cor *core)
 		}
 		b_alive = ft_checklives(core);
 	}
-
+	// core->last_champ_alive Won !
 }
