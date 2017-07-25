@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/25 14:00:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:38:04 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void		ft_parse(t_cor *core, int ac, char **av)
 static void		ft_init(t_cor *core)
 {
 	core->cycle_to_die = CYCLE_TO_DIE;
+	core->tmp_cycle_to_die = 0;
 	core->checks = 0;
-	core->last_check = 0;
 	core->total_cycle = 0;
 	core->champs = NULL;
 	core->process = NULL;

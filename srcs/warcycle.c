@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_warcycle.c                                      :+:      :+:    :+:   */
+/*   warcycle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/25 14:23:45 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:38:23 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void			ft_warcycle(t_cor *core)
 	b_alive = true;
 	while (b_alive)
 	{
-		while (core->total_cycle - last_check < core->cycle_to_die)
+		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
 			// browse / execute processes op
 			core->total_cycle++;
+			core->tmp_cycle_to_die++;
 		}
 		b_alive = ft_checklives(core);
 	}

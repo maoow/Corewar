@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/25 14:23:51 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:38:12 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct			s_cor
 	t_process			*process;
 	char				*last_champ_alive;
 	size_t				cycle_to_die;
+	size_t				tmp_cycle_to_die;
 	size_t				checks;
 	size_t				total_cycle;
 	unsigned char		*arena;
