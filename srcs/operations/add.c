@@ -6,11 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:24:58 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/26 14:32:45 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/26 14:35:11 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-include "operations.h"
+#include "operations.h"
 
 bool	add(t_cor *core, t_process *proc)
 {
