@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/26 12:19:49 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/26 14:12:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct			s_champ
 	char				*comment;
 	size_t				ID;
 	struct s_champ		*next;
+	bool				alive;
 }						t_champ;
 
 /*
@@ -48,7 +49,7 @@ typedef struct			s_process
 	size_t				PC;
 	size_t				next_jump;
 	size_t				cycles_before_execute;
-	void				*next_op;
+	bool				*next_op;
 	bool				carry;
 	size_t				live;
 	struct s_process	*next;
@@ -57,7 +58,7 @@ typedef struct			s_process
 /*
 ** char *last_champ_alive : dernier champion rapporte en vie
 ** t_process **process: liste chainee des processus
-** t_champ **champs : liste chainee des champions
+** t_champ **champs : tableau des champions
 ** int checks : compteur de verifications de cycle_to_die
 ** int total_cycle : nombre de cycle total pour les option d'affichage tous les
 ** N cycles (modulo)
@@ -107,6 +108,24 @@ bool	lldi(t_cor *core, t_process *proc);
 bool	lfork(t_cor *core, t_process *proc);
 bool	aff(t_cor *core, t_process *proc);
 
+size_t					g_optime[OPC_NBR] = {
+	10,
+	5,
+	5,
+	10,
+	10,
+	6,
+	6,
+	6,
+	20,
+	25,
+	25,
+	800,
+	10,
+	50,
+	1000,
+	2
+};
 bool					g_opcarry[OPC_NBR] = {
 	false,
 	true,
@@ -142,6 +161,24 @@ bool					*g_opctable[OPC_NBR] = {
 	&lldi,
 	&lfork,
 	&aff
+};
+size_t					g_oplabel[OPC_NBR] = {
+4,
+4,
+0,
+0,
+0,
+4,
+4,
+4,
+2,
+2,
+2,
+2,
+4,
+2,
+2,
+0
 };
 
 #endif
