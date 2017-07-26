@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/25 14:38:12 by starrit          ###   ########.fr       */
+/*   Updated: 2017/07/26 12:19:49 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 # define CHAMP_MAX_SIZE (MEM_SIZE / 6)
 
 # define REG_NUMBER 16
+# define OPC_NUMBER 16
 # define REG_SIZE 4
 
 # define CYCLE_TO_DIE 1500
 # define NBR_LIVE 21
 # define CYCLE_DELTA 50
 # define MAX_CHECKS 10
+
 
 typedef struct			s_champ
 {
@@ -73,7 +75,73 @@ typedef struct			s_cor
 	unsigned char		*arena;
 }						t_cor;
 
-void	ft_browseprocess(t_cor *core);
+void		ft_browseprocess(t_cor *core);
 void		usage(void);
 void		ft_warcycle(t_cor *core);
+
+
+
+
+
+
+
+
+
+// opcodes
+
+
+bool	live(t_cor *core, t_process *proc);
+bool	ld(t_cor *core, t_process *proc);
+bool	st(t_cor *core, t_process *proc);
+bool	add(t_cor *core, t_process *proc);
+bool	sub(t_cor *core, t_process *proc);
+bool	and(t_cor *core, t_process *proc);
+bool	or(t_cor *core, t_process *proc);
+bool	xor(t_cor *core, t_process *proc);
+bool	zjmp(t_cor *core, t_process *proc);
+bool	ldi(t_cor *core, t_process *proc);
+bool	sti(t_cor *core, t_process *proc);
+bool	fork(t_cor *core, t_process *proc);
+bool	lld(t_cor *core, t_process *proc);
+bool	lldi(t_cor *core, t_process *proc);
+bool	lfork(t_cor *core, t_process *proc);
+bool	aff(t_cor *core, t_process *proc);
+
+bool					g_opcarry[OPC_NBR] = {
+	false,
+	true,
+	false,
+	true,
+	true,
+	true,
+	true,
+	true,
+	false,
+	false,
+	false,
+	false,
+	true,
+	true,
+	false,
+	false,
+};
+bool					*g_opctable[OPC_NBR] = {
+	&live,
+	&ld,
+	&st,
+	&add,
+	&sub,
+	&and,
+	&or,
+	&xor,
+	&zjmp,
+	&ldi,
+	&sti,
+	&fork,
+	&lld,
+	&lldi,
+	&lfork,
+	&aff
+};
+
 #endif
