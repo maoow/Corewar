@@ -6,10 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:17:49 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/26 14:18:35 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/26 14:34:04 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#ifndef OPERATIONS_H
+# define OPERATIONS_H
 #include "corewar.h"
 
 bool	live(t_cor *core, t_process *proc);
@@ -102,3 +103,5 @@ size_t					g_oplabel[OPC_NBR] = {
 2,
 0
 };
+
+#endif
