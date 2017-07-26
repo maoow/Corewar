@@ -6,31 +6,30 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/26 12:19:47 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/26 13:38:22 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 static void		ft_executeprocess(t_cor *core, t_process *proc)
 {
-	// TO DO
-
+	bool	(*op);
+	bool	carry;
+	carry = proc->next_op(core, proc);
+	if (g_opcarry[core->arena[proc->PC] - 1])
+		proc->carry = carry;
 	proc->PC += proc->next_jump % MEM_SIZE;
 	free_op(proc);
 }
 
-	// compare core->arena[proc->PC] with opc_table
+// compare core->arena[proc->PC] with opc_table
 static void		ft_getop(t_cor *core, t_process *proc)
 {
-	bool	(*op);
-	bool	carry;
 
 	if (core->arena[proc->PC] - 1 < OPC_NBR)
 	{
-		op = g_opctable[core->arena[proc->PC] - 1];
-		carry = op(core, proc);
-		if (g_opcarry[core->arena[proc->PC] - 1])
-			proc->carry = carry;
+		proc->next_op = g_opctable[core->arena[proc->PC] - 1];
+		proc->cycle_before_execute = g_optime[core->arena[proc->PC] - 1];
 	}
 }
 
