@@ -6,7 +6,7 @@
 #    By: cbinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/13 14:45:18 by cbinet            #+#    #+#              #
-#    Updated: 2017/07/21 11:53:41 by cbinet           ###   ########.fr        #
+#    Updated: 2017/07/27 13:42:38 by vkim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ INCLUDES = includes/libft/libft.h includes/ft_printf.h
 
 
 
-all: $(NAME) 
+all: $(NAME)
 $(NAME): $(LIBO) $(OBJ)
 	@ar rc $(NAME) $^
 	ranlib $(NAME)
@@ -85,7 +85,7 @@ $(OBJ_PATH):
 	@mkdir obj
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	gcc $(FLAG) -o $@ -c $<
+	@gcc $(FLAG) -o $@ -c $<
 
 $(LIBO): | $(LIBO_PATH)
 
@@ -93,7 +93,7 @@ $(LIBO_PATH):
 	@mkdir $(LIBO_PATH)
 
 $(LIBO_PATH)%.o: $(LIB_PATH)%.c
-	gcc $(FLAG) -o $@ -c $<
+	@gcc $(FLAG) -o $@ -c $<
 
 clean:
 	rm -rf $(OBJ_PATH) $(LIBO_PATH)

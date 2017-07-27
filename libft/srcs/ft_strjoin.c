@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 02:18:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/03/16 13:13:13 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/27 14:17:15 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,13 @@ char	*ft_strjoinfree(char **s1, char **s2, int which)
 	if ((str = (char *)malloc((ft_strlen((char *)(*s1)) +
 						ft_strlen((char *)(*s2)) + 1) * sizeof(*str))) == NULL)
 		return (NULL);
-	i = 0;
-	while ((*s1)[i])
-	{
+	i = -1;
+	while ((*s1)[++i])
 		str[i] = (*s1)[i];
-		i++;
-	}
-	len = 0;
-	while ((*s2)[len])
-		str[i++] = (*s2)[len++];
-	str[i] = '\0';
+	len = -1;
+	while ((*s2)[++len])
+		str[i + len] = (*s2)[len];
+	str[i + len] = '\0';
 	if (which == FIRST || which == ALL)
 		free(*s1);
 	if (which == SECOND || which == ALL)
