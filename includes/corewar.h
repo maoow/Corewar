@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/26 14:18:37 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/27 12:13:43 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct			s_cor
 	size_t				tmp_cycle_to_die;
 	size_t				checks;
 	size_t				total_cycle;
-	unsigned char		*arena;
+	unsigned char		arena[MEM_SIZE];
 }						t_cor;
 
 void		ft_browseprocess(t_cor *core);
