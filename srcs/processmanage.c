@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/26 14:21:27 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/27 11:32:07 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void		ft_getop(t_cor *core, t_process *proc)
 		proc->next_op = g_opctable[core->arena[proc->PC] - 1];
 		proc->cycle_before_execute = g_optime[core->arena[proc->PC] - 1];
 	}
+	else
+		proc->PC++;
 }
 
 void			ft_browseprocess(t_cor *core)
