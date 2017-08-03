@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/07/27 17:27:32 by vkim             ###   ########.fr       */
+/*   Updated: 2017/08/03 17:41:40 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,29 @@
 #include <stdio.h>
 
 //GERER ESPACES
-int				ft_name_comment_check(char *str, char **name)
+int				ft_name_check(char *str, char **name, char *s_name)
 {
 	int			i;
-	char		s_name[] = ".name\"";
-	//char		s_comment[] = ".comment\"";
 	char		*tmp;
-	char		**tmp2;
 
+	printf("str : <%s>\n", str);
 	if (!str)
 		return (0);
-	if (!(tmp = malloc(sizeof(char))))
-			return (0);
-	if (!(tmp2 = malloc(sizeof(char *))))
+	i = -1;
+	while (str[++i] && str[i] != '\"')
 	{
-		free(tmp);
-		return (0);
-	}
-	i = -1;
-	while (str[++i] && i < 6)
-		if (str[i] != s_name[i])
-		{
-			printf("str : <%s>\nname : <%s>\n", str, s_name);
-			free(tmp);
-			free(tmp2);
+		if ((i < ft_strlen(s_name) && str[i] != s_name[i])
+				|| (i >= ft_strlen(s_name) && str[i] != ' '))
 			return (0);
-		}
-	*tmp2 = str + i;
-	*name = ft_strjoinfree(name, tmp2, FIRST);
+	}
+	tmp = str + i + 1;
 	i = -1;
-	while ((*name)[++i] && (*name)[i] != '\"')
+	while (tmp[++i] && tmp[i] != '\"')
 		;
-	if ((*name)[i] == '\0')
-	{
-		free(tmp2);
+	if (tmp[i] == '\0')
 		return (0);
-	}
+	*name = ft_strsub(tmp, 0, i);
 	(*name)[i] = '\0';
-	//*name = ft_strjoinfree(&tmp, name, ALL);
-	//free(tmp2);
-	//free(tmp);
 	return (1);
 }
 
@@ -62,24 +45,38 @@ int				main(int ac, char **av)
 	char		*load;
 	char		*name;
 	char		*comment;
+	int			i;
 
 	(void)ac;
 	(void)av;
-	(void)load;
-	(void)name;
-	(void)comment;
-	if (!(load = malloc(2 * sizeof(char))) || !(name = malloc(sizeof(char)))
-		|| !(comment = malloc(sizeof(char))))
+	//(void)load;
+	//(void)name;
+	//(void)comment;
+	name = NULL;
+	comment = NULL;
+	if (!(load = malloc(1 * sizeof(char))))
 		return (1);
 	load[0] = '\0';
-	name[0] = '\0';
-	comment[0] = '\0';
 	ft_loading(ac, av, 1, &load);
 	//printf("load : <%s>\n", load);
-	ft_name_comment_check(load, &name);
-	//printf("name : <%s>\n", name);
-	free(load);
-	free(name);
-	free(comment);
+	if (ft_name_check(load, &name, ".name") != 0)
+	{
+		i = -1;
+		while (load[++i] != '\"')
+			;
+		i++;
+		while (load[++i] != '\"')
+			;
+		i += 2;
+		ft_name_check(load + i, &comment, ".comment");
+		printf("name : <%s>, comment : <%s>\n", name, comment);
+	}
+	if (load)
+		free(load);
+	if (name)
+		free(name);
+	if (comment)
+		free(comment);
+	//while(1);
 	return (0);
 }

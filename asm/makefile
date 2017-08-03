@@ -6,7 +6,7 @@
 #    By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/27 12:28:21 by vkim              #+#    #+#              #
-#    Updated: 2017/07/27 14:25:39 by vkim             ###   ########.fr        #
+#    Updated: 2017/08/03 17:09:14 by vkim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ $(NAME): $(SRC)
 	@$(COMPIL) $(INC) -c $(SRC)
 	@echo "OK OBJ"
 	@$(COMPIL) $(INC) $(OBJ) -L../libft -lftprintf -o $(NAME)
+	@echo "OK ASM"
 
 clean:
 	@cd ../libft/ && make clean
