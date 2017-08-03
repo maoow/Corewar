@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/25 14:39:45 by starrit          ###   ########.fr       */
+/*   Updated: 2017/07/27 14:02:53 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			ft_warcycle(t_cor *core)
 	{
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
-			// browse / execute processes op
+			ft_browseprocess(core);
 			core->total_cycle++;
 			core->tmp_cycle_to_die++;
 		}

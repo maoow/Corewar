@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:17:49 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/26 14:34:04 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/07/27 13:52:17 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef OPERATIONS_H
@@ -86,22 +86,59 @@ bool					*g_opctable[OPC_NBR] = {
 };
 
 size_t					g_oplabel[OPC_NBR] = {
-4,
-4,
-0,
-0,
-0,
-4,
-4,
-4,
-2,
-2,
-2,
-2,
-4,
-2,
-2,
-0
+	4,
+	4,
+	0,
+	0,
+	0,
+	4,
+	4,
+	4,
+	2,
+	2,
+	2,
+	2,
+	4,
+	2,
+	2,
+	0
+};
+
+bool					g_opparamnb[OPC_NBR] = {
+	1,
+	2,
+	2,
+	3,
+	3,
+	3,
+	3,
+	3,
+	1,
+	3,
+	3,
+	1,
+	2,
+	3,
+	1,
+	1
+};
+bool					g_ocp[OPC_NBR] = {
+	false,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	false,
+	true,
+	true,
+	false,
+	true,
+	true,
+	false,
+	true
 };
 
 #endif
