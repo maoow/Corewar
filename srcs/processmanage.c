@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/27 13:58:06 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/04 13:00:49 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 	size_t		i;
 	size_t		tmp;
 
-	if (!(params = (size_t *)malloc(g_oplabel[core->arena[proc->PC]] * sizeof(size_t))))
+	if (!(params = (size_t *)malloc(g_oplabel[core->arena[proc->startpos + proc->PC]] * sizeof(size_t))))
 		exit(1);
-	tmp = core->arena[proc->PC + 1];
+	tmp = core->arena[proc->startpos + proc->PC + 1];
 	i = 0;
 	while (tmp)
 	{
@@ -30,7 +30,7 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 		else if (tmp % 4 == 3)
 			params[i] = 2;
 		else if (tmp % 4 == 2)
-			params[i] = g_oplabel[core->arena[proc->PC]];
+			params[i] = g_oplabel[core->arena[proc->startpos + proc->PC]];
 		i++;
 	}
 	return (params);
@@ -41,7 +41,7 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 	bool	(*op);
 	bool	carry;
 	carry = proc->next_op(core, proc);
-	if (g_opcarry[core->arena[proc->PC] - 1])
+	if (g_opcarry[core->arena[proc->startpos + proc->PC] - 1])
 		proc->carry = carry;
 	ft_determinejmpdist(core, proc);
 	proc->PC += proc->next_jump % MEM_SIZE;
@@ -52,10 +52,10 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 static void		ft_getop(t_cor *core, t_process *proc)
 {
 
-	if (core->arena[proc->PC] - 1 < OPC_NBR)
+	if (core->arena[proc->startpos + proc->PC] - 1 < OPC_NBR)
 	{
-		proc->next_op = g_opctable[core->arena[proc->PC] - 1];
-		proc->cycle_before_execute = g_optime[core->arena[proc->PC] - 1];
+		proc->next_op = g_opctable[core->arena[proc->startpos + proc->PC] - 1];
+		proc->cycle_before_execute = g_optime[core->arena[proc->startpos + proc->PC] - 1];
 	}
 	else
 		proc->PC++;
