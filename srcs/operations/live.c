@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 12:05:57 by cbinet            #+#    #+#             */
-/*   Updated: 2017/07/27 12:29:28 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/04 14:27:57 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 bool	live(t_cor *core, t_process *proc)
 {
+	size_t player;
+
 	proc->live++;
-	core->champs[proc->PC + 1]->alive = true;
+	core->champs[getdirvalue(core, proc, proc->PC + 1)]->alive = true;
 	return (true);
 }

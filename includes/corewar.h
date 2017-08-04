@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/07/27 12:13:43 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/04 12:58:44 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct			s_process
 	// int					*registres;
 	unsigned char		registres[REG_NUMBER];
 	size_t				PC;
+	size_t				startpos;
 	size_t				next_jump;
 	size_t				cycles_before_execute;
 	bool				*next_op;
