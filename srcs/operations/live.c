@@ -17,6 +17,6 @@ bool	live(t_cor *core, t_process *proc)
 	size_t player;
 
 	proc->live++;
-	core->champs[getdirvalue(core, proc, proc->PC + 1)]->alive = true;
+	core->champs[getram(core, proc->startpos + proc->PC + 1)]->alive = true;
 	return (true);
 }
