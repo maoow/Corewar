@@ -12,9 +12,9 @@
 
 #include "corewar.h"
 
-size_t	ft_calculateIDX(t_process *proc, size_t jump)
+size_t	idx(t_process *proc, size_t jump)
 {
-	size_t	tmp;
+	int	tmp;
 
 	tmp = proc->PC + jump;
 	tmp %= MEM_SIZE;
@@ -23,7 +23,7 @@ size_t	ft_calculateIDX(t_process *proc, size_t jump)
 		tmp %= IDX_MOD;
 	else
 		tmp = (tmp % IDX_MOD) - IDX_MOD;
-	return (tmp);
+	return ((size_t)(tmp + proc->startpos));
 }
 
 void	ft_determinejmpdist(t_cor *core, t_process *proc)
