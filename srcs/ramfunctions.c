@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+#include "corewar.h"
+
 size_t	getram(t_cor *core, size_t address)
 {
 	size_t	value;
