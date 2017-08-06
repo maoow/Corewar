@@ -24,10 +24,10 @@ bool	xor(t_cor *core, t_process *proc); //
 bool	zjmp(t_cor *core, t_process *proc);
 bool	ldi(t_cor *core, t_process *proc); //
 bool	sti(t_cor *core, t_process *proc); //
-bool	fork(t_cor *core, t_process *proc); //
+bool	fork(t_cor *core, t_process *proc);
 bool	lld(t_cor *core, t_process *proc); //
 bool	lldi(t_cor *core, t_process *proc); //
-bool	lfork(t_cor *core, t_process *proc); //
+bool	lfork(t_cor *core, t_process *proc);
 bool	aff(t_cor *core, t_process *proc); //
 
 size_t					g_optime[OPC_NBR] = {
