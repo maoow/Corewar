@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 15:19:52 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 17:11:25 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ static int		*get_hexa(unsigned char *champion, size_t size_champ)
 // 				changer 138 par la formule exacte (voir asm)
 
 #include <stdlib.h>
-int				*parse(char *av, int fd, int ret, bool start)
+int				**parse(char *av, int fd, int ret, bool start)
 {
 	unsigned char	buf[2];
 	unsigned char	*champion;
 	size_t			size_champ = 0;
-	int				*new;
+	int				**new;
 
 	champion = NULL;
 	fd = open(av, O_RDONLY);
@@ -76,6 +76,9 @@ int				*parse(char *av, int fd, int ret, bool start)
 		s++;
 	}
 	champion[size_champ] = '\0';
-	new = get_hexa(champion, size_champ);
+	new = malloc(sizeof(*new) * 2);//
+	new[0] = malloc(sizeof(*new[0] * 1));
+	new[0][0] = (int)size_champ;
+	new[1] = get_hexa(champion, size_champ);
 	return (new);
 }
