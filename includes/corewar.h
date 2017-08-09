@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/04 12:58:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/09 13:04:38 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,12 @@ typedef struct			s_champ
 }						t_champ;
 
 /*
-** int *registres : size de REG_NUMBER
 ** int live : nombre d'instruction live pour calculer la decrementation
 */
 
 typedef struct			s_process
 {
 	size_t				ID;
-
-	// int					*registres;
 	unsigned char		registres[REG_NUMBER];
 	size_t				PC;
 	size_t				startpos;
