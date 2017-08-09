@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 16:56:31 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 18:20:27 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@
 **				3	H white		black	=> highlight white
 **
 ** for champ
-**				4	red			black
-**				5	green		black
-**				6	yellow		black
-**				7	blue		black
-**				8	magenta		black
-**				9	cyan		black
+**				4	green		black		0, 215, 135
+**				5	blue		black		95, 135, 255
+**				6	red			black		1000, 0, 0
+**				7	cyan		black		175, 255, 255
+**				8	yellow		black		215, 255, 135
+**				9	magenta		black		255, 135, 255
 */
 
 WINDOW		*init(void)
@@ -79,8 +79,8 @@ WINDOW		*init(void)
 	}
 	start_color();
 	init_color(COLOR_WHITE, 460, 460, 460);
-	init_color(9, 1000, 1000, 1000);
-	init_pair(10, 9, COLOR_BLACK);
+	init_color(15, 1000, 1000, 1000);
+	init_pair(10, 15, COLOR_BLACK);
 	init_pair(1, COLOR_WHITE, COLOR_WHITE);
 	init_pair(2, COLOR_BLACK, COLOR_BLACK);
 	init_pair(3, COLOR_WHITE, COLOR_BLACK);
