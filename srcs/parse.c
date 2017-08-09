@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 17:11:25 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 17:25:44 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-#define MAX_CHAMP_SIZE 1000
-
+/*
+**	transforme le unsigned char *champion binaire en int *champion hexa
+*/
 static int		*get_hexa(unsigned char *champion, size_t size_champ)
 {
 	int	*new;
 	int	i;
 	int j;
 
-//	i = 3 + 37;
-//	i = 28;
 	i = 0;
 	j = 0;
-	new = (int*)malloc(sizeof(*new) * (size_champ + 1));//
+	if (!(new = (int*)malloc(sizeof(*new) * (size_champ + 1))))
+		write_error(2);
 	while (i < size_champ)
 	{
 		new[j] = champion[i];
@@ -62,7 +62,7 @@ int				**parse(char *av, int fd, int ret, bool start)
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		exit(printf("crash open"));//ft_printf
-	champion = malloc(sizeof(*champion) * (MAX_CHAMP_SIZE + 1));//
+	champion = (unsigned char*)malloc(sizeof(*champion) * (CHAMP_MAX_SIZE + 1));//
 	int s = 0;
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
@@ -77,7 +77,7 @@ int				**parse(char *av, int fd, int ret, bool start)
 	}
 	champion[size_champ] = '\0';
 	new = malloc(sizeof(*new) * 2);//
-	new[0] = malloc(sizeof(*new[0] * 1));
+	new[0] = malloc(sizeof(*new[0] * 1));//
 	new[0][0] = (int)size_champ;
 	new[1] = get_hexa(champion, size_champ);
 	return (new);
