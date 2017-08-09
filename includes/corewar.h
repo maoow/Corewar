@@ -6,12 +6,15 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 13:18:14 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 19:37:54 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
+
+# include <string.h>
+# include <stdbool.h>
 
 # define MEM_SIZE (4*1024)
 # define CHAMP_MAX_SIZE (MEM_SIZE / 6)
@@ -25,6 +28,9 @@
 # define CYCLE_DELTA 50
 # define MAX_CHECKS 10
 
+# define CHAMP_NAME 128
+# define COMMENT_NAME 2048
+# define EXEC_MAGIC_LENGHT 3
 
 typedef struct			s_champ
 {
@@ -60,6 +66,10 @@ typedef struct			s_process
 ** int checks : compteur de verifications de cycle_to_die
 ** int total_cycle : nombre de cycle total pour les option d'affichage tous les
 ** N cycles (modulo)
+**
+**	arena_color :	1 : no color
+**					4 a 9 : color correspondant a COLOR_PAIR du champ
+**					14 a 19 : color correspondant a COLOR_PAIR du champ + fond (new written process)
 */
 
 typedef struct			s_cor
@@ -72,10 +82,15 @@ typedef struct			s_cor
 	size_t				checks;
 	size_t				total_cycle;
 	unsigned char		arena[MEM_SIZE];
+	int					arena_color[MEM_SIZE];
 }						t_cor;
 
 void		ft_browseprocess(t_cor *core);
 void		usage(void);
+void		write_error(int nb);
+int			**parse(t_cor *cor, char *av);
+void		init_struct(t_cor *cor);
+void		visu(t_cor *env);
 void		ft_warcycle(t_cor *core);
 
 #endif

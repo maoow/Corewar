@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 18:20:27 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 18:26:00 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -133,18 +133,16 @@ void	print_left(WINDOW *left, t_cor *cor)
 	}
 }
 
-#define nb_champ 2
 #define NB_CHAMP 2
 
 /*
 **	fonction d'ecriture sous fenetre de droite : menu
 */
-void	print_right(WINDOW *right)
+void	print_right(WINDOW *right, t_cor *cor)
 {
 	char	sP[] = "PAUSED";
 	char	sR[] = "RUNNING";
 	size_t	cycle_second = 50;
-	size_t	total_cycles = 9000;
 	size_t	nb_process_alive = 2;
 	int	champ = NB_CHAMP;
 	int champ_nb1 = 1;
@@ -155,7 +153,7 @@ void	print_right(WINDOW *right)
 
 	mvwprintw(right, 2, 3, "** %s **", sP);
 	mvwprintw(right, 4, 3, "Cycles/second limit : %d", cycle_second);
-	mvwprintw(right, 7, 3, "Cycles : %d", total_cycles);
+	mvwprintw(right, 7, 3, "Cycles : %d", cor->total_cycle);
 	mvwprintw(right, 9, 3, "Processes : %d", nb_process_alive);
 	while (champ > 0)
 	{
@@ -184,7 +182,7 @@ void	manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 {
 	wborder(left, 0 | C(1), 0 | C(2), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
 	wborder(right, 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
-	print_right(right);
+	print_right(right, cor);
 	print_left(left, cor);
 }
 

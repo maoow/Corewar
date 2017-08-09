@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 17:54:27 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 19:38:21 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,27 @@ static int		**get_hexa(unsigned char *champion, size_t size_champ)
 	return (new);
 }
 
+//	changer 138 par la formule exacte (voir asm)
+static void		get_info(t_cor *cor, bool *start, int s, unsigned char buf)
+{
+	(void)cor;
+	
+	if (s > 138 && buf && buf > 0 && buf < 17)
+		*start = true;
+}
 
-static int		**get_champ(char *av, unsigned char *champion, int ret, bool start)
+static int		**get_champ(t_cor *cor, char *av, unsigned char *champion, int fd)
 {
 	int		s;
-	int		fd;
+	int		ret = 0;
 	unsigned char	buf[2];
 	size_t			size_champ = 0;
+	bool			start = false;
 
 	s = 0;
-	fd = open(av, O_RDONLY);
-	if (fd == -1)
-		exit(printf("crash open"));//ft_printf
-	champion = (unsigned char*)malloc(sizeof(*champion) * (CHAMP_MAX_SIZE + 1));//
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
-		if (s > 138 && buf[0] && buf[0] > 0 && buf[0] < 17)
-			start = true;
+		get_info(cor, &start, s, buf[0]);
 		if (start == true)
 		{
 			champion[size_champ] = buf[0];
@@ -78,9 +82,17 @@ static int		**get_champ(char *av, unsigned char *champion, int ret, bool start)
 */
 
 // a faire : 	remplir les 2 struct
-// 				changer 138 par la formule exacte (voir asm)
 
-int				**parse(char *av, int fd, int ret, bool start)
+int				**parse(t_cor *cor, char *av)
 {
-	return (get_champ(av, NULL, 0, 0));
+	int				fd;
+	unsigned char	*champion;
+
+	fd = open(av, O_RDONLY);
+	if (fd == -1)
+		exit(printf("crash open"));//ft_printf
+	if (!(champion = (unsigned char*)malloc(sizeof(*champion) * (CHAMP_MAX_SIZE + 1))))
+		write_error(2);
+	init_struct(cor);
+	return (get_champ(cor, av, champion, fd));
 }
