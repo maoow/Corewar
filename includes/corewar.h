@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 13:04:38 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 13:18:14 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct			s_process
 	bool				carry;
 	size_t				live;
 	struct s_process	*next;
-}						t_process
+}						t_process;
 
 /*
 ** char *last_champ_alive : dernier champion rapporte en vie

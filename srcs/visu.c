@@ -6,14 +6,15 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/03 15:39:46 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/09 16:56:31 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
 #include <ncurses.h>
 #include <stdlib.h>
+#include <math.h>
+#include "corewar.h"
 #define C COLOR_PAIR
-void parse(char **s);
 
 /*
  **	initscr() initialise le mode plein ecran
@@ -54,6 +55,14 @@ void parse(char **s);
 ** COLOR_PAIR	1	white		white	=> bordure
 **				2	black		black	=> bordure
 **				3	H white		black	=> highlight white
+**
+** for champ
+**				4	red			black
+**				5	green		black
+**				6	yellow		black
+**				7	blue		black
+**				8	magenta		black
+**				9	cyan		black
 */
 
 WINDOW		*init(void)
@@ -69,21 +78,62 @@ WINDOW		*init(void)
 		return (NULL);
 	}
 	start_color();
+	init_color(COLOR_WHITE, 460, 460, 460);
+	init_color(9, 1000, 1000, 1000);
+	init_pair(10, 9, COLOR_BLACK);
 	init_pair(1, COLOR_WHITE, COLOR_WHITE);
 	init_pair(2, COLOR_BLACK, COLOR_BLACK);
+	init_pair(3, COLOR_WHITE, COLOR_BLACK);
+	init_pair(4, COLOR_GREEN, COLOR_BLACK);
+	init_pair(5, COLOR_BLUE, COLOR_BLACK);
+	init_pair(6, COLOR_RED, COLOR_BLACK);
+	init_pair(7, COLOR_CYAN, COLOR_BLACK);
+	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(9, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(14, COLOR_BLACK, COLOR_GREEN);
+	init_pair(15, COLOR_BLACK, COLOR_BLUE);
+	init_pair(16, COLOR_BLACK, COLOR_RED);
+	init_pair(17, COLOR_BLACK, COLOR_CYAN);
+	init_pair(18, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(19, COLOR_BLACK, COLOR_MAGENTA);
 	return (stdscr);
 }
 
-void	print_left(WINDOW *left)
+/*
+**	fonction d'ecriture sous fenetre de gauche : arena vide
+*/
+
+void	print_left(WINDOW *left, t_cor *cor)
 {
-	(void)left;
+	size_t	col;
+	size_t	lign;
+	size_t	max;
+	size_t	i;
+
+	col = 4;
+	lign = 2;
+	i = 0;
+	max = sqrt((double)MEM_SIZE);
+	while (lign <= max + 1)
+	{
+		while (col <= max * 3 + 2)
+		{
+			mvwprintw(left, lign, col, "%02x", cor->arena[i]);
+			mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
+			i++;
+			col++;
+			col++;
+			mvwprintw(left, lign, col, " ");
+			col++;
+		}
+		mvwprintw(left, lign, col, "\n");
+		col = 4;
+		//mvchgat(lign, col, max * 3 - 1, A_NORMAL, 4, NULL);
+		lign++;
+	}
 }
 
 #define nb_champ 2
-#define DCYCLE_TO_DIE 1500
-#define DCYCLE_DELTA 50
-#define DNBR_LIVE 20
-#define DMAX_CHECKS 10
 #define NB_CHAMP 2
 
 /*
@@ -96,10 +146,6 @@ void	print_right(WINDOW *right)
 	size_t	cycle_second = 50;
 	size_t	total_cycles = 9000;
 	size_t	nb_process_alive = 2;
-	int CYCLE_TO_DIE = DCYCLE_TO_DIE;
-	int CYCLE_DELTA = DCYCLE_DELTA;
-	int NBR_LIVE = DNBR_LIVE;
-	int MAX_CHECKS = DMAX_CHECKS;
 	int	champ = NB_CHAMP;
 	int champ_nb1 = 1;
 	int champ_nb2 = 2;
@@ -123,40 +169,41 @@ champ_nb1 = champ_nb2;
 	mvwprintw(right, 11 + NB_CHAMP * 4 + 2, 3, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvwprintw(right, 11 + NB_CHAMP * 4 + 4, 3, "NBR_LIVE : %d", NBR_LIVE);
 	mvwprintw(right,11 + NB_CHAMP * 4 + 6, 3, "MAX_CHECKS : %d", MAX_CHECKS);
+	int lign = LINES - 2;
+	while (lign > 1)
+	{
+		mvwchgat(right, lign, 3, COLS / 5 - 4, A_NORMAL, 10, NULL);
+		lign--;
+	}
 }
 
 /*
-**	creer les bordures et appelles les fonctions d'ecriture
+**	creer les bordures des fenetres et appelle les fonctions d'ecriture
 */
-void	manage_box(WINDOW *left, WINDOW *right)
+void	manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 {
-	init_color(COLOR_WHITE, 460, 460, 460);
-	attron(COLOR_PAIR(1));
 	wborder(left, 0 | C(1), 0 | C(2), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
 	wborder(right, 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
-	attroff(COLOR_PAIR(1));
-	init_color(COLOR_WHITE, 1000, 1000, 1000);
 	print_right(right);
+	print_left(left, cor);
 }
 
-int		main(int ac, char **av)
+/*
+** lance le mode et les options ncurse (init() ), creer les fenetres gauche/droite
+*/
+void		visu(t_cor *cor)
 {
 	WINDOW	*left;
 	WINDOW	*right;
 	int		touche;
 
-	(void)ac;
-	parse(av);
-	return (0);
-
-
 	if (init() == NULL)
-		return (0);
+		return ;
 	while (1)
 	{
 		left = subwin(stdscr, LINES, COLS - COLS / 5, 0, 0);
 		right = subwin(stdscr, LINES, COLS / 5, 0, COLS - COLS / 5);
-		manage_box(left, right);
+		manage_box(left, right, cor);
 		wrefresh(left);
 		wrefresh(right);
 		if ((touche = getch()) == 27)
@@ -167,5 +214,4 @@ int		main(int ac, char **av)
 	endwin();
 	delwin(left);
 	delwin(right);
-	return (0);
 }
