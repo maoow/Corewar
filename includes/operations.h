@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:17:49 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/09 13:36:52 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/10 14:35:34 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef OPERATIONS_H
@@ -15,18 +15,18 @@
 
 bool	live(t_cor *core, t_process *proc);
 bool	ld(t_cor *core, t_process *proc);
-bool	st(t_cor *core, t_process *proc); //
+bool	st(t_cor *core, t_process *proc);
 bool	add(t_cor *core, t_process *proc);
-bool	sub(t_cor *core, t_process *proc); //
-bool	and(t_cor *core, t_process *proc); //
-bool	or(t_cor *core, t_process *proc); //
-bool	xor(t_cor *core, t_process *proc); //
+bool	sub(t_cor *core, t_process *proc);
+bool	and(t_cor *core, t_process *proc);
+bool	or(t_cor *core, t_process *proc);
+bool	xor(t_cor *core, t_process *proc);
 bool	zjmp(t_cor *core, t_process *proc);
-bool	ldi(t_cor *core, t_process *proc); //
-bool	sti(t_cor *core, t_process *proc); //
+bool	ldi(t_cor *core, t_process *proc);
+bool	sti(t_cor *core, t_process *proc);
 bool	fork(t_cor *core, t_process *proc);
 bool	lld(t_cor *core, t_process *proc);
-bool	lldi(t_cor *core, t_process *proc); //
+bool	lldi(t_cor *core, t_process *proc);
 bool	lfork(t_cor *core, t_process *proc);
 bool	aff(t_cor *core, t_process *proc);
 
