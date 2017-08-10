@@ -6,11 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/04 13:00:49 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/10 15:14:09 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
 
 size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 {
@@ -55,7 +55,7 @@ static void		ft_getop(t_cor *core, t_process *proc)
 	if (core->arena[proc->startpos + proc->PC] - 1 < OPC_NBR)
 	{
 		proc->next_op = g_opctable[core->arena[proc->startpos + proc->PC] - 1];
-		proc->cycle_before_execute = g_optime[core->arena[proc->startpos + proc->PC] - 1];
+		proc->cycles_before_execute = g_optime[core->arena[proc->startpos + proc->PC] - 1];
 	}
 	else
 		proc->PC++;
