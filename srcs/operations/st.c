@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:11 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 14:11:46 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/10 14:14:29 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	st(t_cor *core, t_process *proc)
 	op = core->arena[proc->pc + proc->startpos + 1] / 4;
 	if (op % 4 == 3)
 	{
-		setram(core, ind(core, proc, proc->pc + 2) + proc->startpos,
+		setram(core, idx(proc, ind(core, proc, proc->pc + 2),
 				getparam(core, proc, 1, 2));
 	}
 	else
