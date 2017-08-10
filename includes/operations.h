@@ -6,12 +6,13 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:17:49 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 14:35:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/10 14:50:48 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
-#include "corewar.h"
+# include "corewar.h"
+# define OPC_NBR 16
 
 bool	live(t_cor *core, t_process *proc);
 bool	ld(t_cor *core, t_process *proc);
@@ -66,7 +67,7 @@ bool					g_opcarry[OPC_NBR] = {
 	false,
 	false,
 };
-bool					*g_opctable[OPC_NBR] = {
+bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *) = {
 	&live,
 	&ld,
 	&st,
