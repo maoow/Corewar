@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 13:52:36 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/10 14:29:14 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,4 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 		op /= 4;
 	}
 	return (place + proc->PC + proc->startpos);
-
 }
