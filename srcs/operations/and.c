@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:01 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 13:52:14 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/10 13:55:46 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ bool	and(t_cor *core, t_process *proc)
 	a = getparam(core, proc, 1, 4);
 	b = getparam(core, proc, 2, 4);
 	proc->registres[core->arena[getparamplace(core, proc, 3, 4)]] = (a || b) && ((a && !b) || (!a && b));
-	return (true);
+	return (proc->registres[core->arena[getparamplace(core, proc, 3, 4)]] != 0);
 }
