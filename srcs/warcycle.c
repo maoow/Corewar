@@ -6,9 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/09 14:20:12 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/10 15:06:30 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "corewar.h"
 
 static bool		ft_checklives(t_cor *core)
 {
