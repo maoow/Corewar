@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:05 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 14:32:18 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/10 14:33:37 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ bool	ldi(t_cor *core, t_process *proc)
 	adress += getparam(core, proc, 2, 2);
 	proc->registres[core->arena[getparamplace(core, proc, 3, 2)]] =
 	getram(core, idx(proc, adress));
-	return (true);
+	return (proc->registres[core->arena[getparamplace(core, proc, 3, 2)]] != 0);
 }
