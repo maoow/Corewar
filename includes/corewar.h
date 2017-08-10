@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 19:37:54 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/10 14:52:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct			s_process
 	size_t				startpos;
 	size_t				next_jump;
 	size_t				cycles_before_execute;
-	bool				*next_op;
+	bool				*(*next_op);
 	bool				carry;
 	size_t				live;
 	struct s_process	*next;
@@ -92,5 +92,13 @@ int			**parse(t_cor *cor, char *av);
 void		init_struct(t_cor *cor);
 void		visu(t_cor *env);
 void		ft_warcycle(t_cor *core);
+size_t	idx(t_process *proc, size_t jump);
+void	ft_determinejmpdist(t_cor *core, t_process *proc);
+size_t	ind(t_cor *core, t_process *proc, size_t PC);
+size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label);
+size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
+size_t			*ft_getparamstype(t_cor *core, t_process *proc);
+size_t	getram(t_cor *core, size_t address);
+void		setram(t_cor *core, size_t address, size_t value);
 
 #endif
