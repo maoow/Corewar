@@ -6,27 +6,20 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 19:38:21 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/13 15:40:17 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include <stdlib.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdbool.h>
 
 /*
 **	transforme le unsigned char *champion binaire en int *champion hexa
 */
 static int		**get_hexa(unsigned char *champion, size_t size_champ)
 {
-	int	**new;
-	int	i;
-	int j;
+	int			**new;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	j = 0;
@@ -45,25 +38,33 @@ static int		**get_hexa(unsigned char *champion, size_t size_champ)
 }
 
 //	changer 138 par la formule exacte (voir asm)
+//	recuperer le name et le comment pour remplir la struct champion
 static void		get_info(t_cor *cor, bool *start, int s, unsigned char buf)
 {
 	(void)cor;
-	
+
 	if (s > 138 && buf && buf > 0 && buf < 17)
 		*start = true;
+
 }
 
-static int		**get_champ(t_cor *cor, char *av, unsigned char *champion, int fd)
+static int		**get_champ(t_cor *cor, unsigned char *champion, int fd)
 {
 	int		s;
 	int		ret = 0;
 	unsigned char	buf[2];
 	size_t			size_champ = 0;
 	bool			start = false;
+	char			name[CHAMP_NAME];
+	char			comment[COMMENT_NAME];
 
 	s = 0;
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
+		if (s > 3 && s < CHAMP_NAME)
+			name[s - 4] = buf[0];
+		if (s >= CHAMP_NAME + 4 && s < COMMENT_NAME)
+			comment[s - CHAMP_NAME - 20] = buf[0];
 		get_info(cor, &start, s, buf[0]);
 		if (start == true)
 		{
@@ -72,6 +73,7 @@ static int		**get_champ(t_cor *cor, char *av, unsigned char *champion, int fd)
 		}
 		s++;
 	}
+	add_champ(cor, name, comment, -1);
 	champion[size_champ] = '\0';
 	return (get_hexa(champion, size_champ));
 }
@@ -90,9 +92,9 @@ int				**parse(t_cor *cor, char *av)
 
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		exit(printf("crash open"));//ft_printf
+		exit(ft_printf("crash open"));
 	if (!(champion = (unsigned char*)malloc(sizeof(*champion) * (CHAMP_MAX_SIZE + 1))))
 		write_error(2);
 	init_struct(cor);
-	return (get_champ(cor, av, champion, fd));
+	return (get_champ(cor, champion, fd));
 }

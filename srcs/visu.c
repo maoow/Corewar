@@ -6,12 +6,10 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 18:26:00 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/13 15:56:16 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
-#include <ncurses.h>
-#include <stdlib.h>
 #include <math.h>
 #include "corewar.h"
 #define C COLOR_PAIR
@@ -100,7 +98,7 @@ WINDOW		*init(void)
 }
 
 /*
-**	fonction d'ecriture sous fenetre de gauche : arena vide
+**	fonction d'ecriture sous fenetre de gauche : arena
 */
 
 void	print_left(WINDOW *left, t_cor *cor)
@@ -130,48 +128,6 @@ void	print_left(WINDOW *left, t_cor *cor)
 		col = 4;
 		//mvchgat(lign, col, max * 3 - 1, A_NORMAL, 4, NULL);
 		lign++;
-	}
-}
-
-#define NB_CHAMP 2
-
-/*
-**	fonction d'ecriture sous fenetre de droite : menu
-*/
-void	print_right(WINDOW *right, t_cor *cor)
-{
-	char	sP[] = "PAUSED";
-	char	sR[] = "RUNNING";
-	size_t	cycle_second = 50;
-	size_t	nb_process_alive = 2;
-	int	champ = NB_CHAMP;
-	int champ_nb1 = 1;
-	int champ_nb2 = 2;
-	int champ_last_live = 0;
-	int champ_current_live = 0;
-	char champ_name[] = "champion name";
-
-	mvwprintw(right, 2, 3, "** %s **", sP);
-	mvwprintw(right, 4, 3, "Cycles/second limit : %d", cycle_second);
-	mvwprintw(right, 7, 3, "Cycles : %d", cor->total_cycle);
-	mvwprintw(right, 9, 3, "Processes : %d", nb_process_alive);
-	while (champ > 0)
-	{
-		mvwprintw(right, 11 - champ * 4 + NB_CHAMP * 4, 3, "Player -%d : %s", champ_nb1, champ_name);
-champ_nb1 = champ_nb2;
-		mvwprintw(right, 12 - champ * 4 + NB_CHAMP * 4, 3, "  Last live : \t\t%d", champ_last_live);
-		mvwprintw(right, 13 - champ * 4 + NB_CHAMP * 4, 3, "  Lives in current period :  %d", champ_current_live);
-		champ--;
-	}
-	mvwprintw(right, 11 + NB_CHAMP * 4, 3, "CYCLE_TO_DIE : %d", CYCLE_TO_DIE);
-	mvwprintw(right, 11 + NB_CHAMP * 4 + 2, 3, "CYCLE_DELTA : %d", CYCLE_DELTA);
-	mvwprintw(right, 11 + NB_CHAMP * 4 + 4, 3, "NBR_LIVE : %d", NBR_LIVE);
-	mvwprintw(right,11 + NB_CHAMP * 4 + 6, 3, "MAX_CHECKS : %d", MAX_CHECKS);
-	int lign = LINES - 2;
-	while (lign > 1)
-	{
-		mvwchgat(right, lign, 3, COLS / 5 - 4, A_NORMAL, 10, NULL);
-		lign--;
 	}
 }
 

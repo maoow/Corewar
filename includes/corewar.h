@@ -6,15 +6,16 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/10 14:52:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/13 15:57:32 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include <string.h>
-# include <stdbool.h>
+# include "ft_printf.h"
+# include <fcntl.h>
+# include <ncurses.h>
 
 # define MEM_SIZE (4*1024)
 # define CHAMP_MAX_SIZE (MEM_SIZE / 6)
@@ -28,8 +29,8 @@
 # define CYCLE_DELTA 50
 # define MAX_CHECKS 10
 
-# define CHAMP_NAME 128
-# define COMMENT_NAME 2048
+# define CHAMP_NAME 128 + 8
+# define COMMENT_NAME 2048 + CHAMP_NAME + 8
 # define EXEC_MAGIC_LENGHT 3
 
 typedef struct			s_champ
@@ -83,22 +84,25 @@ typedef struct			s_cor
 	size_t				total_cycle;
 	unsigned char		arena[MEM_SIZE];
 	int					arena_color[MEM_SIZE];
+	size_t				nb_champs;
 }						t_cor;
 
 void		ft_browseprocess(t_cor *core);
 void		usage(void);
 void		write_error(int nb);
 int			**parse(t_cor *cor, char *av);
+void		add_champ(t_cor *cor, char *name, char *comment, int ID);
 void		init_struct(t_cor *cor);
-void		visu(t_cor *env);
+void		visu(t_cor *cor);
+void		print_right(WINDOW *right, t_cor *cor);
 void		ft_warcycle(t_cor *core);
-size_t	idx(t_process *proc, size_t jump);
-void	ft_determinejmpdist(t_cor *core, t_process *proc);
-size_t	ind(t_cor *core, t_process *proc, size_t PC);
-size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label);
-size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
-size_t			*ft_getparamstype(t_cor *core, t_process *proc);
-size_t	getram(t_cor *core, size_t address);
+size_t		idx(t_process *proc, size_t jump);
+void		ft_determinejmpdist(t_cor *core, t_process *proc);
+size_t		ind(t_cor *core, t_process *proc, size_t PC);
+size_t		getparam(t_cor *core, t_process *proc, size_t param, size_t label);
+size_t		getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
+size_t		*ft_getparamstype(t_cor *core, t_process *proc);
+size_t		getram(t_cor *core, size_t address);
 void		setram(t_cor *core, size_t address, size_t value);
 
 #endif
