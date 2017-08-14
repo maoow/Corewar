@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	add(t_cor *core, t_process *proc)
+bool	cw_add(t_cor *core, t_process *proc)
 {
 	proc->registres[proc->PC + proc->startpos + 4] =
 		proc->registres[proc->PC + proc->startpos + 3] +

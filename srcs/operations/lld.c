@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	lld(t_cor *core, t_process *proc)
+bool	cw_lld(t_cor *core, t_process *proc)
 {
 	size_t value;
 	size_t PC;

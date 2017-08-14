@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	sti(t_cor *core, t_process *proc)
+bool	cw_sti(t_cor *core, t_process *proc)
 {
 	size_t		adress;
 

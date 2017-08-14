@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	or(t_cor *core, t_process *proc)
+bool	cw_or(t_cor *core, t_process *proc)
 {
 	size_t	a;
 	size_t	b;

@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	lfork(t_cor *core, t_process *proc)
+bool	cw_lfork(t_cor *core, t_process *proc)
 {
 	t_process 	*tmp;
 	size_t		i;

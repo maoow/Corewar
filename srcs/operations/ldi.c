@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	ldi(t_cor *core, t_process *proc)
+bool	cw_ldi(t_cor *core, t_process *proc)
 {
 	size_t adress;
 

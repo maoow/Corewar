@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	zjmp(t_cor *core, t_process *proc)
+bool	cw_zjmp(t_cor *core, t_process *proc)
 {
 	if (proc->carry)
 		proc->PC += ind(core, proc, proc->PC + 1);

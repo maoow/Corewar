@@ -14,22 +14,22 @@
 # include "corewar.h"
 # define OPC_NBR 16
 
-bool	live(t_cor *core, t_process *proc);
-bool	ld(t_cor *core, t_process *proc);
-bool	st(t_cor *core, t_process *proc);
-bool	add(t_cor *core, t_process *proc);
-bool	sub(t_cor *core, t_process *proc);
-bool	and(t_cor *core, t_process *proc);
-bool	or(t_cor *core, t_process *proc);
-bool	xor(t_cor *core, t_process *proc);
-bool	zjmp(t_cor *core, t_process *proc);
-bool	ldi(t_cor *core, t_process *proc);
-bool	sti(t_cor *core, t_process *proc);
-bool	fork(t_cor *core, t_process *proc);
-bool	lld(t_cor *core, t_process *proc);
-bool	lldi(t_cor *core, t_process *proc);
-bool	lfork(t_cor *core, t_process *proc);
-bool	aff(t_cor *core, t_process *proc);
+bool	cw_live(t_cor *core, t_process *proc);
+bool	cw_ld(t_cor *core, t_process *proc);
+bool	cw_st(t_cor *core, t_process *proc);
+bool	cw_add(t_cor *core, t_process *proc);
+bool	cw_sub(t_cor *core, t_process *proc);
+bool	cw_and(t_cor *core, t_process *proc);
+bool	cw_or(t_cor *core, t_process *proc);
+bool	cw_xor(t_cor *core, t_process *proc);
+bool	cw_zjmp(t_cor *core, t_process *proc);
+bool	cw_ldi(t_cor *core, t_process *proc);
+bool	cw_sti(t_cor *core, t_process *proc);
+bool	cw_fork(t_cor *core, t_process *proc);
+bool	cw_lld(t_cor *core, t_process *proc);
+bool	cw_lldi(t_cor *core, t_process *proc);
+bool	cw_lfork(t_cor *core, t_process *proc);
+bool	cw_aff(t_cor *core, t_process *proc);
 
 size_t					g_optime[OPC_NBR] = {
 	10,
@@ -68,22 +68,22 @@ bool					g_opcarry[OPC_NBR] = {
 	false,
 };
 bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *) = {
-	&live,
-	&ld,
-	&st,
-	&add,
-	&sub,
-	&and,
-	&or,
-	&xor,
-	&zjmp,
-	&ldi,
-	&sti,
-	&fork,
-	&lld,
-	&lldi,
-	&lfork,
-	&aff
+	&cw_live,
+	&cw_ld,
+	&cw_st,
+	&cw_add,
+	&cw_sub,
+	&cw_and,
+	&cw_or,
+	&cw_xor,
+	&cw_zjmp,
+	&cw_ldi,
+	&cw_sti,
+	&cw_fork,
+	&cw_lld,
+	&cw_lldi,
+	&cw_lfork,
+	&cw_aff
 };
 
 size_t					g_oplabel[OPC_NBR] = {

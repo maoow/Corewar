@@ -12,7 +12,7 @@
 
 #include	"operations.h"
 
-bool	live(t_cor *core, t_process *proc)
+bool	cw_live(t_cor *core, t_process *proc)
 {
 	size_t player;
 

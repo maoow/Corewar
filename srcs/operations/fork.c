@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	fork(t_cor *core, t_process *proc)
+bool	cw_fork(t_cor *core, t_process *proc)
 {
 	t_process 	*tmp;
 	size_t		i;
