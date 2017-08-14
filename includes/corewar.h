@@ -18,6 +18,7 @@
 # include <ncurses.h>
 
 # define MEM_SIZE (4*1024)
+# define IDX_MOD (MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE (MEM_SIZE / 6)
 
 # define REG_NUMBER 16
@@ -54,7 +55,7 @@ typedef struct			s_process
 	size_t				startpos;
 	size_t				next_jump;
 	size_t				cycles_before_execute;
-	bool				*(*next_op);
+	bool				(*next_op)();
 	bool				carry;
 	size_t				live;
 	struct s_process	*next;

@@ -21,8 +21,8 @@ static bool		ft_checklives(t_cor *core)
 	proc = core->process;
 	while (proc)
 	{
-		if (proc->live == 0)
-			ft_killprocess(core, proc);
+		//if (proc->live == 0)
+			//ft_killprocess(core, proc);
 		lives = proc->live;
 		proc->live = 0;
 		proc = proc->next;

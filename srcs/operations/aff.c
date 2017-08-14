@@ -12,7 +12,7 @@
 
 #include "operations.h"
 
-bool	cw_aff(t_cor *core, t_process *proc);
+bool	cw_aff(t_cor *core, t_process *proc)
 {
 	if (proc->registres[core->arena[proc->PC + 2]] % 256 == 0)
 		return (false);

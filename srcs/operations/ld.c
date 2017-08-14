@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operation.h"
+#include "operations.h"
 
 bool	cw_ld(t_cor *core, t_process *proc)
 {
@@ -18,7 +18,7 @@ bool	cw_ld(t_cor *core, t_process *proc)
 	size_t PC;
 
 	PC = proc->PC;
-	if (core->arena[proc->PC + proc->startpos + 1] / 16 ) % 4 == 2)
+	if ((core->arena[proc->PC + proc->startpos + 1] / 16 ) % 4 == 2)
 	{
 		value = getram(core, PC + 2 + proc->startpos);
 		PC += 6;

@@ -45,7 +45,7 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 		proc->carry = carry;
 	ft_determinejmpdist(core, proc);
 	proc->PC += proc->next_jump % MEM_SIZE;
-	free_op(proc);
+	//free_op(proc);
 }
 
 // compare core->arena[proc->PC] with opc_table

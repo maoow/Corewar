@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
 
 size_t	idx(t_process *proc, size_t jump)
 {
@@ -31,7 +31,7 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 	unsigned char	tmp;
 
 	tmp = core->arena[proc->startpos + proc->PC + 1];
-	if (g_opc[core->arena[proc->startpos + proc->PC]])
+	if (g_ocp[core->arena[proc->startpos + proc->PC]])
 	{
 		proc->next_jump = 2;
 		while (tmp)

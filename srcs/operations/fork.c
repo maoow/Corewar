@@ -24,11 +24,11 @@ bool	cw_fork(t_cor *core, t_process *proc)
 		tmp->registres[i] = proc->registres[i];
 		i++;
 	}
-	tmp->PC = (proc->PC - proc->startpos + idx(core, ind(proc, proc->PC + 1))) % MEM_SIZE;
+	tmp->PC = (proc->PC - proc->startpos + idx(proc, ind(core, proc, proc->PC + 1))) % MEM_SIZE;
 	tmp->startpos = proc->startpos;
 	tmp->next_jump = 0;
 	tmp->cycles_before_execute = 0;
-	tmp->next_jump = NULL;
+	tmp->next_jump = 0;
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
 	tmp->next = NULL; // todo (voir comment on gere la pile)

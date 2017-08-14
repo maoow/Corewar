@@ -9,10 +9,12 @@
 /*   Updated: 2017/08/10 14:50:48 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
-# include "corewar.h"
+
 # define OPC_NBR 16
+# include "corewar.h"
 
 bool	cw_live(t_cor *core, t_process *proc);
 bool	cw_ld(t_cor *core, t_process *proc);

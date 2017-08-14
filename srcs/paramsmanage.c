@@ -31,23 +31,23 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 
 	i = 0;
 	place = 2;
-	op = core->arena[proc->pc + proc->startpos + 1];
+	op = core->arena[proc->PC + proc->startpos + 1];
 	while (i < param)
 	{
 		if (op % 4 == 1)
 		{
-			value = proc->registres[core->arena[proc->pc + proc->startpos + place]];
+			value = proc->registres[core->arena[proc->PC + proc->startpos + place]];
 				place++;
 		}
 		else if (op % 4 == 2)
 		{
 			if (label == 2)
-				value = getram(core, ind(core, proc->PC + proc->startpos + place));
+				value = getram(core, ind(core, proc, proc->PC + proc->startpos + place));
 			place += label;
 		}
 		else
 		{
-			value = getram(core, ind(core, proc->PC + proc->startpos + place));
+			value = getram(core, ind(core, proc, proc->PC + proc->startpos + place));
 			place += 2;
 		}
 		i++;
@@ -64,7 +64,7 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 
 	i = 1;
 	place = 2;
-	op = core->arena[proc->pc + proc->startpos + 1];
+	op = core->arena[proc->PC + proc->startpos + 1];
 	while (i < param)
 	{
 		if (op % 4 == 1)
