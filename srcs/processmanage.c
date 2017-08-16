@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 15:14:09 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/16 15:33:30 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 
 static void		ft_executeprocess(t_cor *core, t_process *proc)
 {
-	bool	(*op);
 	bool	carry;
+
 	carry = proc->next_op(core, proc);
 	if (g_opcarry[core->arena[proc->startpos + proc->PC] - 1])
 		proc->carry = carry;
