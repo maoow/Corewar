@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 12:05:57 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 15:04:13 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/16 15:24:01 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 bool	cw_live(t_cor *core, t_process *proc)
 {
-	size_t player;
-
 	proc->live++;
 	core->champs[getram(core, proc->startpos + proc->PC + 1)].alive = true;
 	return (true);

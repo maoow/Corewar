@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:13 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 15:00:10 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/16 15:23:53 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ bool	cw_sub(t_cor *core, t_process *proc)
 		proc->registres[proc->PC + proc->startpos + 3] -
 		proc->registres[proc->PC + proc->startpos + 2];
 	return (proc->registres[proc->PC + proc->startpos + 4] != 0);
-	return (true);
+	core = NULL;
 }
