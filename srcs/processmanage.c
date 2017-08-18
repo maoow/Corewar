@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/18 04:27:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/18 04:47:56 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,20 @@ void			ft_browseprocess(t_cor *core)
 	}
 }
 
-void	free_process(t_process *tmp)
-{
-	free(tmp->next_op);
-	free(tmp);
-}
 
-void	ft_delprocess(t_cor *core, t_process *del)
+void	ft_delprocess(t_cor *core, t_process **del)
 {
 	t_process *tmp;
-	if (core->process == del)
-		core->process = del->next;
+	if (core->process == (*del))
+		core->process = (*del)->next;
 	else
 	{
 		tmp = core->process;
-		while (tmp->next != del)
+		while (tmp->next != (*del))
 			tmp = tmp->next;
-		tmp->next = del->next;
+		tmp->next = (*del)->next;
 	}
-	free_process(del);
+	free((*del));
 }
 
 void	ft_addprocess(t_cor *core, t_process *new)
