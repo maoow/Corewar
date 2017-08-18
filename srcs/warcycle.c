@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 15:06:30 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/18 04:49:14 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static bool		ft_checklives(t_cor *core)
 	proc = core->process;
 	while (proc)
 	{
-		//if (proc->live == 0)
-			//ft_killprocess(core, proc);
+		if (proc->live == 0)
+			ft_delprocess(core, &proc);
 		lives = proc->live;
 		proc->live = 0;
 		proc = proc->next;
