@@ -6,11 +6,13 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/13 15:50:43 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/18 04:43:14 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+// je referais l'init en plus propre c'est juste pour limiter la casse en attendant
 
 void		init_struct(t_cor *cor)
 {
@@ -19,6 +21,11 @@ void		init_struct(t_cor *cor)
 		if (!(cor->process = (t_process*)malloc(sizeof(*cor->process))))//
 			write_error(2);
 		cor->process->next_op = NULL;
+		cor->process->PC = 0;
+		cor->process->next_jump = 0;
+		cor->process->startpos = 0; // (non !)
+		cor->process->cycles_before_execute = 0;
+		cor->process->live = 0;
 		cor->process->next = NULL;
 	}
 }
