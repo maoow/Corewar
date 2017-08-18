@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/13 15:57:32 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/18 04:30:05 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,8 @@ size_t		getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		*ft_getparamstype(t_cor *core, t_process *proc);
 size_t		getram(t_cor *core, size_t address);
 void		setram(t_cor *core, size_t address, size_t value);
+void		free_process(t_process *tmp);
+void		ft_delprocess(t_cor *core, t_process *del);
+void		ft_addprocess(t_cor *core, t_process *new);
 
 #endif
