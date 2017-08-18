@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/13 16:20:57 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/18 05:44:48 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void			launch_parse(t_cor *cor, int ac, char **av)
 	size_t		i = 0;
 
 	nb_champ = 1;//nb_champ = 1 + nb_option
+	if (ac > 1)
 	moove_champ = MEM_SIZE / (ac - 1);
 	i = 0;
 	size_t		decal = 0;
