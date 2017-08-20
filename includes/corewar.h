@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/18 04:48:43 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 11:56:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct			s_champ
 typedef struct			s_process
 {
 	size_t				ID;
-	unsigned char		registres[REG_NUMBER];
+	size_t				registres[REG_NUMBER];
 	size_t				PC;
 	size_t				startpos;
 	size_t				next_jump;
