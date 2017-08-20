@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/20 11:56:40 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 13:03:36 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct			s_champ
 	size_t				ID;
 	struct s_champ		*next;
 	bool				alive;
+	int					color;
 }						t_champ;
 
 /*
@@ -59,6 +60,7 @@ typedef struct			s_process
 	bool				carry;
 	size_t				live;
 	struct s_process	*next;
+	int					color;
 }						t_process;
 
 /*
@@ -104,7 +106,7 @@ size_t		getparam(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		*ft_getparamstype(t_cor *core, t_process *proc);
 size_t		getram(t_cor *core, size_t address);
-void		setram(t_cor *core, size_t address, size_t value);
+void		setram(t_cor *core, size_t address, size_t value, int color);
 void		free_process(t_process *tmp);
 void		ft_delprocess(t_cor *core, t_process **del);
 void		ft_addprocess(t_cor *core, t_process *new);

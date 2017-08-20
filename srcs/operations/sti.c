@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/20 11:41:41 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 13:02:30 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ bool	cw_sti(t_cor *core, t_process *proc)
 
 	adress = getparam(core, proc, 2, 2);
 	adress += getparam(core, proc, 3, 2);
-	setram(core, adress, proc->registres[core->arena[proc->PC + proc->startpos + 2] - 1]);
+	setram(core, adress, proc->registres[core->arena[proc->PC + proc->startpos + 2] - 1], proc->color);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/20 11:08:08 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 13:16:10 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,26 @@ static bool		ft_checklives(t_cor *core)
 	return (true);
 }
 
+static void		initproccolor(t_process *proc)
+{
+	t_process	*tmp;
+	int			i;
+
+	i = 6;
+	tmp = proc;
+	while (tmp)
+	{
+		tmp->color = i;
+		tmp = tmp->next;
+		i++;
+	}
+}
+
 void			ft_warcycle(t_cor *core)
 {
 	bool	b_alive;
 
+	initproccolor(core->process);
 	b_alive = true;
 	while (b_alive)
 	{

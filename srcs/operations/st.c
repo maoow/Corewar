@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:11 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 15:00:10 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 13:02:08 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	cw_st(t_cor *core, t_process *proc)
 	if (op % 4 == 3)
 	{
 		setram(core, idx(proc, ind(core, proc, proc->PC + 2)),
-				getparam(core, proc, 1, 2));
+				getparam(core, proc, 1, 2), proc->color);
 	}
 	else
 	{

@@ -6,11 +6,12 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/18 05:49:17 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 13:47:42 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
+# include "opg.c"
 
 size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 {
@@ -44,7 +45,8 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 	if (g_opcarry[core->arena[proc->startpos + proc->PC] - 1])
 		proc->carry = carry;
 	ft_determinejmpdist(core, proc);
-	proc->PC += proc->next_jump % MEM_SIZE;
+	proc->PC += proc->next_jump;
+	core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE] = proc->color + 3;
 	//free_op(proc);
 }
 
