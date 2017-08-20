@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/18 04:43:14 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 11:42:11 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		init_struct(t_cor *cor)
 		cor->process->cycles_before_execute = 0;
 		cor->process->live = 0;
 		cor->process->next = NULL;
+		cor->process->registres[0] = -1;
 	}
 }
 
