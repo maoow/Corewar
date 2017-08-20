@@ -6,12 +6,47 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/04 14:09:59 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 13:41:42 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-
+size_t					g_oplabel[OPC_NBR] = {
+	4,
+	4,
+	0,
+	0,
+	0,
+	4,
+	4,
+	4,
+	2,
+	2,
+	2,
+	2,
+	4,
+	2,
+	2,
+	0
+};
+bool					g_ocp[OPC_NBR] = {
+	false,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	false,
+	true,
+	true,
+	false,
+	true,
+	true,
+	false,
+	true
+};
 size_t	idx(t_process *proc, size_t jump)
 {
 	int	tmp;
