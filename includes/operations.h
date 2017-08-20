@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:17:49 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/16 15:39:25 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 13:35:57 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,5 @@ bool	cw_lld(t_cor *core, t_process *proc);
 bool	cw_lldi(t_cor *core, t_process *proc);
 bool	cw_lfork(t_cor *core, t_process *proc);
 bool	cw_aff(t_cor *core, t_process *proc);
-
-extern size_t					g_optime[OPC_NBR];
-extern bool					g_opcarry[OPC_NBR];
-extern bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *);
-extern size_t					g_oplabel[OPC_NBR];
-extern bool					g_opparamnb[OPC_NBR];
-extern bool					g_ocp[OPC_NBR];
-
 
 #endif
