@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 15:51:54 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/13 16:07:03 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/20 13:12:38 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			print_right(WINDOW *right, t_cor *cor)
 	mvwprintw(right, 9, 3, "Processes : %d", nb_process_alive);
 	while (champ > 0)
 	{
-		mvwprintw(right, 11 - champ * 4 + NB_CHAMP * 4, 3, "Player -%d : %s", tmp->ID, tmp->name);
+		mvwprintw(right, 11 - champ * 4 + NB_CHAMP * 4, 3, "Player %d : %s", tmp->ID, tmp->name);
 		mvwprintw(right, 12 - champ * 4 + NB_CHAMP * 4, 3, "  Last live : \t\t%d", champ_last_live);
 		mvwprintw(right, 13 - champ * 4 + NB_CHAMP * 4, 3, "  Lives in current period :  %d", champ_current_live);
 		champ--;

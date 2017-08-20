@@ -6,12 +6,13 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/13 15:56:16 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/20 14:03:39 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
 #include <math.h>
 #include "corewar.h"
+#include <time.h>
 #define C COLOR_PAIR
 
 /*
@@ -153,18 +154,25 @@ void		visu(t_cor *cor)
 
 	if (init() == NULL)
 		return ;
-	while (1)
+	left = subwin(stdscr, LINES, COLS - COLS / 5, 0, 0);
+	right = subwin(stdscr, LINES, COLS / 5, 0, COLS - COLS / 5);
+	manage_box(left, right, cor);
+	wrefresh(left);
+	wrefresh(right);
+	nodelay(stdscr, true);
+	if ((touche = getch()) == 27)
+		exit (0);
+	else if (touche == 32)
 	{
-		left = subwin(stdscr, LINES, COLS - COLS / 5, 0, 0);
-		right = subwin(stdscr, LINES, COLS / 5, 0, COLS - COLS / 5);
-		manage_box(left, right, cor);
-		wrefresh(left);
-		wrefresh(right);
-		if ((touche = getch()) == 27)
-			break;
-		else
-			clear();
+		while ((touche = getch()) != 32)
+		{
+			if ((touche = getch()) == 27)
+				exit (0);
+			sleep(1);
+		}
 	}
+	usleep(100000);
+	clear();
 	endwin();
 	delwin(left);
 	delwin(right);
