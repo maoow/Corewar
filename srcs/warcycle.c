@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/18 05:50:01 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 11:08:08 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void			ft_warcycle(t_cor *core)
 	{
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
-			//visu
+			visu(core);
 			ft_browseprocess(core);
 			core->total_cycle++;
 			core->tmp_cycle_to_die++;
