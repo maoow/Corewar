@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/20 13:47:42 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 14:13:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 	size_t		i;
 	size_t		tmp;
 
-	if (!(params = (size_t *)malloc(g_oplabel[core->arena[proc->startpos + proc->PC]] * sizeof(size_t))))
+	if (!(params = (size_t *)malloc(g_oplabel[core->arena[proc->startpos + proc->PC] - 1] * sizeof(size_t))))
 		exit(1);
 	tmp = core->arena[proc->startpos + proc->PC + 1];
 	i = 0;
@@ -31,7 +31,7 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 		else if (tmp % 4 == 3)
 			params[i] = 2;
 		else if (tmp % 4 == 2)
-			params[i] = g_oplabel[core->arena[proc->startpos + proc->PC]];
+			params[i] = g_oplabel[core->arena[proc->startpos + proc->PC] - 1];
 		i++;
 	}
 	return (params);
@@ -47,7 +47,7 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 	ft_determinejmpdist(core, proc);
 	proc->PC += proc->next_jump;
 	core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE] = proc->color + 3;
-	//free_op(proc);
+	proc->next_op = NULL;
 }
 
 // compare core->arena[proc->PC] with opc_table
@@ -74,6 +74,7 @@ void			ft_browseprocess(t_cor *core)
 			ft_executeprocess(core, proc);
 		if (!proc->next_op)
 			ft_getop(core, proc);
+		if (proc->cycles_before_execute > 0)
 		proc->cycles_before_execute--;
 		proc = proc->next;
 	}
