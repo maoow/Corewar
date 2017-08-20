@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/18 05:44:48 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/20 14:41:14 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int				main(int ac, char **av)
 
 	ft_init(&core);
 	launch_parse(&core, ac, av);
-//	visu(&core);
 	ft_warcycle(&core);
 	ft_clean(&core);
 }
