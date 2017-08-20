@@ -55,24 +55,6 @@ bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *) = {
 	&cw_aff
 };
 
-size_t					g_oplabel[OPC_NBR] = {
-	4,
-	4,
-	0,
-	0,
-	0,
-	4,
-	4,
-	4,
-	2,
-	2,
-	2,
-	2,
-	4,
-	2,
-	2,
-	0
-};
 
 bool					g_opparamnb[OPC_NBR] = {
 	1,
@@ -92,22 +74,5 @@ bool					g_opparamnb[OPC_NBR] = {
 	1,
 	1
 };
-bool					g_ocp[OPC_NBR] = {
-	false,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	false,
-	true,
-	true,
-	false,
-	true,
-	true,
-	false,
-	true
-};
-
+extern bool					g_ocp[OPC_NBR];
+extern size_t				g_oplabel[OPC_NBR];
