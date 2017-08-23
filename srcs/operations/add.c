@@ -6,17 +6,18 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:24:58 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/16 15:23:59 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/23 11:33:39 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 
-bool	cw_add(t_cor *core, t_process *proc)
+bool		cw_add(t_cor *core, t_process *proc)
 {
-	proc->registres[proc->PC + proc->startpos + 4] =
-		proc->registres[proc->PC + proc->startpos + 3] +
-		proc->registres[proc->PC + proc->startpos + 2];
+	proc->registres[core->arena[proc->PC + proc->startpos + 4]] =
+		proc->registres[core->arena[proc->PC + proc->startpos + 3]] +
+		proc->registres[core->arena[proc->PC + proc->startpos + 2]];
+	if (core->verbose)
+		ft_printf("add | r%d r%d r%d",core->arena[proc->PC + proc->startpos + 2], core->arena[proc->PC + proc->startpos + 3],core->arena[proc->PC + proc->startpos + 2]);
 	return (proc->registres[proc->PC + proc->startpos + 4] != 0);
-	core = NULL;
 }
