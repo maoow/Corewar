@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 15:04:50 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/23 11:03:04 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ bool	cw_lfork(t_cor *core, t_process *proc)
 	tmp->next_jump = 0;
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
-	tmp->next = NULL; // todo (voir comment on gere la pile)
+	tmp->next = core->process;
+	core->process = tmp;
 	return (true);
 }
