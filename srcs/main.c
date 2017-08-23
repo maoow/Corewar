@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/20 14:41:14 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/23 11:29:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void		ft_init(t_cor *core)
 	core->tmp_cycle_to_die = 0;
 	core->checks = 0;
 	core->total_cycle = 0;
+	core->verbose = true;
 	core->champs = NULL;
 	core->process = NULL;
 	core->last_champ_alive = NULL;

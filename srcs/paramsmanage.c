@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 14:29:14 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/23 11:29:43 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ size_t	ind(t_cor *core, t_process *proc, size_t PC)
 {
 	size_t value;
 
-	value = core->arena[proc->startpos + PC];
+	value = core->arena[(proc->startpos + PC) % MEM_SIZE];
 	value *= 256;
-	value += core->arena[proc->startpos + PC + 1];
+	value += core->arena[(proc->startpos + PC + 1) % MEM_SIZE];
 	return (value);
 }
 
@@ -31,12 +31,12 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 
 	i = 0;
 	place = 2;
-	op = core->arena[proc->PC + proc->startpos + 1];
+	op = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
 	while (i < param)
 	{
 		if (op % 4 == 1)
 		{
-			value = proc->registres[core->arena[proc->PC + proc->startpos + place]];
+			value = proc->registres[core->arena[(proc->PC + proc->startpos + place) % MEM_SIZE]];
 				place++;
 		}
 		else if (op % 4 == 2)
@@ -64,7 +64,7 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 
 	i = 1;
 	place = 2;
-	op = core->arena[proc->PC + proc->startpos + 1];
+	op = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
 	while (i < param)
 	{
 		if (op % 4 == 1)

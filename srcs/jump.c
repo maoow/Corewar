@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/20 14:02:10 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/23 11:29:53 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 {
 	unsigned char	tmp;
 
-	tmp = core->arena[proc->startpos + proc->PC + 1];
-	if (g_ocp[core->arena[proc->startpos + proc->PC] - 1])
+	tmp = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
+	if (g_ocp[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1])
 	{
 		proc->next_jump = 2;
 		while (tmp)
@@ -77,9 +77,9 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 			else if (tmp % 4 == 3)
 				proc->next_jump += 2;
 			else if (tmp % 4 == 2)
-				proc->next_jump += g_oplabel[core->arena[proc->startpos + proc->PC] - 1];
+				proc->next_jump += g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		}
 	}
 	else
-		proc->next_jump = 1 + g_oplabel[core->arena[proc->startpos + proc->PC] - 1];
+		proc->next_jump = 1 + g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 }
