@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:11 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 16:39:15 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 16:45:53 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ bool	cw_st(t_cor *core, t_process *proc)
 	if (core->verbose)
 		ft_printf("st | r%d r%d\n", core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE],core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] + 1);
 	}
+	if (core->verbose)
+		ft_printf("st | %d %d\n", proc->PC, proc->startpos);
 	return (proc->registres[core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE]] != 0);
 }
