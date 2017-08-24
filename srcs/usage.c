@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 11:40:42 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/09 17:24:15 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/24 16:34:43 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 	ft_printf("\t-s N    \t\t:runs n cycles, dumps memory, pauses, then repeats");
 }*/
 
-#include <stdio.h>
-#include <stdlib.h>
 void		write_error(int nb)
 {
 	if (nb == 2)
-		exit(printf("Malloc error\n"));//ft_printf
+		exit(ft_printf("Malloc error\n"));
+	if (nb == 3)
+		exit(ft_printf("Input error\n"));
+	if (nb == 4)
+		exit(ft_printf("Too many players\n"));
 }

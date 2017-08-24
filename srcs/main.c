@@ -6,11 +6,21 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 15:00:32 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/24 17:14:30 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+
+static void	init_options(t_options *opt)
+{
+	opt->dump = false;
+	opt->nb_dump = 0;
+	opt->n = false;
+	opt->v4 = false;
+	opt->visu = false;
+}
 
 static void		ft_init(t_cor *core)
 {
@@ -27,9 +37,13 @@ static void		ft_init(t_cor *core)
 	core->tmp_cycle_to_die = 0;
 	core->checks = 0;
 	core->total_cycle = 0;
-	core->verbose = true;
+	core->verbose = false;
 	core->champs = NULL;
 	core->process = NULL;
+	core->options = NULL;
+	core->options = (t_options*)malloc(sizeof(*core->options));//
+	init_options(core->options);
+	core->options->num_champ = NULL;
 	core->last_champ_alive = NULL;
 }
 
@@ -85,7 +99,10 @@ int				main(int ac, char **av)
 {
 	t_cor	core;
 
+	if (ac < 3)
+		write_error(3);
 	ft_init(&core);
+	get_options(&core, ac, av);
 	launch_parse(&core, ac, av);
 	ft_warcycle(&core);
 	ft_clean(&core);

@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/24 14:49:46 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/24 15:13:50 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd)
 }
 
 /*
-**	parse un champion en hexa, ne rempli pas de structure
+**	parse un champion en hexa, rempli la structure champ, mais pas process
 */
 
 int				**parse(t_cor *cor, char *av)
