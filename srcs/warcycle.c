@@ -6,12 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 15:52:48 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 17:18:38 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-
+#include "corewar.h" 
 static bool		ft_checklives(t_cor *core)
 {
 	t_process	*proc;
@@ -41,35 +40,45 @@ static bool		ft_checklives(t_cor *core)
 	return (true);
 }
 
-static void		initproccolor(t_process *proc)
+static void		initproccolor(t_cor *core)
 {
 	t_process	*tmp;
 	int			i;
 
-	i = 6;
-	tmp = proc;
+	i = 14;
+	tmp = core->process;
 	while (tmp)
 	{
-		tmp->color = i;
 		tmp = tmp->next;
 		i++;
 	}
+	tmp = core->process;
+	while (tmp)
+	{
+		i--;
+		tmp->color = i;
+		tmp = tmp->next;
+	}
+
 }
 
 void			ft_warcycle(t_cor *core)
 {
 	bool	b_alive;
 
-	initproccolor(core->process);
+	initproccolor(core);
 	b_alive = true;
 	while (b_alive)
 	{
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
-			if (core->total_cycle == 801)
-			visu(core);
-			if (!core->verbose)
-			visu(core);
+			if (core->total_cycle == 901)
+			{
+				visu(core);
+				ft_printf("%d",core->arena_color[7]);
+			}
+			if (core->options->visu)
+				visu(core);
 			ft_browseprocess(core);
 			core->total_cycle++;
 			core->tmp_cycle_to_die++;
