@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:09 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/10 15:00:10 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 16:39:13 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	cw_lldi(t_cor *core, t_process *proc)
 
 	adress = getparam(core, proc, 1, 2);
 	adress += getparam(core, proc, 2, 2);
-	proc->registres[core->arena[getparamplace(core, proc, 3, 2)]] =
+	proc->registres[core->arena[(getparamplace(core, proc, 3, 2)) % MEM_SIZE]] =
 	getram(core, proc->startpos + adress);
-	return (proc->registres[core->arena[getparamplace(core, proc, 3, 2)]] != 0);
+	return (proc->registres[core->arena[(getparamplace(core, proc, 3, 2)) % MEM_SIZE]] != 0);
 }
