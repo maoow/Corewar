@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/23 11:29:40 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 15:00:32 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,36 @@ static void		ft_init(t_cor *core)
 }
 
 /*
+**	parse() : recupere le code hexa du champion
 **	nb_champ + 3 pour la couleur car les COLOR_PAIR de champ commencent a 4
 **	champ[0][0] = size du champion,	champ[1] = int* du code du champion
+**
+**	while : attribution de la couleur dans l'arene.
+**		moove_champ = espacement entre chaque champion
+**		decal = decalage de chaque champion, commence a zero puis augmente de
+**			moove_champ pour chaque incrementation
 */
 void			launch_parse(t_cor *cor, int ac, char **av)
 {
 	size_t		nb_champ;
 	int			**champ;
 	size_t		moove_champ;
-	size_t		i = 0;
+	size_t		i;
+	size_t		decal = 0;
 
 	nb_champ = 1;//nb_champ = 1 + nb_option
 	if (ac > 1)
 	moove_champ = MEM_SIZE / (ac - 1);
 	i = 0;
-	size_t		decal = 0;
 	while (nb_champ < (size_t)ac)
 	{
 		champ = parse(cor, av[nb_champ]);
+		add_process(cor, decal, ac - nb_champ);
 		while (i + decal < champ[0][0] + decal)
 		{
 			cor->arena[i + decal] = champ[1][i];
 			cor->arena_color[i + decal] = nb_champ + 3;
-			if (i == 0)
+			if (i == 0)//a virer
 				cor->arena_color[i + decal] = 10 + nb_champ + 3;
 			i++;
 		}

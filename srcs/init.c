@@ -6,14 +6,40 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/20 11:42:11 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 15:07:09 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-// je referais l'init en plus propre c'est juste pour limiter la casse en attendant
+void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
+{
+	t_process	*new;
 
+	if (!cor->process)
+	{
+		if (!(cor->process = (t_process*)malloc(sizeof(*cor->process))))//
+			write_error(2);
+		cor->process->next = NULL;
+	}
+	else
+	{
+		if (!(new = (t_process*)malloc(sizeof(*new))))//
+			write_error(2);
+		new->next = cor->process;
+		cor->process = new;
+	}
+	cor->process->next_op = NULL;
+	cor->process->PC = 0;
+	cor->process->next_jump = 0;
+	cor->process->startpos = startpos;
+	cor->process->cycles_before_execute = 0;
+	cor->process->live = 0;
+	cor->process->registres[0] = nb_champ;
+
+}
+
+// je referais l'init en plus propre c'est juste pour limiter la casse en attendant
 void		init_struct(t_cor *cor)
 {
 	if (!cor->process)
