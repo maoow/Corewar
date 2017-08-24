@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 15:55:42 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 17:11:31 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ bool	cw_fork(t_cor *core, t_process *proc)
 	tmp->next_jump = 0;
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
+	tmp->color = proc->color;
 	tmp->next = core->process;
 	core->arena_color[(tmp->PC + tmp->startpos) % MEM_SIZE] = 16;
 	core->process = tmp;
