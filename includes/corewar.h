@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/24 15:02:19 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/24 16:06:50 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <ncurses.h>
 
+# define MAX_PLAYERS 4
 # define MEM_SIZE (4*1024)
 # define IDX_MOD (MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE (MEM_SIZE / 6)
@@ -33,6 +34,36 @@
 # define CHAMP_NAME 128 + 8
 # define COMMENT_NAME 2048 + CHAMP_NAME + 8
 # define EXEC_MAGIC_LENGHT 3
+
+/*
+**	structure allouee et remplie si un ou plusieurs champions a un numero 
+**	assigne au lancement de l'executable
+*/
+
+typedef struct			s_opt_number
+{
+	size_t				num;
+	size_t				champ;
+	struct s_opt_number	*next;
+}						t_opt_number;
+
+/*
+**	structure remplie en fonction des options passees a l'executable
+**	dump et son size_t pour afficher l'etat de la vm a un cycle donne
+**	n et num_champ pour assigner un numero precis a un champion
+**	v4 pour le verbose details des operations
+**	visu pour le visualisateur ncurses
+*/
+
+typedef struct			s_options
+{
+	bool				dump;
+	size_t				nb_dump;
+	bool				n;
+	t_opt_number		*num_champ;
+	bool				v4;
+	bool				visu;
+}						t_options;
 
 typedef struct			s_champ
 {
@@ -80,6 +111,7 @@ typedef struct			s_cor
 {
 	t_champ				*champs;
 	t_process			*process;
+	t_options			*options;
 	char				*last_champ_alive;
 	size_t				cycle_to_die;
 	size_t				tmp_cycle_to_die;
@@ -91,15 +123,22 @@ typedef struct			s_cor
 	size_t				nb_champs;
 }						t_cor;
 
-void		ft_browseprocess(t_cor *core);
+/*
+**			START FUNCTIONS
+*/
 void		usage(void);
 void		write_error(int nb);
+void		get_options(t_cor *cor, int ac, char **av);
 int			**parse(t_cor *cor, char *av);
 void		add_champ(t_cor *cor, char *name, char *comment, int ID);
 void		add_process(t_cor *cor, size_t startpos, size_t nb_champ);
 void		visu(t_cor *cor);
 void		print_right(WINDOW *right, t_cor *cor);
+/*
+**			GAME FUNCTIONS
+*/
 void		ft_warcycle(t_cor *core);
+void		ft_browseprocess(t_cor *core);
 size_t		idx(t_process *proc, size_t jump);
 void		ft_determinejmpdist(t_cor *core, t_process *proc);
 size_t		ind(t_cor *core, t_process *proc, size_t PC);

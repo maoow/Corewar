@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/20 14:03:39 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/24 12:56:24 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 */
 
 /*
+**				FOREGREOUND		BACKGROUND
+**					  |			  |
 ** COLOR_PAIR	1	white		white	=> bordure
 **				2	black		black	=> bordure
 **				3	H white		black	=> highlight white
