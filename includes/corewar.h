@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/23 11:21:16 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 15:02:19 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void		usage(void);
 void		write_error(int nb);
 int			**parse(t_cor *cor, char *av);
 void		add_champ(t_cor *cor, char *name, char *comment, int ID);
-void		init_struct(t_cor *cor);
+void		add_process(t_cor *cor, size_t startpos, size_t nb_champ);
 void		visu(t_cor *cor);
 void		print_right(WINDOW *right, t_cor *cor);
 void		ft_warcycle(t_cor *core);
