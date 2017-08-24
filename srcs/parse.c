@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/13 15:40:17 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/24 14:49:46 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,8 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd)
 }
 
 /*
-**	parse un champion en hexa et rempli sa struct champ
-**	rempli sa struct process
+**	parse un champion en hexa, ne rempli pas de structure
 */
-
-// a faire : 	remplir les 2 struct
 
 int				**parse(t_cor *cor, char *av)
 {
@@ -95,6 +92,5 @@ int				**parse(t_cor *cor, char *av)
 		exit(ft_printf("crash open"));
 	if (!(champion = (unsigned char*)malloc(sizeof(*champion) * (CHAMP_MAX_SIZE + 1))))
 		write_error(2);
-	init_struct(cor);
 	return (get_champ(cor, champion, fd));
 }
