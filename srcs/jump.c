@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/23 11:29:53 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/24 16:48:17 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t	idx(t_process *proc, size_t jump)
 		tmp %= IDX_MOD;
 	else
 		tmp = (tmp % IDX_MOD) - IDX_MOD;
-	return ((size_t)(tmp + proc->startpos));
+	return ((size_t)((tmp + proc->startpos) % MEM_SIZE));
 }
 
 void	ft_determinejmpdist(t_cor *core, t_process *proc)
