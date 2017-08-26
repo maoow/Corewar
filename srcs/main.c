@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 17:14:30 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/26 15:28:37 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,21 @@ void			launch_parse(t_cor *cor, int ac, char **av)
 	i = 0;
 	while (nb_champ < (size_t)ac)
 	{
-		champ = parse(cor, av[nb_champ]);
-		add_process(cor, decal, ac - nb_champ);
-		while (i + decal < champ[0][0] + decal)
+		if (is_champ(av[nb_champ], 0, true))
 		{
-			cor->arena[i + decal] = champ[1][i];
-			cor->arena_color[i + decal] = nb_champ + 3;
-			if (i == 0)//a virer
-				cor->arena_color[i + decal] = 10 + nb_champ + 3;
-			i++;
+			champ = parse(cor, av[nb_champ]);
+			add_process(cor, decal, ac - nb_champ);
+			while (i + decal < champ[0][0] + decal)
+			{
+				cor->arena[i + decal] = champ[1][i];
+				cor->arena_color[i + decal] = nb_champ + 3;
+				if (i == 0)//a virer
+					cor->arena_color[i + decal] = 10 + nb_champ + 3;
+				i++;
+			}
+			i = 0;
+			decal = decal + moove_champ;
 		}
-		i = 0;
-		decal = decal + moove_champ;
 		nb_champ++;
 	}
 	cor->nb_champs = nb_champ;
@@ -99,7 +102,7 @@ int				main(int ac, char **av)
 {
 	t_cor	core;
 
-	if (ac < 3)
+	if (ac < 2)
 		write_error(3);
 	ft_init(&core);
 	get_options(&core, ac, av);

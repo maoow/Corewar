@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 17:18:38 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/26 15:54:09 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,11 @@ void			ft_warcycle(t_cor *core)
 	{
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
-			if (core->total_cycle == 901)
+			if (core->options->dump && core->total_cycle == core->options->nb_dump)
 			{
-				visu(core);
-				ft_printf("%d",core->arena_color[7]);
+			//	visu(core);
+				ft_dump(core);
+			//	ft_printf("%d",core->arena_color[7]);
 			}
 			if (core->options->visu)
 				visu(core);
