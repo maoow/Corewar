@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 13:10:18 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/20 12:59:17 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/26 13:36:02 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ size_t	getram(t_cor *core, size_t address)
 
 	value = core->arena[(address) % MEM_SIZE];
 	value *= 256;
-	value = core->arena[(address + 1) % MEM_SIZE];
+	value += core->arena[(address + 1) % MEM_SIZE];
 	value *= 256;
-	value = core->arena[(address + 2) % MEM_SIZE];
+	value += core->arena[(address + 2) % MEM_SIZE];
 	value *= 256;
-	value = core->arena[(address + 3) % MEM_SIZE];
+	value += core->arena[(address + 3) % MEM_SIZE];
 	return (value);
 }
 void		setram(t_cor *core, size_t address, size_t value, int color)
