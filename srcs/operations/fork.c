@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/26 13:44:09 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/26 14:32:22 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ bool	cw_fork(t_cor *core, t_process *proc)
 	core->arena_color[(tmp->PC + tmp->startpos) % MEM_SIZE] = 16;
 	core->process = tmp;
 	if (core->verbose)
-		ft_printf("p%d fork | %d (%d)\n", proc->ID,ind(core, proc, proc->PC + 1), ind(core, proc, proc->PC + 1) + proc->startpos);
+		ft_printf("P%4d | fork %d (%d)\n", proc->ID,ind(core, proc, proc->PC + 1), ind(core, proc, proc->PC + 1) + proc->startpos);
 	return (true);
 }
