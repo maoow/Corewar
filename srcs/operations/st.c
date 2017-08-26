@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:11 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 16:45:53 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/26 13:39:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ bool	cw_st(t_cor *core, t_process *proc)
 	{
 		setram(core, idx(proc, ind(core, proc, proc->PC + 3)),
 				getparam(core, proc, 1, 2), proc->color);
-		ft_printf("st | r%d %d\n", core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE] + 1, ind(core, proc, proc->PC + 3));
+	if (core->verbose)
+		ft_printf("p%d st | r%d %d\n", proc->ID,core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE] + 1, ind(core, proc, proc->PC + 3));
 	}
 	else
 	{
 		proc->registres[core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE]] =
 		proc->registres[core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE]];
 	if (core->verbose)
-		ft_printf("st | r%d r%d\n", core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE],core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] + 1);
+		ft_printf("p%d st | r%d r%d\n", proc->ID,core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE],core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] + 1);
 	}
-	if (core->verbose)
-		ft_printf("st | %d %d\n", proc->PC, proc->startpos);
 	return (proc->registres[core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE]] != 0);
 }
