@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/26 16:06:27 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/26 16:12:09 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void			ft_warcycle(t_cor *core)
 			{
 			//	visu(core);
 				ft_dump(core);
-			//	ft_printf("%d",core->arena_color[7]);
+				exit(0);
 			}
 			if (core->options->visu)
 				visu(core);
