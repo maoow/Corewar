@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/24 15:10:56 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/26 13:48:52 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 		if (!(cor->process = (t_process*)malloc(sizeof(*cor->process))))//
 			write_error(2);
 		cor->process->next = NULL;
+		cor->process->ID = 1;
 	}
 	else
 	{
 		if (!(new = (t_process*)malloc(sizeof(*new))))//
 			write_error(2);
+		new->ID = cor->process->ID + 1;
 		new->next = cor->process;
 		cor->process = new;
 	}
