@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/26 16:06:12 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/26 16:10:28 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ void			get_options(t_cor *cor, int ac, char **av)
 		if (ft_strcmp(av[i], "-dump") == 0)
 		{
 			cor->options->dump = true;
-			if ((cor->options->nb_dump = ft_atoi(av[i + 1]) == -1))
+			if ((cor->options->nb_dump = ft_atoi(av[i + 1])) == -1)
 				write_error(3);
-			cor->options->nb_dump = ft_atoi(av[i + 1]);
 			i++;
 		}
 		else if (ft_strcmp(av[i], "-v4") == 0)
