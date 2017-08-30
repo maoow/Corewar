@@ -6,13 +6,13 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 13:10:18 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/26 13:36:02 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/30 16:04:07 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-size_t	getram(t_cor *core, size_t address)
+int	getram(t_cor *core, size_t address)
 {
 	size_t	value;
 
