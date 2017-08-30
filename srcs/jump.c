@@ -5,12 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/30 14:32:55 by cbinet            #+#    #+#             */
+/*   Updated: 2017/08/30 14:36:33 by cbinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   jump.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/24 16:48:17 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/30 14:31:00 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
+
 size_t					g_oplabel[OPC_NBR] = {
 	4,
 	4,
@@ -51,6 +64,7 @@ size_t	idx(t_process *proc, size_t jump)
 {
 	int	tmp;
 
+	/*
 	tmp = proc->PC + jump;
 	tmp %= MEM_SIZE;
 	tmp -= proc->PC;
@@ -58,6 +72,12 @@ size_t	idx(t_process *proc, size_t jump)
 		tmp %= IDX_MOD;
 	else
 		tmp = (tmp % IDX_MOD) - IDX_MOD;
+	return ((size_t)((tmp + proc->startpos) % MEM_SIZE));
+	*/
+	if (jump > MEM_SIZE / 2)
+		tmp = (jump % IDX_MOD) + proc->PC - IDX_MOD;
+	else
+		tmp = (jump % IDX_MOD) + proc->PC;
 	return ((size_t)((tmp + proc->startpos) % MEM_SIZE));
 }
 
