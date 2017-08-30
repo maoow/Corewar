@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/23 11:29:43 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/26 14:49:38 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,30 @@ size_t	ind(t_cor *core, t_process *proc, size_t PC)
 
 size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 {
-	unsigned char	op;
+	unsigned char	op[3];
 	size_t			i;
 	size_t			place;
 	size_t			value;
 
 	i = 0;
 	place = 2;
-	op = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
+	op[0] = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
+	op[2] = (op[0] / 4) % 4;
+	op[1] = (op[0] / 16) % 4;
+	op[0] /= 64;
 	while (i < param)
 	{
-		if (op % 4 == 1)
+		if (op[i] == 1)
 		{
 			value = proc->registres[core->arena[(proc->PC + proc->startpos + place) % MEM_SIZE]];
 				place++;
 		}
-		else if (op % 4 == 2)
+		else if (op[i] == 2)
 		{
 			if (label == 2)
 				value = getram(core, ind(core, proc, proc->PC + proc->startpos + place));
+			else
+				value = ind(core, proc, proc->PC + proc->startpos + place);
 			place += label;
 		}
 		else
@@ -51,7 +56,6 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 			place += 2;
 		}
 		i++;
-		op /= 4;
 	}
 	return (value);
 }
