@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/23 11:32:00 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/30 16:11:42 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 }
 
 // compare core->arena[proc->PC] with opc_table
-static void		ft_getop(t_cor *core, t_process *proc)
+void		ft_getop(t_cor *core, t_process *proc)
 {
 
 	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 < OPC_NBR)
