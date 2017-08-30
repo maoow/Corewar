@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 13:40:44 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/26 14:31:51 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/30 15:56:50 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ bool	cw_ld(t_cor *core, t_process *proc)
 	}
 	proc->registres[core->arena[(PC + proc->startpos) % MEM_SIZE]] = value;
 	if (core->verbose)
-		ft_printf("P%4d | ld %d r%d\n", proc->ID, value, core->arena[(PC + proc->startpos) % MEM_SIZE]);
+		ft_printf("P%5d | ld %d r%d\n", proc->ID, value, core->arena[(PC + proc->startpos) % MEM_SIZE]);
 	return (value != 0);
 }

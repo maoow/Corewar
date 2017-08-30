@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 12:05:57 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/30 15:25:47 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/30 15:56:50 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ bool	cw_live(t_cor *core, t_process *proc)
 	if (core->nb_champs >= proc->registres[0])
 	core->champs[proc->registres[0]].alive = true;
 	if (core->verbose)
-		ft_printf("P%4d live | %d\n",proc->ID,proc->registres[0]);
+		ft_printf("P%5d | live %d\n",proc->ID,proc->registres[0]);
 	return (true);
 }
