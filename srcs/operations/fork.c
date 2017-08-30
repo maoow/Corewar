@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/26 14:32:22 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/30 15:02:41 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	cw_fork(t_cor *core, t_process *proc)
 {
 	t_process 	*tmp;
 	size_t		i;
+	int			indt;
 
 	i = 0;
 	tmp = (t_process *)malloc(sizeof(t_process)); //
@@ -24,8 +25,8 @@ bool	cw_fork(t_cor *core, t_process *proc)
 		tmp->registres[i] = proc->registres[i];
 		i++;
 	}
-	tmp->PC = (proc->PC - proc->startpos + idx(proc, ind(core, proc, proc->PC + 1))) % MEM_SIZE;
-	tmp->startpos = proc->startpos;
+	tmp->PC = 0;
+	tmp->startpos = (proc->PC - proc->startpos + idx(proc, ind(core, proc, proc->PC + 1)) + proc->startpos) % MEM_SIZE;
 	tmp->next_jump = 0;
 	tmp->cycles_before_execute = 0;
 	tmp->next_op = false;
@@ -37,6 +38,11 @@ bool	cw_fork(t_cor *core, t_process *proc)
 	core->arena_color[(tmp->PC + tmp->startpos) % MEM_SIZE] = 16;
 	core->process = tmp;
 	if (core->verbose)
-		ft_printf("P%4d | fork %d (%d)\n", proc->ID,ind(core, proc, proc->PC + 1), ind(core, proc, proc->PC + 1) + proc->startpos);
+	{
+		indt = ind(core, proc, proc->PC + 1) % MEM_SIZE;
+		if (indt > MEM_SIZE / 2)
+			indt -= MEM_SIZE;
+		ft_printf("P%4d | fork %d (%d)\n", proc->ID, indt, idx(proc,ind(core, proc, proc->PC + 1)));
+	}
 	return (true);
 }
