@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/30 16:11:37 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/31 12:48:09 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct			s_cor
 	size_t				total_cycle;
 	unsigned char		arena[MEM_SIZE];
 	int					arena_color[MEM_SIZE];
+	bool				arena_update[MEM_SIZE];
 	bool				verbose;
 	size_t				nb_champs;
 }						t_cor;
