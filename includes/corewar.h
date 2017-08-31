@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/31 12:48:09 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/31 15:03:56 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct			s_options
 	bool				n;
 	t_opt_number		*num_champ;
 	bool				v4;
+	bool				v2;
 	bool				visu;
 }						t_options;
 
@@ -82,7 +83,7 @@ typedef struct			s_champ
 typedef struct			s_process
 {
 	size_t				ID;
-	size_t				registres[REG_NUMBER];
+	int				registres[REG_NUMBER];
 	size_t				PC;
 	size_t				startpos;
 	size_t				next_jump;
