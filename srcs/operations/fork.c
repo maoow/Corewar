@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 13:10:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/31 13:58:50 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ bool	cw_fork(t_cor *core, t_process *proc)
 		i++;
 	}
 	tmp->PC = 0;
-	tmp->startpos = (proc->PC - proc->startpos + idx(proc, ind(core, proc, proc->PC + 1)) + proc->startpos) % MEM_SIZE;
+	tmp->startpos = (idx(proc, ind(core, proc, proc->PC + 1)) ) % MEM_SIZE;
 	tmp->next_jump = 0;
 	tmp->next_op = false;
-	ft_getop(core, proc);
+	ft_getop(core, tmp);
 	tmp->cycles_before_execute--;
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
