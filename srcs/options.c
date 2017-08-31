@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/26 16:10:28 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/31 13:35:33 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void			get_options(t_cor *cor, int ac, char **av)
 				write_error(3);
 			i++;
 		}
+		else if (ft_strcmp(av[i], "-v2") == 0)
+			cor->options->v2 = true;
 		else if (ft_strcmp(av[i], "-v4") == 0)
 			cor->options->v4 = true;
 		else if (ft_strcmp(av[i], "-visu") == 0)
