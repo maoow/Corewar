@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/26 16:12:09 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/31 13:44:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void			ft_warcycle(t_cor *core)
 			ft_browseprocess(core);
 			core->total_cycle++;
 			core->tmp_cycle_to_die++;
+			if (core->options->v2)
+			ft_printf("It is now cycle %d\n",core->total_cycle);
 		}
 		core->tmp_cycle_to_die = 0;
 		b_alive = ft_checklives(core);
