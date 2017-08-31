@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/26 15:51:45 by starrit          ###   ########.fr       */
+/*   Updated: 2017/08/31 12:57:32 by cbinet           ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -119,8 +119,12 @@ void	print_left(WINDOW *left, t_cor *cor)
 	{
 		while (col <= max * 3 + 2)
 		{
-			mvwprintw(left, lign, col, "%02x", cor->arena[i]);
-			mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
+			if (cor->arena_update[i])
+			{
+				mvwprintw(left, lign, col, "%02x", cor->arena[i]);
+				mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
+				cor->arena_update[i] = false;
+			}
 			i++;
 			col++;
 			col++;
@@ -170,11 +174,11 @@ void		visu(t_cor *cor)
 		{
 			if ((touche = getch()) == 27)
 				exit (0);
-			sleep(1);
+//			sleep(1);
 		}
 	}
-	usleep(100000);
-	clear();
+// usleep(100000);
+//	clear();
 	endwin();
 	delwin(left);
 	delwin(right);
