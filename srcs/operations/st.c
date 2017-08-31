@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:11 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/30 15:56:50 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/31 13:10:19 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ bool	cw_st(t_cor *core, t_process *proc)
 	{
 		setram(core, idx(proc, ind(core, proc, proc->PC + 3)),
 				getparam(core, proc, 1, 2), proc->color);
-	if (core->verbose)
+	if (core->options->v4)
 		ft_printf("P%5d | st r%d %d\n", proc->ID,core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE] + 1, ind(core, proc, proc->PC + 3));
 	}
 	else
 	{
 		proc->registres[core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE]] =
 		proc->registres[core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE]];
-	if (core->verbose)
+	if (core->options->v4)
 		ft_printf("P%5d | st r%d r%d\n", proc->ID,core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE],core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] + 1);
 	}
 	return (proc->registres[core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE]] != 0);

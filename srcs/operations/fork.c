@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/30 16:13:15 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/08/31 13:10:19 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	cw_fork(t_cor *core, t_process *proc)
 	tmp->next = core->process;
 	core->arena_color[(tmp->PC + tmp->startpos) % MEM_SIZE] = 16;
 	core->process = tmp;
-	if (core->verbose)
+	if (core->options->v4)
 	{
 		indt = ind(core, proc, proc->PC + 1) % MEM_SIZE;
 		if (indt > MEM_SIZE / 2)
