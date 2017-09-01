@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/26 13:48:52 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/01 16:07:19 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 
 }
 
+static void	add_champ_color(t_cor *cor)
+{
+	size_t		nb_champ;
+	t_champ		*tmp;
+
+	nb_champ = 1;
+	tmp = cor->champs;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+		nb_champ++;
+	}
+	cor->champs->color = nb_champ + 3;
+}
+
 //a faire : mettre l'ID recue en param si c'est le cas, sinon bien compter quel nombre mettre
 void		add_champ(t_cor *cor, char *name, char *comment, int ID)
 {
@@ -70,4 +85,5 @@ void		add_champ(t_cor *cor, char *name, char *comment, int ID)
 	cor->champs->name = ft_strdup(name);//
 	cor->champs->comment = ft_strdup(comment);//
 	cor->champs->alive = false;
+	add_champ_color(cor);
 }
