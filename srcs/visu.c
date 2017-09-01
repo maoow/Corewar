@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/01 14:18:48 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/01 16:03:31 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -102,12 +102,15 @@ WINDOW		*init(void)
 
 /*
 **	fonction d'ecriture sous fenetre de gauche : arena
+**
+**	while (tmp) : check si c'est un process et si oui le met en surlignance
 */
 
 void	print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 {
 	size_t	max;
 	size_t	i;
+t_process *tmp;
 
 	i = 0;
 	max = sqrt((double)MEM_SIZE);
@@ -115,12 +118,25 @@ void	print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 	{
 		while (col <= max * 3 + 2)
 		{
-			if (cor->arena_update[i] == 1000 || cor->arena_update[i] == UPDATE || cor->arena_update[i] == 1)
-			{
+//			if (cor->arena_update[i] == 1000 || cor->arena_update[i] == UPDATE || cor->arena_update[i] == 1)
+//			{
 				mvwprintw(left, lign, col, "%02x", cor->arena[i]);
+		//		if (cor->arena_color[i] > 13 && cor->arena_color[i] < 20)
+		//			cor->arena_color[i] -= 10;
 				mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
+				tmp = cor->process;
+				while (tmp)
+				{
+					if (i == tmp->PC + tmp->startpos)
+					{
+						cor->arena_color[i] = get_process_color(cor, tmp) + 10;
+						mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
+						cor->arena_color[i] = get_process_color(cor, tmp);
+					}
+					tmp = tmp->next;
+				}
 				cor->arena_update[i] = false;
-			}
+//			}
 			i++;
 			col = col + 2;
 			mvwprintw(left, lign, col, " ");
@@ -171,8 +187,8 @@ void		visu(t_cor *cor)
 			sleep(1);
 		}
 	}
-	sleep(1);
-	//usleep(10000);
+	//sleep(1);
+	usleep(50000);
 //	clear();
 //	endwin();
 //	delwin(left);
