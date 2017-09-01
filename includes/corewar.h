@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/31 15:03:56 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/01 14:29:28 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define CHAMP_NAME 128 + 8
 # define COMMENT_NAME 2048 + CHAMP_NAME + 8
 # define EXEC_MAGIC_LENGHT 3
+
+# define UPDATE 80
 
 /*
 **	structure allouee et remplie si un ou plusieurs champions a un numero 
@@ -120,7 +122,7 @@ typedef struct			s_cor
 	size_t				total_cycle;
 	unsigned char		arena[MEM_SIZE];
 	int					arena_color[MEM_SIZE];
-	bool				arena_update[MEM_SIZE];
+	size_t				arena_update[MEM_SIZE];
 	bool				verbose;
 	size_t				nb_champs;
 }						t_cor;
@@ -130,7 +132,7 @@ typedef struct			s_cor
 */
 void		usage(void);
 void		write_error(int nb);
-void		get_options(t_cor *cor, int ac, char **av);
+size_t		get_options(t_cor *cor, int ac, char **av);
 int			**parse(t_cor *cor, char *av);
 bool		is_champ(char *av, size_t *nb_champ, bool test);
 void		add_champ(t_cor *cor, char *name, char *comment, int ID);

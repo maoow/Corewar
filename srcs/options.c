@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/31 13:35:33 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/01 14:29:55 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool			is_champ(char *av, size_t *nb_champ, bool test)
 	return (true);
 }
 
-void			get_options(t_cor *cor, int ac, char **av)
+size_t			get_options(t_cor *cor, int ac, char **av)
 {
 	size_t		i;
 	size_t		nb_champ;
@@ -74,6 +74,7 @@ void			get_options(t_cor *cor, int ac, char **av)
 	}
 	if (cor->options->dump)
 		cor->options->visu = false;
+	return (i - nb_champ - 1);
 }
 
 void			ft_dump(t_cor *cor)

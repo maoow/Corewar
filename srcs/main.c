@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 15:04:54 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/01 14:31:59 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		ft_init(t_cor *core)
 **		decal = decalage de chaque champion, commence a zero puis augmente de
 **			moove_champ pour chaque incrementation
 */
-void			launch_parse(t_cor *cor, int ac, char **av)
+void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 {
 	size_t		nb_champ;
 	int			**champ;
@@ -67,9 +67,9 @@ void			launch_parse(t_cor *cor, int ac, char **av)
 	size_t		i;
 	size_t		decal = 0;
 
-	nb_champ = 1;//nb_champ = 1 + nb_option
+	nb_champ = 1;
 	if (ac > 1)
-	moove_champ = MEM_SIZE / (ac - 1);
+		moove_champ = MEM_SIZE /  (ac - 1 - nb_options);
 	i = 0;
 	while (nb_champ < (size_t)ac)
 	{
@@ -90,7 +90,7 @@ void			launch_parse(t_cor *cor, int ac, char **av)
 		}
 		nb_champ++;
 	}
-	cor->nb_champs = nb_champ;
+	cor->nb_champs = nb_champ;// - nb_option
 }
 
 static void		ft_clean(t_cor *core)
@@ -103,12 +103,14 @@ static void		ft_clean(t_cor *core)
 int				main(int ac, char **av)
 {
 	t_cor	core;
+	size_t	nb_options;
 
 	if (ac < 2)
 		write_error(3);
 	ft_init(&core);
-	get_options(&core, ac, av);
-	launch_parse(&core, ac, av);
+	nb_options = get_options(&core, ac, av);
+	launch_parse(&core, ac, av, nb_options);
 	ft_warcycle(&core);
 	ft_clean(&core);
+	endwin();
 }
