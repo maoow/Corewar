@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/01 14:31:59 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/01 15:55:11 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 	size_t		moove_champ;
 	size_t		i;
 	size_t		decal = 0;
+	size_t		real_champ;
 
 	nb_champ = 1;
+	real_champ = 1;
 	if (ac > 1)
 		moove_champ = MEM_SIZE /  (ac - 1 - nb_options);
 	i = 0;
@@ -76,21 +78,20 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 		if (is_champ(av[nb_champ], 0, true))
 		{
 			champ = parse(cor, av[nb_champ]);
-			add_process(cor, decal, ac - nb_champ);
+			add_process(cor, decal, real_champ);
 			while (i + decal < champ[0][0] + decal)
 			{
 				cor->arena[i + decal] = champ[1][i];
 				cor->arena_color[i + decal] = nb_champ + 3;
-				if (i == 0)//a virer
-					cor->arena_color[i + decal] = 10 + nb_champ + 3;
 				i++;
 			}
 			i = 0;
 			decal = decal + moove_champ;
+			real_champ++;
 		}
 		nb_champ++;
 	}
-	cor->nb_champs = nb_champ;// - nb_option
+	cor->nb_champs = nb_champ - nb_options;
 }
 
 static void		ft_clean(t_cor *core)
