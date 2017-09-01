@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/01 14:29:28 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/01 16:14:50 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct			s_champ
 typedef struct			s_process
 {
 	size_t				ID;
-	int				registres[REG_NUMBER];
+	int					registres[REG_NUMBER];
 	size_t				PC;
 	size_t				startpos;
 	size_t				next_jump;
@@ -137,6 +137,7 @@ int			**parse(t_cor *cor, char *av);
 bool		is_champ(char *av, size_t *nb_champ, bool test);
 void		add_champ(t_cor *cor, char *name, char *comment, int ID);
 void		add_process(t_cor *cor, size_t startpos, size_t nb_champ);
+int			get_process_color(t_cor *cor, t_process *proc);
 void		visu(t_cor *cor);
 void		print_right(WINDOW *right, t_cor *cor);
 void		ft_dump(t_cor *cor);
