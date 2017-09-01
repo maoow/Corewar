@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 13:06:30 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/01 13:46:46 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 		proc->carry = carry;
 	ft_determinejmpdist(core, proc);
 	core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE] = 0; // need extracolor for pc
-	core->arena_update[(proc->PC + proc->startpos) % MEM_SIZE] = true;
+	core->arena_update[(proc->PC + proc->startpos) % MEM_SIZE] = UPDATE;
 	proc->PC += proc->next_jump;
 	core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE] = proc->color + 3; // need extracolor for pc
-	core->arena_update[(proc->PC + proc->startpos) % MEM_SIZE] = true;
+	core->arena_update[(proc->PC + proc->startpos) % MEM_SIZE] = UPDATE;
 	proc->next_op = NULL;
 }
 

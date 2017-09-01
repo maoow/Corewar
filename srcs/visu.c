@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/31 12:57:32 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/01 14:18:48 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -104,36 +104,30 @@ WINDOW		*init(void)
 **	fonction d'ecriture sous fenetre de gauche : arena
 */
 
-void	print_left(WINDOW *left, t_cor *cor)
+void	print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 {
-	size_t	col;
-	size_t	lign;
 	size_t	max;
 	size_t	i;
 
-	col = 4;
-	lign = 2;
 	i = 0;
 	max = sqrt((double)MEM_SIZE);
 	while (lign <= max + 1)
 	{
 		while (col <= max * 3 + 2)
 		{
-			if (cor->arena_update[i])
+			if (cor->arena_update[i] == 1000 || cor->arena_update[i] == UPDATE || cor->arena_update[i] == 1)
 			{
 				mvwprintw(left, lign, col, "%02x", cor->arena[i]);
 				mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
 				cor->arena_update[i] = false;
 			}
 			i++;
-			col++;
-			col++;
+			col = col + 2;
 			mvwprintw(left, lign, col, " ");
 			col++;
 		}
 		mvwprintw(left, lign, col, "\n");
 		col = 4;
-		//mvchgat(lign, col, max * 3 - 1, A_NORMAL, 4, NULL);
 		lign++;
 	}
 }
@@ -146,7 +140,7 @@ void	manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 	wborder(left, 0 | C(1), 0 | C(2), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
 	wborder(right, 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
 	print_right(right, cor);
-	print_left(left, cor);
+	print_left(left, cor, 4, 2);
 }
 
 /*
@@ -174,12 +168,13 @@ void		visu(t_cor *cor)
 		{
 			if ((touche = getch()) == 27)
 				exit (0);
-//			sleep(1);
+			sleep(1);
 		}
 	}
-// usleep(100000);
+	sleep(1);
+	//usleep(10000);
 //	clear();
-	endwin();
-	delwin(left);
-	delwin(right);
+//	endwin();
+//	delwin(left);
+//	delwin(right);
 }

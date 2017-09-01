@@ -6,11 +6,12 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 13:44:40 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/01 13:53:47 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h" 
+
 static bool		ft_checklives(t_cor *core)
 {
 	t_process	*proc;
@@ -62,6 +63,19 @@ static void		initproccolor(t_cor *core)
 
 }
 
+static void		ft_decrease_arena_update(t_cor *cor)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		if (cor->arena_update[i] > 0)
+			cor->arena_update[i]--;
+		i++;
+	}
+}
+
 void			ft_warcycle(t_cor *core)
 {
 	bool	b_alive;
@@ -74,7 +88,6 @@ void			ft_warcycle(t_cor *core)
 		{
 			if (core->options->dump && core->total_cycle == core->options->nb_dump)
 			{
-			//	visu(core);
 				ft_dump(core);
 				exit(0);
 			}
@@ -83,6 +96,7 @@ void			ft_warcycle(t_cor *core)
 			ft_browseprocess(core);
 			core->total_cycle++;
 			core->tmp_cycle_to_die++;
+			ft_decrease_arena_update(core);
 			if (core->options->v2)
 			ft_printf("It is now cycle %d\n",core->total_cycle);
 		}
