@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 13:58:50 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/02 18:20:38 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ bool	cw_fork(t_cor *core, t_process *proc)
 		tmp->registres[i] = proc->registres[i];
 		i++;
 	}
+printf("\033[45m");
+printf("%d\n", tmp->registres[0]);
+printf("\033[0m");
 	tmp->PC = 0;
 	tmp->startpos = (idx(proc, ind(core, proc, proc->PC + 1)) ) % MEM_SIZE;
 	tmp->next_jump = 0;
@@ -36,7 +39,8 @@ bool	cw_fork(t_cor *core, t_process *proc)
 	tmp->color = proc->color;
 	tmp->ID = core->process->ID + 1;
 	tmp->next = core->process;
-	core->arena_color[(tmp->PC + tmp->startpos) % MEM_SIZE] = 16;
+//	core->arena_color[(tmp->PC + tmp->startpos) % MEM_SIZE] = 16;
+//	core->arena_color[(tmp->PC + tmp->startpos) % MEM_SIZE] = core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE];
 	core->process = tmp;
 	if (core->options->v4)
 	{
