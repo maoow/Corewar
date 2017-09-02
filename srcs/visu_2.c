@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 15:51:54 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/20 13:12:38 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/02 15:38:54 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,40 @@ static int		get_nb_champ(t_champ *list)
 	return (total);
 }
 
+static int		get_nb_process_alive(t_cor *cor)
+{
+	t_process	*tmp;
+	int			count;
+
+	tmp = cor->process;
+	count = 0;
+	while (tmp)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
 /*
 **	fonction d'ecriture sous fenetre de droite : menu
 */
 void			print_right(WINDOW *right, t_cor *cor)
 {
 	t_champ *tmp = cor->champs;
-	char	sP[] = "PAUSED";
-	char	sR[] = "RUNNING";
-	(void)sR;
-	size_t	cycle_second = 50;
-	size_t	nb_process_alive = 2;
+//	size_t	cycle_second = 50;
 	int	champ = get_nb_champ(cor->champs);
 	int NB_CHAMP = champ;
-	int champ_last_live = 0;
-	int champ_current_live = 0;
 
-	mvwprintw(right, 2, 3, "** %s **", sP);
-	mvwprintw(right, 4, 3, "Cycles/second limit : %d", cycle_second);
+	mvwprintw(right, 2, 3, "** Pause : ESP       Quit : ESC **");
+	mvwprintw(right, 4, 3, "Cycles/second limit : max speed");//, cycle_second);
 	mvwprintw(right, 7, 3, "Cycles : %d", cor->total_cycle);
-	mvwprintw(right, 9, 3, "Processes : %d", nb_process_alive);
+	mvwprintw(right, 9, 3, "Processes : %d", get_nb_process_alive(cor));
 	while (champ > 0)
 	{
 		mvwprintw(right, 11 - champ * 4 + NB_CHAMP * 4, 3, "Player %d : %s", tmp->ID, tmp->name);
-		mvwprintw(right, 12 - champ * 4 + NB_CHAMP * 4, 3, "  Last live : \t\t%d", champ_last_live);
-		mvwprintw(right, 13 - champ * 4 + NB_CHAMP * 4, 3, "  Lives in current period :  %d", champ_current_live);
+		mvwprintw(right, 12 - champ * 4 + NB_CHAMP * 4, 3, "  Last live : \t\t%d", tmp->last_live);
+		mvwprintw(right, 13 - champ * 4 + NB_CHAMP * 4, 3, "  Lives in current period :  %d", tmp->lives_in_period);
 		champ--;
 		tmp = tmp->next;
 	}
