@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/02 15:03:02 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/02 18:22:11 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 {
 	size_t	max;
 	size_t	i;
-t_process *tmp;
+	t_process *tmp;
 
 	i = 0;
 	max = sqrt((double)MEM_SIZE);
@@ -133,21 +133,18 @@ t_process *tmp;
 //			if (cor->arena_update[i] == 1000 || cor->arena_update[i] == UPDATE || cor->arena_update[i] == 1)
 //			{
 				mvwprintw(left, lign, col, "%02x", cor->arena[i]);
-				if (cor->arena_color[i] > 13 && cor->arena_color[i] < 20)
-					cor->arena_color[i] -= 10;
 				mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
 				tmp = cor->process;
 				while (tmp)
 				{
-					if (i == tmp->PC + tmp->startpos)
+					if (i == (tmp->PC + tmp->startpos) % MEM_SIZE)
 					{
 						cor->arena_color[i] = get_process_color(cor, tmp) + 10;
 						mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
-						cor->arena_color[i] = get_process_color(cor, tmp);
+						cor->arena_color[i] = cor->arena_color[i] - 10;
 					}
 					tmp = tmp->next;
 				}
-				cor->arena_update[i] = false;
 //			}
 			i++;
 			col = col + 2;
@@ -200,7 +197,7 @@ void		visu(t_cor *cor)
 		}
 	}
 	//sleep(1);
-	usleep(50000);
+//	usleep(50000);
 //	clear();
 //	endwin();
 //	delwin(left);
