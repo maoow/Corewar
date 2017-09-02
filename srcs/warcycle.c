@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/01 13:53:47 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/02 14:33:36 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void		initproccolor(t_cor *core)
 	t_process	*tmp;
 	int			i;
 
-	i = 14;
+	i = 24;
 	tmp = core->process;
 	while (tmp)
 	{
