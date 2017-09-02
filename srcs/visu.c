@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/01 16:03:31 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/02 15:03:02 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@
 **				3	H white		black	=> highlight white
 **
 ** for champ
-**				4	green		black		0, 215, 135
-**				5	blue		black		95, 135, 255
-**				6	red			black		1000, 0, 0
-**				7	cyan		black		175, 255, 255
-**				8	yellow		black		215, 255, 135
-**				9	magenta		black		255, 135, 255
+**				4	green		black		400, 1000, 400
+**				5	blue		black		0, 400, 1000
+**				6	red			black		1000, 0, 400
+**				7	cyan		black		0, 1000, 1000
+**				8	yellow		black		1000, 1000, 400
+**				9	magenta		black		1000, 400, 1000
 */
 
 WINDOW		*init(void)
@@ -80,8 +80,14 @@ WINDOW		*init(void)
 	}
 	start_color();
 	init_color(COLOR_WHITE, 460, 460, 460);
-	init_color(15, 1000, 1000, 1000);
-	init_pair(10, 15, COLOR_BLACK);
+	init_color(35, 1000, 1000, 1000);
+	init_color(44, 400, 1000, 400);
+	init_color(45, 0, 400, 1000);
+	init_color(46, 1000, 0, 400);
+	init_color(47, 0, 1000, 1000);
+	init_color(48, 1000, 1000, 400);
+	init_color(49, 1000, 400, 1000);
+	init_pair(10, 35, COLOR_BLACK);
 	init_pair(1, COLOR_WHITE, COLOR_WHITE);
 	init_pair(2, COLOR_BLACK, COLOR_BLACK);
 	init_pair(3, COLOR_WHITE, COLOR_BLACK);
@@ -97,6 +103,12 @@ WINDOW		*init(void)
 	init_pair(17, COLOR_BLACK, COLOR_CYAN);
 	init_pair(18, COLOR_BLACK, COLOR_YELLOW);
 	init_pair(19, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(24, 44, COLOR_BLACK);
+	init_pair(25, 45, COLOR_BLACK);
+	init_pair(26, 45, COLOR_BLACK);
+	init_pair(27, 47, COLOR_BLACK);
+	init_pair(28, 48, COLOR_BLACK);
+	init_pair(29, 49, COLOR_BLACK);
 	return (stdscr);
 }
 
@@ -121,8 +133,8 @@ t_process *tmp;
 //			if (cor->arena_update[i] == 1000 || cor->arena_update[i] == UPDATE || cor->arena_update[i] == 1)
 //			{
 				mvwprintw(left, lign, col, "%02x", cor->arena[i]);
-		//		if (cor->arena_color[i] > 13 && cor->arena_color[i] < 20)
-		//			cor->arena_color[i] -= 10;
+				if (cor->arena_color[i] > 13 && cor->arena_color[i] < 20)
+					cor->arena_color[i] -= 10;
 				mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
 				tmp = cor->process;
 				while (tmp)
