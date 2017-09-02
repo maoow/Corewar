@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/01 16:07:19 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/02 15:26:55 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void		add_champ(t_cor *cor, char *name, char *comment, int ID)
 	}
 	cor->champs->name = ft_strdup(name);//
 	cor->champs->comment = ft_strdup(comment);//
-	cor->champs->alive = false;
+	cor->champs->last_live = 0;
+	cor->champs->lives_in_period = 0;
 	add_champ_color(cor);
 }
