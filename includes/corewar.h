@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/02 15:21:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/02 16:01:41 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct			s_process
 **	arena_color :	1 : no color
 **					4 a 9 : color correspondant a COLOR_PAIR du champ
 **					14 a 19 : color correspondant a COLOR_PAIR du champ + fond (new written process)
+**					24 a 29 : color d'ecriture des processus. temporaire
 */
 
 typedef struct			s_cor
