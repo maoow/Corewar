@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 01:19:50 by cbinet            #+#    #+#             */
-/*   Updated: 2016/11/19 13:05:56 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/05 15:56:58 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ char		*ft_strsub(char const *s, unsigned int start, size_t len)
 		return (str);
 	}
 	i = 0;
-	while (i + start < len - 1)
+	while (i < start + len - 1)
 	{
-		if (!s[i + start])
+		if (s[i] == '\0')
 			return (NULL);
 		i++;
 	}

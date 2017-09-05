@@ -6,53 +6,35 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/04 16:50:47 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/05 16:59:18 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int				ft_name_check(char *str, char **name, char *s_name)
-{
-	int			i;
-	int			j;
-	char		*tmp;
-
-	if (!str)
-		return (0);
-	i = -1;
-	while (str[++i] && str[i] == ' ')
-		;
-	i--;
-	j = i + 1;
-	while (str[++i] && str[i] != '\"')
-	{
-		if (((i - j) < ft_strlen(s_name) && str[i] != s_name[i - j])
-				|| ((i - j) >= ft_strlen(s_name) && str[i] != ' '))
-			return (0);
-	}
-	//tmp = str + i + 1;
-	//i = -1;
-	//while (tmp[++i] && tmp[i] != '\"')
-	//	;
-	if (str[i] == '\0')
-		return (0);
-	j = i;
-	*name = ft_strsub(tmp, 0, i);
-	(*name)[i] = '\0';
-	return (1);
-}
-
 void			ft_free_end(t_asm **as)
 {
-	if ((*as)->load)
-		free((*as)->load);
-	if ((*as)->name)
-		free((*as)->name);
-	if ((*as)->comment)
-		free((*as)->comment);
-	if ((*as)->enc)
-		free((*as)->enc);
+	int			i;
+
+	if (*as)
+	{
+		if ((*as)->lines)
+		{
+			i = -1;
+			while ((*as)->lines[++i])
+				free((*as)->lines[i]);
+			free((*as)->lines);
+		}
+		if ((*as)->load)
+			free((*as)->load);
+		if ((*as)->name)
+			free((*as)->name);
+		if ((*as)->comment)
+			free((*as)->comment);
+		if ((*as)->enc)
+			free((*as)->enc);
+		free(*as);
+	}
 }
 
 int				ft_init_struct_asm(t_asm **as)
@@ -61,6 +43,7 @@ int				ft_init_struct_asm(t_asm **as)
 		return (0);
 	if (!((*as)->load = malloc(sizeof(char))))
 		return (0);
+	(*as)->lines = NULL;
 	(*as)->load[0] = '\0';
 	(*as)->name = NULL;
 	(*as)->comment = NULL;
@@ -78,21 +61,32 @@ int				main(int ac, char **av)
 
 	if (!(ft_init_struct_asm(&t_var_asm)))
 		return (1);
-	ft_loading(ac, av, 1, &t_var_asm->load);
-	if (ft_name_check(t_var_asm->load, &t_var_asm->name, NAME_CMD_STRING) != 0)
+	ft_loading(ac, av, 1, t_var_asm);
+	//printf("Load : <%s>\n", t_var_asm->load);
+
+	i = -1;
+	ft_putstr("Lines : \n");
+	while (t_var_asm->lines[++i])
 	{
-		i = -1;
-		while (t_var_asm->load[++i] != '\"')
-			;
-		i++;
-		while (t_var_asm->load[++i] != '\"')
-			;
-		if (t_var_asm->load[i + 1] != '\n')
-			return (1);
-		i += 2;
-		ft_name_check(t_var_asm->load + i, &t_var_asm->comment, COMMENT_CMD_STRING);
+		ft_putstr("<");
+		ft_putstr(t_var_asm->lines[i]);
+		ft_putstr(">\n");
 	}
-	printf("Name : <%s>\nComment : <%s>\nLoad : <%s>\n", t_var_asm->name, t_var_asm->comment, t_var_asm->load);
+
+	if (ft_name_check(t_var_asm, &t_var_asm->name, NAME_CMD_STRING) != 0)
+	{
+		ft_putstr("Name : <");
+		ft_putstr(t_var_asm->name);
+		ft_putstr(">\n");
+
+		if (!(ft_name_check(t_var_asm, &t_var_asm->comment, COMMENT_CMD_STRING)))
+			return (1);
+
+		ft_putstr("Comment : <");
+		ft_putstr(t_var_asm->comment);
+		ft_putstr(">\n");
+	}
+
 	ft_free_end(&t_var_asm);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 11:33:24 by cbinet            #+#    #+#             */
-/*   Updated: 2017/03/16 14:07:27 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/05 16:43:17 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ int				ft_isalnum(int i);
 int				ft_isdigit(int i);
 int				ft_isascii(int i);
 int				ft_isprint(int i);
+char		*ft_strnewcpy(const char *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/04 16:13:15 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/05 13:14:35 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 
 
 #include <stdio.h>
-char	*ft_loading(int ac, char **av, int index, char **load);
-
 typedef struct s_instr
 {
 	int			num;
@@ -50,6 +48,7 @@ typedef struct	s_asm
 {
 	t_op		t_op_list[16];
 	char		*load;
+	char		**lines;
 	char		*name;
 	char		*comment;
 	int			len_mem;
@@ -57,4 +56,8 @@ typedef struct	s_asm
 	t_label		*t_lab_list;
 	t_instr		*t_instr_list;
 }				t_asm;
+
+int				ft_loading(int ac, char **av, int index, t_asm *as);
+int				ft_name_check(t_asm *as, char **name, char *s_check);
+
 #endif
