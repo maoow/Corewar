@@ -6,16 +6,18 @@
 #    By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/27 12:28:21 by vkim              #+#    #+#              #
-#    Updated: 2017/09/05 11:25:31 by vkim             ###   ########.fr        #
+#    Updated: 2017/09/08 14:14:59 by vkim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=asm
 COMPIL=gcc -g -Wall -Wextra -Werror
-INC= -I ../includes/ -I ../libft/includes
+INC= -I ../includes/ -I ../libft/includes -I ../ressources/
 
 N_SRC=ft_loading.c \
 	  ft_name_comment.c \
+	  ft_clean_load.c \
+	  ft_init_ref.c \
 	  main.c \
 
 P_SRC = .

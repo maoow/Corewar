@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/05 16:59:18 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/11 12:52:02 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int				ft_init_struct_asm(t_asm **as)
 	(*as)->comment = NULL;
 	(*as)->len_mem = 0;
 	(*as)->enc = NULL;
-	(*as)->t_lab_list = NULL;
-	(*as)->t_instr_list = NULL;
+	(*as)->op_lst = NULL;
 	return (1);
 }
 
@@ -58,35 +57,36 @@ int				main(int ac, char **av)
 {
 	t_asm		*t_var_asm;
 	int			i;
+	int			j;
+	t_op		op_tab[17];
 
+	(void)i;
+	(void)j;
 	if (!(ft_init_struct_asm(&t_var_asm)))
 		return (1);
-	ft_loading(ac, av, 1, t_var_asm);
-	//printf("Load : <%s>\n", t_var_asm->load);
-
+	if (!(ft_loading(ac, av, 1, t_var_asm)))
+		return (1);
 	i = -1;
-	ft_putstr("Lines : \n");
 	while (t_var_asm->lines[++i])
-	{
-		ft_putstr("<");
-		ft_putstr(t_var_asm->lines[i]);
-		ft_putstr(">\n");
-	}
-
+		printf("<%s>\n", t_var_asm->lines[i]);
 	if (ft_name_check(t_var_asm, &t_var_asm->name, NAME_CMD_STRING) != 0)
 	{
-		ft_putstr("Name : <");
-		ft_putstr(t_var_asm->name);
-		ft_putstr(">\n");
-
-		if (!(ft_name_check(t_var_asm, &t_var_asm->comment, COMMENT_CMD_STRING)))
+		if (!(ft_name_check(t_var_asm, &t_var_asm->comment,
+			COMMENT_CMD_STRING)))
 			return (1);
-
-		ft_putstr("Comment : <");
-		ft_putstr(t_var_asm->comment);
-		ft_putstr(">\n");
 	}
-
+	ft_init_struct_ref_1((t_op *)op_tab);
+	i = -1;
+	/*while (op_tab[++i].ref_name)
+	{
+		printf("{%s, %d, ", op_tab[i].ref_name, op_tab[i].nb_args);
+		j = -1;
+		while (op_tab[i].ref_enc[++j] && j < 3)
+		{
+			printf("%d ", op_tab[i].ref_enc[j]);
+		}
+		printf(", %d, %d}\n", op_tab[i].ref_mdf_c, op_tab[i].ref_lbl_sz);
+	}*/
 	ft_free_end(&t_var_asm);
 	return (0);
 }

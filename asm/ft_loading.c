@@ -6,39 +6,11 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 10:57:15 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/05 16:54:45 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/07 11:57:26 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
-
-int				ft_del_space(t_asm *as)
-{
-	int			i;
-	int			j;
-	int			k;
-
-	i = -1;
-	while (as->lines[++i])
-	{
-		j = -1;
-		while (as->lines[i][++j] == ' ')
-			;
-		k = ft_strlen(as->lines[i]);
-		while (--k >= i && as->lines[i][k] == ' ')
-			;
-		if (as->lines[i][j] == '\0')
-			as->lines[i][0] = '\0';
-		else if (j != 0 || k != ft_strlen(as->lines[i] - 1))
-		{
-			if (as->lines[i])
-				free(as->lines[i]);
-			if (!(as->lines[i] = ft_strsub(as->lines[i], j, k - j + 1)))
-				return (0);
-		}
-	}
-	return (1);
-}
 
 int				ft_new_line(t_asm *as, int *nb_l, int i)
 {
@@ -111,7 +83,10 @@ int				ft_loading(int ac, char **av, int index, t_asm *as)
 	}
 	if (!(ft_str_gnl(as)))
 		return (0);
+	if (!(ft_del_com(as)))
+		return (0);
 	if (!(ft_del_space(as)))
 		return (0);
+	ft_del_empty_lines(as);
 	return (1);
 }

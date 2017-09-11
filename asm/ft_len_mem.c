@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 13:31:22 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/04 14:37:49 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/11 15:28:26 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,33 @@
 	IND => encode sur size 2
 	DIR => encode sur label_size
 
-void			ft_mem_op(t_asm *t_val_asm)
+int				ft_mem_op(t_asm *as, t_op *ref)
 {
 	int			i;
 	int			count;
 
-	count = 0;
-	i = -1;
-	while (t_val_asm->load[++i] && count < 4)
+	i = 1;
+	while (as->lines[++i])
 	{
-		if (t_val_asm->load[i] == '\"')
-			count++;
+		
 	}
-	i += 2;
+}
 
+int				ft_init_lst_op(t_asm *as)
+{
+	int			i;
+
+	i = 1;
+	while (as->lines[++i])
+		;
+	if (!(as->op_lst = (t_instr *)malloc((i - 1) * sizeof(t_instr))))
+		return (0);
+	free(as->op_lst[i - 2]);
+	as->op_lst[i - 2] = NULL;
 
 }
 
-void			ft_mem_len(t_asm *t_val_asm)
+void			ft_mem_len(t_asm *as, t_op *ref)
 {
 	int			mod1;
 	int			mod2;
@@ -54,7 +63,8 @@ void			ft_mem_len(t_asm *t_val_asm)
 	mod2 = (COMMENT_LENGHT+ 3) % 8;
 	if (mod2 == 0)
 		mod2 = 8;
-	t_val_asm = 4 + PROG_NAME_LENGTH + 8 - mod1 + 3 + COMMENT_LENGHT + 8 - mod2;
-	ft_mem_op(t_val_asm);
+	as->len_mem = 4 + PROG_NAME_LENGTH + 8 - mod1 + 3 + COMMENT_LENGHT + 8 - mod2;
+	ft_init_lst_op(as);
+	ft_mem_op(as, ref);
 
 }
