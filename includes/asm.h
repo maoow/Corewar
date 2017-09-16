@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/11 11:49:06 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/16 16:05:49 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,7 @@ int				ft_del_com(t_asm *as);
 int				ft_del_space(t_asm *as);
 void			ft_del_empty_lines(t_asm *as);
 void			ft_init_struct_ref_1(t_op *op_tab);
+
+int				ft_if_label(t_asm *as, int *i);
+int				ft_del_labels(t_asm *as);
 #endif
