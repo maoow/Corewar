@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/16 16:07:53 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/18 13:46:45 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,18 @@ int				main(int ac, char **av)
 		printf("<%s>\n", t_var_asm->lines[i]);
 	exit(0);*/
 	ft_init_struct_ref_1((t_op *)op_tab);
+	ft_init_struct_ref_1((t_op *)t_var_asm->t_op_list);
 	i = -1;
-	/*while (op_tab[++i].ref_name)
+	while (t_var_asm->t_op_list[++i].ref_name)
 	{
-		printf("{%s, %d, ", op_tab[i].ref_name, op_tab[i].nb_args);
+		printf("{%s, %d, ", t_var_asm->t_op_list[i].ref_name, t_var_asm->t_op_list[i].nb_args);
 		j = -1;
-		while (op_tab[i].ref_enc[++j] && j < 3)
+		while (t_var_asm->t_op_list[i].ref_enc[++j] && j < 3)
 		{
-			printf("%d ", op_tab[i].ref_enc[j]);
+			printf("%d ", t_var_asm->t_op_list[i].ref_enc[j]);
 		}
-		printf(", %d, %d}\n", op_tab[i].ref_mdf_c, op_tab[i].ref_lbl_sz);
-	}*/
+		printf(", %d, %d}\n", t_var_asm->t_op_list[i].ref_mdf_c, t_var_asm->t_op_list[i].ref_lbl_sz);
+	}
 	i = -1;
 	while (t_var_asm->lines[++i])
 		;
@@ -136,7 +137,13 @@ int				main(int ac, char **av)
 	printf("\n\n--\n");
 	while (t_var_asm->lines[++i])
 		printf("<%s>\n", t_var_asm->lines[i]);
-	
+	ft_instr_check(t_var_asm);
+	printf("\n\n__\n");
+	i = -1;
+	while (t_var_asm->lines[++i])
+	{
+		printf("<%d>\n", t_var_asm->op_lst[i].num);
+	}
 	ft_free_end(&t_var_asm);
 	return (0);
 }

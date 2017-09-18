@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/16 16:05:49 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/18 14:03:53 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@ typedef struct	s_instr
 {
 	int			num;
 	int			opc;
-	int			arg1;
-	int			arg2;
-	int			arg3;
+	int			ag1_i;
+	char		ag1_lbl;
+	int			ag2_i;
+	char		*ag2_lbl;
+	int			ag3_i;
+	char		ag3_lbl;
 	char		*label;
 }				t_instr;
 
-typedef struct	s_descr_op
+/*typedef struct	s_descr_op
 {
 	char		*name;
 	int			nb_args;
@@ -37,11 +40,20 @@ typedef struct	s_descr_op
 	int			opc;
 	int			modif_carry;
 	int			label_size;
-}				t_descr_op;
+}				t_descr_op;*/
+
+typedef struct		s_op
+{
+	char	*ref_name;
+	int		nb_args;
+	int		ref_enc[3];
+	int		ref_mdf_c;
+	int		ref_lbl_sz;
+}					t_op;
 
 typedef struct	s_asm
 {
-	t_descr_op	t_op_list[16];
+	t_op		t_op_list[17];
 	char		*load;
 	char		**lines;
 	char		*name;
@@ -59,15 +71,6 @@ typedef struct		s_header
   char				comment[COMMENT_LENGTH + 1];
 }					t_header;
 
-typedef struct		s_op
-{
-	char	*ref_name;
-	int		nb_args;
-	int		ref_enc[3];
-	int		ref_mdf_c;
-	int		ref_lbl_sz;
-}					t_op;
-
 int				ft_loading(int ac, char **av, int index, t_asm *as);
 int				ft_name_check(t_asm *as, char **name, char *s_check);
 int				ft_del_com(t_asm *as);
@@ -75,6 +78,10 @@ int				ft_del_space(t_asm *as);
 void			ft_del_empty_lines(t_asm *as);
 void			ft_init_struct_ref_1(t_op *op_tab);
 
+int				ft_instr_check(t_asm *as);
 int				ft_if_label(t_asm *as, int *i);
 int				ft_del_labels(t_asm *as);
+
+void			ft_while_space(char *txt, int *i);
+int				ft_if_op_ok(t_asm *as, char *op);
 #endif

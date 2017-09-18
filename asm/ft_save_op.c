@@ -6,24 +6,38 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 09:44:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/16 16:08:59 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/18 13:53:43 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void			ft_while_esp_(char *txt, int *i)
+int				ft_instr_check(t_asm *as)
 {
-	while (txt[++(*i)] && txt[*i] == ' ')
-		;
-}
+	int			i;
+	int			j;
+	char		*tmp;
 
-int				ft_instr_check(t_asm *as, t_op *ref, char *txt, int *i)
-{
-	(void)as;
-	(void)ref;
-	(void)txt;
-	(void)i;
+	i = -1;
+	while (as->lines[++i])
+	{
+		j = -1;
+		while (as->lines[i][++j] != '%' && as->lines[i][j] != ' '
+			&& as->lines[i][j] != '\0')
+			;
+		if (j != 0)
+		{
+			if (!(tmp = ft_strsub(as->lines[i], 0, j))
+				|| (as->op_lst[i].num = ft_if_op_ok(as, tmp)) == -1)
+			{
+				free(tmp);
+				return (0);
+			}
+			else
+				as->op_lst[i].num += 1;
+			free(tmp);
+		}
+	}
 	return (1);
 }
 
