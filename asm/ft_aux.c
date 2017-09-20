@@ -6,13 +6,13 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:38:40 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/18 13:48:46 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/20 14:37:06 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void			ft_while_esp_(char *txt, int *i)
+void			ft_while_space(char *txt, int *i)
 {
 	while (txt[++(*i)] && txt[*i] == ' ')
 		;

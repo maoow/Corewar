@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 09:44:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/18 13:53:43 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/20 14:01:55 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,5 @@ int				ft_if_label(t_asm *as, int *i)
 		if (!(as->op_lst[*i].label = ft_strsub(as->lines[*i], 0, k)))
 			return (0);
 	}
-	return (1);
-}
-
-int				ft_check_types_var(t_asm *as, char *txt, int *i)
-{
-	(void)as;
-	(void)txt;
-	(void)i;
 	return (1);
 }

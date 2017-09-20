@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/18 13:46:45 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/20 17:12:59 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void			ft_free_end(t_asm **as)
 			{
 				if ((*as)->op_lst[i].label)
 					free((*as)->op_lst[i].label);
+				if ((*as)->op_lst[i].ag_lbl[0])
+					free((*as)->op_lst[i].ag_lbl[0]);
+				if ((*as)->op_lst[i].ag_lbl[1])
+					free((*as)->op_lst[i].ag_lbl[1]);
+				if ((*as)->op_lst[i].ag_lbl[2])
+					free((*as)->op_lst[i].ag_lbl[2]);
 			}
 			free((*as)->op_lst);
 		}
@@ -97,7 +103,7 @@ int				main(int ac, char **av)
 	exit(0);*/
 	ft_init_struct_ref_1((t_op *)op_tab);
 	ft_init_struct_ref_1((t_op *)t_var_asm->t_op_list);
-	i = -1;
+	/*i = -1;
 	while (t_var_asm->t_op_list[++i].ref_name)
 	{
 		printf("{%s, %d, ", t_var_asm->t_op_list[i].ref_name, t_var_asm->t_op_list[i].nb_args);
@@ -108,6 +114,7 @@ int				main(int ac, char **av)
 		}
 		printf(", %d, %d}\n", t_var_asm->t_op_list[i].ref_mdf_c, t_var_asm->t_op_list[i].ref_lbl_sz);
 	}
+	*/
 	i = -1;
 	while (t_var_asm->lines[++i])
 		;
@@ -117,33 +124,38 @@ int				main(int ac, char **av)
 	{
 		t_var_asm->op_lst[k].num = 0;
 		t_var_asm->op_lst[k].opc = 0;
-		t_var_asm->op_lst[k].arg1 = 0;
-		t_var_asm->op_lst[k].arg2 = 0;
-		t_var_asm->op_lst[k].arg3 = 0;
+		t_var_asm->op_lst[k].ag_i[0] = -1;
+		t_var_asm->op_lst[k].ag_i[1] = -1;
+		t_var_asm->op_lst[k].ag_i[2] = -1;
+		t_var_asm->op_lst[k].ag_lbl[0] = NULL;
+		t_var_asm->op_lst[k].ag_lbl[1] = NULL;
+		t_var_asm->op_lst[k].ag_lbl[2] = NULL;
 		t_var_asm->op_lst[k].label = NULL;
 	}
 	i = -1;
 	k = -1;
 	while (t_var_asm->lines[++i])
 		ft_if_label(t_var_asm, &i);
-	printf("\n\n____\n");
+	/*printf("\n\n____\n");
 	i = -1;
 	while (t_var_asm->lines[++i])
 	{
 		printf("<%s>\n", t_var_asm->op_lst[i].label);
 	}
+	*/
 	ft_del_labels(t_var_asm);
-	i = -1;
+	/*i = -1;
 	printf("\n\n--\n");
 	while (t_var_asm->lines[++i])
 		printf("<%s>\n", t_var_asm->lines[i]);
+	*/
 	ft_instr_check(t_var_asm);
-	printf("\n\n__\n");
+	/*printf("\n\n__\n");
 	i = -1;
 	while (t_var_asm->lines[++i])
 	{
 		printf("<%d>\n", t_var_asm->op_lst[i].num);
-	}
+	}*/
 	ft_free_end(&t_var_asm);
 	return (0);
 }
