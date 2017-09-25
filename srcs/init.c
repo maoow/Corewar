@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/02 15:26:55 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/25 15:10:11 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 	cor->process->startpos = startpos;
 	cor->process->cycles_before_execute = 0;
 	cor->process->live = 0;
-	cor->process->registres[0] = nb_champ;
+	cor->process->registres[0] = (0 - (int)nb_champ);
 
 }
 

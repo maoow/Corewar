@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/26 14:49:38 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/25 15:30:56 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 	unsigned char	op[3];
 	size_t			i;
 	size_t			place;
-	size_t			value;
+	int				value;
 
 	i = 0;
 	place = 2;
@@ -39,7 +39,7 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 	{
 		if (op[i] == 1)
 		{
-			value = proc->registres[core->arena[(proc->PC + proc->startpos + place) % MEM_SIZE]];
+			value = proc->registres[core->arena[(proc->PC + proc->startpos + place) % MEM_SIZE] - 1];
 				place++;
 		}
 		else if (op[i] == 2)
@@ -57,7 +57,7 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 		}
 		i++;
 	}
-	return (value);
+	return ((size_t)(value % 4294967295));
 }
 
 size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
