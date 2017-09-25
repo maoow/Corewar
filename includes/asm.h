@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/20 15:14:26 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/25 10:31:45 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ typedef struct		s_op
 
 typedef struct	s_asm
 {
+	int			n_ln;
+	int			n_chr;
+	int			n_inst;
+	int			count_args;
 	t_op		t_op_list[17];
 	char		*load;
 	char		**lines;
