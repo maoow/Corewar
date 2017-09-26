@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/26 11:56:37 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/26 15:38:57 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 	if (ac > 1 && ac - 1 - nb_options != 0)
 		moove_champ = MEM_SIZE /  (ac - 1 - nb_options);
 	i = 0;
-	while (nb_champ < (size_t)ac)
+	ac--;
+	while (ac > 0)
 	{
-		if (is_champ(av[nb_champ], 0, true))
+		if (is_champ(av[ac], 0, true))
 		{
-			champ = parse(cor, av[nb_champ]);
+			champ = parse(cor, av[ac]);
 			add_process(cor, decal, real_champ);
 			while (i + decal < champ[0][0] + decal)
 			{
@@ -88,8 +89,9 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 			i = 0;
 			decal = decal + moove_champ;
 			real_champ++;
+			nb_champ++;
 		}
-		nb_champ++;
+		ac--;
 	}
 	cor->nb_champs = nb_champ - nb_options;
 }
