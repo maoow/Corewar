@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/02 18:22:11 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/26 12:29:04 by starrit          ###   ########.fr       */
 
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@
 **				9	magenta		black		1000, 400, 1000
 */
 
+/*	init_pair 	4 a 9 : couleur champion
+**				14 a 19 : couleur processus en cours
+**				24 a 29 : couleur ecriture processus
+*/
 WINDOW		*init(void)
 {
 	initscr();
@@ -105,7 +109,7 @@ WINDOW		*init(void)
 	init_pair(19, COLOR_BLACK, COLOR_MAGENTA);
 	init_pair(24, 44, COLOR_BLACK);
 	init_pair(25, 45, COLOR_BLACK);
-	init_pair(26, 45, COLOR_BLACK);
+	init_pair(26, 46, COLOR_BLACK);
 	init_pair(27, 47, COLOR_BLACK);
 	init_pair(28, 48, COLOR_BLACK);
 	init_pair(29, 49, COLOR_BLACK);
@@ -138,11 +142,7 @@ void	print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 				while (tmp)
 				{
 					if (i == (tmp->PC + tmp->startpos) % MEM_SIZE)
-					{
-						cor->arena_color[i] = get_process_color(cor, tmp) + 10;
-						mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
-						cor->arena_color[i] = cor->arena_color[i] - 10;
-					}
+						mvchgat(lign, col, 2, A_NORMAL, tmp->color - 10, NULL);
 					tmp = tmp->next;
 				}
 //			}
@@ -191,7 +191,7 @@ void		visu(t_cor *cor)
 	{
 		while ((touche = getch()) != 32)
 		{
-			if ((touche = getch()) == 27)
+			if (touche == 27)
 				exit (0);
 			sleep(1);
 		}
