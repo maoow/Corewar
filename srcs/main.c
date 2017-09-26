@@ -1,12 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
+/*   Updated: 2017/09/26 11:53:51 by starrit          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   vm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:07:38 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/01 15:55:11 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/26 11:52:02 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +44,7 @@ static void		ft_init(t_cor *core)
 	{
 		core->arena[i] = 0;
 		core->arena_color[i] = 3;
-				core->arena_update[i] = true;
+		core->arena_update[i] = true;
 		i++;
 	}
 	core->cycle_to_die = CYCLE_TO_DIE;
@@ -70,7 +82,7 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 
 	nb_champ = 1;
 	real_champ = 1;
-	if (ac > 1)
+	if (ac > 1 && ac - 1 - nb_options != 0)
 		moove_champ = MEM_SIZE /  (ac - 1 - nb_options);
 	i = 0;
 	while (nb_champ < (size_t)ac)
@@ -100,7 +112,6 @@ static void		ft_clean(t_cor *core)
 	// TO DO
 }
 
-//check error : no champ : actuellement : floating point exception
 int				main(int ac, char **av)
 {
 	t_cor	core;
