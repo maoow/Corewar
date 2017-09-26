@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/25 15:10:11 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/26 15:05:45 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ static void	add_champ_color(t_cor *cor)
 	cor->champs->color = nb_champ + 3;
 }
 
-//a faire : mettre l'ID recue en param si c'est le cas, sinon bien compter quel nombre mettre
 void		add_champ(t_cor *cor, char *name, char *comment, int ID)
 {
 	t_champ	*new;
+	static int	ID_fix = 1;
 
 	if (!cor->champs)
 	{
@@ -67,7 +67,10 @@ void		add_champ(t_cor *cor, char *name, char *comment, int ID)
 			write_error(2);
 		cor->champs->next = NULL;
 		if (ID == - 1)
-			cor->champs->ID = 1;
+		{
+			cor->champs->ID = ID_fix;
+			ID_fix++;
+		}
 		else
 			cor->champs->ID = ID;
 	}
@@ -78,9 +81,12 @@ void		add_champ(t_cor *cor, char *name, char *comment, int ID)
 		new->next = cor->champs;
 		cor->champs = new;
 		if (ID == - 1)
-			cor->champs->ID = cor->champs->next->ID + 1;
+		{
+			cor->champs->ID = ID_fix;
+			ID_fix++;
+		}
 		else
-			cor->champs->ID = ID;
+			cor->champs->ID = ID;//verifier que l'id est negatif et n'existe pas deja
 	}
 	cor->champs->name = ft_strdup(name);//
 	cor->champs->comment = ft_strdup(comment);//
