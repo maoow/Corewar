@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/20 17:12:59 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/27 11:53:38 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				main(int ac, char **av)
 
 	(void)i;
 	(void)j;
+	//CHECK NOM ET COMM TOO LONG
 	if (!(ft_init_struct_asm(&t_var_asm)))
 		return (1);
 	if (!(ft_loading(ac, av, 1, t_var_asm)))
