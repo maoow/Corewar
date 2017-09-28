@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/25 15:12:07 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/27 15:13:25 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 typedef struct			s_opt_number
 {
-	size_t				num;
+	int					num;
 	size_t				champ;
 	struct s_opt_number	*next;
 }						t_opt_number;
@@ -61,7 +61,6 @@ typedef struct			s_options
 {
 	bool				dump;
 	size_t				nb_dump;
-	bool				n;
 	t_opt_number		*num_champ;
 	bool				v4;
 	bool				v2;
@@ -103,6 +102,7 @@ typedef struct			s_process
 ** char *last_champ_alive : dernier champion rapporte en vie
 ** t_process **process: liste chainee des processus
 ** t_champ **champs : tableau des champions
+** t_opt_number *id_list : list des numero optionnels de champions
 ** int checks : compteur de verifications de cycle_to_die
 ** int total_cycle : nombre de cycle total pour les option d'affichage tous les
 ** N cycles (modulo)
@@ -118,6 +118,7 @@ typedef struct			s_cor
 	t_champ				*champs;
 	t_process			*process;
 	t_options			*options;
+	t_opt_number		*id_list;
 	char				*last_champ_alive;
 	size_t				cycle_to_die;
 	size_t				tmp_cycle_to_die;
@@ -136,7 +137,7 @@ typedef struct			s_cor
 void		usage(void);
 void		write_error(int nb);
 size_t		get_options(t_cor *cor, int ac, char **av);
-int			**parse(t_cor *cor, char *av);
+int			**parse(t_cor *cor, char *av, int optionnal_id);
 bool		is_champ(char *av, size_t *nb_champ, bool test);
 void		add_champ(t_cor *cor, char *name, char *comment, int ID);
 void		add_process(t_cor *cor, size_t startpos, size_t nb_champ);
