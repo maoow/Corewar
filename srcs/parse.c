@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 14:15:22 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 18:11:43 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,32 @@ static void		get_info(t_cor *cor, bool *start, int s, unsigned char buf)
 		*start = true;
 }
 
+/*
+**	Assemble l'hexa du magic paquet pour avoir un int (cf get_ram dans
+**	ramfunctions.c) et le compare au define magic packet
+*/
+
+static void		check_magic_packet(unsigned char *magic)
+{
+	size_t		i;
+	int			res;
+
+	i = 0;
+	res = 0;
+	while (i <= EXEC_MAGIC_LENGHT)
+	{
+		res = res + magic[i];
+		if (i < EXEC_MAGIC_LENGHT)
+			res = res * 256;
+		i++;
+	}
+	if (res != MAGIC_PACKET)
+	{
+		ft_putendl("Wrong Magic Packet");
+		exit (0);
+	}
+}
+
 static int		**get_champ(t_cor *cor, unsigned char *champion, int fd, int optionnal_id)
 {
 	int				s;
@@ -57,10 +83,19 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd, int optionn
 	bool			start = false;
 	char			name[CHAMP_NAME];
 	char			comment[COMMENT_NAME];
+	unsigned char	*magic;
+	int				i;
 
 	s = 0;
+	magic = ft_memalloc(EXEC_MAGIC_LENGHT + 1);//
+	i = 0;
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
+		if (s <= EXEC_MAGIC_LENGHT)
+		{
+			magic[i] = buf[0];
+			i++;
+		}
 		if (s > 3 && s < CHAMP_NAME)
 			name[s - 4] = buf[0];
 		if (s >= CHAMP_NAME + 4 && s < COMMENT_NAME)
@@ -73,6 +108,8 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd, int optionn
 		}
 		s++;
 	}
+	magic[i] = '\0';
+	check_magic_packet(magic);
 	add_champ(cor, name, comment, optionnal_id);
 	champion[size_champ] = '\0';
 	return (get_hexa(champion, size_champ));
