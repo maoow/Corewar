@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 12:05:57 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/28 15:52:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/28 16:14:04 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,16 @@ bool	cw_live(t_cor *core, t_process *proc)
 	i = 1;
 	while (i < champ && tmp)
 	{
-	tmp = tmp->next;
+		tmp = tmp->next;
 		i++;
 	}
 	if (tmp)
 	{
-	tmp->last_live = core->total_cycle;
-	tmp->lives_in_period++;
-	if (core->options->v4)
-		ft_printf("P%5d | live %d\n",proc->ID, getram(core, proc->PC + proc->startpos + 1));
+		tmp->last_live = core->total_cycle;
+		tmp->lives_in_period++;
+		core->last_champ_alive = tmp->name;
+		if (core->options->v4)
+			ft_printf("P%5d | live %d\n",proc->ID, getram(core, proc->PC + proc->startpos + 1));
 	}
 	return (true);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/02 14:33:36 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/28 16:11:16 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ void			ft_warcycle(t_cor *core)
 		core->tmp_cycle_to_die = 0;
 		b_alive = ft_checklives(core);
 	}
-	// core->last_champ_alive Won !
+	 ft_printf("%s Won !\n", core->last_champ_alive );
 }
