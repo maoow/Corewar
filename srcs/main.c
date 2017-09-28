@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/27 16:27:01 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:11:55 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,12 @@ static void		ft_init(t_cor *core)
 	core->last_champ_alive = NULL;
 }
 
-
+/*
+**	Permet de recuperer le numero de champion donne en ligne de commande s'il
+**	existe en verifiant qu'il est bien negatif
+**	Retourne 1 s'il n'existe pas pour gestion ulterieure de l'incrementation
+**	de l'index positif
+*/
 static int		get_optionnal_id(int ac, char **av)
 {
 	if (ac > 2)
