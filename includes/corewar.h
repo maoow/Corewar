@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 14:10:03 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 17:30:34 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define CHAMP_NAME 128 + 8
 # define COMMENT_NAME 2048 + CHAMP_NAME + 8
 # define EXEC_MAGIC_LENGHT 3
+# define MAGIC_PACKET 0xea83f3
 
 # define UPDATE 80
 
