@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 12:48:23 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:03:12 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ size_t			get_options(t_cor *cor, int ac, char **av)
 		else if (ft_strcmp(av[i], "-visu") == 0)
 			cor->options->visu = true;
 		else if (!is_champ(av[i], &nb_champ, false))
-	//	{
-	//		ft_putendl(av[i]);
 			write_error(3);
-	//	}
 		if (nb_champ > MAX_PLAYERS)
 			write_error(4);
 		i++;
