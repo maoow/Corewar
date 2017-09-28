@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:46:49 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 18:13:32 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,36 @@ static int		get_optionnal_id(int ac, char **av)
 		}
 	}
 	return (1);
+}
+
+/*
+**	Check si le champion a bien un code a executer et si celui ci n'est pas
+**	trop gros.
+*/
+
+static void		check_champ(int **champ)
+{
+	int		i;
+	bool	code_exists;
+
+	i = 0;
+	code_exists = false;
+	if (champ[0][0] > CHAMP_MAX_SIZE)
+	{
+		ft_putendl("Champion too big");
+		exit(0);
+	}
+	while (i < champ[0][0])
+	{
+		if (champ[1][i] != 0)
+			code_exists = true;
+		i++;
+	}
+	if (!code_exists)
+	{
+		ft_putendl("A champion has no code");
+		exit(0);
+	}
 }
 
 /*
@@ -67,6 +97,7 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 		if (is_champ(av[ac], 0, true, 0))
 		{
 			champ = parse(cor, av[ac], get_optionnal_id(ac, av));
+			check_champ(champ);
 			add_process(cor, decal, nb_champ);
 			while (i + decal < champ[0][0] + decal)
 			{
