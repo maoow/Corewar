@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/27 16:03:45 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:00:22 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,21 @@ static void	add_special_champ_id(t_cor *cor, t_champ *champ, int id)
 		cor->id_list = id_list;
 		return ;
 	}
-	while (id_list->next)
+	while (id_list)
 	{
-		if (id_list->num == id || id_list->next->num == id)
+		if (id_list->num == id)
 		{
 			ft_putendl("Champion ID_number already used");
 			exit (0);
 		}
-		id_list = id_list->next;
+		if (id_list->next)
+			id_list = id_list->next;
+		else
+			break;
 	}
 	id_list->next = (t_opt_number*)malloc(sizeof(*id_list));//
 	id_list->next->num = id;
+	champ->ID = id;
 	id_list->next->champ = champ->ID;
 	id_list->next->next = NULL;
 }
