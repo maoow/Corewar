@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:11:55 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:32:13 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,8 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 	size_t		moove_champ;
 	size_t		i;
 	size_t		decal = 0;
-	size_t		real_champ;
 
 	nb_champ = 1;
-	real_champ = 1;
 	if (ac > 1 && ac - 1 - nb_options != 0)
 		moove_champ = MEM_SIZE /  (ac - 1 - nb_options);
 	i = 0;
@@ -103,7 +101,7 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 		if (is_champ(av[ac], 0, true))
 		{
 			champ = parse(cor, av[ac], get_optionnal_id(ac, av));
-			add_process(cor, decal, real_champ);
+			add_process(cor, decal, nb_champ);
 			while (i + decal < champ[0][0] + decal)
 			{
 				cor->arena[i + decal] = champ[1][i];
@@ -112,12 +110,11 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 			}
 			i = 0;
 			decal = decal + moove_champ;
-			real_champ++;
 			nb_champ++;
 		}
 		ac--;
 	}
-	cor->nb_champs = nb_champ - nb_options;
+	cor->nb_champs = nb_champ - 1;
 }
 
 static void		ft_clean(t_cor *core)
