@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_champ_process.c                               :+:      :+:    :+:   */
+/*   add_champ_process.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:44:09 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 14:09:23 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 	cor->process->cycles_before_execute = 0;
 	cor->process->live = 0;
 	cor->process->registres[0] = (0 - (int)nb_champ);
-
 }
 
 static void	add_champ_color(t_cor *cor)
@@ -76,12 +75,12 @@ static void	add_special_champ_id(t_cor *cor, t_champ *champ, int id)
 		if (id_list->num == id)
 		{
 			ft_putendl("Champion ID_number already used");
-			exit (0);
+			exit(0);
 		}
 		if (id_list->next)
 			id_list = id_list->next;
 		else
-			break;
+			break ;
 	}
 	id_list->next = (t_opt_number*)malloc(sizeof(*id_list));//
 	id_list->next->num = id;
@@ -92,7 +91,7 @@ static void	add_special_champ_id(t_cor *cor, t_champ *champ, int id)
 
 void		add_champ(t_cor *cor, char *name, char *comment, int id)
 {
-	t_champ	*new;
+	t_champ		*new;
 	static int	id_fix = 1;
 
 	if (!cor->champs)
