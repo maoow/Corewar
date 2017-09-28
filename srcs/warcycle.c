@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/28 16:11:16 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/28 20:48:23 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,24 @@
 static bool		ft_checklives(t_cor *core)
 {
 	t_process	*proc;
+	t_process	*tproc;
 	size_t		lives;
 
 	lives = 0;
 	proc = core->process;
-	while (proc)
+	while (proc) // not any kill :/
 	{
 		if (proc->live == 0)
+		{
+			tproc = proc->next;
 			ft_delprocess(core, &proc);
+			proc = tproc;
+		}
 		else
 		{
-		lives = proc->live;
-		proc->live = 0;
-		proc = proc->next;
+			lives = proc->live;
+			proc->live = 0;
+			proc = proc->next;
 		}
 	}
 	if (!lives)
