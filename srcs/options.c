@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:57:09 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 17:15:37 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,15 @@ void			ft_dump(t_cor *cor)
 	size_t	i;
 
 	i = 1;
+			ft_printf(" \n0x0000 : ");
 	while (i <= MEM_SIZE)
 	{
 		ft_printf("%02x", cor->arena[i - 1]);
-		if (i % 64 == 0)
-			ft_printf("\n");
+		if (i % 64 == 0 && i != MEM_SIZE)
+			ft_printf(" \n0x%04x : ", i);
 		else
 			ft_printf(" ");
 		i++;
 	}
+			ft_printf("\n");
 }
