@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/08/26 15:34:20 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/27 16:27:24 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void		get_info(t_cor *cor, bool *start, int s, unsigned char buf)
 
 }
 
-static int		**get_champ(t_cor *cor, unsigned char *champion, int fd)
+static int		**get_champ(t_cor *cor, unsigned char *champion, int fd, int optionnal_id)
 {
 	int		s;
 	int		ret = 0;
@@ -59,6 +59,7 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd)
 	char			comment[COMMENT_NAME];
 
 	s = 0;
+ft_printf("%d\n", optionnal_id);
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
 		if (s > 3 && s < CHAMP_NAME)
@@ -73,7 +74,7 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd)
 		}
 		s++;
 	}
-	add_champ(cor, name, comment, -1);
+	add_champ(cor, name, comment, optionnal_id);
 	champion[size_champ] = '\0';
 	return (get_hexa(champion, size_champ));
 }
@@ -82,15 +83,18 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd)
 **	parse un champion en hexa, rempli la structure champ, mais pas process
 */
 
-int				**parse(t_cor *cor, char *av)
+int				**parse(t_cor *cor, char *av, int optionnal_id)
 {
 	int				fd;
 	unsigned char	*champion;
 
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		exit(ft_printf("crash open"));
+	{
+		ft_putendl("crash open");
+		exit (0);
+	}
 	if (!(champion = (unsigned char*)malloc(sizeof(*champion) * (CHAMP_MAX_SIZE + 1))))
 		write_error(2);
-	return (get_champ(cor, champion, fd));
+	return (get_champ(cor, champion, fd, optionnal_id));
 }
