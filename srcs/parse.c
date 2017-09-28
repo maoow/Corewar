@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:03:56 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 14:15:22 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 **	transforme le unsigned char *champion binaire en int *champion hexa
 */
+
 static int		**get_hexa(unsigned char *champion, size_t size_champ)
 {
 	int			**new;
@@ -45,13 +46,12 @@ static void		get_info(t_cor *cor, bool *start, int s, unsigned char buf)
 
 	if (s > 138 && buf && buf > 0 && buf < 17)
 		*start = true;
-
 }
 
 static int		**get_champ(t_cor *cor, unsigned char *champion, int fd, int optionnal_id)
 {
-	int		s;
-	int		ret = 0;
+	int				s;
+	int				ret = 0;
 	unsigned char	buf[2];
 	size_t			size_champ = 0;
 	bool			start = false;
@@ -91,9 +91,10 @@ int				**parse(t_cor *cor, char *av, int optionnal_id)
 	if (fd == -1)
 	{
 		ft_putendl("crash open");
-		exit (0);
+		exit(0);
 	}
-	if (!(champion = (unsigned char*)malloc(sizeof(*champion) * (CHAMP_MAX_SIZE + 1))))
+	if (!(champion = (unsigned char*)malloc(sizeof(*champion) *
+					(CHAMP_MAX_SIZE + 1))))
 		write_error(2);
 	return (get_champ(cor, champion, fd, optionnal_id));
 }

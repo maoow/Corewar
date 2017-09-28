@@ -6,8 +6,8 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/26 12:29:04 by starrit          ###   ########.fr       */
-
+/*   Updated: 2017/09/28 14:18:59 by starrit          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
@@ -16,22 +16,22 @@
 #define C COLOR_PAIR
 
 /*
- **	initscr() initialise le mode plein ecran
- **	move(ligne, colonne) deplace virtuellement le curseur
- **
- ** fonctions suivantes : coordonnes : y,x et non x,y
- **	addch(char) ecrit un caractere la ou est le curseur
- **	addstr(char*) ecrit une chaine de caractere la ou est le curseur
- ** printw() similaire a printf
- ** attron() attroff() : mise en forme (voir man)
- **
- **	refresh() equivalent de mlx_put_img_to_window
- **
- **		 /!\/!\ NE PAS OUBLIER /!\/!\
- **
- **	endwin() free(?) et quitte le mode ncurse
- **		==> oubli = crash shell
- */
+**	initscr() initialise le mode plein ecran
+**	move(ligne, colonne) deplace virtuellement le curseur
+**
+** fonctions suivantes : coordonnes : y,x et non x,y
+**	addch(char) ecrit un caractere la ou est le curseur
+**	addstr(char*) ecrit une chaine de caractere la ou est le curseur
+** printw() similaire a printf
+** attron() attroff() : mise en forme (voir man)
+**
+**	refresh() equivalent de mlx_put_img_to_window
+**
+**		 /!\/!\ NE PAS OUBLIER /!\/!\
+**
+**	endwin() free(?) et quitte le mode ncurse
+**		==> oubli = crash shell
+*/
 
 /*
 ** LINES : nombre de ligne
@@ -70,6 +70,7 @@
 **				14 a 19 : couleur processus en cours
 **				24 a 29 : couleur ecriture processus
 */
+
 WINDOW		*init(void)
 {
 	initscr();
@@ -160,6 +161,7 @@ void	print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 /*
 **	creer les bordures des fenetres et appelle les fonctions d'ecriture
 */
+
 void	manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 {
 	wborder(left, 0 | C(1), 0 | C(2), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
@@ -171,6 +173,7 @@ void	manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 /*
 ** lance le mode et les options ncurse (init() ), creer les fenetres gauche/droite
 */
+
 void		visu(t_cor *cor)
 {
 	WINDOW	*left;
@@ -186,20 +189,14 @@ void		visu(t_cor *cor)
 	wrefresh(right);
 	nodelay(stdscr, true);
 	if ((touche = getch()) == 27)
-		exit (0);
+		exit(0);
 	else if (touche == 32)
 	{
 		while ((touche = getch()) != 32)
 		{
 			if (touche == 27)
-				exit (0);
+				exit(0);
 			sleep(1);
 		}
 	}
-	//sleep(1);
-//	usleep(50000);
-//	clear();
-//	endwin();
-//	delwin(left);
-//	delwin(right);
 }
