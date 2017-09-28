@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 17:30:34 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 20:20:03 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct			s_options
 	bool				dump;
 	size_t				nb_dump;
 	t_opt_number		*num_champ;
+	bool				v16;
 	bool				v4;
 	bool				v2;
 	bool				visu;

@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:45:48 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 20:21:05 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void		init_options(t_options *opt)
 	opt->dump = false;
 	opt->nb_dump = 0;
 	opt->v4 = false;
+	opt->v16 = false;
 	opt->v2 = false;
 	opt->visu = false;
 }
