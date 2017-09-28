@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 14:54:59 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/28 16:02:39 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ bool	cw_zjmp(t_cor *core, t_process *proc)
 	if (core->options->v4)
 		ft_printf("OK\n");
 		proc->PC += jump;
+		proc->PC %= MEM_SIZE;
 	}
 	else if (core->options->v4)
-		ft_printf("\n");
+		ft_printf("FAILED\n");
 	return (true);
 }
