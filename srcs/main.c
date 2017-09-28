@@ -6,48 +6,11 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:32:13 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:46:49 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-
-static void	init_options(t_options *opt)
-{
-	opt->dump = false;
-	opt->nb_dump = 0;
-	opt->v4 = false;
-	opt->v2 = false;
-	opt->visu = false;
-}
-
-static void		ft_init(t_cor *core)
-{
-	size_t		i;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		core->arena[i] = 0;
-		core->arena_color[i] = 3;
-		core->arena_update[i] = true;
-		i++;
-	}
-	core->cycle_to_die = CYCLE_TO_DIE;
-	core->tmp_cycle_to_die = 0;
-	core->checks = 0;
-	core->total_cycle = 0;
-	core->verbose = false;
-	core->champs = NULL;
-	core->process = NULL;
-	core->options = NULL;
-	core->id_list = NULL;
-	core->options = (t_options*)malloc(sizeof(*core->options));//
-	init_options(core->options);
-	core->options->num_champ = NULL;
-	core->last_champ_alive = NULL;
-}
 
 /*
 **	Permet de recuperer le numero de champion donne en ligne de commande s'il
@@ -55,6 +18,7 @@ static void		ft_init(t_cor *core)
 **	Retourne 1 s'il n'existe pas pour gestion ulterieure de l'incrementation
 **	de l'index positif
 */
+
 static int		get_optionnal_id(int ac, char **av)
 {
 	if (ac > 2)
@@ -66,7 +30,7 @@ static int		get_optionnal_id(int ac, char **av)
 			else
 			{
 				ft_putendl("Champions selected ID_number must be < 0");
-				exit (0);
+				exit(0);
 			}
 		}
 	}
@@ -83,22 +47,24 @@ static int		get_optionnal_id(int ac, char **av)
 **		decal = decalage de chaque champion, commence a zero puis augmente de
 **			moove_champ pour chaque incrementation
 */
+
 void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 {
 	size_t		nb_champ;
 	int			**champ;
 	size_t		moove_champ;
 	size_t		i;
-	size_t		decal = 0;
+	size_t		decal;
 
 	nb_champ = 1;
+	decal = 0;
 	if (ac > 1 && ac - 1 - nb_options != 0)
-		moove_champ = MEM_SIZE /  (ac - 1 - nb_options);
+		moove_champ = MEM_SIZE / (ac - 1 - nb_options);
 	i = 0;
 	ac--;
 	while (ac > 0)
 	{
-		if (is_champ(av[ac], 0, true))
+		if (is_champ(av[ac], 0, true, 0))
 		{
 			champ = parse(cor, av[ac], get_optionnal_id(ac, av));
 			add_process(cor, decal, nb_champ);
@@ -131,7 +97,7 @@ int				main(int ac, char **av)
 	if (ac < 2)
 		write_error(3);
 	ft_init(&core);
-	nb_options = get_options(&core, ac, av);
+	nb_options = get_options(&core, ac, av, 1);
 	launch_parse(&core, ac, av, nb_options);
 	ft_warcycle(&core);
 	ft_clean(&core);
