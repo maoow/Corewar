@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/27 16:27:24 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:03:56 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd, int optionn
 	char			comment[COMMENT_NAME];
 
 	s = 0;
-ft_printf("%d\n", optionnal_id);
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
 		if (s > 3 && s < CHAMP_NAME)
