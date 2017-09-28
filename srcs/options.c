@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:23:30 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:57:09 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,44 @@
 **	le lancer dans la vm (true) pour ne pas remodifier la valeur de nb_champ
 */
 
-bool			is_champ(char *av, size_t *nb_champ, bool test)
+bool			is_champ(char *av, size_t *nb_champ, bool test, int j)
 {
 	size_t	len_str;
 	size_t	len_suffix;
-	char	suffix[] = ".cor";
+	char	*suffix;
 	size_t	i;
-	size_t	j;
 
+	if (!(suffix = ft_strdup(".cor")))
+		write_error(2);
 	len_str = ft_strlen(av);
 	len_suffix = ft_strlen(suffix);
 	i = len_str - len_suffix;
-	j = 0;
 	if (len_str < len_suffix)
 		return (false);
 	while (i < len_str)
 	{
 		if (av[i] != suffix[j])
+		{
+			ft_strdel(&suffix);
 			return (false);
-		i++;
+		}
 		j++;
+		i++;
 	}
 	if (!test)
 		*nb_champ = *nb_champ + 1;
+	ft_strdel(&suffix);
 	return (true);
 }
 
-size_t			get_options(t_cor *cor, int ac, char **av)
+/*
+**	i = 1;
+*/
+
+size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 {
-	size_t		i;
 	size_t		nb_champ;
 
-	i = 1;
 	nb_champ = 0;
 	while (i < (size_t)ac)
 	{
@@ -68,8 +74,11 @@ size_t			get_options(t_cor *cor, int ac, char **av)
 			cor->options->v4 = true;
 		else if (ft_strcmp(av[i], "-visu") == 0)
 			cor->options->visu = true;
-		else if (!is_champ(av[i], &nb_champ, false))
+		else if (!is_champ(av[i], &nb_champ, false, 0))
+		{
+			ft_putendl(av[i]);
 			write_error(3);
+		}
 		if (nb_champ > MAX_PLAYERS)
 			write_error(4);
 		i++;
@@ -93,5 +102,4 @@ void			ft_dump(t_cor *cor)
 			ft_printf(" ");
 		i++;
 	}
-
 }
