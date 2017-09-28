@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/30 14:32:55 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/28 20:31:26 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/28 20:40:32 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	dispjump(t_cor *core, t_process *proc)
 		ft_printf(" %02x", core->arena[proc->startpos + proc->PC + i]);
 		i++;
 	}
-	ft_printf("\n");
+	ft_printf(" \n");
 
 }
 
@@ -107,8 +107,8 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 	unsigned char	tmp;
 
 	tmp = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] != 9)
-	{
+//	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] != 9)
+//	{
 		if (g_ocp[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1])
 		{
 			proc->next_jump = 2;
@@ -125,7 +125,7 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 		}
 		else
 			proc->next_jump = 1 + g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
-	}
+//	}
 	if (core->options->v16)
 		dispjump(core, proc);
 }
