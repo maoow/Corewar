@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/01 14:29:55 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 12:48:23 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ size_t			get_options(t_cor *cor, int ac, char **av)
 				write_error(3);
 			i++;
 		}
+		else if (ft_strcmp(av[i], "-n") == 0 && av[i + 1])
+			i++;
 		else if (ft_strcmp(av[i], "-v2") == 0)
 			cor->options->v2 = true;
 		else if (ft_strcmp(av[i], "-v4") == 0)
@@ -67,7 +69,10 @@ size_t			get_options(t_cor *cor, int ac, char **av)
 		else if (ft_strcmp(av[i], "-visu") == 0)
 			cor->options->visu = true;
 		else if (!is_champ(av[i], &nb_champ, false))
+	//	{
+	//		ft_putendl(av[i]);
 			write_error(3);
+	//	}
 		if (nb_champ > MAX_PLAYERS)
 			write_error(4);
 		i++;
