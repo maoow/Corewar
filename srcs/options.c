@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 13:03:12 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:23:30 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ size_t			get_options(t_cor *cor, int ac, char **av)
 		if (ft_strcmp(av[i], "-dump") == 0)
 		{
 			cor->options->dump = true;
-			if ((cor->options->nb_dump = ft_atoi(av[i + 1])) == -1)
+			if (ft_atoi(av[i + 1]) <= 0 || (cor->options->nb_dump = ft_atoi(av[i + 1])) <= 0)
 				write_error(3);
 			i++;
 		}
-		else if (ft_strcmp(av[i], "-n") == 0 && av[i + 1])
+		else if (ft_strcmp(av[i], "-n") == 0 && av[i + 1] && ft_atoi(av[i + 1]) != 0)
 			i++;
 		else if (ft_strcmp(av[i], "-v2") == 0)
 			cor->options->v2 = true;
