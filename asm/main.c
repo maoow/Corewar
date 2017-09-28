@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/27 11:53:38 by vkim             ###   ########.fr       */
+/*   Updated: 2017/09/28 15:35:43 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,9 @@ int				main(int ac, char **av)
 	{
 		t_var_asm->op_lst[k].num = 0;
 		t_var_asm->op_lst[k].opc = 0;
-		t_var_asm->op_lst[k].ag_i[0] = -1;
-		t_var_asm->op_lst[k].ag_i[1] = -1;
-		t_var_asm->op_lst[k].ag_i[2] = -1;
+		t_var_asm->op_lst[k].ag_i[0] = 0;
+		t_var_asm->op_lst[k].ag_i[1] = 0;
+		t_var_asm->op_lst[k].ag_i[2] = 0;
 		t_var_asm->op_lst[k].ag_lbl[0] = NULL;
 		t_var_asm->op_lst[k].ag_lbl[1] = NULL;
 		t_var_asm->op_lst[k].ag_lbl[2] = NULL;
@@ -144,19 +144,46 @@ int				main(int ac, char **av)
 		printf("<%s>\n", t_var_asm->op_lst[i].label);
 	}
 	*/
-	ft_del_labels(t_var_asm);
-	/*i = -1;
+	if (!(ft_del_labels(t_var_asm)))
+		return (1);
+	//if (!(ft_del_space(t_var_asm)))
+	//	return (1);
+	i = -1;
 	printf("\n\n--\n");
 	while (t_var_asm->lines[++i])
 		printf("<%s>\n", t_var_asm->lines[i]);
-	*/
-	ft_instr_check(t_var_asm);
+	
+	if (!(ft_instr_check(t_var_asm)))
+		return (1);
 	/*printf("\n\n__\n");
 	i = -1;
 	while (t_var_asm->lines[++i])
 	{
 		printf("<%d>\n", t_var_asm->op_lst[i].num);
 	}*/
+	//if (!(ft_check_var(t_var_asm)))
+	//	return (1);
+	ft_check_var(t_var_asm);
+	printf("\n\n----\n");
+	i = -1;
+	while (t_var_asm->lines[++i])
+	{
+		printf("<%s>", t_var_asm->op_lst[i].label);
+		printf("<%d>", t_var_asm->op_lst[i].num);
+		if (t_var_asm->op_lst[i].num > 0)
+		{
+			printf("<%s>", t_var_asm->t_op_list[t_var_asm->op_lst[i].num - 1].ref_name);
+			printf("||");
+			printf("<%d>", t_var_asm->op_lst[i].ag_i[0]);
+			printf("<%d>", t_var_asm->op_lst[i].ag_i[1]);
+			printf("<%d>", t_var_asm->op_lst[i].ag_i[2]);
+			printf("||");
+			printf("<%s>", t_var_asm->op_lst[i].ag_lbl[0]);
+			printf("<%s>", t_var_asm->op_lst[i].ag_lbl[1]);
+			printf("<%s>", t_var_asm->op_lst[i].ag_lbl[2]);
+		}
+		printf("\n");
+	}
 	ft_free_end(&t_var_asm);
 	return (0);
 }
