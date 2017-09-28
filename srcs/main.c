@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/26 15:38:57 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/27 16:27:01 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	init_options(t_options *opt)
 {
 	opt->dump = false;
 	opt->nb_dump = 0;
-	opt->n = false;
 	opt->v4 = false;
 	opt->v2 = false;
 	opt->visu = false;
@@ -43,10 +42,30 @@ static void		ft_init(t_cor *core)
 	core->champs = NULL;
 	core->process = NULL;
 	core->options = NULL;
+	core->id_list = NULL;
 	core->options = (t_options*)malloc(sizeof(*core->options));//
 	init_options(core->options);
 	core->options->num_champ = NULL;
 	core->last_champ_alive = NULL;
+}
+
+
+static int		get_optionnal_id(int ac, char **av)
+{
+	if (ac > 2)
+	{
+		if (ft_strcmp("-n", av[ac - 2]) == 0)
+		{
+			if (ft_atoi(av[ac - 1]) < 0)
+				return (ft_atoi(av[ac - 1]));
+			else
+			{
+				ft_putendl("Champions selected ID_number must be < 0");
+				exit (0);
+			}
+		}
+	}
+	return (1);
 }
 
 /*
@@ -78,7 +97,7 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 	{
 		if (is_champ(av[ac], 0, true))
 		{
-			champ = parse(cor, av[ac]);
+			champ = parse(cor, av[ac], get_optionnal_id(ac, av));
 			add_process(cor, decal, real_champ);
 			while (i + decal < champ[0][0] + decal)
 			{
