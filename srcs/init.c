@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/26 15:05:45 by starrit          ###   ########.fr       */
+/*   Updated: 2017/09/27 16:03:45 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,53 @@ static void	add_champ_color(t_cor *cor)
 	cor->champs->color = nb_champ + 3;
 }
 
-void		add_champ(t_cor *cor, char *name, char *comment, int ID)
+static void	add_special_champ_id(t_cor *cor, t_champ *champ, int id)
+{
+	t_opt_number	*id_list;
+
+	id_list = cor->id_list;
+	if (!id_list)
+	{
+		id_list = (t_opt_number*)malloc(sizeof(*id_list));//
+		id_list->num = id;
+		champ->ID = id;
+		id_list->champ = champ->ID;
+		id_list->next = NULL;
+		cor->id_list = id_list;
+		return ;
+	}
+	while (id_list->next)
+	{
+		if (id_list->num == id || id_list->next->num == id)
+		{
+			ft_putendl("Champion ID_number already used");
+			exit (0);
+		}
+		id_list = id_list->next;
+	}
+	id_list->next = (t_opt_number*)malloc(sizeof(*id_list));//
+	id_list->next->num = id;
+	id_list->next->champ = champ->ID;
+	id_list->next->next = NULL;
+}
+
+void		add_champ(t_cor *cor, char *name, char *comment, int id)
 {
 	t_champ	*new;
-	static int	ID_fix = 1;
+	static int	id_fix = 1;
 
 	if (!cor->champs)
 	{
 		if (!(cor->champs = (t_champ*)malloc(sizeof(*cor->champs))))//
 			write_error(2);
 		cor->champs->next = NULL;
-		if (ID == - 1)
+		if (id == 1)
 		{
-			cor->champs->ID = ID_fix;
-			ID_fix++;
+			cor->champs->ID = id_fix;
+			id_fix++;
 		}
 		else
-			cor->champs->ID = ID;
+			add_special_champ_id(cor, cor->champs, id);
 	}
 	else
 	{
@@ -80,13 +110,13 @@ void		add_champ(t_cor *cor, char *name, char *comment, int ID)
 			write_error(2);
 		new->next = cor->champs;
 		cor->champs = new;
-		if (ID == - 1)
+		if (id == 1)
 		{
-			cor->champs->ID = ID_fix;
-			ID_fix++;
+			cor->champs->ID = id_fix;
+			id_fix++;
 		}
 		else
-			cor->champs->ID = ID;//verifier que l'id est negatif et n'existe pas deja
+			add_special_champ_id(cor, cor->champs, id);
 	}
 	cor->champs->name = ft_strdup(name);//
 	cor->champs->comment = ft_strdup(comment);//
