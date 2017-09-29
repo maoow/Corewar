@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 13:40:44 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 13:10:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 17:42:12 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,15 @@ bool	cw_ld(t_cor *core, t_process *proc)
 		value = getram(core, idx(proc,ind(core, proc, PC + 2)));
 		PC += 4;
 	}
+	if (core->arena[(PC + proc->startpos) % MEM_SIZE] < REG_NUMBER)
+	{
 	proc->registres[core->arena[(PC + proc->startpos) % MEM_SIZE]] = value;
+	}
+	else //tmp
+	{
+		ft_printf("error");
+		return (false);
+	}
 	if (core->options->v4)
 		ft_printf("P%5d | ld %d r%d\n", proc->ID, value, core->arena[(PC + proc->startpos) % MEM_SIZE]);
 	return (value != 0);
