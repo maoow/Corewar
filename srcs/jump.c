@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/30 14:32:55 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 16:21:36 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 16:52:36 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,5 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 		if (core->options->v16)
 			dispjump(core, proc);
 	}
-	else if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] != 9)
-			proc->next_jump = 1;
 
 }
