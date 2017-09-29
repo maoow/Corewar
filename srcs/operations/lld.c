@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 13:10:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 18:12:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ bool	cw_lld(t_cor *core, t_process *proc)
 		PC += 4;
 	}
 	proc->registres[core->arena[(PC + proc->startpos) % MEM_SIZE]] = value;
+	if (core->options->v4)
+		ft_printf("P%5d | lld %d r%d\n", proc->ID, value, core->arena[(PC + proc->startpos) % MEM_SIZE]);
 	return (value != 0);
 }
