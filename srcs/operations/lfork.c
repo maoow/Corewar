@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/31 13:10:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 17:48:45 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ bool	cw_lfork(t_cor *core, t_process *proc)
 	tmp->next = core->process;
 	core->process = tmp;
 	if (core->options->v4)
-		ft_printf("P%5d | lfork %d", proc->ID,ind(core, proc, proc->PC + 1));
+		ft_printf("P%5d | lfork %d\n", proc->ID,ind(core, proc, proc->PC + 1));
 	return (true);
 }

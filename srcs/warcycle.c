@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 17:39:28 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 17:57:57 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool		ft_checklives(t_cor *core)
 		core->checks = 0;
 	}
 	core->checks++;
-	return (core->process && core->process->next);
+	return (core->process);
 }
 
 static void		initproccolor(t_cor *core)

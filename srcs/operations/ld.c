@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 13:40:44 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 17:42:12 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 17:46:44 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ bool	cw_ld(t_cor *core, t_process *proc)
 	}
 	if (core->arena[(PC + proc->startpos) % MEM_SIZE] < REG_NUMBER)
 	{
-	proc->registres[core->arena[(PC + proc->startpos) % MEM_SIZE]] = value;
+		proc->registres[core->arena[(PC + proc->startpos) % MEM_SIZE]] = value;
 	}
 	else //tmp
 	{
-		ft_printf("error");
+//		ft_printf("error");
 		return (false);
 	}
 	if (core->options->v4)
