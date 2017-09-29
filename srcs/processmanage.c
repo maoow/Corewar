@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 16:18:46 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 17:06:20 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 void		ft_getop(t_cor *core, t_process *proc)
 {
 
-	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 < OPC_NBR)
+	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 >= 0 && core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 < OPC_NBR)
 	{
 		proc->next_op = g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		proc->cycles_before_execute = g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
