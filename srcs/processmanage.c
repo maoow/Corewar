@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 17:06:20 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/09/29 17:33:59 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,3 @@ void	ft_delprocess(t_cor *core, t_process **del)
 	*del = NULL;
 }
 
-void	ft_addprocess(t_cor *core, t_process *new)
-{
-	new->next = core->process;
-	core->process = new;
-}
