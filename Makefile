@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/02 13:02:07 by starrit          ###   ########.fr        #
+#    Updated: 2017/10/02 13:04:41 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,6 @@ $(OBJ_PATH):
 	@mkdir -p $@/operations
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(LIB)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-
-$(OBJ_PATH)operations/%.o: $(SRC_PATH)operations/%.c $(HEADER) $(LIB)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 .PHONY:clean
