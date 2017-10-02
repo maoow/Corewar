@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 18:11:43 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/02 15:53:32 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void		get_info(t_cor *cor, bool *start, int s, unsigned char buf)
 {
 	(void)cor;
 
-	if (s > 138 && buf && buf > 0 && buf < 17)
+	//if (s > 138 && buf && buf > 0 && buf < 17)
+	if (s > 148 && buf && buf > 0 && buf < 17)
 		*start = true;
 }
 
