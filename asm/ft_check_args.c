@@ -6,26 +6,20 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:03:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/28 18:04:35 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/03 14:47:44 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int			ft_arg_ok(t_asm *as)
-{
-	(void)as;
-	return (0);
-}
-
-int			ft_check_reg(t_asm *as, char *txt, int *i, int *save)
+int			ft_check_reg(t_asm *as, char *txt, int *i, unsigned int *save)
 {
 	int		tmp;
 	int		nb_dgts;
 
-	if ((as->t_op_list[as->op_lst[as->n_ln].num - 1].ref_enc[as->count_args - 1]
-		& T_REG) != T_REG)
+	if ((as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1] & T_REG) != T_REG)
 		return (0);
+	as->op[as->n_ln].ag_i4[as->ac - 1] = 1;
 	nb_dgts = 1;
 	(*i)++;
 	if (txt[*i] < '0' || txt[*i] > '9')
@@ -39,90 +33,66 @@ int			ft_check_reg(t_asm *as, char *txt, int *i, int *save)
 	if ((tmp = ft_atoi(txt + *i)) >= 0 && tmp <= 99)
 	{
 		*save = tmp;
-		(*i)+= nb_dgts;
+		(*i) += nb_dgts;
 	}
 	else
 		return (0);
 	return (1);
 }
 
-int			ft_check_dir(t_asm *as, char *txt, int *i, t_instr *sv)
-{
-	int		nb_chrs;
+/*
+** modif taille ind reg dir ?
+** gere labels
+*/
 
-	if (txt[*i] == '%')
+int			ft_type_var(t_asm *as)
+{
+	if (as->lines[as->n_ln][as->n_chr] == '%'
+		|| ((as->lines[as->n_ln][as->n_chr] >= '0'
+			&& as->lines[as->n_ln][as->n_chr] <= '9')
+			|| as->lines[as->n_ln][as->n_chr] == '-'
+			|| ft_strchr(LABEL_CHARS, as->lines[as->n_ln][as->n_chr])))
 	{
-		if (!txt[*i + 1])
-			return (0);
-		(*i)++;
-	}
-	if (txt[*i] == ':')
-	{
-		(*i)++;
-		nb_chrs = 0;
-		while (ft_strchr(LABEL_CHARS, txt[*i]))
+		(as->ac)++;
+		if (as->lines[as->n_ln][as->n_chr] == '%')
 		{
-			(*i)++;
-			nb_chrs++;
+			(as->n_chr)++;
+			if ((as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1]
+				& T_DIR) != T_DIR)
+				return (0);
 		}
-		if (!(sv->ag_lbl[as->count_args - 1]
-			= ft_strsub(txt, *i - nb_chrs, nb_chrs)))
+		else if ((as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1]
+				& T_IND) != T_IND)
 			return (0);
-	}
-	else if (txt[*i] == '-' || (txt[*i] >= '0' && txt[*i] <= '9'))
-	{
-		sv->ag_i[as->count_args - 1] = ft_atoi(txt + *i);
-		if (txt[*i] == '-')
-			(*i)++;
-		while (txt[*i] >= '0' && txt[*i] <= '9')
-			(*i)++;
+		if (!(ft_dir_ind(as, as->lines[as->n_ln], &as->n_chr,
+			&as->op[as->n_ln])))
+			return (0);
 	}
 	else
 		return (0);
+	ft_while_space(as->lines[as->n_ln], &as->n_chr);
 	return (1);
 }
 
 int			ft_wich_var(t_asm *as, t_instr *sv)
 {
-	//gerer nb negatifs qui bouclent sauf Reg
 	ft_while_space(as->lines[as->n_ln], &as->n_chr);
 	if (as->lines[as->n_ln][as->n_chr] == ',')
 	{
 		(as->n_chr)++;
-		if (as->count_args == 0
-			|| as->count_args
-				> as->t_op_list[as->op_lst[as->n_ln].num - 1].nb_args)
+		if (as->ac == 0 || as->ac > as->ref[as->op[as->n_ln].num - 1].ac)
 			return (0);
 	}
 	ft_while_space(as->lines[as->n_ln], &as->n_chr);
 	if (as->lines[as->n_ln][as->n_chr] == 'r')
 	{
-		(as->count_args)++;
-		ft_check_reg(as, as->lines[as->n_ln], &as->n_chr,
-			&sv->ag_i[as->count_args - 1]);
-	}
-	else if (as->lines[as->n_ln][as->n_chr] == '%')
-	{
-		(as->count_args)++;
-		if ((as->t_op_list[as->op_lst[as->n_ln].num - 1].ref_enc[as->count_args - 1]
-			& T_DIR) != T_DIR)
+		(as->ac)++;
+		if (!(ft_check_reg(as, as->lines[as->n_ln], &as->n_chr,
+			&sv->ag_i4[as->ac - 1])))
 			return (0);
-		ft_check_dir(as, as->lines[as->n_ln], &as->n_chr, &as->op_lst[as->n_ln]);
 	}
-	else if ((as->lines[as->n_ln][as->n_chr] >= '0'
-				&& as->lines[as->n_ln][as->n_chr] <= '9')
-			|| as->lines[as->n_ln][as->n_chr] == '-'
-			|| ft_strchr(LABEL_CHARS, as->lines[as->n_ln][as->n_chr]))
-	{
-		(as->count_args)++;
-		if ((as->t_op_list[as->op_lst[as->n_ln].num - 1].ref_enc[as->count_args - 1]
-			& T_IND) != T_IND)
-			return (0);
-		ft_check_dir(as, as->lines[as->n_ln], &as->n_chr, &as->op_lst[as->n_ln]);
-	}
-	else
+	else if (!(ft_type_var(as)))
 		return (0);
-	ft_while_space(as->lines[as->n_ln], &as->n_chr);
 	return (1);
 }
 
@@ -131,7 +101,7 @@ int			ft_check_var(t_asm *as)
 	as->n_ln = -1;
 	while (as->lines[++(as->n_ln)])
 	{
-		as->count_args = 0;
+		as->ac = 0;
 		as->n_chr = -1;
 		while (as->lines[as->n_ln][++(as->n_chr)] != '%'
 			&& as->lines[as->n_ln][as->n_chr] != ' '
@@ -139,10 +109,9 @@ int			ft_check_var(t_asm *as)
 			;
 		if (as->n_chr != 0)
 		{
-			while (as->count_args
-			< as->t_op_list[as->op_lst[as->n_ln].num - 1].nb_args)
+			while (as->ac < as->ref[as->op[as->n_ln].num - 1].ac)
 			{
-				if (!(ft_wich_var(as, &as->op_lst[as->n_ln])))
+				if (!(ft_wich_var(as, &as->op[as->n_ln])))
 					return (0);
 			}
 			if (as->lines[as->n_ln][as->n_chr] != '\0')

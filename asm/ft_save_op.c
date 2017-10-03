@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 09:44:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/20 14:01:55 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/03 12:01:45 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ int				ft_instr_check(t_asm *as)
 	{
 		j = -1;
 		while (as->lines[i][++j] != '%' && as->lines[i][j] != ' '
-			&& as->lines[i][j] != '\0')
+			&& as->lines[i][j] != '\t' && as->lines[i][j] != '\0')
 			;
 		if (j != 0)
 		{
 			if (!(tmp = ft_strsub(as->lines[i], 0, j))
-				|| (as->op_lst[i].num = ft_if_op_ok(as, tmp)) == -1)
+				|| (as->op[i].num = ft_if_op_ok(as, tmp)) == -1)
 			{
 				free(tmp);
 				return (0);
 			}
 			else
-				as->op_lst[i].num += 1;
+				as->op[i].num += 1;
 			free(tmp);
 		}
 	}
@@ -80,7 +80,7 @@ int				ft_if_label(t_asm *as, int *i)
 			;
 		if (as->lines[*i][k] != ':')
 			return (1);
-		if (!(as->op_lst[*i].label = ft_strsub(as->lines[*i], 0, k)))
+		if (!(as->op[*i].label = ft_strsub(as->lines[*i], 0, k)))
 			return (0);
 	}
 	return (1);

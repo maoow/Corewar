@@ -6,7 +6,7 @@
 #    By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/27 12:28:21 by vkim              #+#    #+#              #
-#    Updated: 2017/09/20 15:18:06 by vkim             ###   ########.fr        #
+#    Updated: 2017/10/03 14:50:24 by vkim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ N_SRC=ft_loading.c \
 	  ft_save_op.c \
 	  ft_aux.c \
 	  ft_check_args.c \
+	  ft_dir_ind.c \
 	  main.c \
 
 P_SRC = .
