@@ -6,146 +6,146 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 14:08:38 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/11 10:27:47 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/03 13:39:43 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void			ft_init_struct_ref_5(t_op *op_tab)
+void			ft_init_struct_ref_5(t_ref *ref)
 {
-	op_tab[11].ref_mdf_c = 0;
-	op_tab[12].ref_mdf_c = 1;
-	op_tab[13].ref_mdf_c = 1;
-	op_tab[14].ref_mdf_c = 0;
-	op_tab[15].ref_mdf_c = 1;
-	op_tab[0].ref_lbl_sz = 4;
-	op_tab[1].ref_lbl_sz = 4;
-	op_tab[2].ref_lbl_sz = 0;
-	op_tab[3].ref_lbl_sz = 0;
-	op_tab[4].ref_lbl_sz = 0;
-	op_tab[5].ref_lbl_sz = 4;
-	op_tab[6].ref_lbl_sz = 4;
-	op_tab[7].ref_lbl_sz = 4;
-	op_tab[8].ref_lbl_sz = 2;
-	op_tab[9].ref_lbl_sz = 2;
-	op_tab[10].ref_lbl_sz = 2;
-	op_tab[11].ref_lbl_sz = 2;
-	op_tab[12].ref_lbl_sz = 4;
-	op_tab[13].ref_lbl_sz = 2;
-	op_tab[14].ref_lbl_sz = 2;
-	op_tab[15].ref_lbl_sz = 0;
-	op_tab[16].ref_lbl_sz = 0;
+	ref[11].mdf_c = 0;
+	ref[12].mdf_c = 1;
+	ref[13].mdf_c = 1;
+	ref[14].mdf_c = 0;
+	ref[15].mdf_c = 1;
+	ref[0].lbl_sz = 4;
+	ref[1].lbl_sz = 4;
+	ref[2].lbl_sz = 0;
+	ref[3].lbl_sz = 0;
+	ref[4].lbl_sz = 0;
+	ref[5].lbl_sz = 4;
+	ref[6].lbl_sz = 4;
+	ref[7].lbl_sz = 4;
+	ref[8].lbl_sz = 2;
+	ref[9].lbl_sz = 2;
+	ref[10].lbl_sz = 2;
+	ref[11].lbl_sz = 2;
+	ref[12].lbl_sz = 4;
+	ref[13].lbl_sz = 2;
+	ref[14].lbl_sz = 2;
+	ref[15].lbl_sz = 0;
+	ref[16].lbl_sz = 0;
 }
 
-void			ft_init_struct_ref_4(t_op *op_tab)
+void			ft_init_struct_ref_4(t_ref *ref)
 {
-	op_tab[14].ref_enc[0] = T_DIR;
-	op_tab[14].ref_enc[1] = 0;
-	op_tab[14].ref_enc[2] = 0;
-	op_tab[15].ref_enc[0] = T_REG;
-	op_tab[15].ref_enc[1] = 0;
-	op_tab[15].ref_enc[2] = 0;
-	op_tab[16].ref_enc[0] = 0;
-	op_tab[16].ref_enc[1] = 0;
-	op_tab[16].ref_enc[2] = 0;
-	op_tab[0].ref_mdf_c = 0;
-	op_tab[1].ref_mdf_c = 1;
-	op_tab[2].ref_mdf_c = 1;
-	op_tab[3].ref_mdf_c = 1;
-	op_tab[4].ref_mdf_c = 1;
-	op_tab[5].ref_mdf_c = 1;
-	op_tab[6].ref_mdf_c = 1;
-	op_tab[7].ref_mdf_c = 1;
-	op_tab[8].ref_mdf_c = 0;
-	op_tab[9].ref_mdf_c = 1;
-	op_tab[10].ref_mdf_c = 1;
-	ft_init_struct_ref_5(op_tab);
+	ref[14].tvar[0] = T_DIR;
+	ref[14].tvar[1] = 0;
+	ref[14].tvar[2] = 0;
+	ref[15].tvar[0] = T_REG;
+	ref[15].tvar[1] = 0;
+	ref[15].tvar[2] = 0;
+	ref[16].tvar[0] = 0;
+	ref[16].tvar[1] = 0;
+	ref[16].tvar[2] = 0;
+	ref[0].mdf_c = 0;
+	ref[1].mdf_c = 1;
+	ref[2].mdf_c = 1;
+	ref[3].mdf_c = 1;
+	ref[4].mdf_c = 1;
+	ref[5].mdf_c = 1;
+	ref[6].mdf_c = 1;
+	ref[7].mdf_c = 1;
+	ref[8].mdf_c = 0;
+	ref[9].mdf_c = 1;
+	ref[10].mdf_c = 1;
+	ft_init_struct_ref_5(ref);
 }
 
-void			ft_init_struct_ref_3(t_op *op_tab)
+void			ft_init_struct_ref_3(t_ref *ref)
 {
-	op_tab[6].ref_enc[0] = T_REG | T_IND | T_DIR;
-	op_tab[6].ref_enc[1] = T_REG | T_IND | T_DIR;
-	op_tab[6].ref_enc[2] = T_REG;
-	op_tab[7].ref_enc[0] = T_REG | T_IND | T_DIR;
-	op_tab[7].ref_enc[1] = T_REG | T_IND | T_DIR;
-	op_tab[7].ref_enc[2] = T_REG;
-	op_tab[8].ref_enc[0] = T_DIR;
-	op_tab[8].ref_enc[1] = 0;
-	op_tab[8].ref_enc[2] = 0;
-	op_tab[9].ref_enc[0] = T_REG | T_DIR | T_IND;
-	op_tab[9].ref_enc[1] = T_DIR | T_REG;
-	op_tab[9].ref_enc[2] = T_REG;
-	op_tab[10].ref_enc[0] = T_REG;
-	op_tab[10].ref_enc[1] = T_REG | T_DIR | T_IND;
-	op_tab[10].ref_enc[2] = T_DIR | T_REG;
-	op_tab[11].ref_enc[0] = T_DIR;
-	op_tab[11].ref_enc[1] = 0;
-	op_tab[11].ref_enc[2] = 0;
-	op_tab[12].ref_enc[0] = T_DIR | T_IND;
-	op_tab[12].ref_enc[1] = T_REG;
-	op_tab[12].ref_enc[2] = 0;
-	op_tab[13].ref_enc[0] = T_REG | T_DIR | T_IND;
-	op_tab[13].ref_enc[1] = T_DIR | T_REG;
-	op_tab[13].ref_enc[2] = T_REG;
-	ft_init_struct_ref_4(op_tab);
+	ref[6].tvar[0] = T_REG | T_IND | T_DIR;
+	ref[6].tvar[1] = T_REG | T_IND | T_DIR;
+	ref[6].tvar[2] = T_REG;
+	ref[7].tvar[0] = T_REG | T_IND | T_DIR;
+	ref[7].tvar[1] = T_REG | T_IND | T_DIR;
+	ref[7].tvar[2] = T_REG;
+	ref[8].tvar[0] = T_DIR;
+	ref[8].tvar[1] = 0;
+	ref[8].tvar[2] = 0;
+	ref[9].tvar[0] = T_REG | T_DIR | T_IND;
+	ref[9].tvar[1] = T_DIR | T_REG;
+	ref[9].tvar[2] = T_REG;
+	ref[10].tvar[0] = T_REG;
+	ref[10].tvar[1] = T_REG | T_DIR | T_IND;
+	ref[10].tvar[2] = T_DIR | T_REG;
+	ref[11].tvar[0] = T_DIR;
+	ref[11].tvar[1] = 0;
+	ref[11].tvar[2] = 0;
+	ref[12].tvar[0] = T_DIR | T_IND;
+	ref[12].tvar[1] = T_REG;
+	ref[12].tvar[2] = 0;
+	ref[13].tvar[0] = T_REG | T_DIR | T_IND;
+	ref[13].tvar[1] = T_DIR | T_REG;
+	ref[13].tvar[2] = T_REG;
+	ft_init_struct_ref_4(ref);
 }
 
-void			ft_init_struct_ref_2(t_op *op_tab)
+void			ft_init_struct_ref_2(t_ref *ref)
 {
-	op_tab[7].nb_args = 3;
-	op_tab[8].nb_args = 1;
-	op_tab[9].nb_args = 3;
-	op_tab[10].nb_args = 3;
-	op_tab[11].nb_args = 1;
-	op_tab[12].nb_args = 2;
-	op_tab[13].nb_args = 3;
-	op_tab[14].nb_args = 1;
-	op_tab[15].nb_args = 1;
-	op_tab[16].nb_args = 0;
-	op_tab[0].ref_enc[0] = T_DIR;
-	op_tab[1].ref_enc[0] = T_DIR | T_IND;
-	op_tab[1].ref_enc[1] = T_REG;
-	op_tab[2].ref_enc[0] = T_REG;
-	op_tab[2].ref_enc[1] = T_IND | T_REG;
-	op_tab[3].ref_enc[0] = T_REG;
-	op_tab[3].ref_enc[1] = T_REG;
-	op_tab[3].ref_enc[2] = T_REG;
-	op_tab[4].ref_enc[0] = T_REG;
-	op_tab[4].ref_enc[1] = T_REG;
-	op_tab[4].ref_enc[2] = T_REG;
-	op_tab[5].ref_enc[0] = T_REG | T_DIR | T_IND;
-	op_tab[5].ref_enc[1] = T_REG | T_IND | T_DIR;
-	op_tab[5].ref_enc[2] = T_REG;
-	ft_init_struct_ref_3(op_tab);
+	ref[7].ac = 3;
+	ref[8].ac = 1;
+	ref[9].ac = 3;
+	ref[10].ac = 3;
+	ref[11].ac = 1;
+	ref[12].ac = 2;
+	ref[13].ac = 3;
+	ref[14].ac = 1;
+	ref[15].ac = 1;
+	ref[16].ac = 0;
+	ref[0].tvar[0] = T_DIR;
+	ref[1].tvar[0] = T_DIR | T_IND;
+	ref[1].tvar[1] = T_REG;
+	ref[2].tvar[0] = T_REG;
+	ref[2].tvar[1] = T_IND | T_REG;
+	ref[3].tvar[0] = T_REG;
+	ref[3].tvar[1] = T_REG;
+	ref[3].tvar[2] = T_REG;
+	ref[4].tvar[0] = T_REG;
+	ref[4].tvar[1] = T_REG;
+	ref[4].tvar[2] = T_REG;
+	ref[5].tvar[0] = T_REG | T_DIR | T_IND;
+	ref[5].tvar[1] = T_REG | T_IND | T_DIR;
+	ref[5].tvar[2] = T_REG;
+	ft_init_struct_ref_3(ref);
 }
 
-void			ft_init_struct_ref_1(t_op *op_tab)
+void			ft_init_struct_ref_1(t_ref *ref)
 {
-	op_tab[0].ref_name = "live";
-	op_tab[1].ref_name = "ld";
-	op_tab[2].ref_name = "st";
-	op_tab[3].ref_name = "add";
-	op_tab[4].ref_name = "sub";
-	op_tab[5].ref_name = "and";
-	op_tab[6].ref_name = "or";
-	op_tab[7].ref_name = "xor";
-	op_tab[8].ref_name = "zjmp";
-	op_tab[9].ref_name = "ldi";
-	op_tab[10].ref_name = "sti";
-	op_tab[11].ref_name = "fork";
-	op_tab[12].ref_name = "lld";
-	op_tab[13].ref_name = "lldi";
-	op_tab[14].ref_name = "lfork";
-	op_tab[15].ref_name = "aff";
-	op_tab[16].ref_name = 0;
-	op_tab[0].nb_args = 1;
-	op_tab[1].nb_args = 2;
-	op_tab[2].nb_args = 2;
-	op_tab[3].nb_args = 3;
-	op_tab[4].nb_args = 3;
-	op_tab[5].nb_args = 3;
-	op_tab[6].nb_args = 3;
-	ft_init_struct_ref_2(op_tab);
+	ref[0].name = "live";
+	ref[1].name = "ld";
+	ref[2].name = "st";
+	ref[3].name = "add";
+	ref[4].name = "sub";
+	ref[5].name = "and";
+	ref[6].name = "or";
+	ref[7].name = "xor";
+	ref[8].name = "zjmp";
+	ref[9].name = "ldi";
+	ref[10].name = "sti";
+	ref[11].name = "fork";
+	ref[12].name = "lld";
+	ref[13].name = "lldi";
+	ref[14].name = "lfork";
+	ref[15].name = "aff";
+	ref[16].name = 0;
+	ref[0].ac = 1;
+	ref[1].ac = 2;
+	ref[2].ac = 2;
+	ref[3].ac = 3;
+	ref[4].ac = 3;
+	ref[5].ac = 3;
+	ref[6].ac = 3;
+	ft_init_struct_ref_2(ref);
 }

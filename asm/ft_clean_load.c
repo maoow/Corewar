@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 11:42:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/16 16:01:58 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/03 10:58:16 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				ft_del_space(t_asm *as)
 	while (as->lines[++i])
 	{
 		j = -1;
-		while (as->lines[i][++j] == ' ')
+		while (as->lines[i][++j] == ' ' || as->lines[i][j] == '\t')
 			;
 		save = as->lines[i];
 		if (!(as->lines[i] = ft_strsub(as->lines[i], j,
@@ -56,7 +56,7 @@ int				ft_del_space(t_asm *as)
 			return (0);
 		free(save);
 		j = ft_strlen(as->lines[i]);
-		while (--j > -1 && as->lines[i][j] == ' ')
+		while (--j > -1 && (as->lines[i][j] == ' ' || as->lines[i][j] == '\t'))
 			;
 		as->lines[i][j + 1] = '\0';
 	}

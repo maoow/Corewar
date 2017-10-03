@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/28 15:35:43 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/03 17:00:37 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ void			ft_free_end(t_asm **as)
 
 	if (*as)
 	{
-		if ((*as)->op_lst)
+		if ((*as)->op)
 		{
 			i = -1;
 			while((*as)->lines[++i])
 			{
-				if ((*as)->op_lst[i].label)
-					free((*as)->op_lst[i].label);
-				if ((*as)->op_lst[i].ag_lbl[0])
-					free((*as)->op_lst[i].ag_lbl[0]);
-				if ((*as)->op_lst[i].ag_lbl[1])
-					free((*as)->op_lst[i].ag_lbl[1]);
-				if ((*as)->op_lst[i].ag_lbl[2])
-					free((*as)->op_lst[i].ag_lbl[2]);
+				if ((*as)->op[i].label)
+					free((*as)->op[i].label);
+				if ((*as)->op[i].ag_lbl[0])
+					free((*as)->op[i].ag_lbl[0]);
+				if ((*as)->op[i].ag_lbl[1])
+					free((*as)->op[i].ag_lbl[1]);
+				if ((*as)->op[i].ag_lbl[2])
+					free((*as)->op[i].ag_lbl[2]);
 			}
-			free((*as)->op_lst);
+			free((*as)->op);
 		}
 		if ((*as)->lines)
 		{
@@ -65,125 +65,135 @@ int				ft_init_struct_asm(t_asm **as)
 	(*as)->comment = NULL;
 	(*as)->len_mem = 0;
 	(*as)->enc = NULL;
-	(*as)->op_lst = NULL;
+	(*as)->op = NULL;
 	return (1);
 }
 
 int				main(int ac, char **av)
 {
-	t_asm		*t_var_asm;
+	t_asm		*as;
 	int			i;
 	int			j;
-	int			k;
-	t_op		op_tab[17];
 
-	(void)i;
-	(void)j;
-	//CHECK NOM ET COMM TOO LONG
-	if (!(ft_init_struct_asm(&t_var_asm)))
+	if (!(ft_init_struct_asm(&as)))
 		return (1);
-	if (!(ft_loading(ac, av, 1, t_var_asm)))
+	if (!(ft_loading(ac, av, 1, as)))
 		return (1);
 	/*i = -1;
-	while (t_var_asm->lines[++i])
-		printf("<%s>\n", t_var_asm->lines[i]);
+	while (as->lines[++i])
+		printf("<%s>\n", as->lines[i]);
 	*/
-	if (ft_name_check(t_var_asm, &t_var_asm->name, NAME_CMD_STRING) != 0)
+	if (ft_name_check(as, &as->name, NAME_CMD_STRING) != 0)
 	{
-		if (!(ft_name_check(t_var_asm, &t_var_asm->comment,
+		if (!(ft_name_check(as, &as->comment,
 			COMMENT_CMD_STRING)))
 			return (1);
 	}
-	t_var_asm->lines[0][0] = '\0';
-	t_var_asm->lines[1][0] = '\0';
-	ft_del_empty_lines(t_var_asm);
+	if (ft_strlen(as->name) > PROG_NAME_LENGTH
+		|| ft_strlen(as->comment) > COMMENT_LENGTH)
+		return (1);
+	as->lines[0][0] = '\0';
+	as->lines[1][0] = '\0';
+	ft_del_empty_lines(as);
 	/*i = -1;
 	printf("\n\n");
-	while (t_var_asm->lines[++i])
-		printf("<%s>\n", t_var_asm->lines[i]);
+	while (as->lines[++i])
+		printf("<%s>\n", as->lines[i]);
 	exit(0);*/
-	ft_init_struct_ref_1((t_op *)op_tab);
-	ft_init_struct_ref_1((t_op *)t_var_asm->t_op_list);
+	//ft_init_struct_ref_1((t_op *)op_tab);
+	ft_init_struct_ref_1((t_ref *)as->ref);
 	/*i = -1;
-	while (t_var_asm->t_op_list[++i].ref_name)
+	while (as->t_op_list[++i].ref_name)
 	{
-		printf("{%s, %d, ", t_var_asm->t_op_list[i].ref_name, t_var_asm->t_op_list[i].nb_args);
+		printf("{%s, %d, ", as->t_op_list[i].ref_name, as->t_op_list[i].nb_args);
 		j = -1;
-		while (t_var_asm->t_op_list[i].ref_enc[++j] && j < 3)
+		while (as->t_op_list[i].ref_enc[++j] && j < 3)
 		{
-			printf("%d ", t_var_asm->t_op_list[i].ref_enc[j]);
+			printf("%d ", as->t_op_list[i].ref_enc[j]);
 		}
-		printf(", %d, %d}\n", t_var_asm->t_op_list[i].ref_mdf_c, t_var_asm->t_op_list[i].ref_lbl_sz);
+		printf(", %d, %d}\n", as->t_op_list[i].ref_mdf_c, as->t_op_list[i].ref_lbl_sz);
 	}
 	*/
 	i = -1;
-	while (t_var_asm->lines[++i])
+	while (as->lines[++i])
 		;
-	t_var_asm->op_lst = (t_instr *)malloc(i * sizeof(t_instr));
-	k = -1;
-	while (++k < i)
+	as->op = (t_instr *)malloc(i * sizeof(t_instr));
+	j = -1;
+	while (++j < i)
 	{
-		t_var_asm->op_lst[k].num = 0;
-		t_var_asm->op_lst[k].opc = 0;
-		t_var_asm->op_lst[k].ag_i[0] = 0;
-		t_var_asm->op_lst[k].ag_i[1] = 0;
-		t_var_asm->op_lst[k].ag_i[2] = 0;
-		t_var_asm->op_lst[k].ag_lbl[0] = NULL;
-		t_var_asm->op_lst[k].ag_lbl[1] = NULL;
-		t_var_asm->op_lst[k].ag_lbl[2] = NULL;
-		t_var_asm->op_lst[k].label = NULL;
+		as->op[j].num = 0;
+		as->op[j].opc = 0;
+		as->op[j].i2_on[0] = 0;
+		as->op[j].i2_on[1] = 0;
+		as->op[j].i2_on[2] = 0;
+		as->op[j].ag_i2[0] = 0;
+		as->op[j].ag_i2[1] = 0;
+		as->op[j].ag_i2[2] = 0;
+		as->op[j].i4_on[0] = 0;
+		as->op[j].i4_on[1] = 0;
+		as->op[j].i4_on[2] = 0;
+		as->op[j].ag_i4[0] = 0;
+		as->op[j].ag_i4[1] = 0;
+		as->op[j].ag_i4[2] = 0;
+		as->op[j].ag_lbl[0] = NULL;
+		as->op[j].ag_lbl[1] = NULL;
+		as->op[j].ag_lbl[2] = NULL;
+		as->op[j].label = NULL;
 	}
 	i = -1;
-	k = -1;
-	while (t_var_asm->lines[++i])
-		ft_if_label(t_var_asm, &i);
+	while (as->lines[++i])
+		ft_if_label(as, &i);
 	/*printf("\n\n____\n");
 	i = -1;
-	while (t_var_asm->lines[++i])
+	while (as->lines[++i])
 	{
-		printf("<%s>\n", t_var_asm->op_lst[i].label);
+		printf("<%s>\n", as->op_lst[i].label);
 	}
 	*/
-	if (!(ft_del_labels(t_var_asm)))
+	if (!(ft_del_labels(as)))
 		return (1);
-	//if (!(ft_del_space(t_var_asm)))
-	//	return (1);
-	i = -1;
+	if (!(ft_del_space(as)))
+		return (1);
 	printf("\n\n--\n");
-	while (t_var_asm->lines[++i])
-		printf("<%s>\n", t_var_asm->lines[i]);
-	
-	if (!(ft_instr_check(t_var_asm)))
-		return (1);
-	/*printf("\n\n__\n");
 	i = -1;
-	while (t_var_asm->lines[++i])
-	{
-		printf("<%d>\n", t_var_asm->op_lst[i].num);
-	}*/
-	//if (!(ft_check_var(t_var_asm)))
-	//	return (1);
-	ft_check_var(t_var_asm);
+	while (as->lines[++i])
+		printf("<%s>\n", as->lines[i]);
+	
+	if (!(ft_instr_check(as)))
+		return (1);
+	if (!(ft_check_var(as)))
+		return (1);
 	printf("\n\n----\n");
 	i = -1;
-	while (t_var_asm->lines[++i])
+	while (as->lines[++i])
 	{
-		printf("<%s>", t_var_asm->op_lst[i].label);
-		printf("<%d>", t_var_asm->op_lst[i].num);
-		if (t_var_asm->op_lst[i].num > 0)
+		printf("<%s> ", as->op[i].label);
+		if (as->op[i].num > 0)
+			printf("<%d> ", as->op[i].num);
+		if (as->op[i].num > 0)
 		{
-			printf("<%s>", t_var_asm->t_op_list[t_var_asm->op_lst[i].num - 1].ref_name);
-			printf("||");
-			printf("<%d>", t_var_asm->op_lst[i].ag_i[0]);
-			printf("<%d>", t_var_asm->op_lst[i].ag_i[1]);
-			printf("<%d>", t_var_asm->op_lst[i].ag_i[2]);
-			printf("||");
-			printf("<%s>", t_var_asm->op_lst[i].ag_lbl[0]);
-			printf("<%s>", t_var_asm->op_lst[i].ag_lbl[1]);
-			printf("<%s>", t_var_asm->op_lst[i].ag_lbl[2]);
+			printf("<%s> ", as->ref[as->op[i].num - 1].name);
+			printf("|| ");
+			j = -1;
+			while (++j < 3)
+			{
+				if (as->op[i].i2_on[j] == 1)
+					printf("<%hu> ", as->op[i].ag_i2[j]);
+				if (as->op[i].i4_on[j] == 1)
+						printf("<%u> ", as->op[i].ag_i4[j]);
+			}
+			if (as->op[i].ag_lbl[0] != NULL)
+				printf("|| ");
+			j = -1;
+			while (++j < 3 && as->op[i].ag_lbl[j])
+				printf("<%s> ", as->op[i].ag_lbl[j]);
 		}
 		printf("\n");
 	}
-	ft_free_end(&t_var_asm);
+	ft_free_end(&as);
+	j = 1;
+	i = 2147483647;
+	i *= 10;
+	printf("I : %d\n", i);
 	return (0);
 }
