@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/03 21:53:15 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/03 23:41:28 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	adress2 = ind(core, proc, proc->PC + 5);
 	total = adress + adress2;
 	//a finir + 2 - 2 en verifiant sur d'autres sti
-	setram(core, proc->PC + total, core->arena[proc->PC + 2 + proc->startpos] - 2, proc->color);
+	setram(core, proc->PC + proc->startpos + total, core->arena[proc->PC + 2 + proc->startpos] - 2, proc->color);
 	if (core->options->v4)
 		ft_printf("P%5d | sti r%d %d %d\n       | -> store to %d + %d = %d (with pc and mod %d)\n",
 				proc->ID,core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE],
