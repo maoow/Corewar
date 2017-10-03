@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:05 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/28 20:32:54 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/03 21:32:58 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ bool	cw_ldi(t_cor *core, t_process *proc)
 	proc->registres[core->arena[getparamplace(core, proc, 3, 2) % MEM_SIZE]] =
 	getram(core, idx(proc, adress));
 	if (core->options->v4)
-		ft_printf("P%5d | ldi %d %d r%d\n",  proc->ID, adress - 201363497, adress2, core->arena[getparamplace(core, proc, 3, 2) % MEM_SIZE]);
+		ft_printf("P%5d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n",
+			  	proc->ID, adress - 201363497, adress2, core->arena[getparamplace(core, proc, 3, 2) % MEM_SIZE],
+				adress - 201363497, adress2, (adress + adress2) - 201363497,(adress + adress2 + proc->PC + proc->startpos) % MEM_SIZE);
 //		exit(0);
 
 	return (proc->registres[core->arena[(getparamplace(core, proc, 3, 2)) % MEM_SIZE]] != 0);
