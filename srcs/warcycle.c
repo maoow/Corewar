@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 17:57:57 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/03 22:02:08 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ static bool		ft_checklives(t_cor *core)
 		return (false);
 	if (core->checks >= MAX_CHECKS || lives > NBR_LIVE)
 	{
+		if (core->cycle_to_die <= CYCLE_DELTA)
+			return (false);
 		core->cycle_to_die -= CYCLE_DELTA;
+		ft_printf("Cycle to die is now %d\n", core->cycle_to_die);
 		core->checks = 0;
 	}
 	core->checks++;
