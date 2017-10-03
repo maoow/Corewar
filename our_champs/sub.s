@@ -1,5 +1,5 @@
-.name "add"
-.comment "add"
+.name "sub"
+.comment "sub"
 
 res:
 sub		r2, r3, r2		#add r2 + r3 et stock le res dans r2
