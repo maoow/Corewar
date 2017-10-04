@@ -1,5 +1,5 @@
-.name "bigzork"
-.comment "I know i cant win"
+.name "st"
+.comment "st"
 
 loop:
 st r1, r2
