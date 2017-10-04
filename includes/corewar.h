@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 20:20:03 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/03 15:23:36 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define OPC_NUMBER 16
 # define REG_SIZE 4
 
-# define CYCLE_TO_DIE 1500
+# define CYCLE_TO_DIE 1536
 # define NBR_LIVE 21
 # define CYCLE_DELTA 50
 # define MAX_CHECKS 10
