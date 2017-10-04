@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/03 23:41:28 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/04 03:27:30 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	size_t		adress;
 	size_t		adress2;
 	size_t		total;
+	size_t		decale;
 
 	// + 4 et + 2 dans le cas sans reg
 	// a faire : un truc generique
@@ -24,8 +25,17 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	//exit(0);
 	//adress = core->arena[proc->PC + 4 + proc->startpos];
 	//adress2 = core->arena[proc->PC + 2 + proc->startpos];
-	adress = ind(core, proc, proc->PC + 3);
-	adress2 = ind(core, proc, proc->PC + 5);
+	decale = 3;
+	if ((core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE] / 16) % 4 > 1)
+	{
+		adress = ind(core, proc, proc->PC + 3);
+		decale += 2;
+	}
+	else
+	{
+		adress = proc->registres[core->arena[proc->PC + 3 + proc->startpos]];
+	}
+	adress2 = ind(core, proc, proc->PC + decale);
 	total = adress + adress2;
 	//a finir + 2 - 2 en verifiant sur d'autres sti
 	setram(core, proc->PC + proc->startpos + total, core->arena[proc->PC + 2 + proc->startpos] - 2, proc->color);
