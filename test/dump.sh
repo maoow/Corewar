@@ -1,11 +1,11 @@
 #!/bin/bash
 rm tests/diffs*
-n=2450
+n=1
 diff=0
-while [ $diff -lt 2 ]
+while [ $n -lt 25000 ]
 do
 ./corewar ressources/zaz_champ/fluttershy.cor -dump $n > me
 ./ressources/corewar_goinfre ressources/zaz_champ/fluttershy.cor -d $n > you
 diff me you > tests/diffs$n
-n=$(($n + 10))
+n=$(($n + 100))
 done
