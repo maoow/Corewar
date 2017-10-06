@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/03 17:00:37 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/04 10:22:05 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int				main(int ac, char **av)
 		return (1);
 	if (!(ft_del_space(as)))
 		return (1);
+
 	printf("\n\n--\n");
 	i = -1;
 	while (as->lines[++i])
@@ -163,6 +164,7 @@ int				main(int ac, char **av)
 		return (1);
 	if (!(ft_check_var(as)))
 		return (1);
+
 	printf("\n\n----\n");
 	i = -1;
 	while (as->lines[++i])
@@ -190,10 +192,15 @@ int				main(int ac, char **av)
 		}
 		printf("\n");
 	}
+
+	if (!(ft_check_lbl(as)))
+	{
+		printf("Err label\n");
+		return (1);
+	}
+	else
+		printf("LBL OK\n");
+
 	ft_free_end(&as);
-	j = 1;
-	i = 2147483647;
-	i *= 10;
-	printf("I : %d\n", i);
 	return (0);
 }

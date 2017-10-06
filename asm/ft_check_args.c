@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:03:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/03 14:47:44 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/04 10:29:51 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ int			ft_check_reg(t_asm *as, char *txt, int *i, unsigned int *save)
 		return (0);
 	return (1);
 }
-
-/*
-** modif taille ind reg dir ?
-** gere labels
-*/
 
 int			ft_type_var(t_asm *as)
 {

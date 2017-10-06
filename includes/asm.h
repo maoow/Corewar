@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/03 14:54:14 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/04 10:26:28 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,15 @@ int				ft_instr_check(t_asm *as);
 int				ft_if_label(t_asm *as, int *i);
 int				ft_del_labels(t_asm *as);
 
-//2 fonctions - ft_aux.c
+//4 fonctions - ft_aux.c
 void			ft_while_space(char *txt, int *i);
 int				ft_if_op_ok(t_asm *as, char *op);
+int				ft_check_lbl(t_asm *as);
 
 //4 fonctions - ft_check_args.c
 int				ft_check_var(t_asm *as);
 
 //2 fonctions - ft_dir_ind.c
 int				ft_dir_ind(t_asm *as, char *txt, int *i, t_instr *sv);
+
 #endif
