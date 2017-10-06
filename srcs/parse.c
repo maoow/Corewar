@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/02 15:53:32 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/06 16:32:18 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static int		**get_champ(t_cor *cor, unsigned char *champion, int fd, int optionn
 	magic[i] = '\0';
 	check_magic_packet(magic);
 	add_champ(cor, name, comment, optionnal_id);
+	cor->champs->weight = size_champ;
 	champion[size_champ] = '\0';
 	return (get_hexa(champion, size_champ));
 }
