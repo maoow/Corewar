@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/02 13:04:41 by starrit          ###   ########.fr        #
+#    Updated: 2017/10/06 13:41:36 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,35 @@ CPPFLAGS = -iquote includes -iquote $(LIB_PATH)$(INC)
 OPTIONS = -lncurses
 
 SRC_PATH = srcs/
-SRC_NAME = add_champ_process.c init.c main.c paramsmanage.c parse.c processmanage.c jump.c ramfunctions.c usage.c visu.c visu_2.c warcycle.c operations/add.c operations/aff.c operations/and.c operations/fork.c operations/ld.c operations/ldi.c operations/lfork.c operations/live.c operations/lld.c operations/lldi.c operations/or.c operations/st.c operations/sti.c operations/sub.c operations/xor.c operations/zjmp.c options.c 
+SRC_NAME = add_champ_process.c						\
+		   init.c									\
+		   main.c									\
+		   paramsmanage.c							\
+		   parse.c									\
+		   processmanage.c							\
+		   jump.c									\
+		   ramfunctions.c							\
+		   usage.c									\
+		   visu.c									\
+		   visu_2.c									\
+		   warcycle.c								\
+		   operations/add.c							\
+		   operations/aff.c							\
+		   operations/and.c							\
+		   operations/fork.c						\
+		   operations/ld.c							\
+		   operations/ldi.c							\
+		   operations/lfork.c						\
+		   operations/live.c						\
+		   operations/lld.c							\
+		   operations/lldi.c						\
+		   operations/or.c							\
+		   operations/st.c							\
+		   operations/sti.c							\
+		   operations/sub.c							\
+		   operations/xor.c							\
+		   operations/zjmp.c						\
+		   options.c 
 
 OBJ_PATH = obj/
 OBJ_NAME = $(SRC_NAME:.c=.o)
