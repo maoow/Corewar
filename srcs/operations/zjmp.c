@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/03 21:02:45 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/06 13:46:35 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	cw_zjmp(t_cor *core, t_process *proc)
 	}
 	else
 	{
-		//proc->PC += 2;
+		proc->PC += 1;
 		if (core->options->v4)
 			ft_printf("FAILED\n");
 	}
