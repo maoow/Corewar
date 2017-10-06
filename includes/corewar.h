@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/03 15:23:36 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/06 16:34:33 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct			s_champ
 	bool				alive;
 	size_t				last_live;
 	size_t				lives_in_period;
+	size_t				weight;
 	int					color;
 }						t_champ;
 
