@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/06 13:54:57 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/06 16:20:39 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,5 @@ void		add_champ(t_cor *cor, char *name, char *comment, int id)
 	cor->champs->lives_in_period = 0;
 	if (!cor->last_champ_alive)
 		cor->last_champ_alive = cor->champs->name;
-	ft_printf("%s\n", name);
 	add_champ_color(cor);
 }

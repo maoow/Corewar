@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 18:13:32 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/06 16:40:44 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,22 @@ static void		ft_clean(t_cor *core)
 	// TO DO
 }
 
+static void		intro(t_champ *champs)
+{
+	t_champ	*tmp;
+	size_t	i;
+
+	i = 1;
+	tmp = champs;
+	ft_printf("Introducing contestants...\n");
+	while(tmp)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i, tmp->weight, tmp->name, tmp->comment);
+		tmp = tmp->next;
+		i++;
+	}
+}
+
 int				main(int ac, char **av)
 {
 	t_cor	core;
@@ -130,6 +146,7 @@ int				main(int ac, char **av)
 	ft_init(&core);
 	nb_options = get_options(&core, ac, av, 1);
 	launch_parse(&core, ac, av, nb_options);
+	intro(core.champs);
 	ft_warcycle(&core);
 	ft_clean(&core);
 	endwin();
