@@ -1,5 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -67,6 +66,7 @@ typedef struct			s_options
 	bool				v4;
 	bool				v2;
 	bool				visu;
+	bool				fast;
 }						t_options;
 
 typedef struct			s_champ
@@ -152,6 +152,7 @@ void		ft_dump(t_cor *cor);
 **			GAME FUNCTIONS
 */
 void		ft_warcycle(t_cor *core);
+void		ft_increase_cycle(t_cor *core);
 void		ft_browseprocess(t_cor *core);
 size_t		idx(t_process *proc, size_t jump);
 void		ft_determinejmpdist(t_cor *core, t_process *proc);
