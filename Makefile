@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/06 13:41:36 by starrit          ###   ########.fr        #
+#    Updated: 2017/10/09 10:21:29 by cbinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ OPTIONS = -lncurses
 SRC_PATH = srcs/
 SRC_NAME = add_champ_process.c						\
 		   init.c									\
+		   cyclemanage.c									\
 		   main.c									\
 		   paramsmanage.c							\
 		   parse.c									\
