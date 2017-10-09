@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/06 16:22:58 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/09 10:20:29 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 			cor->options->v16 = true;
 		else if (ft_strcmp(av[i], "-v4") == 0)
 			cor->options->v4 = true;
+		else if (ft_strcmp(av[i], "-fast") == 0)
+			cor->options->fast = true;
 		else if (ft_strcmp(av[i], "-visu") == 0)
 			cor->options->visu = true;
 		else if (!is_champ(av[i], &nb_champ, false, 0))
