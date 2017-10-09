@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/03 22:31:02 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/09 10:41:34 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,6 @@ static void		initproccolor(t_cor *core)
 		tmp->color = i;
 		tmp = tmp->next;
 	}
-
-}
-
-static void		ft_decrease_arena_update(t_cor *cor)
-{
-	size_t		i;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		if (cor->arena_update[i] > 0)
-			cor->arena_update[i]--;
-		i++;
-	}
 }
 
 void			ft_warcycle(t_cor *core)
@@ -103,11 +89,7 @@ void			ft_warcycle(t_cor *core)
 			if (core->options->visu)
 				visu(core);
 			ft_browseprocess(core);
-			core->total_cycle++;
-			core->tmp_cycle_to_die++;
-			ft_decrease_arena_update(core);
-			if (core->options->v2)
-			ft_printf("It is now cycle %d\n",core->total_cycle);
+			ft_increase_cycle(core);
 		}
 		core->tmp_cycle_to_die = 0;
 		b_alive = ft_checklives(core);
