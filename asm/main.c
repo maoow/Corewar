@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/04 10:22:05 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/09 21:12:42 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ void			ft_free_end(t_asm **as)
 			{
 				if ((*as)->op[i].label)
 					free((*as)->op[i].label);
-				if ((*as)->op[i].ag_lbl[0])
-					free((*as)->op[i].ag_lbl[0]);
-				if ((*as)->op[i].ag_lbl[1])
-					free((*as)->op[i].ag_lbl[1]);
-				if ((*as)->op[i].ag_lbl[2])
-					free((*as)->op[i].ag_lbl[2]);
+				if ((*as)->op[i].ag_lbl2[0])
+					free((*as)->op[i].ag_lbl2[0]);
+				if ((*as)->op[i].ag_lbl2[1])
+					free((*as)->op[i].ag_lbl2[1]);
+				if ((*as)->op[i].ag_lbl2[2])
+					free((*as)->op[i].ag_lbl2[2]);
+				if ((*as)->op[i].ag_lbl4[0])
+					free((*as)->op[i].ag_lbl4[0]);
+				if ((*as)->op[i].ag_lbl4[1])
+					free((*as)->op[i].ag_lbl4[1]);
+				if ((*as)->op[i].ag_lbl4[2])
+					free((*as)->op[i].ag_lbl4[2]);
 			}
 			free((*as)->op);
 		}
@@ -135,9 +141,18 @@ int				main(int ac, char **av)
 		as->op[j].ag_i4[0] = 0;
 		as->op[j].ag_i4[1] = 0;
 		as->op[j].ag_i4[2] = 0;
-		as->op[j].ag_lbl[0] = NULL;
-		as->op[j].ag_lbl[1] = NULL;
-		as->op[j].ag_lbl[2] = NULL;
+		as->op[j].ag_lbl2[0] = 0;
+		as->op[j].ag_lbl2[1] = 0;
+		as->op[j].ag_lbl2[2] = 0;
+		as->op[j].ag_lbl2[0] = NULL;
+		as->op[j].ag_lbl2[1] = NULL;
+		as->op[j].ag_lbl2[2] = NULL;
+		as->op[j].ag_lbl4[0] = 0;
+		as->op[j].ag_lbl4[1] = 0;
+		as->op[j].ag_lbl4[2] = 0;
+		as->op[j].ag_lbl4[0] = NULL;
+		as->op[j].ag_lbl4[1] = NULL;
+		as->op[j].ag_lbl4[2] = NULL;
 		as->op[j].label = NULL;
 	}
 	i = -1;
@@ -171,9 +186,8 @@ int				main(int ac, char **av)
 	{
 		printf("<%s> ", as->op[i].label);
 		if (as->op[i].num > 0)
-			printf("<%d> ", as->op[i].num);
-		if (as->op[i].num > 0)
 		{
+			printf("<%d> ", as->op[i].num);
 			printf("<%s> ", as->ref[as->op[i].num - 1].name);
 			printf("|| ");
 			j = -1;
@@ -184,23 +198,22 @@ int				main(int ac, char **av)
 				if (as->op[i].i4_on[j] == 1)
 						printf("<%u> ", as->op[i].ag_i4[j]);
 			}
-			if (as->op[i].ag_lbl[0] != NULL)
-				printf("|| ");
-			j = -1;
-			while (++j < 3 && as->op[i].ag_lbl[j])
-				printf("<%s> ", as->op[i].ag_lbl[j]);
+			printf("|| ");
+			j = -3;
+			while (++j < 3)
+			{
+				if (as->op[i].lbl2_on[j] == 1)
+					printf("<%s> ", as->op[i].ag_lbl2[j]);
+				if (as->op[i].lbl4_on[j] == 1)
+					printf("<%s> ", as->op[i].ag_lbl4[j]);
+			}
 		}
 		printf("\n");
 	}
-
 	if (!(ft_check_lbl(as)))
-	{
-		printf("Err label\n");
 		return (1);
-	}
-	else
-		printf("LBL OK\n");
-
+	ft_mem_len(as);
+	printf("\nLEN MEM : %d\n", as->len_mem);
 	ft_free_end(&as);
 	return (0);
 }

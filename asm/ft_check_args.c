@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:03:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/04 10:29:51 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/09 18:22:03 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int			ft_check_reg(t_asm *as, char *txt, int *i, unsigned int *save)
 
 	if ((as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1] & T_REG) != T_REG)
 		return (0);
-	as->op[as->n_ln].ag_i4[as->ac - 1] = 1;
+	as->op[as->n_ln].i4_on[as->ac - 1] = 1;
+	as->op[as->n_ln].reg_on[as->ac - 1] = 1;
 	nb_dgts = 1;
 	(*i)++;
 	if (txt[*i] < '0' || txt[*i] > '9')
@@ -46,19 +47,18 @@ int			ft_type_var(t_asm *as)
 		|| ((as->lines[as->n_ln][as->n_chr] >= '0'
 			&& as->lines[as->n_ln][as->n_chr] <= '9')
 			|| as->lines[as->n_ln][as->n_chr] == '-'
-			|| ft_strchr(LABEL_CHARS, as->lines[as->n_ln][as->n_chr])))
+			|| ft_strchr(LABEL_CHARS, as->lines[as->n_ln][as->n_chr]))
+		|| as->lines[as->n_ln][as->n_chr] == ':')
 	{
 		(as->ac)++;
 		if (as->lines[as->n_ln][as->n_chr] == '%')
 		{
-			(as->n_chr)++;
 			if ((as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1]
-				& T_DIR) != T_DIR)
+				& T_DIR) != T_DIR
+				&& (as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1] & T_IND)
+				!= T_IND)
 				return (0);
 		}
-		else if ((as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1]
-				& T_IND) != T_IND)
-			return (0);
 		if (!(ft_dir_ind(as, as->lines[as->n_ln], &as->n_chr,
 			&as->op[as->n_ln])))
 			return (0);
