@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/06 11:08:33 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/10 16:24:11 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ind(t_cor *core, t_process *proc, size_t PC)
 
 size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 {
-	unsigned char	op[3];
+	size_t			op[3];
 	size_t			i;
 	size_t			place;
 	int				value;
@@ -62,11 +62,11 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 
 size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 {
-	unsigned char	op[3];
+	size_t		op[3];
 	size_t			i;
 	size_t			place;
 
-	i = 1;
+	i = 0;
 	place = 2;
 	op[0] = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
 	op[2] = (op[0] / 4) % 4;
@@ -74,6 +74,7 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 	op[0] /= 64;
 	while (i < param)
 	{
+		//ft_printf("%d %d\n", i, op[i]);
 		if (op[i] == 1)
 				place++;
 		else if (op[i] == 2)
@@ -100,5 +101,5 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 		//i++;
 		//op /= 4;
 	//}
-	return (place + proc->PC + proc->startpos);
+	return ((place + proc->PC + proc->startpos) % MEM_SIZE);
 }
