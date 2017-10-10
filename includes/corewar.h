@@ -100,6 +100,8 @@ typedef struct			s_process
 	size_t				live;
 	struct s_process	*next;
 	int					color;
+	size_t				buffc;
+	char				buff[128];
 }						t_process;
 
 /*
