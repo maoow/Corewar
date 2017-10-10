@@ -1,5 +1,5 @@
 #!/bin/bash
-n=0
+n=100
 step=100
 diff=0
 FILESIZE=0
