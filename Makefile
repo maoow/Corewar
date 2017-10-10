@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/09 10:21:29 by cbinet           ###   ########.fr        #
+#    Updated: 2017/10/10 13:03:45 by cbinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,9 @@ SRC_NAME = add_champ_process.c						\
 		   cyclemanage.c									\
 		   main.c									\
 		   paramsmanage.c							\
-		   parse.c									\
 		   processmanage.c							\
+		   regmanage.c							\
+		   parse.c									\
 		   jump.c									\
 		   ramfunctions.c							\
 		   usage.c									\
