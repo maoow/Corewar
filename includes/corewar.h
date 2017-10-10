@@ -65,6 +65,7 @@ typedef struct			s_options
 	bool				v16;
 	bool				v4;
 	bool				v2;
+	bool				reg;
 	bool				visu;
 	bool				fast;
 }						t_options;

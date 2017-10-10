@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/09 10:20:40 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/10 13:30:46 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void		init_options(t_options *opt)
 	opt->v2 = false;
 	opt->visu = false;
 	opt->fast = false;
+	opt->reg = false;
 }
 
 void			ft_init(t_cor *core)
