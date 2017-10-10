@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 17:33:59 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/10 13:06:07 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 	bool	carry;
 
 	ft_determinejmpdist(core, proc);
+//	dispreg(proc);
 	carry = proc->next_op(core, proc);
+	dispreg(proc);
 	if (g_opcarry[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1])
 		proc->carry = carry;
 //COMMENT SOPHIE ICI	core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE] = 0; // need extracolor for pc
