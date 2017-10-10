@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/10 13:23:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/10 15:24:19 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	{
 		adress = proc->registres[core->arena[proc->PC + 3 + proc->startpos] - 1];
 	}
-	adress2 = ind(core, proc, proc->PC + decale);
+	if ((core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE] / 4) % 4 > 1)
+		adress2 = ind(core, proc, proc->PC + decale);
+	else
+		adress2 = proc->registres[core->arena[(proc->PC + decale + proc->startpos) % MEM_SIZE ] - 1];
 	total = adress + adress2;
 	//a finir + 2 - 2 en verifiant sur d'autres sti
 	setram(core, proc->PC + proc->startpos + total, proc->registres[core->arena[proc->PC + 2 + proc->startpos] - 1], proc->color);
