@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/10 13:30:46 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/10 14:45:58 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			ft_init(t_cor *core)
 	core->cycle_to_die = CYCLE_TO_DIE;
 	core->tmp_cycle_to_die = 0;
 	core->checks = 0;
-	core->total_cycle = 0;
+	core->total_cycle = -1; // a faire autrement (je crois que ce n'est dut qu'au dump)
 	core->verbose = false;
 	core->champs = NULL;
 	core->process = NULL;
