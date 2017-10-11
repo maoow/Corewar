@@ -6,21 +6,37 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/09 12:12:06 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/11 13:38:24 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h" 
+#include "corewar.h"
 
-static bool		ft_checklives(t_cor *core)
+static bool		check_delta(t_cor *core, size_t lives)
 {
-	t_process	*proc;
-	t_process	*tproc;
-	size_t		lives;
+	if (core->checks >= MAX_CHECKS || lives > NBR_LIVE)
+	{
+		if (core->cycle_to_die <= CYCLE_DELTA)
+			return (false);
+		core->cycle_to_die -= CYCLE_DELTA;
+		if (core->options->v2)
+			ft_printf("Cycle to die is now %d\n", core->cycle_to_die);
+		core->checks = 0;
+	}
+	core->checks++;
+	return (core->process);
+}
 
-	lives = 0;
+/*
+**	proc et tproc initialises a NULL;
+**	lives initialise a 0;
+*/
+
+static bool		ft_checklives(t_cor *core, t_process *proc, t_process *tproc,
+		size_t lives)
+{
 	proc = core->process;
-	while (proc) // not any kill :/
+	while (proc)
 	{
 		if (proc->live == 0)
 		{
@@ -37,17 +53,8 @@ static bool		ft_checklives(t_cor *core)
 	}
 	if (!lives)
 		return (false);
-	if (core->checks >= MAX_CHECKS || lives > NBR_LIVE)
-	{
-		if (core->cycle_to_die <= CYCLE_DELTA)
-			return (false);
-		core->cycle_to_die -= CYCLE_DELTA;
-			if (core->options->v2)
-		ft_printf("Cycle to die is now %d\n", core->cycle_to_die);
-		core->checks = 0;
-	}
 	core->checks++;
-	return (core->process);
+	return (check_delta(core, lives));
 }
 
 static void		initproccolor(t_cor *core)
@@ -81,10 +88,11 @@ void			ft_warcycle(t_cor *core)
 	{
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
-			if (core->options->dump && core->total_cycle == core->options->nb_dump)
+			if (core->options->dump &&
+					core->total_cycle == core->options->nb_dump)
 			{
 				if (!core->options->v4)
-				ft_dump(core);
+					ft_dump(core);
 				exit(0);
 			}
 			if (core->options->visu)
@@ -93,7 +101,7 @@ void			ft_warcycle(t_cor *core)
 			ft_increase_cycle(core);
 		}
 		core->tmp_cycle_to_die = 0;
-		b_alive = ft_checklives(core);
+		b_alive = ft_checklives(core, NULL, NULL, 0);
 	}
-	 ft_printf("%s Won !\n", core->last_champ_alive );
+	ft_printf("%s Won !\n", core->last_champ_alive);
 }
