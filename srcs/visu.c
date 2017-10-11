@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/09/28 14:18:59 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/11 16:08:56 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,14 @@
 **				9	magenta		black		1000, 400, 1000
 */
 
-/*	init_pair 	4 a 9 : couleur champion
+/*
+**	init_pair 	4 a 9 : couleur champion
 **				14 a 19 : couleur processus en cours
 **				24 a 29 : couleur ecriture processus
 */
 
-WINDOW		*init(void)
+static void		init_my_pairs(void)
 {
-	initscr();
-	raw();
-	keypad(stdscr, TRUE);
-	curs_set(0);
-	if (has_colors() == FALSE)
-	{
-		endwin();
-		printf("Terminal does not support color\n");
-		return (NULL);
-	}
-	start_color();
-	init_color(COLOR_WHITE, 460, 460, 460);
-	init_color(35, 1000, 1000, 1000);
-	init_color(44, 400, 1000, 400);
-	init_color(45, 0, 400, 1000);
-	init_color(46, 1000, 0, 400);
-	init_color(47, 0, 1000, 1000);
-	init_color(48, 1000, 1000, 400);
-	init_color(49, 1000, 400, 1000);
 	init_pair(10, 35, COLOR_BLACK);
 	init_pair(1, COLOR_WHITE, COLOR_WHITE);
 	init_pair(2, COLOR_BLACK, COLOR_BLACK);
@@ -114,67 +96,53 @@ WINDOW		*init(void)
 	init_pair(27, 47, COLOR_BLACK);
 	init_pair(28, 48, COLOR_BLACK);
 	init_pair(29, 49, COLOR_BLACK);
-	return (stdscr);
 }
 
-/*
-**	fonction d'ecriture sous fenetre de gauche : arena
-**
-**	while (tmp) : check si c'est un process et si oui le met en surlignance
-*/
-
-void	print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
+WINDOW			*init(void)
 {
-	size_t	max;
-	size_t	i;
-	t_process *tmp;
-
-	i = 0;
-	max = sqrt((double)MEM_SIZE);
-	while (lign <= max + 1)
+	initscr();
+	raw();
+	keypad(stdscr, TRUE);
+	curs_set(0);
+	if (has_colors() == FALSE)
 	{
-		while (col <= max * 3 + 2)
-		{
-//			if (cor->arena_update[i] == 1000 || cor->arena_update[i] == UPDATE || cor->arena_update[i] == 1)
-//			{
-				mvwprintw(left, lign, col, "%02x", cor->arena[i]);
-				mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
-				tmp = cor->process;
-				while (tmp)
-				{
-					if (i == (tmp->PC + tmp->startpos) % MEM_SIZE)
-						mvchgat(lign, col, 2, A_NORMAL, tmp->color - 10, NULL);
-					tmp = tmp->next;
-				}
-//			}
-			i++;
-			col = col + 2;
-			mvwprintw(left, lign, col, " ");
-			col++;
-		}
-		mvwprintw(left, lign, col, "\n");
-		col = 4;
-		lign++;
+		endwin();
+		printf("Terminal does not support color\n");
+		return (NULL);
 	}
+	start_color();
+	init_color(COLOR_WHITE, 460, 460, 460);
+	init_color(35, 1000, 1000, 1000);
+	init_color(44, 400, 1000, 400);
+	init_color(45, 0, 400, 1000);
+	init_color(46, 1000, 0, 400);
+	init_color(47, 0, 1000, 1000);
+	init_color(48, 1000, 1000, 400);
+	init_color(49, 1000, 400, 1000);
+	init_my_pairs();
+	return (stdscr);
 }
 
 /*
 **	creer les bordures des fenetres et appelle les fonctions d'ecriture
 */
 
-void	manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
+static void		manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 {
-	wborder(left, 0 | C(1), 0 | C(2), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
-	wborder(right, 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1));
+	wborder(left, 0 | C(1), 0 | C(2), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1),
+			0 | C(1), 0 | C(1));
+	wborder(right, 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1),
+			0 | C(1), 0 | C(1));
 	print_right(right, cor);
 	print_left(left, cor, 4, 2);
 }
 
 /*
-** lance le mode et les options ncurse (init() ), creer les fenetres gauche/droite
+**	lance le mode et les options ncurse (init() ),
+**	creer les fenetres gauche/droite
 */
 
-void		visu(t_cor *cor)
+void			visu(t_cor *cor)
 {
 	WINDOW	*left;
 	WINDOW	*right;
