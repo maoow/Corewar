@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/11 15:18:46 by starrit          ###   ########.fr        #
+#    Updated: 2017/10/11 16:05:42 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC_NAME = add_champ.c								\
 		   ramfunctions.c							\
 		   usage.c									\
 		   visu.c									\
-		   visu_2.c									\
+		   visu_right.c								\
+		   visu_left.c								\
 		   warcycle.c								\
 		   operations/add.c							\
 		   operations/aff.c							\
