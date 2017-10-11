@@ -1,6 +1,6 @@
 #!/bin/bash
 rm tests/diffs*
-n=2500
+n=1
 diff=0
 FILESIZE=0
 while [ $FILESIZE -lt 1 ]

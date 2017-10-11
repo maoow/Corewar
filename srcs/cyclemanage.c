@@ -6,13 +6,13 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 10:12:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/10 12:09:14 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/11 13:07:24 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		ft_decrease_arena_update(t_cor *cor)
+static void			ft_decrease_arena_update(t_cor *cor)
 {
 	size_t		i;
 
@@ -32,7 +32,7 @@ static void			get_next_ic(t_cor *core)
 
 	min = core->cycle_to_die - core->tmp_cycle_to_die;
 	if (core->options->dump && core->options->nb_dump - core->total_cycle < min)
-min = core->options->nb_dump - core->total_cycle - 1;
+		min = core->options->nb_dump - core->total_cycle - 1;
 	tmp = core->process;
 	while (tmp)
 	{
@@ -41,7 +41,6 @@ min = core->options->nb_dump - core->total_cycle - 1;
 		tmp = tmp->next;
 	}
 	tmp = core->process;
-	//min++;
 	while (tmp)
 	{
 		tmp->cycles_before_execute -= min;
@@ -64,4 +63,3 @@ void				ft_increase_cycle(t_cor *core)
 	if (core->options->v2)
 		ft_printf("It is now cycle %d\n", core->total_cycle);
 }
-
