@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/10 13:03:45 by cbinet           ###   ########.fr        #
+#    Updated: 2017/10/11 15:18:46 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,14 @@ CPPFLAGS = -iquote includes -iquote $(LIB_PATH)$(INC)
 OPTIONS = -lncurses
 
 SRC_PATH = srcs/
-SRC_NAME = add_champ_process.c						\
+SRC_NAME = add_champ.c								\
+		   add_process.c							\
 		   init.c									\
-		   cyclemanage.c									\
+		   cyclemanage.c							\
 		   main.c									\
 		   paramsmanage.c							\
 		   processmanage.c							\
-		   regmanage.c							\
+		   regmanage.c								\
 		   parse.c									\
 		   jump.c									\
 		   ramfunctions.c							\
