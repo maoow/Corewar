@@ -6,12 +6,12 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/10 13:31:25 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/11 16:58:36 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-# include "opg.c"
+#include "opg.c"
 
 size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 {
@@ -19,7 +19,9 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 	size_t		i;
 	size_t		tmp;
 
-	if (!(params = (size_t *)malloc(g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1] * sizeof(size_t))))
+	if (!(params =
+				(size_t *)malloc(g_oplabel[core->arena[(proc->startpos +
+						proc->PC) % MEM_SIZE] - 1] * sizeof(size_t))))
 		exit(1);
 	tmp = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
 	i = 0;
@@ -31,7 +33,8 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 		else if (tmp % 4 == 3)
 			params[i] = 2;
 		else if (tmp % 4 == 2)
-			params[i] = g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+			params[i] = g_oplabel[core->arena[(proc->startpos + proc->PC) %
+				MEM_SIZE] - 1];
 		i++;
 	}
 	return (params);
@@ -44,25 +47,23 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 	ft_determinejmpdist(core, proc);
 	carry = proc->next_op(core, proc);
 	if (core->options->reg)
-	dispreg(proc);
+		dispreg(proc);
 	if (g_opcarry[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1])
 		proc->carry = carry;
-//COMMENT SOPHIE ICI	core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE] = 0; // need extracolor for pc
-	core->arena_update[(proc->PC + proc->startpos) % MEM_SIZE] = UPDATE;
 	proc->PC += proc->next_jump;
-//COMMENT SOPHIE ICI	core->arena_color[(proc->PC + proc->startpos) % MEM_SIZE] = proc->color + 3; // need extracolor for pc
-	core->arena_update[(proc->PC + proc->startpos) % MEM_SIZE] = UPDATE;
 	proc->next_op = NULL;
 }
 
 // compare core->arena[proc->PC] with opc_table
-void		ft_getop(t_cor *core, t_process *proc)
+void			ft_getop(t_cor *core, t_process *proc)
 {
-
-	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 >= 0 && core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 < OPC_NBR)
+	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 >= 0 &&
+			core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 < OPC_NBR)
 	{
-		proc->next_op = g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
-		proc->cycles_before_execute = g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+		proc->next_op =
+			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+		proc->cycles_before_execute =
+			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 	}
 	else
 		proc->PC++;
@@ -80,15 +81,15 @@ void			ft_browseprocess(t_cor *core)
 		if (!proc->next_op)
 			ft_getop(core, proc);
 		if (proc->cycles_before_execute > 0)
-		proc->cycles_before_execute--;
+			proc->cycles_before_execute--;
 		proc = proc->next;
 	}
 }
 
-
-void	ft_delprocess(t_cor *core, t_process **del)
+void			ft_delprocess(t_cor *core, t_process **del)
 {
 	t_process *tmp;
+
 	if (core->process == (*del))
 	{
 		core->process = (*del)->next;
@@ -103,4 +104,3 @@ void	ft_delprocess(t_cor *core, t_process **del)
 	free((*del));
 	*del = NULL;
 }
-
