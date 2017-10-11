@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/10 14:45:58 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/11 13:05:24 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ void			ft_init(t_cor *core)
 	core->cycle_to_die = CYCLE_TO_DIE;
 	core->tmp_cycle_to_die = 0;
 	core->checks = 0;
-	core->total_cycle = -1; // a faire autrement (je crois que ce n'est dut qu'au dump)
+	core->total_cycle = -1;
 	core->verbose = false;
 	core->champs = NULL;
 	core->process = NULL;
 	core->options = NULL;
 	core->id_list = NULL;
-	core->options = (t_options*)malloc(sizeof(*core->options));//
+	if (!(core->options = (t_options*)malloc(sizeof(*core->options))))
+		write_error(2);
 	init_options(core->options);
 	core->options->num_champ = NULL;
 	core->last_champ_alive = NULL;
