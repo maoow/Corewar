@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 13:10:18 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/25 16:10:07 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/11 14:01:30 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	getram(t_cor *core, size_t address)
 {
 	int	value;
 
+	address %= MEM_SIZE;
 	value = core->arena[(address) % MEM_SIZE];
 	value *= 256;
 	value += core->arena[(address + 1) % MEM_SIZE];
