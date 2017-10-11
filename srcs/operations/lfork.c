@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/09/29 17:48:45 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/11 16:49:12 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 bool	cw_lfork(t_cor *core, t_process *proc)
 {
-	t_process 	*tmp;
+	t_process	*tmp;
 	size_t		i;
 
 	i = 0;
-	tmp = (t_process *)malloc(sizeof(t_process)); //
+	if (!(tmp = (t_process *)malloc(sizeof(t_process))))
+		write_error(2);
 	while (i < REG_NUMBER)
 	{
 		tmp->registres[i] = proc->registres[i];
@@ -34,6 +35,6 @@ bool	cw_lfork(t_cor *core, t_process *proc)
 	tmp->next = core->process;
 	core->process = tmp;
 	if (core->options->v4)
-		ft_printf("P%5d | lfork %d\n", proc->ID,ind(core, proc, proc->PC + 1));
+		ft_printf("P%5d | lfork %d\n", proc->ID, ind(core, proc, proc->PC + 1));
 	return (true);
 }
