@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/11 16:08:56 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/11 16:33:17 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static void		manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 			0 | C(1), 0 | C(1));
 	wborder(right, 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1), 0 | C(1),
 			0 | C(1), 0 | C(1));
-	print_right(right, cor);
+	print_right(right, cor, 1, cor->champs);
 	print_left(left, cor, 4, 2);
 }
 
