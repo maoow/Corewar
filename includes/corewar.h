@@ -13,6 +13,7 @@
 # define COREWAR_H
 
 # include "ft_printf.h"
+# include <math.h>
 # include <fcntl.h>
 # include <ncurses.h>
 
@@ -150,6 +151,7 @@ void		add_champ(t_cor *cor, char *name, char *comment, int ID);
 void		add_process(t_cor *cor, size_t startpos, size_t nb_champ);
 void		visu(t_cor *cor);
 void		print_right(WINDOW *right, t_cor *cor);
+void		print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign);
 void		ft_dump(t_cor *cor);
 /*
 **			GAME FUNCTIONS
