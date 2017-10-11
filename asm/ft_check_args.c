@@ -6,21 +6,21 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:03:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/09 18:22:03 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/11 11:04:20 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int			ft_check_reg(t_asm *as, char *txt, int *i, unsigned int *save)
+int			ft_check_reg(t_asm *as, char *txt, int *i, char *save)
 {
 	int		tmp;
 	int		nb_dgts;
 
 	if ((as->ref[as->op[as->n_ln].num - 1].tvar[as->ac - 1] & T_REG) != T_REG)
 		return (0);
-	as->op[as->n_ln].i4_on[as->ac - 1] = 1;
-	as->op[as->n_ln].reg_on[as->ac - 1] = 1;
+	if (as->ref[as->op[as->n_ln].num - 1].mdf_c)
+		as->op[as->n_ln].opc |= (REG_CODE << (6 - (as->ac - 1) * 2));
 	nb_dgts = 1;
 	(*i)++;
 	if (txt[*i] < '0' || txt[*i] > '9')
@@ -83,7 +83,7 @@ int			ft_wich_var(t_asm *as, t_instr *sv)
 	{
 		(as->ac)++;
 		if (!(ft_check_reg(as, as->lines[as->n_ln], &as->n_chr,
-			&sv->ag_i4[as->ac - 1])))
+			&sv->reg[as->ac - 1])))
 			return (0);
 	}
 	else if (!(ft_type_var(as)))

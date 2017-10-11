@@ -6,31 +6,72 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 13:31:22 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/09 21:42:33 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/11 18:56:19 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void			ft_len_args(t_asm *as, t_instr *instr)
+void			ft_clc_lbl(t_asm *as, t_instr *instr, int i, int j)
 {
+	int			k;
+
+	printf("i : %d\n", i);
+	k = -1;
+	while (as->lines[++k])
+	{
+		if (as->op[k].label && i != k
+			&& !ft_strcmp(as->op[k].label, instr->ag_lbl[j]))
+		{
+			while (as->op[k].mem_num == -1 || k == i)
+				k++;
+			if (instr->i_lbl_sz[1][j] == 2)
+			{
+				printf("OK\n");
+				if (instr->mem_num > as->op[k].mem_num)
+				{
+					instr->ag_i2[j] = 0xFFFF - instr->mem_num + as->op[k].mem_num + 1;
+					printf("AVANT\n");
+				}
+				else
+				{
+					printf("APRES %d\n", k);
+					instr->ag_i2[j] = as->op[k].mem_num;
+				}
+			}
+			if (instr->i_lbl_sz[1][j] == 4)
+			{
+				printf("PAS OK\n");
+				instr->ag_i4[j] = 0xFFFF - instr->mem_num + as->op[k].mem_num + 1;
+			}
+		}
+	}
+}
+
+void			ft_len_args(t_asm *as, t_instr *instr, int i)
+{
+	int			l;
 	int			j;
 
+	l = -1;
+	while (++l < 2)
+	{
+		j = -1;
+		while (++j < 3)
+		{
+			if (instr->i_lbl_sz[l][j] > 0)
+			{
+				as->len_mem += instr->i_lbl_sz[l][j];
+				if (l == 1)
+					ft_clc_lbl(as, instr, i, j);
+			}
+		}
+	}
 	j = -1;
 	while (++j < 3)
 	{
-		if (instr->i2_on[j] == 1)
-			as->len_mem += 2;
-		if (instr->i4_on[j] == 1)
-		{
+		if (instr->reg[j] > -1)
 			as->len_mem++;
-			if (!instr->reg_on[j])
-				as->len_mem += 3;
-		}
-		if (instr->ag_lbl2[j] != NULL)
-			as->len_mem += 2;
-		if (instr->ag_lbl4[j] != NULL)
-			as->len_mem += 4;
 	}
 }
 
@@ -44,9 +85,10 @@ void			ft_mem_op(t_asm *as)
 		if (as->op[i].num > 0)
 		{
 			as->len_mem++;
-			if (as->ref[as->op[i].num - 1].mdf_c == 1)
+			as->op[i].mem_num = as->len_mem - as->strt_mem - 1;
+			if (as->op[i].opc > 0)
 				as->len_mem++;
-			ft_len_args(as, &as->op[i]);
+			ft_len_args(as, &as->op[i], i);
 		}
 	}
 }
@@ -65,5 +107,6 @@ void			ft_mem_len(t_asm *as)
 		mod2 = 8;
 	as->len_mem = 4 + PROG_NAME_LENGTH + 8 - mod1 + 3 + COMMENT_LENGTH
 		+ 8 - mod2;
+	as->strt_mem = as->len_mem;
 	ft_mem_op(as);
 }

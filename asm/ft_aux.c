@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:38:40 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/09 21:28:48 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/11 18:24:24 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,13 @@ void			ft_lbl2(t_asm *as, int i, int j, int *find)
 {
 	int			k;
 
-	k = i;
-	while (--k >= 0 && as->op[i].ag_lbl2[j] != NULL)
+	k = -1;
+	while (as->lines[++k] && !*find)
 	{
-		if (as->op[k].label && !ft_strcmp(as->op[k].label,
-			as->op[i].ag_lbl2[j]))
-			(*find)++;
+		if (as->op[k].label && k != i
+			&& !ft_strcmp(as->op[k].label, as->op[i].ag_lbl[j]))
+			*find = 1;
 	}
-	k = i;
-	while (--k >= 0 && as->op[i].ag_lbl4[j] != NULL)
-	{
-		if (as->op[k].label && !ft_strcmp(as->op[k].label,
-			as->op[i].ag_lbl4[j]))
-			(*find)++;
-	}
-	if (*find == 1 && as->op[i].ag_lbl2[j] && as->op[i].ag_lbl4[j])
-		*find = 0;
-	else if (*find > 0)
-		*find = 1;
 }
 
 int				ft_check_lbl(t_asm *as)
@@ -70,7 +59,7 @@ int				ft_check_lbl(t_asm *as)
 		while (++j < 3)
 		{
 			find = 0;
-			if (as->op[i].ag_lbl2[j] != NULL || as->op[i].ag_lbl4[j] != NULL)
+			if (as->op[i].ag_lbl[j] != NULL)
 			{
 				ft_lbl2(as, i, j, &find);
 				if (!find)

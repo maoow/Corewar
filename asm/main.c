@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/09 21:12:42 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/11 18:43:32 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void			ft_free_end(t_asm **as)
 {
 	int			i;
+	int			j;
 
 	if (*as)
 	{
@@ -25,18 +26,10 @@ void			ft_free_end(t_asm **as)
 			{
 				if ((*as)->op[i].label)
 					free((*as)->op[i].label);
-				if ((*as)->op[i].ag_lbl2[0])
-					free((*as)->op[i].ag_lbl2[0]);
-				if ((*as)->op[i].ag_lbl2[1])
-					free((*as)->op[i].ag_lbl2[1]);
-				if ((*as)->op[i].ag_lbl2[2])
-					free((*as)->op[i].ag_lbl2[2]);
-				if ((*as)->op[i].ag_lbl4[0])
-					free((*as)->op[i].ag_lbl4[0]);
-				if ((*as)->op[i].ag_lbl4[1])
-					free((*as)->op[i].ag_lbl4[1]);
-				if ((*as)->op[i].ag_lbl4[2])
-					free((*as)->op[i].ag_lbl4[2]);
+				j = -1;
+				while (++j < 3)
+					if ((*as)->op[i].ag_lbl[j])
+						free((*as)->op[i].ag_lbl[j]);
 			}
 			free((*as)->op);
 		}
@@ -53,8 +46,6 @@ void			ft_free_end(t_asm **as)
 			free((*as)->name);
 		if ((*as)->comment)
 			free((*as)->comment);
-		if ((*as)->enc)
-			free((*as)->enc);
 		free(*as);
 	}
 }
@@ -70,8 +61,50 @@ int				ft_init_struct_asm(t_asm **as)
 	(*as)->name = NULL;
 	(*as)->comment = NULL;
 	(*as)->len_mem = 0;
-	(*as)->enc = NULL;
+	(*as)->ac = 0;
+	(*as)->n_ln = 0;
+	(*as)->n_chr = 0;
+	(*as)->strt_mem = 0;
 	(*as)->op = NULL;
+	return (1);
+}
+
+int				ft_malloc_instr(t_asm *as)
+{
+	int			i;
+	int			j;
+
+	i = -1;
+	while (as->lines[++i])
+		;
+	if (!(as->op = (t_instr *)malloc(i * sizeof(t_instr))))
+		return (0);
+	j = -1;
+	while (++j < i)
+	{
+		as->op[j].mem_num = -1;
+		as->op[j].num = 0;
+		as->op[j].opc = 0;
+		as->op[j].reg[0] = -1;
+		as->op[j].reg[1] = -1;
+		as->op[j].reg[2] = -1;
+		as->op[j].i_lbl_sz[0][0] = 0;
+		as->op[j].i_lbl_sz[0][1] = 0;
+		as->op[j].i_lbl_sz[0][2] = 0;
+		as->op[j].i_lbl_sz[1][0] = 0;
+		as->op[j].i_lbl_sz[1][1] = 0;
+		as->op[j].i_lbl_sz[1][2] = 0;
+		as->op[j].ag_i2[0] = 0;
+		as->op[j].ag_i2[1] = 0;
+		as->op[j].ag_i2[2] = 0;
+		as->op[j].ag_i4[0] = 0;
+		as->op[j].ag_i4[1] = 0;
+		as->op[j].ag_i4[2] = 0;
+		as->op[j].ag_lbl[0] = NULL;
+		as->op[j].ag_lbl[1] = NULL;
+		as->op[j].ag_lbl[2] = NULL;
+		as->op[j].label = NULL;
+	}
 	return (1);
 }
 
@@ -80,15 +113,16 @@ int				main(int ac, char **av)
 	t_asm		*as;
 	int			i;
 	int			j;
+	int			k;
+	int			count;
 
+	(void)k;
+	(void)count;
+	(void)j;
 	if (!(ft_init_struct_asm(&as)))
 		return (1);
 	if (!(ft_loading(ac, av, 1, as)))
 		return (1);
-	/*i = -1;
-	while (as->lines[++i])
-		printf("<%s>\n", as->lines[i]);
-	*/
 	if (ft_name_check(as, &as->name, NAME_CMD_STRING) != 0)
 	{
 		if (!(ft_name_check(as, &as->comment,
@@ -101,70 +135,12 @@ int				main(int ac, char **av)
 	as->lines[0][0] = '\0';
 	as->lines[1][0] = '\0';
 	ft_del_empty_lines(as);
-	/*i = -1;
-	printf("\n\n");
-	while (as->lines[++i])
-		printf("<%s>\n", as->lines[i]);
-	exit(0);*/
-	//ft_init_struct_ref_1((t_op *)op_tab);
 	ft_init_struct_ref_1((t_ref *)as->ref);
-	/*i = -1;
-	while (as->t_op_list[++i].ref_name)
-	{
-		printf("{%s, %d, ", as->t_op_list[i].ref_name, as->t_op_list[i].nb_args);
-		j = -1;
-		while (as->t_op_list[i].ref_enc[++j] && j < 3)
-		{
-			printf("%d ", as->t_op_list[i].ref_enc[j]);
-		}
-		printf(", %d, %d}\n", as->t_op_list[i].ref_mdf_c, as->t_op_list[i].ref_lbl_sz);
-	}
-	*/
-	i = -1;
-	while (as->lines[++i])
-		;
-	as->op = (t_instr *)malloc(i * sizeof(t_instr));
-	j = -1;
-	while (++j < i)
-	{
-		as->op[j].num = 0;
-		as->op[j].opc = 0;
-		as->op[j].i2_on[0] = 0;
-		as->op[j].i2_on[1] = 0;
-		as->op[j].i2_on[2] = 0;
-		as->op[j].ag_i2[0] = 0;
-		as->op[j].ag_i2[1] = 0;
-		as->op[j].ag_i2[2] = 0;
-		as->op[j].i4_on[0] = 0;
-		as->op[j].i4_on[1] = 0;
-		as->op[j].i4_on[2] = 0;
-		as->op[j].ag_i4[0] = 0;
-		as->op[j].ag_i4[1] = 0;
-		as->op[j].ag_i4[2] = 0;
-		as->op[j].ag_lbl2[0] = 0;
-		as->op[j].ag_lbl2[1] = 0;
-		as->op[j].ag_lbl2[2] = 0;
-		as->op[j].ag_lbl2[0] = NULL;
-		as->op[j].ag_lbl2[1] = NULL;
-		as->op[j].ag_lbl2[2] = NULL;
-		as->op[j].ag_lbl4[0] = 0;
-		as->op[j].ag_lbl4[1] = 0;
-		as->op[j].ag_lbl4[2] = 0;
-		as->op[j].ag_lbl4[0] = NULL;
-		as->op[j].ag_lbl4[1] = NULL;
-		as->op[j].ag_lbl4[2] = NULL;
-		as->op[j].label = NULL;
-	}
+	if (!(ft_malloc_instr(as)))
+		return (1);
 	i = -1;
 	while (as->lines[++i])
 		ft_if_label(as, &i);
-	/*printf("\n\n____\n");
-	i = -1;
-	while (as->lines[++i])
-	{
-		printf("<%s>\n", as->op_lst[i].label);
-	}
-	*/
 	if (!(ft_del_labels(as)))
 		return (1);
 	if (!(ft_del_space(as)))
@@ -174,46 +150,122 @@ int				main(int ac, char **av)
 	i = -1;
 	while (as->lines[++i])
 		printf("<%s>\n", as->lines[i]);
-	
+
 	if (!(ft_instr_check(as)))
 		return (1);
+	printf("OK INSTR\n");
 	if (!(ft_check_var(as)))
 		return (1);
+	printf("OK VAR\n");
+	if (!(ft_check_lbl(as)))
+		return (1);
+	printf("OK LBL\n");
+	//PEUT AUSSI SAUTER EN AVANT
+	ft_mem_len(as);
 
 	printf("\n\n----\n");
+	count = 0;
 	i = -1;
 	while (as->lines[++i])
 	{
 		printf("<%s> ", as->op[i].label);
+		printf("MEM : <%d> ", as->op[i].mem_num);
 		if (as->op[i].num > 0)
 		{
 			printf("<%d> ", as->op[i].num);
+			count++;
+			if (as->op[i].opc)
+				count++;
 			printf("<%s> ", as->ref[as->op[i].num - 1].name);
 			printf("|| ");
 			j = -1;
 			while (++j < 3)
 			{
-				if (as->op[i].i2_on[j] == 1)
+				if (as->op[i].i_lbl_sz[0][j] == 2)
+				{
+					count += 2;
 					printf("<%hu> ", as->op[i].ag_i2[j]);
-				if (as->op[i].i4_on[j] == 1)
+				}
+				if (as->op[i].i_lbl_sz[0][j] == 4)
+				{
+					count += 4;
+					printf("<%u> ", as->op[i].ag_i4[j]);
+				}
+				if (as->op[i].reg[j] > -1)
+				{
+					count++;
+					printf("<%u> ", as->op[i].reg[j]);
+				}
+				if (as->op[i].ag_lbl[j] != NULL)
+				{
+					count += as->op[i].i_lbl_sz[1][j];
+					printf("<%s>//", as->op[i].ag_lbl[j]);
+					if (as->op[i].i_lbl_sz[1][j] == 2)
+						printf("<%hu> ", as->op[i].ag_i2[j]);
+					if (as->op[i].i_lbl_sz[1][j] == 4)
 						printf("<%u> ", as->op[i].ag_i4[j]);
-			}
-			printf("|| ");
-			j = -3;
-			while (++j < 3)
-			{
-				if (as->op[i].lbl2_on[j] == 1)
-					printf("<%s> ", as->op[i].ag_lbl2[j]);
-				if (as->op[i].lbl4_on[j] == 1)
-					printf("<%s> ", as->op[i].ag_lbl4[j]);
+				}
 			}
 		}
 		printf("\n");
 	}
-	if (!(ft_check_lbl(as)))
-		return (1);
-	ft_mem_len(as);
-	printf("\nLEN MEM : %d\n", as->len_mem);
+	printf("count : %d\n", count);
+	printf("\n\n>>>>\n");
+	count = 0;
+	i = -1;
+	while (as->lines[++i])
+	{
+		if (as->op[i].num > 0)
+		{
+			printf("%02x ", as->op[i].num);
+			count++;
+			if (count % 8 == 0)
+				printf("  ");
+			if (count % 16 == 0)
+				printf("\n");
+			if (as->op[i].opc > 0)
+			{
+				printf("%02x ", as->op[i].opc);
+				count++;
+			if (count % 8 == 0)
+				printf("  ");
+			if (count % 16 == 0)
+				printf("\n");
+			}
+			j = -1;
+			while (++j < 3)
+			{
+				k = 0;
+				if (as->op[i].reg[j] > -1)
+					k = 1;
+				if (as->op[i].i_lbl_sz[0][j])
+					k = as->op[i].i_lbl_sz[0][j];
+				if (as->op[i].i_lbl_sz[1][j])
+					k = as->op[i].i_lbl_sz[1][j];
+				while (--k >= 0)
+				{
+					if (as->op[i].reg[j] > -1)
+						printf("%02hhx ", as->op[i].reg[j]);
+					if (as->op[i].i_lbl_sz[0][j] == 2)
+						printf("%02hhx ", ((char *)&as->op[i].ag_i2[j])[k]);
+					if (as->op[i].i_lbl_sz[0][j] == 4)
+						printf("%02hhx ", ((char *)&as->op[i].ag_i4[j])[k]);
+					if (as->op[i].i_lbl_sz[1][j] == 2)
+						printf("%02hhx ", ((char *)&as->op[i].ag_i2[j])[k]);
+					if (as->op[i].i_lbl_sz[1][j] == 4)
+						printf("%02hhx ", ((char *)&as->op[i].ag_i4[j])[k]);
+					count++;
+					if (count % 8 == 0)
+						printf("  ");
+					if (count % 16 == 0)
+						printf("\n");
+				}
+			}
+		}
+	}
+	printf("\n");
+	printf("\nLEN MEM : %d\nLEN REF : 2304\n", as->len_mem);
+
 	ft_free_end(&as);
 	return (0);
 }
