@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/06 16:40:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/12 14:51:25 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,72 +68,61 @@ static void		check_champ(int **champ)
 }
 
 /*
+**	color_arena : attribution de la couleur dans l'arene.
+**		moove_champ = espacement entre chaque champion
+**		decal = decalage de chaque champion, commence a zero puis augmente de
+**			moove_champ pour chaque incrementation
+*/
+
+static size_t	color_arena(t_cor *cor, int ac, char **av, size_t moove_champ)
+{
+	static size_t		nb_champ = 1;
+	static int			**champ = NULL;
+	size_t				i;
+	static size_t		decal = 0;
+
+	if (is_champ(av[ac], 0, true, 0))
+	{
+		i = 0;
+		champ = parse(cor, av[ac], get_optionnal_id(ac, av));
+		check_champ(champ);
+		add_process(cor, decal, nb_champ);
+		while (i + decal < champ[0][0] + decal)
+		{
+			cor->arena[i + decal] = champ[1][i];
+			cor->arena_color[i + decal] = nb_champ + 3;
+			i++;
+		}
+		decal = decal + moove_champ;
+		nb_champ++;
+	}
+	return (nb_champ);
+}
+
+/*
 **	parse() : recupere le code hexa du champion
 **	nb_champ + 3 pour la couleur car les COLOR_PAIR de champ commencent a 4
 **	champ[0][0] = size du champion,	champ[1] = int* du code du champion
 **
 **	while : attribution de la couleur dans l'arene.
 **		moove_champ = espacement entre chaque champion
-**		decal = decalage de chaque champion, commence a zero puis augmente de
-**			moove_champ pour chaque incrementation
 */
 
 void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 {
 	size_t		nb_champ;
-	int			**champ;
 	size_t		moove_champ;
-	size_t		i;
-	size_t		decal;
 
-	nb_champ = 1;
-	decal = 0;
+	moove_champ = 0;
 	if (ac > 1 && ac - 1 - nb_options != 0)
 		moove_champ = MEM_SIZE / (ac - 1 - nb_options);
-	i = 0;
 	ac--;
 	while (ac > 0)
 	{
-		if (is_champ(av[ac], 0, true, 0))
-		{
-			champ = parse(cor, av[ac], get_optionnal_id(ac, av));
-			check_champ(champ);
-			add_process(cor, decal, nb_champ);
-			while (i + decal < champ[0][0] + decal)
-			{
-				cor->arena[i + decal] = champ[1][i];
-				cor->arena_color[i + decal] = nb_champ + 3;
-				i++;
-			}
-			i = 0;
-			decal = decal + moove_champ;
-			nb_champ++;
-		}
+		nb_champ = color_arena(cor, ac, av, moove_champ);
 		ac--;
 	}
 	cor->nb_champs = nb_champ - 1;
-}
-
-static void		ft_clean(t_cor *core)
-{
-	(void)core;
-	// TO DO
-}
-
-static void		intro(t_champ *champs)
-{
-	t_champ	*tmp;
-	size_t	i;
-
-	i = 1;
-	tmp = champs;
-	ft_printf("Introducing contestants...\n");
-	while(tmp)
-	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i, tmp->weight, tmp->name, tmp->comment);
-		tmp = tmp->next;
-		i++;
-	}
 }
 
 int				main(int ac, char **av)
@@ -143,6 +132,7 @@ int				main(int ac, char **av)
 
 	if (ac < 2)
 		write_error(3);
+	usage(ac, av);
 	ft_init(&core);
 	nb_options = get_options(&core, ac, av, 1);
 	launch_parse(&core, ac, av, nb_options);

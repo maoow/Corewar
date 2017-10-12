@@ -141,7 +141,8 @@ typedef struct			s_cor
 /*
 **			START FUNCTIONS
 */
-void		usage(void);
+void		usage(int ac, char **av);
+void		intro(t_champ *champs);
 void		write_error(int nb);
 void		ft_init(t_cor *core);
 size_t		get_options(t_cor *cor, int ac, char **av, size_t i);
@@ -153,6 +154,7 @@ void		visu(t_cor *cor);
 void		print_right(WINDOW *right, t_cor *cor, int i, t_champ *tmp);
 void		print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign);
 void		ft_dump(t_cor *cor);
+void		ft_clean(t_cor *cor);
 /*
 **			GAME FUNCTIONS
 */
