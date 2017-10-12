@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/06 16:40:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/12 11:37:00 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ int				main(int ac, char **av)
 
 	if (ac < 2)
 		write_error(3);
+	usage(ac, av);
 	ft_init(&core);
 	nb_options = get_options(&core, ac, av, 1);
 	launch_parse(&core, ac, av, nb_options);
