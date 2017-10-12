@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/12 11:37:00 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/12 13:09:11 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,28 +112,6 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 		ac--;
 	}
 	cor->nb_champs = nb_champ - 1;
-}
-
-static void		ft_clean(t_cor *core)
-{
-	(void)core;
-	// TO DO
-}
-
-static void		intro(t_champ *champs)
-{
-	t_champ	*tmp;
-	size_t	i;
-
-	i = 1;
-	tmp = champs;
-	ft_printf("Introducing contestants...\n");
-	while(tmp)
-	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i, tmp->weight, tmp->name, tmp->comment);
-		tmp = tmp->next;
-		i++;
-	}
 }
 
 int				main(int ac, char **av)
