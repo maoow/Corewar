@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/11 16:05:42 by starrit          ###   ########.fr        #
+#    Updated: 2017/10/12 13:10:20 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_PATH = srcs/
 SRC_NAME = add_champ.c								\
 		   add_process.c							\
 		   init.c									\
+		   clean.c									\
 		   cyclemanage.c							\
 		   main.c									\
 		   paramsmanage.c							\
