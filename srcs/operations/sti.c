@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/10 15:24:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/12 14:37:06 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,35 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	size_t		adress;
 	size_t		adress2;
 	size_t		total;
+	//size_t		decale;
+	size_t		reg;
+
+//	ft_printf("%d\n", IDX_MOD);
+	reg = core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE];
+
+	adress = getparam(core, proc, 2, 2);
+	//adress = getparamplace(core, proc, 2, 2) % IDX_MOD;
+	adress2 = getparam(core, proc, 3, 2) ;//% 512;
+	//adress2 = getparamplace(core, proc, 3, 2) % IDX_MOD;
+	total = adress2 + adress;
+	setram(core, proc->PC + proc->startpos + total, proc->registres[reg - 1],
+			proc->color);
+	if (core->options->v4)
+		ft_printf("P%5d | sti r%d %d %d\n       | -> store to %d + %d = %d \
+(with pc and mod %d)\n",
+				proc->ID, reg, adress, adress2, adress, adress2, total,
+				proc->PC + total + proc->startpos);
+	return (true);
+}
+
+/* another one
+bool	cw_sti(t_cor *core, t_process *proc)
+{
+	size_t		adress;
+	size_t		adress2;
+	size_t		total;
 	size_t		decale;
 
-	// + 4 et + 2 dans le cas sans reg
-	// a faire : un truc generique
-	//ft_printf("%x", proc->PC + proc->startpos);
-	//exit(0);
-	//adress = core->arena[proc->PC + 4 + proc->startpos];
-	//adress2 = core->arena[proc->PC + 2 + proc->startpos];
 	decale = 3;
 	if ((core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE] / 16) % 4 > 1)
 	{
@@ -48,21 +69,4 @@ bool	cw_sti(t_cor *core, t_process *proc)
 				adress, adress2, adress, adress2, total, proc->PC + total + proc->startpos);
 	return (true);
 }
-
-/*
-
-TON STI ICI
-
-bool	cw_sti(t_cor *core, t_process *proc)
-{
-	size_t		adress;
-	size_t		adress2;
-
-	adress = getparam(core, proc, 2, 2);
-	adress2 = getparam(core, proc, 3, 2);
-	adress += adress2;
-	setram(core, adress, proc->registres[core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1], proc->color);
-	if (core->options->v4)
-		ft_printf("P%5d | sti r%d %d %d\n", proc->ID,core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1, adress - adress2, adress2);
-	return (true);
-}*/
+*/

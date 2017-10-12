@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:05 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 14:34:24 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/12 14:48:33 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	cw_ldi(t_cor *core, t_process *proc)
 	int adress;
 	int adress2;
 
-	adress = ind(core, proc, proc->PC + 2);
+	adress = getparam(core, proc, 1, 2);
 	if (adress > 65536 / 2)
 		adress -= 65536;
 	adress2 = getparam(core, proc, 2, 2);
