@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/11 19:13:39 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/12 09:31:07 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			ft_free_end(t_asm **as)
 		if ((*as)->op)
 		{
 			i = -1;
-			while((*as)->lines[++i])
+			while ((*as)->lines[++i])
 			{
 				if ((*as)->op[i].label)
 					free((*as)->op[i].label);
@@ -116,9 +116,6 @@ int				main(int ac, char **av)
 	int			k;
 	int			count;
 
-	(void)k;
-	(void)count;
-	(void)j;
 	if (!(ft_init_struct_asm(&as)))
 		return (1);
 	if (!(ft_loading(ac, av, 1, as)))
@@ -145,22 +142,21 @@ int				main(int ac, char **av)
 		return (1);
 	if (!(ft_del_space(as)))
 		return (1);
-
+/*
 	printf("\n\n--\n");
 	i = -1;
 	while (as->lines[++i])
-		printf("<%s>\n", as->lines[i]);
-
+	{
+		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
+		//printf("<%s>\n", as->lines[i]);
+	}
+*/
 	if (!(ft_instr_check(as)))
 		return (1);
-	printf("OK INSTR\n");
 	if (!(ft_check_var(as)))
 		return (1);
-	printf("OK VAR\n");
 	if (!(ft_check_lbl(as)))
 		return (1);
-	printf("OK LBL\n");
-	//PEUT AUSSI SAUTER EN AVANT
 	ft_mem_len(as);
 
 	printf("\n\n----\n");
@@ -168,8 +164,10 @@ int				main(int ac, char **av)
 	i = -1;
 	while (as->lines[++i])
 	{
-		printf("<%s> ", as->op[i].label);
-		printf("MEM : <%d> ", as->op[i].mem_num);
+		ft_putstr("<");ft_putstr(as->op[i].label);ft_putstr("> ");
+		//printf("<%s> ", as->op[i].label);
+		ft_putstr("MEM : <");ft_putnbr(as->op[i].mem_num);ft_putstr("> ");
+		//printf("MEM : <%d> ", as->op[i].mem_num);
 		if (as->op[i].num > 0)
 		{
 			printf("<%d> ", as->op[i].num);
@@ -199,7 +197,8 @@ int				main(int ac, char **av)
 				if (as->op[i].ag_lbl[j] != NULL)
 				{
 					count += as->op[i].i_lbl_sz[1][j];
-					printf("<%s>//", as->op[i].ag_lbl[j]);
+					ft_putstr("<");ft_putstr(as->op[i].ag_lbl[j]);ft_putstr(">//");
+					//printf("<%s>//", as->op[i].ag_lbl[j]);
 					if (as->op[i].i_lbl_sz[1][j] == 2)
 						printf("<%hu> ", as->op[i].ag_i2[j]);
 					if (as->op[i].i_lbl_sz[1][j] == 4)
@@ -227,10 +226,10 @@ int				main(int ac, char **av)
 			{
 				printf("%02x ", as->op[i].opc);
 				count++;
-			if (count % 8 == 0)
-				printf("  ");
-			if (count % 16 == 0)
-				printf("\n");
+				if (count % 8 == 0)
+					printf("  ");
+				if (count % 16 == 0)
+					printf("\n");
 			}
 			j = -1;
 			while (++j < 3)
@@ -265,7 +264,6 @@ int				main(int ac, char **av)
 	}
 	printf("\n");
 	printf("\nLEN MEM : %d\nLEN REF : 2304\n", as->len_mem);
-
 	ft_free_end(&as);
 	return (0);
 }
