@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/12 15:15:20 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/12 15:18:48 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	cw_zjmp(t_cor *core, t_process *proc)
 	else
 	{
 		proc->PC += 2;
-		//ft_getop(core, proc);
+		ft_getop(core, proc);
 		//proc->next_jump = 1;
 		if (core->options->v4)
 			ft_printf("FAILED\n");
