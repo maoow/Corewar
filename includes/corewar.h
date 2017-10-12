@@ -141,7 +141,7 @@ typedef struct			s_cor
 /*
 **			START FUNCTIONS
 */
-void		usage(void);
+void		usage(int ac, char **av);
 void		write_error(int nb);
 void		ft_init(t_cor *core);
 size_t		get_options(t_cor *cor, int ac, char **av, size_t i);
