@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 17:00:39 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/12 14:46:39 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,20 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 	op[2] = (op[0] / 4) % 4;
 	op[1] = (op[0] / 16) % 4;
 	op[0] /= 64;
+	//ft_printf("%d %d %d \n", op[0], op[1], op[2]);
 	while (i < param)
 	{
 		if (op[i] == 1)
 		{
-			value = proc->registres[core->arena[(proc->PC + proc->startpos + place) % MEM_SIZE] - 1];
+			value = proc->registres[core->arena[(proc->PC + proc->startpos + place ) % MEM_SIZE] - 1];
 				place++;
 		}
 		else if (op[i] == 2)
 		{
 			if (label == 2)
-				value = getram(core, ind(core, proc, proc->PC + proc->startpos + place));
+				value = ind(core, proc, proc->PC + place );
 			else
-				value = ind(core, proc, proc->PC + proc->startpos + place);
+				value = getram(core,ind(core, proc, proc->PC + place));
 			place += label;
 		}
 		else
@@ -74,7 +75,6 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 	op[0] /= 64;
 	while (i < param)
 	{
-		//ft_printf("%d %d\n", i, op[i]);
 		if (op[i] == 1)
 				place++;
 		else if (op[i] == 2)
@@ -83,6 +83,9 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 			place += 2;
 		i++;
 	}
+	return ((place + proc->PC + proc->startpos) % MEM_SIZE);
+}
+
 	/*
 	unsigned char	op;
 	size_t			i;
@@ -102,5 +105,3 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 		i++;
 		op /= 4;
 	}*/
-	return ((place + proc->PC + proc->startpos) % MEM_SIZE);
-}
