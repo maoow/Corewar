@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 11:40:42 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/12 11:52:45 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/12 13:07:35 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,21 @@ void		write_error(int nb)
 		exit(ft_printf("Input error. See ./corewar --help\n"));
 	if (nb == 4)
 		exit(ft_printf("Too many players\n"));
+}
+
+void		intro(t_champ *champs)
+{
+	t_champ	*tmp;
+	size_t	i;
+
+	i = 1;
+	tmp = champs;
+	ft_printf("Introducing contestants...\n");
+	while (tmp)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i,
+				tmp->weight, tmp->name, tmp->comment);
+		tmp = tmp->next;
+		i++;
+	}
 }
