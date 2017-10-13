@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:01 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/13 12:08:49 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/13 12:21:31 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	and(size_t a, size_t b)
 
 	place = 1;
 	out = 0;
-	while (a / place || b / place)
+	while (place <= 4294967295)
 	{
 		if ((a / place) % 2 && (b / place) % 2)
 			out += place;

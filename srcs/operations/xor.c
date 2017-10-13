@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:13 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/13 12:09:33 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/13 12:21:33 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static size_t	xor(size_t a, size_t b)
 {
 	size_t	out;
-	size_t	place;
+	uintmax_t	place;
 
 	place = 1;
 	out = 0;
-	while (a / place || b / place)
+	while (place <= 4294967295)
 	{
 		if (((a / place) % 2 || (b / place) % 2) && !((a / place) % 2 && (b / place) % 2))
 			out += place;
