@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/12 12:55:41 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/12 15:00:00 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t nb_champ)
 		cor->options->visu = true;
 	else if (!is_champ(av[i], &nb_champ, false, 0))
 	{
-		ft_putendl(av[i]);
+		ft_putstr(av[i]);
+		ft_putstr(" : ");
 		write_error(3);
 	}
 	return (nb_champ);
