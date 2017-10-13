@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 13:40:44 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/12 11:26:12 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/13 13:16:57 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ bool	cw_ld(t_cor *core, t_process *proc)
 	size_t value;
 	size_t pc;
 
+	if (proc->next_jump < 3)
+		return (true);
 	pc = proc->PC;
 	if ((core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE] / 16) % 4 != 2)
 	{
