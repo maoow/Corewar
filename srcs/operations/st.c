@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:11 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/12 11:32:02 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/14 15:39:46 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 bool	cw_st(t_cor *core, t_process *proc)
 {
-	size_t		op;
-	int			pos;
+	size_t		reg;
+	size_t		reg2;
+	size_t		adress;
 
-	pos = proc->PC + proc->startpos;
-	op = core->arena[(pos + 1) % MEM_SIZE] / 16;
-	if (op % 4 == 3)
+reg = core->arena[(proc->startpos + proc->PC + 2) % MEM_SIZE];
+reg2 = core->arena[(proc->startpos + proc->PC + 3) % MEM_SIZE];
+	if ((core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE] / 16) % 4 == 3)
 	{
-		setram(core, idx(proc, ind(core, proc, proc->PC + 3)),
-		proc->registres[core->arena[(pos + 2) % MEM_SIZE] - 1], proc->color);
+		adress = ind(core, proc, proc->PC + 3);
+		adress %= MEM_SIZE;
+	if (adress > MEM_SIZE / 2)
+		adress -= MEM_SIZE;
+		setram(core, adress,
+		proc->registres[reg - 1], proc->color);
 		if (core->options->v4)
-			ft_printf("P%5d | st r%d %d\n", proc->ID,
-					core->arena[(pos + 3) % MEM_SIZE] + 1,
-					ind(core, proc, proc->PC + 3));
+			ft_printf("P%5d | st r%d %d\n", proc->ID, reg, adress);
 	}
 	else
 	{
-		proc->registres[core->arena[(pos + 3) % MEM_SIZE] - 1] =
-		proc->registres[core->arena[(pos + 2) % MEM_SIZE] - 1];
+		proc->registres[reg - 1] = proc->registres[reg2 - 1];
 		if (core->options->v4)
-			ft_printf("P%5d | st r%d r%d\n", proc->ID,
-					core->arena[(pos + 3) % MEM_SIZE],
-					core->arena[(pos + 2) % MEM_SIZE] + 1);
+			ft_printf("P%5d | st r%d r%d\n", proc->ID, reg, reg2);
 	}
-	return (proc->registres[core->arena[(pos + 2) % MEM_SIZE]] != 0);
+	return (proc->registres[reg - 1] != 0);
 }
