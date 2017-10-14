@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 13:38:24 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/14 15:04:37 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void			ft_warcycle(t_cor *core)
 	{
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
-			if (core->options->dump &&
-					core->total_cycle == core->options->nb_dump)
+			if (((core->options->dump && core->total_cycle)|| core->options->s)
+					&& core->total_cycle % core->options->nb_dump == 0)
 			{
-				if (!core->options->v4)
 					ft_dump(core);
+				if (core->options->dump)
 				exit(0);
 			}
 			if (core->options->visu)
