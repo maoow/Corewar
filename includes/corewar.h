@@ -131,7 +131,7 @@ typedef struct			s_cor
 	size_t				cycle_to_die;
 	size_t				tmp_cycle_to_die;
 	size_t				checks;
-	size_t				total_cycle;
+	int					total_cycle;
 	unsigned char		arena[MEM_SIZE];
 	int					arena_color[MEM_SIZE];
 	size_t				arena_update[MEM_SIZE];
