@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/30 14:32:55 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/12 14:14:26 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/13 14:51:23 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void	dispjump(t_cor *core, t_process *proc)
 
 	i = 0;
 	if (proc->startpos + proc->PC > 0)
-	ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, proc->startpos + proc->PC, proc->startpos + proc->PC + proc->next_jump);
+		ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, proc->startpos + proc->PC, proc->startpos + proc->PC + proc->next_jump);
 	else
-	ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump,  proc->startpos + proc->PC + proc->next_jump);
+		ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump,  proc->startpos + proc->PC + proc->next_jump);
 	if (proc->next_jump < 1000)
 		while (i < proc->next_jump)
 		{
@@ -132,6 +132,6 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 			dispjump(core, proc);
 	}
 	else
-			proc->next_jump = 0;
+		proc->next_jump = 0;
 
 }
