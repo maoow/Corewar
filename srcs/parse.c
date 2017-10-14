@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/11 14:39:16 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/14 16:55:47 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		**get_hexa(unsigned char *champion, size_t size_champ)
 	j = 0;
 	if (!(new = malloc(sizeof(*new) * 2)))
 		write_error(2);
-	if (!(new[0] = malloc(sizeof(*new[0] * 1))))
+	if (!(new[0] = malloc(sizeof(*new[0]))))
 		write_error(2);
 	new[0][0] = (int)size_champ;
 	if (!(new[1] = (int*)malloc(sizeof(*new[1]) * (size_champ + 1))))
@@ -80,9 +80,11 @@ static void		get_magic_packet(size_t s, unsigned char *buf)
 	static bool				end = false;
 	static unsigned char	*magic = NULL;
 
-	if (!magic)
+	if (!magic && !end)
+	{
 		if (!(magic = ft_memalloc(EXEC_MAGIC_LENGHT + 1)))
 			write_error(2);
+	}
 	if (s <= EXEC_MAGIC_LENGHT)
 	{
 		magic[i] = buf[0];
@@ -93,6 +95,8 @@ static void		get_magic_packet(size_t s, unsigned char *buf)
 		magic[i] = '\0';
 		check_magic_packet(magic);
 		end = true;
+		free(magic);
+		magic = NULL;
 	}
 }
 
@@ -125,23 +129,27 @@ static size_t	read_loop(unsigned char *buf, char *name, char *comment,
 	return (size_champ);
 }
 
-static int		**get_champ(t_cor *cor, unsigned char *champion, int fd,
+static int		**get_champ(t_cor *cor, unsigned char **champion, int fd,
 		int optionnal_id)
 {
 	unsigned char	buf[2];
 	size_t			size_champ;
 	char			name[CHAMP_NAME];
 	char			comment[COMMENT_NAME];
+	int				**ret;
 
 	size_champ = 0;
 	while ((read(fd, buf, 1)) > 0)
-		size_champ = read_loop(buf, name, comment, champion);
+		size_champ = read_loop(buf, name, comment, *champion);
 	read_loop(buf, name, comment, NULL);
 	add_champ(cor, name, comment, optionnal_id);
 	cor->champs->weight = size_champ;
-	champion[size_champ] = '\0';
+	(*champion)[size_champ] = '\0';
 	close(fd);
-	return (get_hexa(champion, size_champ));
+	ret = get_hexa(*champion, size_champ);
+	free(*champion);
+	*champion = NULL;
+	return (ret);
 }
 
 /*
@@ -162,5 +170,5 @@ int				**parse(t_cor *cor, char *av, int optionnal_id)
 	if (!(champion = (unsigned char*)malloc(sizeof(*champion) *
 					(CHAMP_MAX_SIZE + 1))))
 		write_error(2);
-	return (get_champ(cor, champion, fd, optionnal_id));
+	return (get_champ(cor, &champion, fd, optionnal_id));
 }
