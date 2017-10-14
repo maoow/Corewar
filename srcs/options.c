@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 14:47:04 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/14 14:49:49 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static bool	get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 		if (ft_atoi(av[*i + 1]) <= 0 || (cor->options->nb_dump =
 					ft_atoi(av[*i + 1])) <= 0)
 			write_error(3);
-		i++;
+		(*i)++;
 	}
 	else
 		return (false);
