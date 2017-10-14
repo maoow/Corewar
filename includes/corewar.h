@@ -63,6 +63,7 @@ typedef struct			s_options
 	bool				dump;
 	size_t				nb_dump;
 	t_opt_number		*num_champ;
+	bool				s;
 	bool				v16;
 	bool				v4;
 	bool				v2;

@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/12 15:00:00 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/14 14:33:11 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@ bool			is_champ(char *av, size_t *nb_champ, bool test, int j)
 	return (true);
 }
 
+static bool	get_option_3(t_cor *cor, char **av, size_t *i)
+{
+	if (ft_strcmp(av[*i], "-s") == 0)
+	{
+		cor->options->s = true;
+		if (ft_atoi(av[*i + 1]) <= 0 || (cor->options->nb_dump =
+					ft_atoi(av[*i + 1])) <= 0)
+			write_error(3);
+		i++;
+	}
+	else
+		return (false);
+	return (true);
+}
 static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t nb_champ)
 {
 	if (ft_strcmp(av[i], "-v2") == 0)
@@ -87,7 +101,7 @@ size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 		else if (ft_strcmp(av[i], "-n") == 0 && av[i + 1] &&
 				ft_atoi(av[i + 1]) != 0)
 			i++;
-		else
+		else if (!get_option_3(cor, av, &i))
 			nb_champ = get_option_2(cor, av, i, nb_champ);
 		if (nb_champ > MAX_PLAYERS)
 			write_error(4);
