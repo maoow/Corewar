@@ -174,5 +174,6 @@ void		ft_delprocess(t_cor *core, t_process **del);
 void		ft_addprocess(t_cor *core, t_process *new);
 void		ft_getop(t_cor *core, t_process *proc);
 void		dispreg(t_process *proc);
+void		dispjump(t_cor *core, t_process *proc);
 
 #endif
