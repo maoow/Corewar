@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/12 14:51:25 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/14 17:03:31 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ static size_t	color_arena(t_cor *cor, int ac, char **av, size_t moove_champ)
 		}
 		decal = decal + moove_champ;
 		nb_champ++;
+		free(champ[0]);
+		free(champ[1]);
+		free(champ);
+		champ = NULL;
 	}
 	return (nb_champ);
 }
