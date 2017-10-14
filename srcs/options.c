@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 14:41:17 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/14 14:47:04 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool			is_champ(char *av, size_t *nb_champ, bool test, int j)
 
 static bool	get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 {
-	if (ft_strcmp(av[*i], "-s") == 0 && ac > *i + 1)
+	if (ft_strcmp(av[*i], "-s") == 0 && ac > (int)(*i + 1))
 	{
 		cor->options->s = true;
 		if (ft_atoi(av[*i + 1]) <= 0 || (cor->options->nb_dump =
@@ -90,7 +90,7 @@ size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 	nb_champ = 0;
 	while (i < (size_t)ac)
 	{
-		if (ft_strcmp(av[i], "-dump") == 0 && ac > i + 1)
+		if (ft_strcmp(av[i], "-dump") == 0 && ac > (int)(i + 1))
 		{
 			cor->options->dump = true;
 			if (ft_atoi(av[i + 1]) <= 0 || (cor->options->nb_dump =
@@ -101,7 +101,7 @@ size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 		else if (ft_strcmp(av[i], "-n") == 0 && av[i + 1] &&
 				ft_atoi(av[i + 1]) != 0)
 			i++;
-		else if (!get_option_3(cor, av, &i))
+		else if (!get_option_3(cor, av, &i, ac))
 			nb_champ = get_option_2(cor, av, i, nb_champ);
 		if (nb_champ > MAX_PLAYERS)
 			write_error(4);
