@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 14:33:11 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/14 14:41:17 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ bool			is_champ(char *av, size_t *nb_champ, bool test, int j)
 	return (true);
 }
 
-static bool	get_option_3(t_cor *cor, char **av, size_t *i)
+static bool	get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 {
-	if (ft_strcmp(av[*i], "-s") == 0)
+	if (ft_strcmp(av[*i], "-s") == 0 && ac > *i + 1)
 	{
 		cor->options->s = true;
 		if (ft_atoi(av[*i + 1]) <= 0 || (cor->options->nb_dump =
@@ -90,7 +90,7 @@ size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 	nb_champ = 0;
 	while (i < (size_t)ac)
 	{
-		if (ft_strcmp(av[i], "-dump") == 0)
+		if (ft_strcmp(av[i], "-dump") == 0 && ac > i + 1)
 		{
 			cor->options->dump = true;
 			if (ft_atoi(av[i + 1]) <= 0 || (cor->options->nb_dump =
