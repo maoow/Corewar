@@ -1,14 +1,16 @@
 #!/bin/bash
 rm tests/diffs*
-n=1
+n=8880
 diff=0
 FILESIZE=0
 while [ $FILESIZE -lt 1 ]
 do
-./corewar ressources/zaz_champ/fluttershy.cor -dump $n > me
-./ressources/corewar_goinfre ressources/zaz_champ/fluttershy.cor -d $n > you
+./corewar ressources/zaz_champ/helltrain.cor -dump $n > me
+./ressources/corewar_goinfre ressources/zaz_champ/helltrain.cor -d $n > you
 diff me you  > tests/diffs
 FILESIZE=$(wc -c < "tests/diffs")
 echo $n
-n=$(($n + 1))
+n=$(($n + 10))
 done
+cat tests/diffs
+rm you me
