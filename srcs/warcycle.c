@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/14 16:18:10 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/16 14:53:34 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool		check_delta(t_cor *core, size_t lives)
 {
-	if (core->checks >= MAX_CHECKS || lives > NBR_LIVE)
+	if (core->checks > MAX_CHECKS || lives >= NBR_LIVE)
 	{
 		if (core->cycle_to_die <= CYCLE_DELTA)
 			return (false);

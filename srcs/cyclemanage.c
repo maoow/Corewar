@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 10:12:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 13:07:24 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/16 14:56:32 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void				ft_increase_cycle(t_cor *core)
 	if (!core->options->fast)
 	{
 		core->total_cycle++;
+		if (core->total_cycle > 0)
 		core->tmp_cycle_to_die++;
 	}
 	else
