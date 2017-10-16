@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:01 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/13 12:21:31 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/16 14:34:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ bool	cw_and(t_cor *core, t_process *proc)
 	size_t	b;
 	size_t	c;
 
-	a = getparam(core, proc, 1, 4);
-	b = getparam(core, proc, 2, 4);
+	a = getparam(core, proc, 1, 2);
+	b = getparam(core, proc, 2, 2);
 	c = core->arena[getparamplace(core, proc, 3, 4) % MEM_SIZE];
 	proc->registres[c] = and(a, b);
 	if (core->options->v4)
