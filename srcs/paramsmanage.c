@@ -48,7 +48,7 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 			if (label == 2)
 				value = ind(core, proc, proc->PC + place );
 			else
-				value = getram(core,ind(core, proc, proc->PC + place));
+				value = getram(core, proc->PC + place + proc->startpos);
 			place += label;
 		}
 		else
