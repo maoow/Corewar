@@ -12,6 +12,19 @@
 
 #include "corewar.h"
 
+static void	init_regs(t_process *tmp, int nb_champ)
+{
+	size_t	i;
+
+	i = 1;
+	tmp->registres[0] = (0 - (int)nb_champ);
+	while (i <= REG_NUMBER)
+	{
+		tmp->registres[i] = 0;
+		i++;
+	}
+}
+
 void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 {
 	t_process	*new;
@@ -38,5 +51,5 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 	cor->process->cycles_before_execute = 0;
 	cor->process->live = 0;
 	cor->process->buffc = 0;
-	cor->process->registres[0] = (0 - (int)nb_champ);
+	init_regs(cor->process, nb_champ);
 }
