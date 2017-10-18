@@ -128,8 +128,8 @@ typedef struct			s_cor
 	t_options			*options;
 	t_opt_number		*id_list;
 	char				*last_champ_alive;
-	size_t				cycle_to_die;
-	size_t				tmp_cycle_to_die;
+	int					cycle_to_die;
+	int					tmp_cycle_to_die;
 	size_t				checks;
 	int					total_cycle;
 	unsigned char		arena[MEM_SIZE];
