@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/18 14:24:37 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 17:07:18 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ static int		**get_hexa(unsigned char *champion, size_t size_champ)
 	return (new);
 }
 
-//	changer 138 par la formule exacte (voir asm)
 static void		get_info(bool *start, size_t s, unsigned char buf)
 {
-	//if (s > 138 && buf && buf > 0 && buf < 17)
 	if (s > 148 && buf && buf > 0 && buf < 17)
 		*start = true;
 }
