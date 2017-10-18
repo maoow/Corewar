@@ -6,14 +6,15 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/18 11:56:37 by cbinet           ###   ########.fr        #
+#    Updated: 2017/10/18 14:32:48 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
+DEBUG = -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
 CPPFLAGS = -iquote includes -iquote $(LIB_PATH)$(INC)
 OPTIONS = -lncurses
 
@@ -69,7 +70,7 @@ HEADER := $(LIB_INCLUDE)						\
 all: lib $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(OPTIONS) $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) $(OPTIONS) $(OBJS) $(LIB) -o $(NAME)
 	@echo "\033[32m$(NAME) udpated\033[0m"
 
 .PHONY:lib
@@ -83,7 +84,7 @@ $(OBJ_PATH):
 	@mkdir -p $@/operations
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(LIB)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) -c $< -o $@
 
 .PHONY:clean
 clean:
