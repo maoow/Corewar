@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 13:35:56 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 18:26:39 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,19 @@ static void		initproccolor(t_cor *core)
 	}
 }
 
-void			ft_warcycle(t_cor *core)
-{
-	bool	b_alive;
+/*
+**	b_alive initialise a true;
+*/
 
+void			ft_warcycle(t_cor *core, bool b_alive)
+{
 	initproccolor(core);
-	b_alive = true;
 	while (b_alive)
 	{
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
-			if (((core->options->dump && core->total_cycle > 0)|| core->options->s)
+			if (((core->options->dump && core->total_cycle > 0) ||
+						core->options->s)
 					&& core->total_cycle % core->options->nb_dump == 0)
 			{
 				ft_dump(core);
