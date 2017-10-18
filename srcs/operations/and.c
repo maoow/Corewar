@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:01 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 15:23:28 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 17:11:07 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static size_t	and(size_t a, size_t b)
 	}
 	return (out);
 }
-bool	cw_and(t_cor *core, t_process *proc)
+
+bool			cw_and(t_cor *core, t_process *proc)
 {
 	size_t	a;
 	size_t	b;
