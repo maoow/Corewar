@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 15:51:54 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/11 16:35:07 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 17:04:07 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,18 @@ void			print_right(WINDOW *right, t_cor *cor, int i, t_champ *tmp)
 	int			champ;
 	int			nb_champ;
 	int			colorlign;
+	char		name_tmp[25];
 
 	champ = get_nb_champ(cor->champs);
 	nb_champ = champ;
 	print_top(right, cor);
 	while (champ > 0)
 	{
+		ft_strncpy(name_tmp, tmp->name, 24);
+		name_tmp[24] = '\0';
 		colorlign = 11 - i * 4 + nb_champ * 4;
 		mvwprintw(right, 11 - i * 4 + nb_champ * 4, 3, "Player %d : %s",
-				tmp->ID, tmp->name);
+				tmp->ID, name_tmp);
 		mvwchgat(right, colorlign, 1, 2, A_NORMAL, 13 + nb_champ - i + 1, NULL);
 		mvwprintw(right, 12 - i * 4 + nb_champ * 4, 3, "  Last live : \t\t%d",
 				tmp->last_live);
