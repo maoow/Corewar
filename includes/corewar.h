@@ -159,7 +159,7 @@ void		ft_clean(t_cor *cor);
 /*
 **			GAME FUNCTIONS
 */
-void		ft_warcycle(t_cor *core);
+void		ft_warcycle(t_cor *core, bool b_alive);
 void		ft_increase_cycle(t_cor *core);
 void		ft_browseprocess(t_cor *core);
 size_t		idx(t_process *proc, size_t jump);
