@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/16 14:53:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 13:35:56 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,19 @@ void			ft_warcycle(t_cor *core)
 			if (((core->options->dump && core->total_cycle > 0)|| core->options->s)
 					&& core->total_cycle % core->options->nb_dump == 0)
 			{
-					ft_dump(core);
+				ft_dump(core);
 				if (core->options->dump)
-				exit(0);
+					exit(0);
 			}
 			if (core->options->visu)
 				visu(core);
 			ft_browseprocess(core);
 			ft_increase_cycle(core);
 		}
-		core->tmp_cycle_to_die = 0;
 		b_alive = ft_checklives(core, NULL, NULL, 0);
+		core->tmp_cycle_to_die = 0;
 	}
+	ft_browseprocess(core);
+	ft_increase_cycle(core);
 	ft_printf("%s Won !\n", core->last_champ_alive);
 }
