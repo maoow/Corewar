@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 16:58:36 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 15:01:30 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 static void		ft_executeprocess(t_cor *core, t_process *proc)
 {
 	bool	carry;
+	int		op;
 
+	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
 	ft_determinejmpdist(core, proc);
 	carry = proc->next_op(core, proc);
 	if (core->options->reg)
 		dispreg(proc);
-	if (g_opcarry[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1])
-		proc->carry = carry;
+			if (op > 0 && op < 17 && g_opcarry[op - 1])
+				proc->carry = carry;
 	proc->PC += proc->next_jump;
 	proc->next_op = NULL;
 }
