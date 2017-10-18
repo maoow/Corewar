@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 10:12:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/16 14:56:32 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 17:10:20 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void				ft_increase_cycle(t_cor *core)
 	{
 		core->total_cycle++;
 		if (core->total_cycle > 0)
-		core->tmp_cycle_to_die++;
+			core->tmp_cycle_to_die++;
 	}
 	else
 		get_next_ic(core);
