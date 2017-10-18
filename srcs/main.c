@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 17:03:31 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 18:25:54 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int				main(int ac, char **av)
 	nb_options = get_options(&core, ac, av, 1);
 	launch_parse(&core, ac, av, nb_options);
 	intro(core.champs);
-	ft_warcycle(&core);
+	ft_warcycle(&core, true);
 	ft_clean(&core);
 	endwin();
 }
