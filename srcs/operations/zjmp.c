@@ -6,13 +6,27 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/14 14:02:51 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 17:55:55 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 
-bool	cw_zjmp(t_cor *core, t_process *proc)
+static void		no_carry(t_cor *core, t_process *proc)
+{
+	if (core->options->v16)
+	{
+		proc->next_jump = 3;
+		dispjump(core, proc);
+		proc->next_jump = 0;
+	}
+	proc->PC += 3;
+	ft_getop(core, proc);
+	if (core->options->v4)
+		ft_printf("FAILED\n");
+}
+
+bool			cw_zjmp(t_cor *core, t_process *proc)
 {
 	long int jump;
 
@@ -36,17 +50,6 @@ bool	cw_zjmp(t_cor *core, t_process *proc)
 		}
 	}
 	else
-	{
-		if (core->options->v16)
-		{
-		proc->next_jump = 3;
-			dispjump(core, proc);
-		proc->next_jump = 0;
-		}
-		proc->PC += 3;
-		ft_getop(core, proc);
-		if (core->options->v4)
-			ft_printf("FAILED\n");
-	}
+		no_carry(core, proc);
 	return (true);
 }

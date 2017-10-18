@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 15:29:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 17:50:49 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	size_t		reg;
 
 	reg = mod(core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1, 16);
-
 	adress = getparam(core, proc, 2, 2);
 	if (adress > 34952)
 		adress -= 65536;
