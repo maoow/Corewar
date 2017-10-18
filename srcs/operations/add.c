@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:24:58 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 15:20:36 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 16:48:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool		cw_add(t_cor *core, t_process *proc)
 {
-	int		res;
+	long int		res;
 
 	res =
-		proc->registres[mod(core->arena[(proc->PC + proc->startpos + 3) %
+		(long int)proc->registres[mod(core->arena[(proc->PC + proc->startpos + 3) %
 		MEM_SIZE] - 1, 16)] +
 		proc->registres[mod(core->arena[(proc->PC + proc->startpos + 2) %
 		MEM_SIZE] - 1, 16)];

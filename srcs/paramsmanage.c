@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/12 14:46:39 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 16:20:44 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 	{
 		if (op[i] == 1)
 		{
-			value = proc->registres[core->arena[(proc->PC + proc->startpos + place ) % MEM_SIZE] - 1];
+			value = proc->registres[mod(core->arena[(proc->PC + proc->startpos + place ) % MEM_SIZE] - 1, 16)];
 				place++;
 		}
 		else if (op[i] == 2)

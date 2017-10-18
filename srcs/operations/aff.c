@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:00 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 15:23:03 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 15:53:16 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		print_procbuff(t_process *proc)
 	i = 0;
 	while (i < proc->buffc && i < 128)
 	{
-		ft_putchar(proc->buff[i]);
+		//ft_putchar(proc->buff[i]);
 		i++;
 	}
 	proc->buffc = 0;
