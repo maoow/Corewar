@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:01 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/16 14:34:25 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 15:23:28 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ bool	cw_and(t_cor *core, t_process *proc)
 
 	a = getparam(core, proc, 1, 2);
 	b = getparam(core, proc, 2, 2);
-	c = core->arena[getparamplace(core, proc, 3, 4) % MEM_SIZE];
+	c = mod(core->arena[getparamplace(core, proc, 3, 4) % MEM_SIZE] - 1, 16);
 	proc->registres[c] = and(a, b);
 	if (core->options->v4)
-		ft_printf("P%5d | and %d %d r%d\n", proc->ID, a, b, c);
+		ft_printf("P%5d | and %d %d r%d\n", proc->ID, a, b, c + 1);
 	return (proc->registres[c] == 0);
 }
