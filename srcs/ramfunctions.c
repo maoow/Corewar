@@ -6,15 +6,15 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 13:10:18 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 16:55:00 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 14:47:19 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int			getram(t_cor *core, size_t address)
+long int			getram(t_cor *core, size_t address)
 {
-	int	value;
+	long int	value;
 
 	address %= MEM_SIZE;
 	value = core->arena[(address) % MEM_SIZE];

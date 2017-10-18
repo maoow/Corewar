@@ -168,7 +168,7 @@ size_t		ind(t_cor *core, t_process *proc, size_t PC);
 size_t		getparam(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		*ft_getparamstype(t_cor *core, t_process *proc);
-int			getram(t_cor *core, size_t address);
+long int	getram(t_cor *core, size_t address);
 void		setram(t_cor *core, size_t address, int value, int color);
 void		free_process(t_process *tmp);
 void		ft_delprocess(t_cor *core, t_process **del);
