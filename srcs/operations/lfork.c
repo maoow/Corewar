@@ -6,16 +6,31 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 16:49:12 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 18:04:15 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 
-bool	cw_lfork(t_cor *core, t_process *proc)
+static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
+{
+	tmp->next_jump = 0;
+	tmp->next_op = NULL;
+	ft_getop(core, tmp);
+	tmp->cycles_before_execute--;
+	tmp->carry = proc->carry;
+	tmp->live = proc->live;
+	tmp->color = proc->color;
+	tmp->ID = core->process->ID + 1;
+	tmp->next = core->process;
+	core->process = tmp;
+}
+
+bool				cw_lfork(t_cor *core, t_process *proc)
 {
 	t_process	*tmp;
 	size_t		i;
+	int			indt;
 
 	i = 0;
 	if (!(tmp = (t_process *)malloc(sizeof(t_process))))
@@ -25,16 +40,16 @@ bool	cw_lfork(t_cor *core, t_process *proc)
 		tmp->registres[i] = proc->registres[i];
 		i++;
 	}
-	tmp->PC = (proc->PC + ind(core, proc, proc->PC + 1)) % MEM_SIZE;
-	tmp->startpos = proc->startpos;
-	tmp->next_jump = 0;
-	tmp->cycles_before_execute = 0;
-	tmp->next_jump = 0;
-	tmp->carry = proc->carry;
-	tmp->live = proc->live;
-	tmp->next = core->process;
-	core->process = tmp;
+	tmp->PC = 0;
+	tmp->startpos = ind(core, proc, proc->PC + 1) % MEM_SIZE;
+	fulfill_tmp(core, tmp, proc);
 	if (core->options->v4)
-		ft_printf("P%5d | lfork %d\n", proc->ID, ind(core, proc, proc->PC + 1));
+	{
+		indt = ind(core, proc, proc->PC + 1) % MEM_SIZE;
+		if (indt > MEM_SIZE / 2)
+			indt -= MEM_SIZE;
+		ft_printf("P%5d | fork %d (%d)\n", proc->ID, indt,
+				idx(proc, ind(core, proc, proc->PC + 1)));
+	}
 	return (true);
 }
