@@ -5,20 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/30 14:32:55 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/13 14:51:23 by cbinet           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   jump.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/08/30 14:31:00 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 17:13:19 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +48,15 @@ bool					g_ocp[OPC_NBR] = {
 	false,
 	true
 };
+
 size_t	idx(t_process *proc, size_t jump)
 {
 	int	tmp;
 
-	/*
-	   tmp = proc->PC + jump;
-	   tmp %= MEM_SIZE;
-	   tmp -= proc->PC;
-	   if (tmp >= 0)
-	   tmp %= IDX_MOD;
-	   else
-	   tmp = (tmp % IDX_MOD) - IDX_MOD;
-	   return ((size_t)((tmp + proc->startpos) % MEM_SIZE));
-	   */
 	if (jump > MEM_SIZE / 2 && jump % IDX_MOD != 0)
-	{
 		tmp = (jump % IDX_MOD) + proc->PC - IDX_MOD;
-	}
 	else
-	{
 		tmp = (jump % IDX_MOD) + proc->PC;
-	}
-	//ft_printf("%d %d %d\n", jump,  tmp, proc->startpos);
 	return ((size_t)((tmp + proc->startpos) % MEM_SIZE));
 }
 
@@ -94,7 +68,7 @@ void	dispjump(t_cor *core, t_process *proc)
 	if (proc->startpos + proc->PC > 0)
 		ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, proc->startpos + proc->PC, proc->startpos + proc->PC + proc->next_jump);
 	else
-		ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump,  proc->startpos + proc->PC + proc->next_jump);
+		ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump, proc->startpos + proc->PC + proc->next_jump);
 	if (proc->next_jump < 1000)
 		while (i < proc->next_jump)
 		{
@@ -102,7 +76,6 @@ void	dispjump(t_cor *core, t_process *proc)
 			i++;
 		}
 	ft_printf(" \n");
-
 }
 
 void	ft_determinejmpdist(t_cor *core, t_process *proc)
@@ -133,5 +106,4 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 	}
 	else
 		proc->next_jump = 0;
-
 }
