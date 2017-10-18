@@ -6,14 +6,14 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/12 13:10:20 by starrit          ###   ########.fr        #
+#    Updated: 2017/10/18 11:56:37 by cbinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 CPPFLAGS = -iquote includes -iquote $(LIB_PATH)$(INC)
 OPTIONS = -lncurses
 
