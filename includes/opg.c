@@ -56,7 +56,7 @@ bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *) = {
 };
 
 
-bool					g_opparamnb[OPC_NBR] = {
+size_t					g_opparamnb[OPC_NBR] = {
 	1,
 	2,
 	2,
