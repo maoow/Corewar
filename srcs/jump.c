@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 17:13:19 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/19 14:00:16 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 		}
 		else
 			proc->next_jump = 1 + g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+		if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] == 2 && proc->next_jump >= 8)
+			proc->next_jump = 6;
 		if (core->options->v16)
 			dispjump(core, proc);
 	}
