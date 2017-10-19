@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/19 14:00:16 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/19 14:28:16 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,18 @@ size_t	idx(t_process *proc, size_t jump)
 void	dispjump(t_cor *core, t_process *proc)
 {
 	size_t		i;
+	size_t		start;
 
+	start = mod(proc->startpos + proc->PC, MEM_SIZE);
 	i = 0;
-	if (proc->startpos + proc->PC > 0)
-		ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, proc->startpos + proc->PC, proc->startpos + proc->PC + proc->next_jump);
+	if (start > 0)
+		ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, start, start + proc->next_jump);
 	else
 		ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump, proc->startpos + proc->PC + proc->next_jump);
 	if (proc->next_jump < 1000)
 		while (i < proc->next_jump)
 		{
-			ft_printf(" %02x", core->arena[proc->startpos + proc->PC + i]);
+			ft_printf(" %02x", core->arena[mod(proc->startpos + proc->PC + i, MEM_SIZE)]);
 			i++;
 		}
 	ft_printf(" \n");
