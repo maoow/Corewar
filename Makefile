@@ -70,7 +70,7 @@ HEADER := $(LIB_INCLUDE)						\
 all: lib $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) $(OPTIONS) $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) $(OBJS) $(OPTIONS) $(LIB) -o $(NAME)
 	@echo "\033[32m$(NAME) udpated\033[0m"
 
 .PHONY:lib
