@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 17:50:49 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/19 16:12:42 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	setram(core, proc->PC + proc->startpos + total, proc->registres[reg],
 			proc->color);
 	if (core->options->v4)
+	{
 		ft_printf("P%5d | sti r%d %d %d\n       | -> store to %d + %d = %d \
 (with pc and mod %d)\n",
 				proc->ID, reg + 1, adress, adress2, adress, adress2, total,
-				proc->PC + total + proc->startpos);
+				((proc->PC + proc->startpos) % MEM_SIZE) + total);
+	}
 	return (true);
 }
