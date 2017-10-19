@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 15:01:30 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/19 17:19:06 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,33 @@ size_t			*ft_getparamstype(t_cor *core, t_process *proc)
 	}
 	return (params);
 }
+static bool		ft_checkconsistancy(t_cor *core, t_process *proc)
+{
+	size_t op;
+	size_t opc;
+	size_t params;
+
+	params = 0;
+	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
+	if (op > 1 && op < OPC_NUMBER && g_ocp[op - 1])
+	{
+
+		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
+		while (opc)
+		{
+			opc /= 4;
+			if (opc % 4 != 0)
+				params++;
+		}
+		if (params != g_opparamnb[op - 1])
+		{
+			proc->next_op = NULL;
+			//proc->next_jump = 2 + params;
+			return (false);
+		}
+	}
+	return (true);
+}
 
 static void		ft_executeprocess(t_cor *core, t_process *proc)
 {
@@ -47,11 +74,12 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 
 	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
 	ft_determinejmpdist(core, proc);
-	carry = proc->next_op(core, proc);
+	if (ft_checkconsistancy(core, proc))
+		carry = proc->next_op(core, proc);
 	if (core->options->reg)
 		dispreg(proc);
-			if (op > 0 && op < 17 && g_opcarry[op - 1])
-				proc->carry = carry;
+	if (op > 0 && op < 17 && g_opcarry[op - 1])
+		proc->carry = carry;
 	proc->PC += proc->next_jump;
 	proc->next_op = NULL;
 }
