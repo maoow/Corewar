@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/20 13:03:38 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/20 16:50:16 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,14 @@ static bool		ft_checkconsistancy(t_cor *core, t_process *proc)
 		if (params != g_opparamnb[op - 1])
 		{
 			proc->next_op = NULL;
-			//proc->next_jump = 2 + params;
+			proc->next_jump = 2;
+			if (core->options->v16)
+				dispjump(core, proc);
 			return (false);
 		}
 	}
+	if (core->options->v16)
+		dispjump(core, proc);
 	return (true);
 }
 
