@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 10:12:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 17:10:20 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/20 14:52:14 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void				ft_increase_cycle(t_cor *core)
 	else
 		get_next_ic(core);
 	ft_decrease_arena_update(core);
-	if (core->options->v2)
+	if (core->options->v2 && core->total_cycle > 0)
 		ft_printf("It is now cycle %d\n", core->total_cycle);
 }
