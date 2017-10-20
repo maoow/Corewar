@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/19 14:17:02 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/20 13:22:20 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void		no_carry(t_cor *core, t_process *proc)
 		proc->next_jump = 0;
 	}
 	proc->PC += 3;
+	ft_getop(core, proc);
 	if (core->options->v4)
 		ft_printf("FAILED\n");
 }
@@ -40,6 +41,7 @@ bool			cw_zjmp(t_cor *core, t_process *proc)
 			ft_printf("OK\n");
 		if (jump != 0)
 		{
+			jump %= IDX_MOD;
 			proc->PC += jump;
 			proc->PC += proc->startpos;
 			proc->PC %= MEM_SIZE;
