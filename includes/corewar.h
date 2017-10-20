@@ -76,7 +76,7 @@ typedef struct			s_champ
 {
 	char				*name;
 	char				*comment;
-	size_t				ID;
+	long int			ID;
 	struct s_champ		*next;
 	bool				alive;
 	size_t				last_live;
@@ -127,7 +127,7 @@ typedef struct			s_cor
 	t_process			*process;
 	t_options			*options;
 	t_opt_number		*id_list;
-	char				*last_champ_alive;
+	long int			last_champ_alive;
 	int					cycle_to_die;
 	int					tmp_cycle_to_die;
 	size_t				checks;
