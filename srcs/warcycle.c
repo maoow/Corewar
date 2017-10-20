@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 18:26:39 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/20 13:53:13 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ static void		initproccolor(t_cor *core)
 	}
 }
 
+void	dispwinner(t_cor *core)
+{
+	t_champ		*tmp;
+
+	tmp = core->champs;
+	while (tmp->ID != core->last_champ_alive)
+		tmp = tmp->next;
+	ft_printf("Contestant %d, \"%s\", has won !\n", core->last_champ_alive, tmp->name);
+}
 /*
 **	b_alive initialise a true;
 */
@@ -107,5 +116,5 @@ void			ft_warcycle(t_cor *core, bool b_alive)
 	}
 	ft_browseprocess(core);
 	ft_increase_cycle(core);
-	ft_printf("%s Won !\n", core->last_champ_alive);
+	dispwinner(core);
 }

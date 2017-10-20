@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 14:22:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/20 13:47:13 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void			ft_init(t_cor *core)
 		write_error(2);
 	init_options(core->options);
 	core->options->num_champ = NULL;
-	core->last_champ_alive = NULL;
+	core->last_champ_alive = 0;
 }
