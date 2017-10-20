@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/20 13:22:20 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/20 16:38:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		no_carry(t_cor *core, t_process *proc)
 		proc->next_jump = 0;
 	}
 	proc->PC += 3;
-	ft_getop(core, proc);
+//	ft_getop(core, proc);
 	if (core->options->v4)
 		ft_printf("FAILED\n");
 }
