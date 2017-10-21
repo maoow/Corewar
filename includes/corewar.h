@@ -57,6 +57,7 @@ typedef struct			s_opt_number
 **	v4 pour le verbose details des operations
 **	visu pour le visualisateur ncurses
 **	follow pour follow un processus precis sur le visu
+**	aff_visu pour n'afficher le visu qu'a partir d'un certain moment
 */
 
 typedef struct			s_options
@@ -73,6 +74,7 @@ typedef struct			s_options
 	bool				fast;
 	bool				follow;
 	int					nb_follow;
+	int					aff_visu;
 }						t_options;
 
 typedef struct			s_champ

@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/20 13:53:13 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 14:34:17 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			ft_warcycle(t_cor *core, bool b_alive)
 				if (core->options->dump)
 					exit(0);
 			}
-			if (core->options->visu)
+			if (core->options->visu && core->total_cycle > core->options->aff_visu)
 				visu(core);
 			ft_browseprocess(core);
 			ft_increase_cycle(core);
