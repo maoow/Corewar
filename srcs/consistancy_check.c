@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 11:00:05 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/21 12:36:58 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 13:16:57 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ static bool		checkopn(t_cor *core, t_process *proc)
 	size_t op;
 
 	op = core->arena[(proc->PC + proc->startpos) % MEM_SIZE];
-	return (op > 0 && op <= OPC_NUMBER);
+	if (op == 0 || op > OPC_NUMBER)
+		return (false);
+	return (true);
 }
 bool			ft_checkexecutable(t_cor *core, t_process *proc)
 {
@@ -93,7 +95,17 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 
 bool			ft_checkloadable(t_cor *core, t_process *proc)
 {
-	if (checkopn(core, proc))
+	size_t opc;
+	size_t op;
+
+	op = core->arena[(proc->PC + proc->startpos) % MEM_SIZE];
+	opc = core->arena[(1 + proc->PC + proc->startpos) % MEM_SIZE];
+	if (!checkopn(core, proc))
+		return (false);
+	if (hasopcode(op) && !(op == 2 || op == 4 || op == 5))
+	{
+		if (get_paramnb(opc) != g_opparamnb[op - 1])
+			return (false);
+	}
 		return (true);
-	return (false);
 }
