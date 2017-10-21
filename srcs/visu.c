@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/21 14:09:41 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/21 14:55:08 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,21 @@ static void		manage_box(WINDOW *left, WINDOW *right, t_cor *cor)
 	print_left(left, cor, 4, 2);
 }
 
+static void		wait_for_start(void)
+{
+	static bool		start = true;
+	int				touche;
+
+	while (start)
+	{
+		touche = getch();
+		if (touche == 27)
+			exit(0);
+		else if (touche == 32)
+			start = false;
+	}
+}
+
 /*
 **	lance le mode et les options ncurse (init() ),
 **	creer les fenetres gauche/droite
@@ -156,6 +171,7 @@ void			visu(t_cor *cor)
 	wrefresh(left);
 	wrefresh(right);
 	nodelay(stdscr, true);
+	wait_for_start();
 	if ((touche = getch()) == 27)
 		exit(0);
 	else if (touche == 32)
