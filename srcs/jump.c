@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/20 16:49:05 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 12:35:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,6 @@ size_t					g_oplabel[OPC_NBR] = {
 	2,
 	2,
 	0
-};
-bool					g_ocp[OPC_NBR] = {
-	false,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	false,
-	true,
-	true,
-	false,
-	true,
-	true,
-	false,
-	true
 };
 
 size_t	idx(t_process *proc, size_t jump)
@@ -90,7 +72,7 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 	tmp = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
 	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] != 9 && core->arena[(proc->startpos + proc->PC) % MEM_SIZE] < 17 && core->arena[(proc->startpos + proc->PC) % MEM_SIZE] > 0)
 	{
-		if (g_ocp[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1])
+		if (hasopcode(core->arena[(proc->startpos + proc->PC) % MEM_SIZE]))
 		{
 			proc->next_jump = 2;
 			while (tmp)
