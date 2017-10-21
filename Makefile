@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/10/18 14:32:48 by starrit          ###   ########.fr        #
+#    Updated: 2017/10/21 11:23:03 by cbinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_NAME = add_champ.c								\
 		   cyclemanage.c							\
 		   main.c									\
 		   paramsmanage.c							\
+		   consistancy_check.c								\
 		   processmanage.c							\
 		   regmanage.c								\
 		   parse.c									\
