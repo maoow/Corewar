@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/11 16:33:17 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/21 14:09:41 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ static void		init_my_pairs(void)
 	init_pair(7, COLOR_CYAN, COLOR_BLACK);
 	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(9, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(14, COLOR_BLACK, COLOR_GREEN);
-	init_pair(15, COLOR_BLACK, COLOR_BLUE);
-	init_pair(16, COLOR_BLACK, COLOR_RED);
-	init_pair(17, COLOR_BLACK, COLOR_CYAN);
-	init_pair(18, COLOR_BLACK, COLOR_YELLOW);
-	init_pair(19, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(14, 35, COLOR_GREEN);
+	init_pair(15, 35, COLOR_BLUE);
+	init_pair(16, 35, COLOR_RED);
+	init_pair(17, 35, COLOR_CYAN);
+	init_pair(18, 35, COLOR_YELLOW);
+	init_pair(19, 35, COLOR_MAGENTA);
 	init_pair(24, 44, COLOR_BLACK);
 	init_pair(25, 45, COLOR_BLACK);
 	init_pair(26, 46, COLOR_BLACK);
