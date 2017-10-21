@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/18 17:15:16 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/21 13:42:42 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool		get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 	return (true);
 }
 
-static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t nb_champ)
+static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t *nb_champ)
 {
 	if (ft_strcmp(av[i], "-v2") == 0)
 		cor->options->v2 = true;
@@ -71,13 +71,13 @@ static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t nb_champ)
 		cor->options->fast = true;
 	else if (ft_strcmp(av[i], "-visu") == 0)
 		cor->options->visu = true;
-	else if (!is_champ(av[i], &nb_champ, false, 0))
+	else if (!is_champ(av[i], nb_champ, false, 0))
 	{
 		ft_putstr(av[i]);
 		ft_putstr(" : ");
 		write_error(3);
 	}
-	return (nb_champ);
+	return (*nb_champ);
 }
 
 /*
@@ -103,13 +103,13 @@ size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 				ft_atoi(av[i + 1]) != 0)
 			i++;
 		else if (!get_option_3(cor, av, &i, ac))
-			nb_champ = get_option_2(cor, av, i, nb_champ);
+			nb_champ = get_option_2(cor, av, i, &nb_champ);
 		if (nb_champ > MAX_PLAYERS)
 			write_error(4);
 		i++;
 	}
-	if (cor->options->dump)
-		cor->options->visu = false;
+	if (nb_champ == 0)
+		write_error(3);
 	return (i - nb_champ - 1);
 }
 
