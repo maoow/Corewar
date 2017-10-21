@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/21 13:42:42 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/21 13:55:32 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ static bool		get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 			write_error(3);
 		(*i)++;
 	}
+	if (ft_strcmp(av[*i], "-follow") == 0 && ac > (int)(*i + 1))
+	{
+		cor->options->follow = true;
+		if (!(cor->options->nb_follow = ft_atoi(av[*i + 1])))
+			write_error(3);
+		(*i)++;
+	}
 	else
 		return (false);
 	return (true);
@@ -72,11 +79,7 @@ static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t *nb_champ)
 	else if (ft_strcmp(av[i], "-visu") == 0)
 		cor->options->visu = true;
 	else if (!is_champ(av[i], nb_champ, false, 0))
-	{
-		ft_putstr(av[i]);
-		ft_putstr(" : ");
 		write_error(3);
-	}
 	return (*nb_champ);
 }
 
