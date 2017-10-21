@@ -56,6 +56,7 @@ typedef struct			s_opt_number
 **	n et num_champ pour assigner un numero precis a un champion
 **	v4 pour le verbose details des operations
 **	visu pour le visualisateur ncurses
+**	follow pour follow un processus precis sur le visu
 */
 
 typedef struct			s_options
@@ -70,6 +71,8 @@ typedef struct			s_options
 	bool				reg;
 	bool				visu;
 	bool				fast;
+	bool				follow;
+	int					nb_follow;
 }						t_options;
 
 typedef struct			s_champ
@@ -91,7 +94,7 @@ typedef struct			s_champ
 
 typedef struct			s_process
 {
-	size_t				ID;
+	int					ID;
 	int					registres[REG_NUMBER];
 	size_t				PC;
 	size_t				startpos;
