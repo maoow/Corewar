@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/21 12:29:13 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 14:16:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *) = {
 	&cw_lfork,
 	&cw_aff
 };
+
+size_t					revgetop(bool (*op)())
+{
+	size_t	i;
+
+	i = 0;
+	while (op != g_opctable[i] && i < OPC_NUMBER)
+	{
+		i++;
+	}
+	if (i >= OPC_NUMBER)
+		return (0);
+	return (i + 1);
+}
 
 bool					g_opcarry[OPC_NBR] = {
 	false,
