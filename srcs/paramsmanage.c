@@ -6,11 +6,25 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 16:20:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 11:18:08 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+size_t	get_paramnb(size_t opc)
+{
+	size_t params;
+
+	params = 0;
+		while (opc)
+		{
+			opc /= 4;
+			if (opc % 4 != 0)
+				params++;
+		}
+		return (params);
+}
 
 size_t	ind(t_cor *core, t_process *proc, size_t PC)
 {
@@ -85,23 +99,3 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 	}
 	return ((place + proc->PC + proc->startpos) % MEM_SIZE);
 }
-
-	/*
-	unsigned char	op;
-	size_t			i;
-	size_t			place;
-
-	i = 1;
-	place = 2;
-	op = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
-	while (i < param)
-	{
-		if (op % 4 == 1)
-				place++;
-		else if (op % 4 == 2)
-			place += label;
-		else
-			place += 2;
-		i++;
-		op /= 4;
-	}*/

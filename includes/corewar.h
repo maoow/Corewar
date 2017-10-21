@@ -176,5 +176,9 @@ void		ft_addprocess(t_cor *core, t_process *new);
 void		ft_getop(t_cor *core, t_process *proc);
 void		dispreg(t_process *proc);
 void		dispjump(t_cor *core, t_process *proc);
+bool		ft_checkexecutable(t_cor *core, t_process *proc);
+bool		ft_checkloadable(t_cor *core, t_process *proc);
+size_t		get_paramnb(size_t opc);
+bool		hasopcode(size_t op);
 
 #endif
