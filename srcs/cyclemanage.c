@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 10:12:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/20 14:52:14 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 13:44:21 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void			get_next_ic(t_cor *core)
 	min = core->cycle_to_die - core->tmp_cycle_to_die;
 	if (core->options->dump && core->options->nb_dump - core->total_cycle < min)
 		min = core->options->nb_dump - core->total_cycle - 1;
+	if (core->cycle_to_die <= 1)
+		min = 0;
 	tmp = core->process;
 	while (tmp)
 	{
