@@ -6,11 +6,18 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/21 14:34:17 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/22 13:31:49 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+/*
+** 	check_delat() :
+**
+**  decrease cycle_to_die if executed lives since last check is superior to NBR_LIVE
+**  or if the function has been called MAX_CHEKS time with no cycle_to_die decrease
+*/
 
 static bool		check_delta(t_cor *core, size_t lives)
 {
@@ -32,6 +39,12 @@ static bool		check_delta(t_cor *core, size_t lives)
 **	lives initialise a 0;
 */
 
+/*
+**	ft_checklives() :
+**	
+**	count every lives executed since last check, if none, end the game, 
+**	else, call check_delta to see if cycle to die need to be decreased
+*/
 static bool		ft_checklives(t_cor *core, t_process *proc, t_process *tproc,
 		size_t lives)
 {
@@ -43,8 +56,7 @@ static bool		ft_checklives(t_cor *core, t_process *proc, t_process *tproc,
 			tproc = proc->next;
 			ft_delprocess(core, &proc);
 			proc = tproc;
-		}
-		else
+		} else
 		{
 			lives += proc->live;
 			proc->live = 0;
@@ -78,6 +90,12 @@ static void		initproccolor(t_cor *core)
 	}
 }
 
+/*
+** dispwinner() :
+**
+** search for the last alive-declared champ and print its informations
+*/
+
 void	dispwinner(t_cor *core)
 {
 	t_champ		*tmp;
@@ -91,6 +109,11 @@ void	dispwinner(t_cor *core)
 **	b_alive initialise a true;
 */
 
+/*
+** ft_warcycle() :
+**
+**	browse process/increase cycle/call visu/check lives... until every process died
+*/
 void			ft_warcycle(t_cor *core, bool b_alive)
 {
 	initproccolor(core);
