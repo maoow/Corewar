@@ -1,4 +1,5 @@
 #!/bin/bash
+make
 
 i=0
 
