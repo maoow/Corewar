@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 16:55:47 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 17:07:18 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ static int		**get_hexa(unsigned char *champion, size_t size_champ)
 	return (new);
 }
 
-//	changer 138 par la formule exacte (voir asm)
 static void		get_info(bool *start, size_t s, unsigned char buf)
 {
-	//if (s > 138 && buf && buf > 0 && buf < 17)
 	if (s > 148 && buf && buf > 0 && buf < 17)
 		*start = true;
 }
@@ -74,13 +72,14 @@ static void		check_magic_packet(unsigned char *magic)
 	}
 }
 
-static void		get_magic_packet(size_t s, unsigned char *buf)
+static void		get_magic_packet(size_t s, unsigned char *buf, bool *end)
 {
 	static size_t			i = 0;
-	static bool				end = false;
 	static unsigned char	*magic = NULL;
 
-	if (!magic && !end)
+	if (s <= EXEC_MAGIC_LENGHT)
+		*end = false;
+	if (!magic && !*end)
 	{
 		if (!(magic = ft_memalloc(EXEC_MAGIC_LENGHT + 1)))
 			write_error(2);
@@ -90,13 +89,14 @@ static void		get_magic_packet(size_t s, unsigned char *buf)
 		magic[i] = buf[0];
 		i++;
 	}
-	else if (!end)
+	else if (!*end)
 	{
 		magic[i] = '\0';
 		check_magic_packet(magic);
-		end = true;
+		*end = true;
 		free(magic);
 		magic = NULL;
+		i = 0;
 	}
 }
 
@@ -106,6 +106,7 @@ static size_t	read_loop(unsigned char *buf, char *name, char *comment,
 	static size_t		s = 0;
 	static bool			start = false;
 	static size_t		size_champ = 0;
+	static bool			end = false;
 
 	if (champion == NULL)
 	{
@@ -114,7 +115,7 @@ static size_t	read_loop(unsigned char *buf, char *name, char *comment,
 		size_champ = 0;
 		return (0);
 	}
-	get_magic_packet(s, buf);
+	get_magic_packet(s, buf, &end);
 	if (s > 3 && s < CHAMP_NAME)
 		name[s - 4] = buf[0];
 	if (s >= CHAMP_NAME + 4 && s < COMMENT_NAME)

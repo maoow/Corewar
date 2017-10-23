@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 14:49:49 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 14:33:53 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool			is_champ(char *av, size_t *nb_champ, bool test, int j)
 	return (true);
 }
 
-static bool	get_option_3(t_cor *cor, char **av, size_t *i, int ac)
+static bool		get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 {
 	if (ft_strcmp(av[*i], "-s") == 0 && ac > (int)(*i + 1))
 	{
@@ -52,11 +52,25 @@ static bool	get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 			write_error(3);
 		(*i)++;
 	}
+	else if (ft_strcmp(av[*i], "-follow") == 0 && ac > (int)(*i + 1))
+	{
+		cor->options->follow = true;
+		if (!(cor->options->nb_follow = ft_atoi(av[*i + 1])))
+			write_error(3);
+		(*i)++;
+	}
+	else if (ft_strcmp(av[*i], "-aff") == 0 && ac > (int)(*i + 1))
+	{
+		if (!(cor->options->aff_visu = ft_atoi(av[*i + 1])))
+			write_error(3);
+		(*i)++;
+	}
 	else
 		return (false);
 	return (true);
 }
-static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t nb_champ)
+
+static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t *nb_champ)
 {
 	if (ft_strcmp(av[i], "-v2") == 0)
 		cor->options->v2 = true;
@@ -70,13 +84,9 @@ static size_t	get_option_2(t_cor *cor, char **av, size_t i, size_t nb_champ)
 		cor->options->fast = true;
 	else if (ft_strcmp(av[i], "-visu") == 0)
 		cor->options->visu = true;
-	else if (!is_champ(av[i], &nb_champ, false, 0))
-	{
-		ft_putstr(av[i]);
-		ft_putstr(" : ");
+	else if (!is_champ(av[i], nb_champ, false, 0))
 		write_error(3);
-	}
-	return (nb_champ);
+	return (*nb_champ);
 }
 
 /*
@@ -102,13 +112,13 @@ size_t			get_options(t_cor *cor, int ac, char **av, size_t i)
 				ft_atoi(av[i + 1]) != 0)
 			i++;
 		else if (!get_option_3(cor, av, &i, ac))
-			nb_champ = get_option_2(cor, av, i, nb_champ);
+			nb_champ = get_option_2(cor, av, i, &nb_champ);
 		if (nb_champ > MAX_PLAYERS)
 			write_error(4);
 		i++;
 	}
-	if (cor->options->dump)
-		cor->options->visu = false;
+	if (nb_champ == 0)
+		write_error(3);
 	return (i - nb_champ - 1);
 }
 

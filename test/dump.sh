@@ -1,31 +1,22 @@
 #!/bin/bash
-rm test/diffs*
-n=1
-diff=0
-FILESIZE=0
-while [ $FILESIZE -lt 1 ]
+
+i=0
+
+step=10000
+while [ $step -gt 0 ]
 do
-./corewar ressources/zaz_champ/helltrain.cor -dump $n > test/me
-./ressources/corewar_goinfre ressources/zaz_champ/helltrain.cor -d $n > test/you
-diff test/me test/you  > test/diffs
-FILESIZE=$(wc -c < "test/diffs")
-n=$(($n + 1000))
+	diff=0
+	while [ $diff -lt 1 ]
+	do
+		i=$(($i + $step))
+		./corewar ressources/zaz_champ/$@.cor -dump $i > /tmp/me
+		./ressources/corewar_goinfre ressources/zaz_champ/$@.cor -d $i > /tmp/you
+		diff /tmp/me /tmp/you > /tmp/diff
+		echo $i
+		diff=$(wc -l < /tmp/diff)
+	done
+	i=$(($i - $step))
+	step=$(($step / 10))
 done
-echo "helltrain :"
-echo $(($n - 1))
-cat test/diffs
-n=1
-diff=0
-FILESIZE=0
-while [ $FILESIZE -lt 1 ]
-do
-./corewar ressources/zaz_champ/bee_gees.cor -dump $n > test/me
-./ressources/corewar_goinfre ressources/zaz_champ/bee_gees.cor -d $n > test/you
-diff test/me test/you  > test/diffs
-FILESIZE=$(wc -c < "test/diffs")
-n=$(($n + 100))
-done
-echo "bee_gees :"
-echo $(($n - 1))
-cat test/diffs
-rm test/you test/me
+cat /tmp/diff
+

@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:24:58 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 16:39:35 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/19 15:53:48 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 bool		cw_add(t_cor *core, t_process *proc)
 {
-	int		res;
-
-	res =
-		proc->registres[core->arena[(proc->PC + proc->startpos + 3) %
-		MEM_SIZE] - 1] +
-		proc->registres[core->arena[(proc->PC + proc->startpos + 2) %
-		MEM_SIZE] - 1];
-	proc->registres[core->arena[(proc->PC + proc->startpos + 4) %
-		MEM_SIZE] - 1] = res;
-	if (core->options->v4)
-		ft_printf("P%5d | add r%d r%d r%d\n",
-			proc->ID, core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE],
-			core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE],
-			core->arena[(proc->PC + proc->startpos + 4) % MEM_SIZE]);
-	if (res == 0)
+	size_t			r1;
+	size_t			r2;
+	size_t			r3;
+	r1 = core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE] - 1;
+	r2 = core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1;
+	r3 = core->arena[(proc->PC + proc->startpos + 4) % MEM_SIZE] - 1;
+	if (r3 > 0 && r2 > 0 && r1 > 0 && r3 < REG_NUMBER && r1 < REG_NUMBER && r2 < REG_NUMBER)
+	{
+proc->registres[r3] = proc->registres[r1] + proc->registres[r2];
+		if (core->options->v4)
+			ft_printf("P%5d | add r%d r%d r%d\n", proc->ID, r3 + 1, r1 + 1, r2 + 1);
+	if (proc->registres[r3] == 0)
 		proc->carry = true;
 	else
 		proc->carry = false;
 	return (proc->carry);
+	}
+	return (false);
 }

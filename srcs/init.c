@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/14 14:22:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/21 14:33:01 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void		init_options(t_options *opt)
 	opt->visu = false;
 	opt->fast = false;
 	opt->reg = false;
+	opt->follow = false;
+	opt->nb_follow = 0;
+	opt->aff_visu = -1;
 }
 
 void			ft_init(t_cor *core)
@@ -50,5 +53,5 @@ void			ft_init(t_cor *core)
 		write_error(2);
 	init_options(core->options);
 	core->options->num_champ = NULL;
-	core->last_champ_alive = NULL;
+	core->last_champ_alive = 0;
 }

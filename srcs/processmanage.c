@@ -6,50 +6,102 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/11 16:58:36 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/22 11:58:09 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-#include "opg.c"
 
-size_t			*ft_getparamstype(t_cor *core, t_process *proc)
+bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *) = {
+	&cw_live,
+	&cw_ld,
+	&cw_st,
+	&cw_add,
+	&cw_sub,
+	&cw_and,
+	&cw_or,
+	&cw_xor,
+	&cw_zjmp,
+	&cw_ldi,
+	&cw_sti,
+	&cw_fork,
+	&cw_lld,
+	&cw_lldi,
+	&cw_lfork,
+	&cw_aff
+};
+
+size_t					revgetop(bool (*op)())
 {
-	size_t		*params;
-	size_t		i;
-	size_t		tmp;
+	size_t	i;
 
-	if (!(params =
-				(size_t *)malloc(g_oplabel[core->arena[(proc->startpos +
-						proc->PC) % MEM_SIZE] - 1] * sizeof(size_t))))
-		exit(1);
-	tmp = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
 	i = 0;
-	while (tmp)
+	while (op != g_opctable[i] && i < OPC_NUMBER)
 	{
-		tmp /= 4;
-		if (tmp % 4 == 1)
-			params[i] = 1;
-		else if (tmp % 4 == 3)
-			params[i] = 2;
-		else if (tmp % 4 == 2)
-			params[i] = g_oplabel[core->arena[(proc->startpos + proc->PC) %
-				MEM_SIZE] - 1];
 		i++;
 	}
-	return (params);
+	if (i >= OPC_NUMBER)
+		return (0);
+	return (i + 1);
 }
 
+bool					g_opcarry[OPC_NBR] = {
+	false,
+	true,
+	false,
+	true,
+	true,
+	true,
+	true,
+	true,
+	false,
+	false,
+	false,
+	false,
+	true,
+	true,
+	false,
+	false,
+};
+
+size_t					g_optime[OPC_NBR] = {
+	10,
+	5,
+	5,
+	10,
+	10,
+	6,
+	6,
+	6,
+	20,
+	25,
+	25,
+	800,
+	10,
+	50,
+	1000,
+	2
+};
 static void		ft_executeprocess(t_cor *core, t_process *proc)
 {
 	bool	carry;
+	int		op;
 
+	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
 	ft_determinejmpdist(core, proc);
-	carry = proc->next_op(core, proc);
-	if (core->options->reg)
-		dispreg(proc);
-	if (g_opcarry[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1])
-		proc->carry = carry;
+	if (ft_checkexecutable(core, proc))
+	{
+		carry = proc->next_op(core, proc);
+		if (core->options->reg)
+			dispreg(proc);
+		if (op > 0 && op < 17 && g_opcarry[op - 1])
+			proc->carry = carry;
+	}
+	else
+	{
+	proc->PC += proc->next_jump;
+		proc->next_jump = 0;
+	}
 	proc->PC += proc->next_jump;
 	proc->next_op = NULL;
 }
@@ -57,16 +109,16 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 // compare core->arena[proc->PC] with opc_table
 void			ft_getop(t_cor *core, t_process *proc)
 {
-	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 >= 0 &&
-			core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1 < OPC_NBR)
+	if (ft_checkloadable(core, proc))
 	{
 		proc->next_op =
 			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		proc->cycles_before_execute =
 			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 	}
-	else
+	else if (proc->next_jump == 0)
 		proc->PC++;
+	proc->next_jump = 0;
 }
 
 void			ft_browseprocess(t_cor *core)

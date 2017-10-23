@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:11:26 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/11 15:18:22 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 14:55:37 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_regs(t_process *tmp, int nb_champ)
 
 	i = 1;
 	tmp->registres[0] = (0 - (int)nb_champ);
-	while (i <= REG_NUMBER)
+	while (i < REG_NUMBER)
 	{
 		tmp->registres[i] = 0;
 		i++;
@@ -50,6 +50,7 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 	cor->process->startpos = startpos;
 	cor->process->cycles_before_execute = 0;
 	cor->process->live = 0;
+	cor->process->carry = false;
 	cor->process->buffc = 0;
 	init_regs(cor->process, nb_champ);
 }

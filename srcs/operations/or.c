@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:10 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/13 12:19:02 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/18 17:14:33 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static size_t	or(size_t a, size_t b)
 	return (out);
 }
 
-bool	cw_or(t_cor *core, t_process *proc)
+bool			cw_or(t_cor *core, t_process *proc)
 {
 	size_t	a;
 	size_t	b;
@@ -36,9 +36,9 @@ bool	cw_or(t_cor *core, t_process *proc)
 
 	a = getparam(core, proc, 1, 4);
 	b = getparam(core, proc, 2, 4);
-	c = core->arena[getparamplace(core, proc, 3, 4) % MEM_SIZE];
+	c = mod(core->arena[getparamplace(core, proc, 3, 4) % MEM_SIZE] - 1, 16);
 	proc->registres[c] = or(a, b);
 	if (core->options->v4)
-		ft_printf("P%5d | or %d %d r%d\n", proc->ID, a, b, c);
+		ft_printf("P%5d | or %d %d r%d\n", proc->ID, a, b, c + 1);
 	return (proc->registres[c] == 0);
 }

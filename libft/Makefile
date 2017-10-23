@@ -6,7 +6,7 @@
 #    By: cbinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/13 14:45:18 by cbinet            #+#    #+#              #
-#    Updated: 2017/07/27 13:42:38 by vkim             ###   ########.fr        #
+#    Updated: 2017/10/18 15:18:06 by cbinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIB_NAME = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		   ft_strmap.c ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c \
 		   ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strrealloc.c \
 		   ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tablen.c \
-		   ft_tolower.c ft_toupper.c ft_uitoa.c ft_ulitoa.c ft_umitoa.c 
+		   ft_tolower.c ft_toupper.c ft_uitoa.c ft_ulitoa.c ft_umitoa.c ft_mod.c
 
 LIBO_NAME = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
 			ft_isdigit.o ft_isprint.o ft_itoa.o ft_itoabase.o ft_litoa.o \
@@ -49,7 +49,7 @@ LIBO_NAME = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
 			ft_strmap.o ft_strmapi.o ft_strncat.o ft_strncmp.o ft_strncpy.o \
 			ft_strnequ.o ft_strnew.o ft_strnstr.o ft_strrchr.o ft_strrealloc.o \
 			ft_strsplit.o ft_strstr.o ft_strsub.o ft_strtrim.o ft_tablen.o \
-			ft_tolower.o ft_toupper.o ft_uitoa.o ft_ulitoa.o ft_umitoa.o 
+			ft_tolower.o ft_toupper.o ft_uitoa.o ft_ulitoa.o ft_umitoa.o ft_mod.o
 
 SRC_NAME = ft_printf.c convarg.c ft_buffit.c ft_colorize.c \
 		   ft_getbases.c ft_getbases2.c ft_getf.c ft_getnbr.c \

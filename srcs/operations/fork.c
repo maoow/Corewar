@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/12 11:20:06 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/18 17:43:13 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 {
 	tmp->next_jump = 0;
-	tmp->next_op = false;
+	tmp->next_op = NULL;
 	ft_getop(core, tmp);
 	tmp->cycles_before_execute--;
 	tmp->carry = proc->carry;

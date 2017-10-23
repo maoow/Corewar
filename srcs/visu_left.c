@@ -6,19 +6,23 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 16:05:12 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/11 16:08:27 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/21 13:58:27 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		check_process_to_color(t_process *tmp, size_t col, size_t lign,
+static void		check_process_to_color(t_cor *cor, size_t col, size_t lign,
 		size_t i)
 {
+	t_process	*tmp;
+
+	tmp = cor->process;
 	while (tmp)
 	{
-		if (i == (tmp->PC + tmp->startpos) % MEM_SIZE)
-			mvchgat(lign, col, 2, A_NORMAL, tmp->color - 10, NULL);
+		if (!cor->options->follow || cor->options->nb_follow == tmp->ID)
+			if (i == (tmp->PC + tmp->startpos) % MEM_SIZE)
+				mvchgat(lign, col, 2, A_NORMAL, tmp->color - 10, NULL);
 		tmp = tmp->next;
 	}
 }
@@ -34,7 +38,6 @@ void			print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 {
 	size_t		max;
 	size_t		i;
-	t_process	*tmp;
 
 	i = 0;
 	max = sqrt((double)MEM_SIZE);
@@ -44,9 +47,8 @@ void			print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 		{
 			mvwprintw(left, lign, col, "%02x", cor->arena[i]);
 			mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
-			tmp = cor->process;
-			check_process_to_color(tmp, col, lign, i);
-			check_process_to_color(tmp, col, lign, i);
+			check_process_to_color(cor, col, lign, i);
+			check_process_to_color(cor, col, lign, i);
 			i++;
 			col = col + 2;
 			mvwprintw(left, lign, col, " ");

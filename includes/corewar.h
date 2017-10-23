@@ -56,6 +56,8 @@ typedef struct			s_opt_number
 **	n et num_champ pour assigner un numero precis a un champion
 **	v4 pour le verbose details des operations
 **	visu pour le visualisateur ncurses
+**	follow pour follow un processus precis sur le visu
+**	aff_visu pour n'afficher le visu qu'a partir d'un certain moment
 */
 
 typedef struct			s_options
@@ -70,13 +72,16 @@ typedef struct			s_options
 	bool				reg;
 	bool				visu;
 	bool				fast;
+	bool				follow;
+	int					nb_follow;
+	int					aff_visu;
 }						t_options;
 
 typedef struct			s_champ
 {
 	char				*name;
 	char				*comment;
-	size_t				ID;
+	long int			ID;
 	struct s_champ		*next;
 	bool				alive;
 	size_t				last_live;
@@ -91,7 +96,7 @@ typedef struct			s_champ
 
 typedef struct			s_process
 {
-	size_t				ID;
+	int					ID;
 	int					registres[REG_NUMBER];
 	size_t				PC;
 	size_t				startpos;
@@ -127,9 +132,9 @@ typedef struct			s_cor
 	t_process			*process;
 	t_options			*options;
 	t_opt_number		*id_list;
-	char				*last_champ_alive;
-	size_t				cycle_to_die;
-	size_t				tmp_cycle_to_die;
+	long int			last_champ_alive;
+	int					cycle_to_die;
+	int					tmp_cycle_to_die;
 	size_t				checks;
 	int					total_cycle;
 	unsigned char		arena[MEM_SIZE];
@@ -159,7 +164,9 @@ void		ft_clean(t_cor *cor);
 /*
 **			GAME FUNCTIONS
 */
-void		ft_warcycle(t_cor *core);
+
+size_t					revgetop(bool (*op)());
+void		ft_warcycle(t_cor *core, bool b_alive);
 void		ft_increase_cycle(t_cor *core);
 void		ft_browseprocess(t_cor *core);
 size_t		idx(t_process *proc, size_t jump);
@@ -168,7 +175,7 @@ size_t		ind(t_cor *core, t_process *proc, size_t PC);
 size_t		getparam(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		*ft_getparamstype(t_cor *core, t_process *proc);
-int			getram(t_cor *core, size_t address);
+long int	getram(t_cor *core, size_t address);
 void		setram(t_cor *core, size_t address, int value, int color);
 void		free_process(t_process *tmp);
 void		ft_delprocess(t_cor *core, t_process **del);
@@ -176,5 +183,9 @@ void		ft_addprocess(t_cor *core, t_process *new);
 void		ft_getop(t_cor *core, t_process *proc);
 void		dispreg(t_process *proc);
 void		dispjump(t_cor *core, t_process *proc);
+bool		ft_checkexecutable(t_cor *core, t_process *proc);
+bool		ft_checkloadable(t_cor *core, t_process *proc);
+size_t		get_paramnb(size_t opc);
+bool		hasopcode(size_t op);
 
 #endif
