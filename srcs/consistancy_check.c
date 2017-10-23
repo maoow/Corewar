@@ -5,8 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/23 12:55:45 by cbinet            #+#    #+#             */
+/*   Updated: 2017/10/23 16:00:34 by cbinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   consistancy_check.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 11:00:05 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/22 13:43:07 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/23 12:54:08 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +84,8 @@ static bool		checkopn(t_cor *core, t_process *proc)
 **
 ** check if the param given proc is on a logically executable operation
 **
-** (check if operation number is correct and in case of the operation have opcode count the number of parameters)
+** (check if operation number is correct and in case of the operation
+** have opcode count the number of parameters)
 */
 
 bool			ft_checkexecutable(t_cor *core, t_process *proc)
@@ -80,14 +93,31 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 	size_t op;
 	size_t opc;
 
-	if (core->options->v16)
-		dispjump(core, proc);
-	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
-	if (!checkopn(core, proc))
-		return (false);
-	opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-	if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1])
-		return (false);
+	//if (core->options->v16)
+		//dispjump(core, proc);
+	//op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
+	op = revgetop(proc->next_op);
+	if (op >= 1 && op <= OPC_NUMBER && g_ocp[op - 1])
+	{
+
+		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
+		if (get_paramnb(opc) != g_opparamnb[op - 1])
+		{
+			proc->next_jump = revgetop(proc->next_op);
+			//if (op != revgetop(proc->next_op))
+			//proc->next_jump = 0;
+			return (false);
+		}
+		if (op == 2 && opc == 144 &&
+				(core->arena[(proc->PC + proc->startpos + 6) % MEM_SIZE] > 16 ||
+				 core->arena[(proc->PC + proc->startpos + 6) % MEM_SIZE] == 0)
+		   )
+			if (!checkopn(core, proc))
+				return (false);
+		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
+		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1])
+			return (false);
+	}
 	return (true);
 }
 
