@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/22 11:58:09 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/23 16:00:36 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,13 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 			dispreg(proc);
 		if (op > 0 && op < 17 && g_opcarry[op - 1])
 			proc->carry = carry;
+	if (core->options->v16 && proc->next_op)
+		dispjump(core, proc);
 	}
 	else
 	{
-	proc->PC += proc->next_jump;
-		proc->next_jump = 0;
+	//proc->PC += proc->next_jump;
+		//proc->next_jump = 0;
 	}
 	proc->PC += proc->next_jump;
 	proc->next_op = NULL;
@@ -116,9 +118,9 @@ void			ft_getop(t_cor *core, t_process *proc)
 		proc->cycles_before_execute =
 			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 	}
-	else if (proc->next_jump == 0)
+	else// if (proc->next_jump == 0)
 		proc->PC++;
-	proc->next_jump = 0;
+	//proc->next_jump = 0;
 }
 
 void			ft_browseprocess(t_cor *core)
