@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 10:57:15 by vkim              #+#    #+#             */
-/*   Updated: 2017/09/07 11:57:26 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/23 15:40:22 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ int				ft_loading(int ac, char **av, int index, t_asm *as)
 	char		buff[5];
 	char		*buff2;
 
+	fd = -1;
 	if (ac < 2 || index >= ac || (fd = open(av[index], O_RDWR)) == -1)
-		return (0);
+		return (ft_err_load(ac, fd, av[0]));
 	while (((ret = read(fd, buff, 4)) > 0))
 	{
 		buff[ret] = '\0';
