@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/22 13:46:09 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/23 15:54:27 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ size_t					g_oplabel[OPC_NBR] = {
 	0
 };
 
-size_t	idx(t_process *proc, size_t jump)
+long int	idx(t_process *proc, long int jump)
 {
-	int	tmp;
+	long int	tmp;
 
+	//ft_printf(" %d %d  ", jump, IDX_MOD);
 	if (jump > MEM_SIZE / 2 && jump % IDX_MOD != 0)
 		tmp = (jump % IDX_MOD) + proc->PC - IDX_MOD;
 	else
 		tmp = (jump % IDX_MOD) + proc->PC;
-	return ((size_t)((tmp + proc->startpos) % MEM_SIZE));
+	//ft_printf(" %d %d  ", tmp, IDX_MOD);
+	return (((tmp + proc->startpos) % MEM_SIZE));
 }
 
 void	dispjump(t_cor *core, t_process *proc)
@@ -51,6 +53,7 @@ void	dispjump(t_cor *core, t_process *proc)
 	{
 	start = mod(proc->startpos + proc->PC, MEM_SIZE);
 	i = 0;
+	//ft_printf("%d  ", proc->ID);
 	if (start > 0)
 		ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, start, start + proc->next_jump);
 	else
@@ -68,11 +71,14 @@ void	dispjump(t_cor *core, t_process *proc)
 void	ft_determinejmpdist(t_cor *core, t_process *proc)
 {
 	unsigned char	tmp;
+	unsigned char	op;
 
+	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
+	op = revgetop(proc->next_op);
 	tmp = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-	if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] != 9 && core->arena[(proc->startpos + proc->PC) % MEM_SIZE] < 17 && core->arena[(proc->startpos + proc->PC) % MEM_SIZE] > 0)
+	if (op != 9 && op < 17 && op > 0)
 	{
-		if (hasopcode(core->arena[(proc->startpos + proc->PC) % MEM_SIZE]))
+		if (hasopcode(op))
 		{
 			proc->next_jump = 2;
 			while (tmp)
@@ -87,9 +93,9 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 			}
 		}
 		else
-			proc->next_jump = 1 + g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
-		if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] == 2 && proc->next_jump >= 8)
-			proc->next_jump = 6;
+			proc->next_jump = 1 + g_oplabel[op - 1];
+		//if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] == 2 && proc->next_jump >= 8)
+			//proc->next_jump = 6;
 	}
 	else
 		proc->next_jump = 0;
