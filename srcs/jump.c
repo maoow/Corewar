@@ -98,5 +98,5 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 			//proc->next_jump = 6;
 	}
 	else
-		proc->next_jump = 0;
+		proc->next_jump = 0; // aqui
 }
