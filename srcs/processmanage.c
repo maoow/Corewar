@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/25 11:38:00 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/25 12:26:23 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,12 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 			proc->carry = carry;
 		if (core->options->v16 && proc->next_op)
 			dispjump(core, proc);
-		if (op != 9)
-			proc->just_played = true;
+		proc->just_played = true;
 	}
 	proc->PC += proc->next_jump;
-		proc->searching = false;
-	//if (ft_checkloadable(core, proc))// || core->total_cycle < 8905)
-			//proc->just_played = false;
+	proc->searching = false;
+	if (ft_checkloadable(core, proc))
+			proc->just_played = false;
 	proc->next_op = NULL;
 }
 
@@ -125,7 +124,7 @@ void			ft_getop(t_cor *core, t_process *proc, int first)
 	else if (proc->just_played == false)
 	{
 		if (first == 1)
-		proc->PC++;
+			proc->PC++;
 		proc->searching = true;
 	}
 	proc->just_played = false;
@@ -138,11 +137,11 @@ void			ft_browseprocess(t_cor *core)
 	proc = core->process;
 	while (proc)
 	{
-		if (!proc->next_op)// && !proc->searching)
+		if (!proc->next_op)
 			ft_getop(core, proc, 1);
 		if (proc->cycles_before_execute == 0 && proc->next_op)
 			ft_executeprocess(core, proc);
-		if (!proc->next_op)
+		if (!proc->next_op)// && !proc->searching)
 			ft_getop(core, proc, 0);
 		if (proc->cycles_before_execute > 0)
 			proc->cycles_before_execute--;
