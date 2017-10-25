@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/23 16:00:36 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/25 11:38:00 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,30 +86,31 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 {
 	bool	carry;
 	int		op;
+	bool	exec;
 
-	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
+	op = revgetop(proc->next_op);
 	ft_determinejmpdist(core, proc);
-	if (ft_checkexecutable(core, proc))
+	if ((exec = ft_checkexecutable(core, proc)))
 	{
 		carry = proc->next_op(core, proc);
 		if (core->options->reg)
 			dispreg(proc);
 		if (op > 0 && op < 17 && g_opcarry[op - 1])
 			proc->carry = carry;
-	if (core->options->v16 && proc->next_op)
-		dispjump(core, proc);
-	}
-	else
-	{
-	//proc->PC += proc->next_jump;
-		//proc->next_jump = 0;
+		if (core->options->v16 && proc->next_op)
+			dispjump(core, proc);
+		if (op != 9)
+			proc->just_played = true;
 	}
 	proc->PC += proc->next_jump;
+		proc->searching = false;
+	//if (ft_checkloadable(core, proc))// || core->total_cycle < 8905)
+			//proc->just_played = false;
 	proc->next_op = NULL;
 }
 
 // compare core->arena[proc->PC] with opc_table
-void			ft_getop(t_cor *core, t_process *proc)
+void			ft_getop(t_cor *core, t_process *proc, int first)
 {
 	if (ft_checkloadable(core, proc))
 	{
@@ -117,10 +118,17 @@ void			ft_getop(t_cor *core, t_process *proc)
 			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		proc->cycles_before_execute =
 			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+		if (proc->searching == false && proc->just_played == false && first == 1)
+			proc->cycles_before_execute--;
+		//ft_printf("%d %B %B\n",proc->ID, proc->just_played, proc->searching);
 	}
-	else// if (proc->next_jump == 0)
+	else if (proc->just_played == false)
+	{
+		if (first == 1)
 		proc->PC++;
-	//proc->next_jump = 0;
+		proc->searching = true;
+	}
+	proc->just_played = false;
 }
 
 void			ft_browseprocess(t_cor *core)
@@ -130,10 +138,12 @@ void			ft_browseprocess(t_cor *core)
 	proc = core->process;
 	while (proc)
 	{
+		if (!proc->next_op)// && !proc->searching)
+			ft_getop(core, proc, 1);
 		if (proc->cycles_before_execute == 0 && proc->next_op)
 			ft_executeprocess(core, proc);
 		if (!proc->next_op)
-			ft_getop(core, proc);
+			ft_getop(core, proc, 0);
 		if (proc->cycles_before_execute > 0)
 			proc->cycles_before_execute--;
 		proc = proc->next;
