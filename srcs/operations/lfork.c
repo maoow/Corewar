@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/25 11:32:09 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/25 12:50:41 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 {
 	tmp->next_jump = 0;
 	tmp->next_op = NULL;
-	ft_getop(core, tmp, 2);
-	tmp->cycles_before_execute--;
-	tmp->carry = proc->carry;
 	tmp->just_played = false;
 	tmp->searching = false;
+	ft_getop(core, tmp, 1);
+	tmp->carry = proc->carry;
 	tmp->live = proc->live;
 	tmp->color = proc->color;
 	tmp->ID = core->process->ID + 1;
