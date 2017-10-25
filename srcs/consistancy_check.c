@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 12:55:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/23 16:00:34 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/24 14:00:59 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 	size_t op;
 	size_t opc;
 
-	//if (core->options->v16)
-		//dispjump(core, proc);
-	//op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
 	op = revgetop(proc->next_op);
 	if (op >= 1 && op <= OPC_NUMBER && g_ocp[op - 1])
 	{
