@@ -100,19 +100,15 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
 		if (get_paramnb(opc) != g_opparamnb[op - 1])
 		{
-			proc->next_jump = revgetop(proc->next_op);
+			proc->next_jump = 2;
 			//if (op != revgetop(proc->next_op))
 			//proc->next_jump = 0;
 			return (false);
 		}
-		if (op == 2 && opc == 144 &&
-				(core->arena[(proc->PC + proc->startpos + 6) % MEM_SIZE] > 16 ||
-				 core->arena[(proc->PC + proc->startpos + 6) % MEM_SIZE] == 0)
-		   )
 			if (!checkopn(core, proc))
 				return (false);
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1])
+		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1]  && op != 3)
 			return (false);
 	}
 	return (true);
@@ -135,7 +131,7 @@ bool			ft_checkloadable(t_cor *core, t_process *proc)
 	opc = core->arena[(1 + proc->PC + proc->startpos) % MEM_SIZE];
 	if (!checkopn(core, proc))
 		return (false);
-	if (hasopcode(op) && (op != 2) && get_paramnb(opc) != g_opparamnb[op - 1])
+	if (hasopcode(op) && (op != 2) && get_paramnb(opc) != g_opparamnb[op - 1] && op != 3)
 		return (false);
 	return (true);
 }

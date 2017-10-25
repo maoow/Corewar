@@ -97,10 +97,11 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 			dispreg(proc);
 		if (op > 0 && op < 17 && g_opcarry[op - 1])
 			proc->carry = carry;
-		if (core->options->v16 && proc->next_op)
+		if (core->options->v16)// && proc->next_op)
 			dispjump(core, proc);
 		proc->just_played = true;
 	}
+			//dispjump(core, proc);
 	proc->PC += proc->next_jump;
 	proc->searching = false;
 	if (ft_checkloadable(core, proc))
