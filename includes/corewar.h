@@ -104,6 +104,8 @@ typedef struct			s_process
 	size_t				cycles_before_execute;
 	bool				(*next_op)();
 	bool				carry;
+	bool				just_played;
+	bool				searching;
 	size_t				live;
 	struct s_process	*next;
 	int					color;
@@ -180,7 +182,7 @@ void		setram(t_cor *core, size_t address, int value, int color);
 void		free_process(t_process *tmp);
 void		ft_delprocess(t_cor *core, t_process **del);
 void		ft_addprocess(t_cor *core, t_process *new);
-void		ft_getop(t_cor *core, t_process *proc);
+void		ft_getop(t_cor *core, t_process *proc, int first);
 void		dispreg(t_process *proc);
 void		dispjump(t_cor *core, t_process *proc);
 bool		ft_checkexecutable(t_cor *core, t_process *proc);
