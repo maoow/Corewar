@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:11:26 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/24 16:03:57 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/25 11:53:47 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 	cor->process->cycles_before_execute = 0;
 	cor->process->live = 0;
 	cor->process->carry = false;
-	cor->process->just_played = false;
+	cor->process->just_played = true;
 	cor->process->searching = false;
 	cor->process->buffc = 0;
 	init_regs(cor->process, nb_champ);
