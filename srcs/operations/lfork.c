@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 18:04:15 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/25 11:32:09 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 {
 	tmp->next_jump = 0;
 	tmp->next_op = NULL;
-	ft_getop(core, tmp);
+	ft_getop(core, tmp, 2);
 	tmp->cycles_before_execute--;
 	tmp->carry = proc->carry;
+	tmp->just_played = false;
+	tmp->searching = false;
 	tmp->live = proc->live;
 	tmp->color = proc->color;
 	tmp->ID = core->process->ID + 1;
@@ -48,7 +50,7 @@ bool				cw_lfork(t_cor *core, t_process *proc)
 		indt = ind(core, proc, proc->PC + 1) % MEM_SIZE;
 		if (indt > MEM_SIZE / 2)
 			indt -= MEM_SIZE;
-		ft_printf("P%5d | fork %d (%d)\n", proc->ID, indt,
+		ft_printf("P%5d | lfork %d (%d)\n", proc->ID, indt,
 				idx(proc, ind(core, proc, proc->PC + 1)));
 	}
 	return (true);
