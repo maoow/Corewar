@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 15:42:42 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 16:06:08 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ bool					(*g_opctable[OPC_NBR])(t_cor *, t_process *) = {
 	&cw_st,
 	&cw_add,
 	&cw_sub,
-	&cw_and,
-	&cw_or,
+	&cw_and, &cw_or,
 	&cw_xor,
 	&cw_zjmp,
 	&cw_ldi,
@@ -117,7 +116,7 @@ void			ft_getop(t_cor *core, t_process *proc, int first)
 			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		proc->cycles_before_execute =
 			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
-		if (proc->searching == false && proc->just_played == false && first == 1) 
+		if (proc->just_played == false && first == 1) 
 			proc->cycles_before_execute--;
 	}
 	else if (proc->just_played == false)
