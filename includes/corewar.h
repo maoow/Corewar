@@ -190,5 +190,6 @@ bool		ft_checkexecutable(t_cor *core, t_process *proc);
 bool		ft_checkloadable(t_cor *core, t_process *proc);
 size_t		get_paramnb(size_t opc);
 bool		hasopcode(size_t op);
+bool		checkopn(t_cor *core, t_process *proc);
 
 #endif
