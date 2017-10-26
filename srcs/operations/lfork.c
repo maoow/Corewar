@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 13:35:43 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 13:52:50 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool				cw_lfork(t_cor *core, t_process *proc)
 		i++;
 	}
 	tmp->PC = 0;
-	tmp->startpos = ind(core, proc, proc->PC + 1) % MEM_SIZE;
+	tmp->startpos = (proc->PC + proc->startpos + ind(core, proc, proc->PC + 1)) % MEM_SIZE;
 	fulfill_tmp(core, tmp, proc);
 	if (core->options->v4)
 	{
@@ -51,7 +51,8 @@ bool				cw_lfork(t_cor *core, t_process *proc)
 		if (indt > MEM_SIZE / 2)
 			indt -= MEM_SIZE;
 		ft_printf("P%5d | lfork %d (%d)\n", proc->ID, indt,
-				idx(proc, ind(core, proc, proc->PC + 1)));
+				tmp->startpos
+				 				 );
 	}
 	return (true);
 }
