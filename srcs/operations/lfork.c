@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/25 12:50:41 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 13:35:43 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
 	tmp->color = proc->color;
-	tmp->ID = core->process->ID + 1;
+	tmp->ID = core->procnb + 1;
+	core->procnb++;
 	tmp->next = core->process;
 	core->process = tmp;
 }

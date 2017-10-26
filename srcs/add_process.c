@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:11:26 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/25 11:53:47 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 13:36:16 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
 	cor->process->just_played = true;
 	cor->process->searching = false;
 	cor->process->buffc = 0;
+	cor->procnb++;
 	init_regs(cor->process, nb_champ);
 }

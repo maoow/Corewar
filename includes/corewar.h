@@ -144,6 +144,7 @@ typedef struct			s_cor
 	size_t				arena_update[MEM_SIZE];
 	bool				verbose;
 	size_t				nb_champs;
+	size_t				procnb;
 }						t_cor;
 
 /*

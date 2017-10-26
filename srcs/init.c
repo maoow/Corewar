@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/21 14:33:01 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/26 13:35:58 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void			ft_init(t_cor *core)
 	core->cycle_to_die = CYCLE_TO_DIE;
 	core->tmp_cycle_to_die = 0;
 	core->checks = 0;
+	core->procnb = 0;
 	core->total_cycle = -1;
 	core->verbose = false;
 	core->champs = NULL;
