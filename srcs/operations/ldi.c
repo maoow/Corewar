@@ -29,7 +29,7 @@ bool	cw_ldi(t_cor *core, t_process *proc)
 	adress2 = getparam(core, proc, 2, 2);
 	if (adress2 > 65536 / 2)
 		adress2 -= 65536;
-adress3 = (adress + adress2);// % IDX_MOD;
+adress3 = (adress + adress2) % IDX_MOD;
 	proc->registres[reg - 1] = getram(core, (adress3 + proc->startpos + proc->PC) % MEM_SIZE);
 	if (core->options->v4)
 	{
@@ -37,7 +37,7 @@ adress3 = (adress + adress2);// % IDX_MOD;
 				reg);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
 				adress, adress2, (adress + adress2),
-				(adress3 + proc->PC + proc->startpos) % MEM_SIZE);
+				(adress3 + proc->PC + proc->startpos));
 	}
 	return (proc->registres[reg - 1] != 0);
 }
