@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/25 12:26:23 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 13:21:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t					revgetop(bool (*op)())
 	size_t	i;
 
 	i = 0;
-	while (op != g_opctable[i] && i < OPC_NUMBER)
+	while (i < OPC_NUMBER && op != g_opctable[i])
 	{
 		i++;
 	}
@@ -101,11 +101,11 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 			dispjump(core, proc);
 		proc->just_played = true;
 	}
-			//dispjump(core, proc);
+	//dispjump(core, proc);
 	proc->PC += proc->next_jump;
 	proc->searching = false;
 	if (ft_checkloadable(core, proc))
-			proc->just_played = false;
+		proc->just_played = false;
 	proc->next_op = NULL;
 }
 
@@ -138,6 +138,13 @@ void			ft_browseprocess(t_cor *core)
 	proc = core->process;
 	while (proc)
 	{
+		if ( proc->next_op &&
+revgetop(proc->next_op) != core->arena[(proc->PC + proc->startpos) % MEM_SIZE]
+&&
+g_optime[revgetop(proc->next_op) - 1] == proc->cycles_before_execute + 1)
+		{
+			proc->next_op = NULL;
+		}
 		if (!proc->next_op)
 			ft_getop(core, proc, 1);
 		if (proc->cycles_before_execute == 0 && proc->next_op)
