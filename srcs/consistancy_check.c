@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 12:55:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 13:24:25 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 15:38:19 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ bool					g_ocp[OPC_NUMBER] = {
 	true
 };
 
+/*
+** check if operation has opcode
+*/
 bool			hasopcode(size_t op)
 {
 	return (g_ocp[op - 1]);
@@ -69,7 +72,7 @@ bool			hasopcode(size_t op)
 /*
 ** check if operation is executable
 */
-static bool		checkopn(t_cor *core, t_process *proc)
+bool		checkopn(t_cor *core, t_process *proc)
 {
 	size_t op;
 
@@ -86,6 +89,7 @@ static bool		checkopn(t_cor *core, t_process *proc)
 **
 ** (check if operation number is correct and in case of the operation
 ** have opcode count the number of parameters)
+** if opc unconsistant jump it (jump = 2)
 */
 
 bool			ft_checkexecutable(t_cor *core, t_process *proc)
@@ -98,19 +102,17 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 	{
 
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-		if (get_paramnb(opc) != g_opparamnb[op - 1])// && opc == 0)
+		if (get_paramnb(opc) != g_opparamnb[op - 1])
 		{
 			proc->next_jump = 2;
 			if (core->options->v16)
 				dispjump(core, proc);
-			//if (op != revgetop(proc->next_op))
-			//proc->next_jump = 0;
 			return (false);
 		}
-			if (!checkopn(core, proc))
-				return (false);
+		if (!checkopn(core, proc))
+			return (false);
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1]  && op != 3)
+		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1])
 			return (false);
 	}
 	return (true);
@@ -121,7 +123,6 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 **
 ** check if the param given proc is on a logically executable operation
 **
-** (check if operation number is correct and in case of the operation have opcode count the number of parameters)
 */
 
 bool			ft_checkloadable(t_cor *core, t_process *proc)
@@ -133,7 +134,8 @@ bool			ft_checkloadable(t_cor *core, t_process *proc)
 	opc = core->arena[(1 + proc->PC + proc->startpos) % MEM_SIZE];
 	if (!checkopn(core, proc))
 		return (false);
-	if (hasopcode(op) && (op != 2) && get_paramnb(opc) != g_opparamnb[op - 1] && op != 3)
-		return (false);
+	//if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1] && (op <= 1 || op >= 5))
+			//return (false);
+
 	return (true);
 }
