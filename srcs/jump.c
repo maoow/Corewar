@@ -6,12 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/23 15:54:27 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 15:46:48 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-
 size_t					g_oplabel[OPC_NBR] = {
 	4,
 	4,
@@ -89,7 +88,7 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 				else if (tmp % 4 == 3)
 					proc->next_jump += 2;
 				else if (tmp % 4 == 2)
-					proc->next_jump += g_oplabel[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+					proc->next_jump += g_oplabel[op - 1];
 			}
 		}
 		else
