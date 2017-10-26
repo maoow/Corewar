@@ -39,7 +39,7 @@ bool			cw_xor(t_cor *core, t_process *proc)
 	b = getparam(core, proc, 2, 4);
 	c = core->arena[(getparamplace(core, proc, 3, 4) - 1) % MEM_SIZE] - 1;
 if (c >= REG_NUMBER)
-return (false);
+return (proc->carry);
 	proc->registres[c] = xor(a, b);
 	if (core->options->v4)
 		ft_printf("P%5d | xor %d %d r%d\n", proc->ID, a, b, c + 1);
