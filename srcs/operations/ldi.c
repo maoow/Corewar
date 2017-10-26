@@ -39,6 +39,5 @@ adress3 = (adress + adress2);// % IDX_MOD;
 				adress, adress2, (adress + adress2),
 				(adress3 + proc->PC + proc->startpos) % MEM_SIZE);
 	}
-	return (proc->registres[mod(core->arena[(getparamplace(core, proc, 3, 2))
-				% MEM_SIZE] - 1, 16)] != 0);
+	return (proc->registres[reg - 1] != 0);
 }
