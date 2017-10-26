@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 13:21:40 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/26 15:42:42 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,10 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 			dispreg(proc);
 		if (op > 0 && op < 17 && g_opcarry[op - 1])
 			proc->carry = carry;
-		if (core->options->v16)// && proc->next_op)
+		if (core->options->v16)
 			dispjump(core, proc);
 		proc->just_played = true;
 	}
-	//dispjump(core, proc);
 	proc->PC += proc->next_jump;
 	proc->searching = false;
 	if (ft_checkloadable(core, proc))
@@ -118,9 +117,8 @@ void			ft_getop(t_cor *core, t_process *proc, int first)
 			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		proc->cycles_before_execute =
 			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
-		if (proc->searching == false && proc->just_played == false && first == 1)
+		if (proc->searching == false && proc->just_played == false && first == 1) 
 			proc->cycles_before_execute--;
-		//ft_printf("%d %B %B\n",proc->ID, proc->just_played, proc->searching);
 	}
 	else if (proc->just_played == false)
 	{
