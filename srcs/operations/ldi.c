@@ -22,7 +22,7 @@ bool	cw_ldi(t_cor *core, t_process *proc)
 	reg = core->arena[(getparamplace(core, proc, 3, 2) - 1) % MEM_SIZE];
 	if (((core->arena[mod(proc->PC + proc->startpos + 1, MEM_SIZE)]) / 16) % 4 == 1)
 		if (reg - 1 >= REG_NUMBER)
-			return (false);
+			return (proc->carry);
 	adress = getparam(core, proc, 1, 2);
 	if (adress > 65536 / 2)
 		adress -= 65536;

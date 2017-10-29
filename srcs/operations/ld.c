@@ -19,7 +19,7 @@ bool	cw_ld(t_cor *core, t_process *proc)
 	size_t		reg;
 
 	if (proc->next_jump < 3)
-		return (true);
+		return (proc->carry);
 	pc = proc->PC;
 	if ((core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE] / 64) % 4 == 2)
 	{
@@ -33,7 +33,7 @@ bool	cw_ld(t_cor *core, t_process *proc)
 	}
 	reg = core->arena[(pc + proc->startpos) % MEM_SIZE];
 	if (reg > REG_NUMBER || reg < 1)
-		return (false);
+		return (proc->carry);
 	proc->registres[reg - 1] = value;
 	if (core->options->v4)
 		ft_printf("P%5d | ld %d r%d\n", proc->ID, value,reg);

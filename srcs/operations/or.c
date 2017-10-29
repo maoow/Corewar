@@ -45,7 +45,7 @@ bool			cw_or(t_cor *core, t_process *proc)
 	b = getparam(core, proc, 2, 4);
 	c = core->arena[(proc->PC + proc->startpos + proc->next_jump - 1) % MEM_SIZE] - 1;
 	if (c >= REG_NUMBER)
-		return (false);
+		return (proc->carry);
 	proc->registres[c] = or(a, b);
 	if (core->options->v4)
 		ft_printf("P%5d | or %d %d r%d\n", proc->ID, a, b, c + 1);

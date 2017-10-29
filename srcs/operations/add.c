@@ -34,5 +34,5 @@ bool		cw_add(t_cor *core, t_process *proc)
 			ft_printf("P%5d | add r%d r%d r%d\n", proc->ID, r3 + 1, r2 + 1, r1 + 1);
 		return (proc->registres[r3] == 0);
 	}
-	return (false);
+	return (proc->carry);
 }

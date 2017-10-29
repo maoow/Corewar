@@ -21,7 +21,7 @@ bool	cw_st(t_cor *core, t_process *proc)
 	reg = core->arena[(proc->startpos + proc->PC + 2) % MEM_SIZE] - 1;
 	//reg = mod(core->arena[(proc->startpos + proc->PC + 2) % MEM_SIZE] - 1, 16);
 	if (reg >= REG_NUMBER)
-		return (false);
+		return (proc->carry);
 	reg2 = mod(core->arena[(proc->startpos + proc->PC + 3) % MEM_SIZE] - 1, 16);
 	if ((core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE] / 16) % 4 == 3)
 	{
