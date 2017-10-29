@@ -116,15 +116,12 @@ void			ft_getop(t_cor *core, t_process *proc, int first)
 			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		proc->cycles_before_execute =
 			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
-		if (proc->just_played == false && first == 1) 
+		if ((proc->just_played == false && first == 1))// || proc->just_played) 
 			proc->cycles_before_execute--;
 	}
 	else if (proc->just_played == false)
-	{
 		if (first == 1)
 			proc->PC++;
-		proc->searching = true;
-	}
 	proc->just_played = false;
 }
 
