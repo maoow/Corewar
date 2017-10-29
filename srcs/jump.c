@@ -50,13 +50,13 @@ void	dispjump(t_cor *core, t_process *proc)
 
 	if (proc->next_jump > 0)
 	{
-	start = mod(proc->startpos + proc->PC, MEM_SIZE);
+	start = (proc->startpos + proc->PC) % MEM_SIZE;
 	i = 0;
 	//ft_printf("%d  ", proc->ID);
 	if (start > 0)
 		ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, start, start + proc->next_jump);
 	else
-		ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump, proc->startpos + proc->PC + proc->next_jump);
+		ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump, (proc->startpos + proc->PC + proc->next_jump) % MEM_SIZE);
 	if (proc->next_jump < 1000)
 		while (i < proc->next_jump)
 		{
