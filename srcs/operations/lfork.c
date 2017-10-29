@@ -18,7 +18,7 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->next_op = NULL;
 	tmp->just_played = false;
 	tmp->searching = false;
-	ft_getop(core, tmp, 1);
+//	ft_getop(core, tmp, 1);
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
 	tmp->color = proc->color;
