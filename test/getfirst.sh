@@ -2,12 +2,13 @@
 
 i=0
 
-step=1000
+step=10000
 while [ $step -gt 0 ]
 do
 	diff=0
 	while [ $diff -lt 1 ]
 	do
+	echo $i
 		i=$(($i + $step))
 		./corewar ressources/zaz_champ/$@.cor -v4 -dump $i > /tmp/me
 		./ressources/corewar_goinfre ressources/zaz_champ/$@.cor -v 4 -d $i > /tmp/you
@@ -23,7 +24,7 @@ cat /tmp/diff
 
 i=0
 
-step=1000
+step=10000
 while [ $step -gt 0 ]
 do
 	diff=0
