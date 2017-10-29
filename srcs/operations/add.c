@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:24:58 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 12:02:17 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/29 12:26:01 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool		cw_add(t_cor *core, t_process *proc)
 		proc->registres[r3] = proc->registres[r1] + proc->registres[r2];
 		if (core->options->v4)
 			ft_printf("P%5d | add r%d r%d r%d\n", proc->ID, r3 + 1, r2 + 1, r1 + 1);
-		return (proc->registres[r3] == 0)
+		return (proc->registres[r3] == 0);
 	}
 	return (false);
 }
