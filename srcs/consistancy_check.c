@@ -92,7 +92,7 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
 		if (get_paramnb(opc) != g_opparamnb[op - 1])
 		{
-			proc->next_jump = 2;
+		//	proc->next_jump = 2;
 			if (core->options->v16)
 				dispjump(core, proc);
 			return (false);
@@ -115,11 +115,11 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 
 bool			ft_checkloadable(t_cor *core, t_process *proc)
 {
-	size_t opc;
-	size_t op;
+//	size_t opc;
+//	size_t op;
 
-	op = core->arena[(proc->PC + proc->startpos) % MEM_SIZE];
-	opc = core->arena[(1 + proc->PC + proc->startpos) % MEM_SIZE];
+//	op = core->arena[(proc->PC + proc->startpos) % MEM_SIZE];
+//	opc = core->arena[(1 + proc->PC + proc->startpos) % MEM_SIZE];
 	if (!checkopn(core, proc))
 		return (false);
 	//if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1] && (op <= 1 || op >= 5))
