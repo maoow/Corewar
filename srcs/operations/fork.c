@@ -6,11 +6,17 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 13:35:43 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/29 12:08:48 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
+
+/*
+** FORK
+**
+** make a perfect copy of the proc and place it on the given adress (%idx)
+*/
 
 static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 {
@@ -18,6 +24,7 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->next_op = NULL;
 	tmp->just_played = false;
 	tmp->searching = false;
+	tmp->buffc = 0;
 	//ft_getop(core, tmp, 1);
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
