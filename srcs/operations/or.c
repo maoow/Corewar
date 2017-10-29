@@ -6,11 +6,18 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:10 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 17:14:33 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/29 12:05:23 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
+
+/*
+** OR
+**
+** store in the third reg the result of a logical or of the other two, 
+** carry go true if the result is equal to zero
+*/
 
 static size_t	or(size_t a, size_t b)
 {

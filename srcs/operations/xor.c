@@ -6,12 +6,17 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:13 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 18:19:01 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/29 12:06:00 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-
+/*
+** XOR
+**
+** store in the third reg the result of a logical xor of the other two, 
+** carry go true if the result is equal to zero
+*/
 static size_t	xor(size_t a, size_t b)
 {
 	size_t		out;

@@ -6,12 +6,16 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/20 16:38:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/29 12:06:49 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-
+/*
+** ZJMP
+**
+** if carry is true jump to the specified adress
+*/
 static void		no_carry(t_cor *core, t_process *proc)
 {
 	if (core->options->v16)

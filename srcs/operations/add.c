@@ -6,14 +6,17 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:24:58 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 12:00:24 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/29 12:02:17 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 
 /*
-** 
+** ADD
+**
+** store in the third reg the sum of the other two, 
+** carry go true if the result is equal to zero
 */
 
 bool		cw_add(t_cor *core, t_process *proc)
