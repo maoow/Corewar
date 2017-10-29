@@ -18,6 +18,7 @@ void	dispreg(t_process *proc)
 
 	i = 0;
 	ft_printf("\n");
+ft_printf("carry : %B\n", proc->carry);
 	while (i < REG_NUMBER)
 	{
 		ft_printf("r%d = %d(10) %X(16)\n", i + 1, proc->registres[i],
