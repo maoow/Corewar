@@ -140,8 +140,8 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 				dispjump(core, proc);
 			return (false);
 		}
-		if (!checkopn(core, proc))
-			return (false);
+		//if (!checkopn(core, proc))
+			//return (false);
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
 		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1])
 			return (false);
