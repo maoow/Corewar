@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 13:45:14 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/29 13:48:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->searching = false;
 	//ft_getop(core, tmp, 1);
 	tmp->carry = proc->carry;
-	tmp->live = 0;
+	tmp->live = proc->live;
 	tmp->color = proc->color;
 	tmp->ID = core->procnb + 1;
 	core->procnb++;
