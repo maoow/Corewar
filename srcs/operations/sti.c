@@ -19,7 +19,9 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	long int	total;
 	size_t		reg;
 
-	reg = mod(core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1, 16);
+	reg = core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1;
+if (reg >= REG_NUMBER)
+return (proc->carry);
 	adress = getparam(core, proc, 2, 2);
 	if (adress > 34952)
 		adress -= 65536;
