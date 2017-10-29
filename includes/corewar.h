@@ -22,6 +22,10 @@
 # define IDX_MOD (MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE (MEM_SIZE / 6)
 
+# define T_REG					1
+# define T_DIR					2
+# define T_IND					3
+
 # define REG_NUMBER 16
 # define OPC_NUMBER 16
 # define REG_SIZE 4
