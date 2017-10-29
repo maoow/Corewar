@@ -36,6 +36,6 @@ bool	cw_lld(t_cor *core, t_process *proc)
 		return (proc->carry);
 	proc->registres[reg - 1] = value;
 	if (core->options->v4)
-		ft_printf("P%5d | ld %d r%d\n", proc->ID, value,reg);
+		ft_printf("P%5d | lld %d r%d\n", proc->ID, value,reg);
 	return (value == 0);
 }

@@ -33,7 +33,7 @@ adress3 = (adress + adress2);
 	proc->registres[reg - 1] = getram(core, (adress3 + proc->startpos + proc->PC) % MEM_SIZE);
 	if (core->options->v4)
 	{
-		ft_printf("P%5d | ldi %d %d r%d\n", proc->ID, adress, adress2,
+		ft_printf("P%5d | lldi %d %d r%d\n", proc->ID, adress, adress2,
 				reg);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
 				adress, adress2, (adress + adress2),
