@@ -26,6 +26,15 @@ size_t	get_paramnb(size_t opc)
 		return (params);
 }
 
+size_t	indx(t_cor *core, t_process *proc, size_t PC)
+{
+	size_t value;
+	PC = ((PC - proc->PC) % IDX_MOD) + proc->PC;
+	value = core->arena[(proc->startpos + PC) % MEM_SIZE];
+	value *= 256;
+	value += core->arena[(proc->startpos + PC + 1) % MEM_SIZE];
+	return (value);
+}
 size_t	ind(t_cor *core, t_process *proc, size_t PC)
 {
 	size_t value;
