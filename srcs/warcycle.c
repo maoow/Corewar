@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/25 12:40:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/29 13:38:32 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@
 
 static bool		check_delta(t_cor *core, size_t lives)
 {
-	if (core->checks > MAX_CHECKS || lives > NBR_LIVE)
+	if (core->checks >= MAX_CHECKS || lives >= NBR_LIVE)
 	{
 		core->cycle_to_die -= CYCLE_DELTA;
 		if (core->options->v2)
 			ft_printf("Cycle to die is now %d\n", core->cycle_to_die);
 		if (core->cycle_to_die <= 0)
-		core->cycle_to_die = 1;
+			core->cycle_to_die = 1;
 		core->checks = 0;
 	}
-	core->checks++;
 	return (core->process);
 }
 
@@ -119,6 +118,7 @@ void			ft_warcycle(t_cor *core, bool b_alive)
 	initproccolor(core);
 	while (b_alive)
 	{
+		core->tmp_cycle_to_die = 0;
 		while (core->tmp_cycle_to_die < core->cycle_to_die)
 		{
 			if (((core->options->dump && core->total_cycle > 0) ||
@@ -135,7 +135,6 @@ void			ft_warcycle(t_cor *core, bool b_alive)
 			ft_increase_cycle(core);
 		}
 		b_alive = ft_checklives(core, NULL, NULL, 0);
-		core->tmp_cycle_to_die = 0;
 	}
 	ft_browseprocess(core);
 	ft_increase_cycle(core);
