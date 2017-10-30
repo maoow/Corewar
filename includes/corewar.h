@@ -24,7 +24,7 @@
 
 # define T_REG					1
 # define T_DIR					2
-# define T_IND					3
+# define T_IND					4
 
 # define REG_NUMBER 16
 # define OPC_NUMBER 16
@@ -195,6 +195,7 @@ bool		ft_checkexecutable(t_cor *core, t_process *proc);
 bool		ft_checkloadable(t_cor *core, t_process *proc);
 size_t		get_paramnb(size_t opc);
 bool		hasopcode(size_t op);
+size_t		getlabel(size_t op);
 bool		checkopn(t_cor *core, t_process *proc);
 
 #endif
