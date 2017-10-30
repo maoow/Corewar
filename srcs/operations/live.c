@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 12:05:57 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 13:09:33 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/30 15:15:07 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 bool	cw_live(t_cor *core, t_process *proc)
 {
-	long int	champ;
+	int	champ;
 	t_champ		*tmp;
 
 	proc->live++;
-	champ = -(getram(core, proc->PC + proc->startpos + 1));
-	champ %= 4294967296;
-	if (champ < 0)
-	champ += 4294967296;
+	champ = getram(core, proc->PC + proc->startpos + 1);
+	//champ %= 4294967296;
 	tmp = core->champs;
 	while (tmp && champ != tmp->ID)
 	{

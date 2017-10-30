@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/21 13:42:55 by starrit          ###   ########.fr       */
+/*   Updated: 2017/10/30 15:10:46 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static size_t	color_arena(t_cor *cor, int ac, char **av, size_t moove_champ)
 		i = 0;
 		champ = parse(cor, av[ac], get_optionnal_id(ac, av));
 		check_champ(champ);
-		add_process(cor, decal, nb_champ);
+		add_process(cor, decal, get_optionnal_id(ac, av));
 		while (i + decal < champ[0][0] + decal)
 		{
 			cor->arena[i + decal] = champ[1][i];

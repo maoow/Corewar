@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:11:26 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/26 13:36:16 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/30 15:13:26 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_regs(t_process *tmp, int nb_champ)
 	size_t	i;
 
 	i = 1;
-	tmp->registres[0] = (0 - (int)nb_champ);
+	tmp->registres[0] = nb_champ;
 	while (i < REG_NUMBER)
 	{
 		tmp->registres[i] = 0;
@@ -25,7 +25,7 @@ static void	init_regs(t_process *tmp, int nb_champ)
 	}
 }
 
-void		add_process(t_cor *cor, size_t startpos, size_t nb_champ)
+void		add_process(t_cor *cor, size_t startpos, int nb_champ)
 {
 	t_process	*new;
 
