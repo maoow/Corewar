@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 15:46:48 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/30 12:51:03 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ size_t					g_oplabel[OPC_NBR] = {
 	0
 };
 
+size_t		getlabel(size_t op)
+{
+	return (g_oplabel[op - 1]);
+}
 long int	idx(t_process *proc, long int jump)
 {
 	long int	tmp;
