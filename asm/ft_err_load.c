@@ -6,11 +6,16 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:10:19 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/23 17:27:51 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/30 12:38:55 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+void			ft_whatis(char *txt, int i)
+{
+
+}
 
 int				ft_err_load(int ac, int fd, char *str)
 {
@@ -23,4 +28,17 @@ int				ft_err_load(int ac, int fd, char *str)
 	else if (fd == -1)
 		ft_putstr("Syntax error at token [TOKEN][001:001] END \"(null)\"\n");
 	return (0);
+}
+
+int				ft_err_name_comm(char *s_check, int num, char *txt, int i)
+{
+	if (s_check == NAME_CMD_STRING && num == 1)
+		ft_putstr("Lexical error at [1:1]\n");
+	else if (num == 1)
+		ft_putstr("Lexical error at [2:1]\n");
+	if (num == 2)
+		//analyse erreur entre NAME_CMD et suite
+	if (num == 3)
+		ft_putstr("ERR A CHECK\n");
+	return(0);
 }
