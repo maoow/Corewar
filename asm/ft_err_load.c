@@ -12,9 +12,16 @@
 
 #include <asm.h>
 
-void			ft_whatis(char *txt, int i)
+void			ft_whatzis(char *txt, int i)
 {
+	int			j;
 
+	j = -1;
+	while (ft_strchr(LABEL_CHARS, txt[i + j]) && txt[i + j])
+		;
+	if (txt[i + j] != ':' && txt[i + j] != ',' && txt[i + j] != ' '
+		&& txt[i + j] != '\t' && txt[i + j] != '\n' && txt[i + j] != '\0')
+		
 }
 
 int				ft_err_load(int ac, int fd, char *str)
