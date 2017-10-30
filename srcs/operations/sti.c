@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/30 12:12:50 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/30 14:30:49 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,21 @@ static bool		regcheck(t_cor *core, t_process *proc)
 	size_t op;
 	size_t reg;
 
+	if (((core->arena[mod(proc->PC + proc->startpos + 1, MEM_SIZE)]) / 64) % 4 != 1)
+		return (false);
 	op = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
-	if ((op / 4) % 4 == 1) // oui
+	if ((op / 4) % 4 == 1)
 	{
-		if ((op / 16) % 4 == 1) // non
+		if ((op / 16) % 4 == 1)
 			reg = core->arena[(proc->PC + proc->startpos + 4) % MEM_SIZE] - 1;
 		else
 			reg = core->arena[(proc->PC + proc->startpos + 5) % MEM_SIZE] - 1;
+		if (reg >= REG_NUMBER)
+			return (false);
+	}
+	if ((op / 16) % 4 == 1)
+	{
+			reg = core->arena[(proc->PC + proc->startpos + 3) % MEM_SIZE] - 1;
 		if (reg >= REG_NUMBER)
 			return (false);
 	}
