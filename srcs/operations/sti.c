@@ -6,11 +6,28 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 16:26:40 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/10/30 11:48:07 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
+static bool		regcheck(t_cor *core, t_process *proc)
+{
+	size_t op;
+	size_t reg;
+
+	op = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
+	if ((op / 4) % 4 == 1) // oui
+	{
+		if ((op / 16) % 4 == 1) // non
+			reg = core->arena[(proc->PC + proc->startpos + 4) % MEM_SIZE] - 1;
+		else
+			reg = core->arena[(proc->PC + proc->startpos + 5) % MEM_SIZE] - 1;
+		if (reg >= REG_NUMBER)
+			return (false);
+	}
+	return (true);
+}
 
 bool	cw_sti(t_cor *core, t_process *proc)
 {
@@ -20,8 +37,8 @@ bool	cw_sti(t_cor *core, t_process *proc)
 	size_t		reg;
 
 	reg = core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1;
-if (reg >= REG_NUMBER)
-return (proc->carry);
+	if (reg >= REG_NUMBER || !regcheck(core, proc))
+		return (proc->carry);
 	adress = getparam(core, proc, 2, 2);
 	if (adress > 34952)
 		adress -= 65536;
