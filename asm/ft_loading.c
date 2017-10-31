@@ -6,19 +6,19 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 10:57:15 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/23 15:40:22 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/31 15:16:01 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int				ft_new_line(t_asm *as, int *nb_l, int i)
+int				ft_new_line(t_asm *as, int *nb_l, int i, int j)
 {
 	char		**save;
 	int			k;
 
 	save = NULL;
-	if (i > 0)
+	if (i >= 0)
 	{
 		(*nb_l)++;
 		save = as->lines;
@@ -29,7 +29,7 @@ int				ft_new_line(t_asm *as, int *nb_l, int i)
 			as->lines[k] = save[k];
 		if (save)
 			free(save);
-		if (!(as->lines[k] = ft_strsub(as->load, 0, i)))
+		if (!(as->lines[k] = ft_strsub(as->load, i, j)))
 			return (0);
 		as->lines[k + 1] = NULL;
 	}
@@ -38,29 +38,29 @@ int				ft_new_line(t_asm *as, int *nb_l, int i)
 
 int				ft_str_gnl(t_asm *as)
 {
-	char		*str_save;
 	int			i;
+	int			j;
 	int			nb_l;
 	int			count;
 
 	nb_l = 0;
 	count = 0;
-	while (ft_strlen(as->load) > 0)
+	j = 0;
+	i = 0;
+	while (as->load[j])
 	{
-		i = -1;
-		while ((as->load[++i] && as->load[i] != '\n')
-				|| (as->load[i] == '\n' && (count % 2) == 1))
-			if (as->load[i] == '\"')
+		i = j;
+		while ((as->load[j] && as->load[j] != '\n')
+				|| (as->load[j] == '\n' && (count % 2) == 1))
+		{
+			if (as->load[j] == '\"')
 				count++;
-		if (!(ft_new_line(as, &nb_l, i)))
+			j++;
+		}
+		if (!(ft_new_line(as, &nb_l, i, j - i)))
 			return (0);
-		if (as->load[i] == '\n')
-			i++;
-		if (!(str_save = ft_strsub(as->load, i, ft_strlen(as->load) - i)))
-			return (0);
-		free(as->load);
-		as->load = str_save;
-		str_save = NULL;
+		if (as->load[j] == '\n')
+			j++;
 	}
 	return (1);
 }
@@ -88,6 +88,5 @@ int				ft_loading(int ac, char **av, int index, t_asm *as)
 		return (0);
 	if (!(ft_del_space(as)))
 		return (0);
-	ft_del_empty_lines(as);
 	return (1);
 }

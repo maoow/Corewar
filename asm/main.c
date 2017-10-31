@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/12 15:37:26 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/31 15:17:36 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,21 +116,48 @@ int				main(int ac, char **av)
 	int			k;
 	int			count;
 
+	(void)count;
+	(void)k;
+	(void)j;
+
 	if (!(ft_init_struct_asm(&as)))
 		return (1);
 	if (!(ft_loading(ac, av, 1, as)))
 		return (1);
-	if (ft_name_check(as, &as->name, NAME_CMD_STRING) != 0)
+
+	//printf("<%s>\n", as->load);
+
+	printf("\nLOAD OK\n");
+
+	printf("\n\n--\n");
+	i = -1;
+	while (as->lines[++i])
+	{
+		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
+		//printf("<%s>\n", as->lines[i]);
+	}
+	
+	/*	if (ft_name_check(as, &as->name, NAME_CMD_STRING, 0) != 0)
 	{
 		if (!(ft_name_check(as, &as->comment,
-			COMMENT_CMD_STRING)))
+			COMMENT_CMD_STRING, 0)))
 			return (1);
+	}*/
+	if (!(ft_name_comment_check(as)))
+		return (1);
+	printf("NAME COMMENT OK\n");
+
+	printf("\n\n--\n");
+	i = -1;
+	while (as->lines[++i])
+	{
+		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
+		//printf("<%s>\n", as->lines[i]);
 	}
+
 	if (ft_strlen(as->name) > PROG_NAME_LENGTH
 		|| ft_strlen(as->comment) > COMMENT_LENGTH)
 		return (1);
-	as->lines[0][0] = '\0';
-	as->lines[1][0] = '\0';
 	ft_del_empty_lines(as);
 	ft_init_struct_ref_1((t_ref *)as->ref);
 	if (!(ft_malloc_instr(as)))
@@ -142,7 +169,7 @@ int				main(int ac, char **av)
 		return (1);
 	if (!(ft_del_space(as)))
 		return (1);
-/*
+
 	printf("\n\n--\n");
 	i = -1;
 	while (as->lines[++i])
@@ -150,7 +177,7 @@ int				main(int ac, char **av)
 		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
 		//printf("<%s>\n", as->lines[i]);
 	}
-*/
+
 	if (!(ft_instr_check(as)))
 		return (1);
 	if (!(ft_check_var(as)))
@@ -264,6 +291,7 @@ int				main(int ac, char **av)
 	}
 	printf("\n");
 	printf("\nLEN MEM : %d\nLEN REF : 2304\n", as->len_mem);
+
 	ft_free_end(&as);
 	return (0);
 }

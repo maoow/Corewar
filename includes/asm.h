@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/23 15:36:44 by vkim             ###   ########.fr       */
+/*   Updated: 2017/10/31 12:38:35 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,15 @@ typedef struct		s_asm
 ** 3 fonctions - ft_loading.c
 */
 int					ft_loading(int ac, char **av, int index, t_asm *as);
+int					ft_str_gnl(t_asm *as);
 
 /*
-** 1 fonction - ft_name_comment.c
+** 2 fonction - ft_name_comment.c
 */
-int					ft_name_check(t_asm *as, char **name, char *s_check);
+int					ft_name_comment_check(t_asm *as);
 
 /*
-** 3 fonctions - ft_clean_load.c
+** 4 fonctions - ft_clean_load.c
 */
 int					ft_del_com(t_asm *as);
 int					ft_del_space(t_asm *as);
