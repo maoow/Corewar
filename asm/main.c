@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/31 15:17:36 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/01 13:55:42 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,36 +129,19 @@ int				main(int ac, char **av)
 
 	printf("\nLOAD OK\n");
 
-	printf("\n\n--\n");
-	i = -1;
-	while (as->lines[++i])
-	{
-		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
-		//printf("<%s>\n", as->lines[i]);
-	}
-	
-	/*	if (ft_name_check(as, &as->name, NAME_CMD_STRING, 0) != 0)
-	{
-		if (!(ft_name_check(as, &as->comment,
-			COMMENT_CMD_STRING, 0)))
-			return (1);
-	}*/
+	if (!(ft_lexical_err(as, as->lines)))
+		;
+
 	if (!(ft_name_comment_check(as)))
 		return (1);
 	printf("NAME COMMENT OK\n");
 
-	printf("\n\n--\n");
-	i = -1;
-	while (as->lines[++i])
-	{
-		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
-		//printf("<%s>\n", as->lines[i]);
-	}
-
 	if (ft_strlen(as->name) > PROG_NAME_LENGTH
 		|| ft_strlen(as->comment) > COMMENT_LENGTH)
 		return (1);
-	ft_del_empty_lines(as);
+
+
+
 	ft_init_struct_ref_1((t_ref *)as->ref);
 	if (!(ft_malloc_instr(as)))
 		return (1);
@@ -290,7 +273,7 @@ int				main(int ac, char **av)
 		}
 	}
 	printf("\n");
-	printf("\nLEN MEM : %d\nLEN REF : 2304\n", as->len_mem);
+	printf("\nLEN MEM : %d\nLEN REF : 2308\n", as->len_mem);
 
 	ft_free_end(&as);
 	return (0);

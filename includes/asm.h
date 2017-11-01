@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/31 12:38:35 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/01 13:33:24 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,13 @@ int					ft_dir_ind(t_asm *as, char *txt, int *i, t_instr *sv);
 void				ft_mem_len(t_asm *as);
 
 /*
-** 1 fonction - ft_err_load.c
+** 4 fonction - ft_err_load.c
 */
 int					ft_err_load(int ac, int fd, char *str);
+int					ft_err_str_gnl(t_asm *as);
+
+/*
+** 3 fonction - ft_err.c
+*/
+int				ft_lexical_err(t_asm *as, char **lines);
 #endif
