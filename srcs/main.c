@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/30 15:10:46 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/01 10:50:49 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,16 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 {
 	size_t		nb_champ;
 	size_t		moove_champ;
+	size_t		i;
 
 	moove_champ = 0;
+	i = 0;
 	if (ac > 1 && ac - 1 - nb_options != 0)
 		moove_champ = MEM_SIZE / (ac - 1 - nb_options);
-	ac--;
-	while (ac > 0)
+	while (i < (size_t)ac)
 	{
-		nb_champ = color_arena(cor, ac, av, moove_champ);
-		ac--;
+		nb_champ = color_arena(cor, i, av, moove_champ);
+		i++;
 	}
 	cor->nb_champs = nb_champ - 1;
 }
