@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 11:12:33 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/03 15:05:28 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,9 @@ int				main(int ac, char **av)
 
 	printf("\nLOAD OK\n");
 
-
+	if (!(ft_lexical_err(as, as->lines)))
+		return (0);
+	printf("LEXICAL ALL OK\n");
 
 	if (!(ft_name_comment_check(as)))
 		return (1);
@@ -138,9 +140,6 @@ int				main(int ac, char **av)
 	if (ft_strlen(as->name) > PROG_NAME_LENGTH
 		|| ft_strlen(as->comment) > COMMENT_LENGTH)
 		return (1);
-
-	if (!(ft_lexical_err(as, as->lines)))
-		;
 
 	ft_init_struct_ref_1((t_ref *)as->ref);
 	if (!(ft_malloc_instr(as)))

@@ -6,36 +6,37 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 10:10:17 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/31 15:33:52 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/03 15:32:04 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int				ft_name_check(t_asm *as, char *line, char *s_check, int check)
+int				ft_name_check(t_asm *as, int ln, char *s_check, int check)
 {
 	int			i;
 	int			j;
 
 	i = -1;
-	while (line[++i] && line[i] != '\"')
-		if ((i < ft_strlen(s_check) && line[i] != s_check[i])
-			|| (i >= ft_strlen(s_check) && line[i] != ' ' && line[i] != '\t')
-			|| line[i] == '\0')
+	while (as->lines[ln][++i] && as->lines[ln][i] != '\"')
+		if ((i < ft_strlen(s_check) && as->lines[ln][i] != s_check[i])
+			|| (i >= ft_strlen(s_check) && as->lines[ln][i] != ' '
+			&& as->lines[ln][i] != '\t')
+			|| as->lines[ln][i] == '\0')
 			return (0);
 	j = i + 1;
-	while (line[++i] != '\"')
-		if (line[i] == '\0')
+	while (as->lines[ln][++i] != '\"')
+		if (as->lines[ln][i] == '\0')
 			return (0);
 	if (check == 0)
 	{
 		if (s_check == NAME_CMD_STRING
-			&& !(as->name = ft_strsub(line, j, i - j)))
+			&& !(as->name = ft_strsub(as->lines[ln], j, i - j)))
 				return (0);
-		else if (!(as->comment = ft_strsub(line, j, i - j)))
+		else if (!(as->comment = ft_strsub(as->lines[ln], j, i - j)))
 				return (0);
 	}
-	line[0] = '\0';
+	as->lines[ln][0] = '\0';
 	return (1);
 }
 
@@ -62,18 +63,25 @@ void			ft_check_command_kill(t_asm *as, int *i)
 		++*i;
 }
 
+int				ft_check_instr()
+{
+
+}
+
 int				ft_name_comment_check(t_asm *as)
 {
 	int			i;
+	int			instr;
 
+	instr = 0;
 	i = 0;
 	while (as->lines[i][0] == '\0')
 		i++;
-	if (!(ft_name_check(as, as->lines[i], NAME_CMD_STRING, 0)))
+	if ((ft_name_check(as, i, NAME_CMD_STRING, 0) <= 0))
 		return (0);
 	while (as->lines[i][0] == '\0')
 		i++;
-	if (!(ft_name_check(as, as->lines[i], COMMENT_CMD_STRING, 0)))
+	if ((ft_name_check(as, i, COMMENT_CMD_STRING, 0) <= 0))
 		return (0);
 	i++;
 	while (as->lines[i])

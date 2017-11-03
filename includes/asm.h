@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 11:03:07 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/03 14:29:29 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,16 +115,23 @@ int					ft_err_load(int ac, int fd, char *str);
 int					ft_err_str_gnl(t_asm *as);
 
 /*
-** x fonction - ft_err.c
+** x fonction - ft_lex_err.c
 */
+int					ft_put_lexerr(t_asm *as, int i, int j);
 int					ft_lexical_err(t_asm *as, char **lines);
+int				ft_check_command(char **lines, int i, int j, int nb);
 
 /*
 ** x fonction - ft_is_char.c
 */
-
 int					ft_is_lblchr(char c);
 int					ft_is_lbl_o_dgt(char c);
 int					ft_is_lex(char c);
 int					ft_is_sep(char c);
+
+/*
+** x fonction - ft_is_char.c
+*/
+int					ft_btw_cmd_qut(t_asm *as, int ln, int chr, char *s_check);
+int					ft_add_bkn(t_asm *as, int ln, int chr);
 #endif
