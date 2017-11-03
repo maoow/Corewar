@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 15:36:11 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/01 14:39:49 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/03 11:51:11 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int				ft_lexical_err(t_asm *as, char **lines)
 	int			j;
 	int			k;
 	int			cmd;
+	int			lbl;
 
 	cmd = 0;
 	i = -1;
@@ -62,6 +63,7 @@ int				ft_lexical_err(t_asm *as, char **lines)
 	{
 		j = -1;
 		cmd = 0;
+		lbl = 0;
 		while (lines[i][++j])
 		{
 			if (lines[i][j] == NAME_CMD_STRING[0]
@@ -73,13 +75,7 @@ int				ft_lexical_err(t_asm *as, char **lines)
 					cmd = 1;
 				}
 			}
-			if (!ft_strchr(LABEL_CHARS, lines[i][j]) && lines[i][j] != ','
-				&& lines[i][j] != ' ' && lines[i][j] != '\t'
-				&& lines[i][j] != ':'
-				&& (lines[i][j] < '0' || lines[i][j] > '9')
-				&& lines[i][j] != '%'
-				&& lines[i][j] != '"'
-				&& lines[i][j] != '\0')
+			if (!ft_is_lex(lines[i][j]))
 			{
 				printf("lex : <%s> <<%c>>\n", lines[i], lines[i][j]);
 				return (ft_put_lexerr(as, i, j));
@@ -87,21 +83,27 @@ int				ft_lexical_err(t_asm *as, char **lines)
 			if (lines[i][j] == ':' || lines[i][j] == '%')
 			{
 				k = -1;
-				if (j > 0 && cmd != 1 && lines[i][j] == ':')
+				if (j > 0 && cmd != 1 && (lines[i][j] == ':' && lbl == 0))
 					k = 1;
-				printf("K : %d %c\n", k, lines[i][j]);
-				if ((!ft_strchr(LABEL_CHARS, lines[i][j - k])
-				&& (lines[i][j - k] < '0' || lines[i][j - k] > '9'))
-				&& (!ft_strchr(LABEL_CHARS, lines[i][j + 1])
-					&& (lines[i][j + 1] < '0' || lines[i][j + 1] > '9')))
-				{
-					if (!(lines[i][j] == '%' && lines[i][j + 1] == ':'))
-					{
-						printf("Prev : %c, apres %c\n", lines[i][j - k], lines[i][j + 1]);
-						return (ft_put_lexerr(as, i, j));
-					}
-				}
+				//printf("K : %d %c\n", k, lines[i][j]);
+				
+				//if (lines[i][j] == ':' && i == 19)
+				//	printf("Char : <<%c>> prev : <<%c>>, apres <<%c>>, lines <%s>, K : %d\n", lines[i][j], lines[i][j - k], lines[i][j + 1], lines[i], k);
 
+				if ((lines[i][j] == ':' && (!ft_is_lblchr(lines[i][j - k])
+					&& !ft_is_lblchr(lines[i][j + 1])))
+				|| (lines[i][j] == '%' && !ft_is_lbl_o_dgt(lines[i][j + 1])))
+				{
+						printf("Char : <<%c>> prev : <<%c>>, apres <<%c>>, lines <%s>, K : %d\n", lines[i][j], lines[i][j - k], lines[i][j + 1], lines[i], k);
+						return (ft_put_lexerr(as, i, j));
+				}
+				if (lines[i][j] == ':')
+					lbl = 1;
+				}
+			if (ft_is_sep(lines[i][j]))
+			{
+				cmd = 0;
+				lbl = 0;
 			}
 		}
 	}

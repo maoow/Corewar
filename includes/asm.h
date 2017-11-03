@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/01 13:33:24 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/03 11:03:07 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,16 @@ int					ft_err_load(int ac, int fd, char *str);
 int					ft_err_str_gnl(t_asm *as);
 
 /*
-** 3 fonction - ft_err.c
+** x fonction - ft_err.c
 */
-int				ft_lexical_err(t_asm *as, char **lines);
+int					ft_lexical_err(t_asm *as, char **lines);
+
+/*
+** x fonction - ft_is_char.c
+*/
+
+int					ft_is_lblchr(char c);
+int					ft_is_lbl_o_dgt(char c);
+int					ft_is_lex(char c);
+int					ft_is_sep(char c);
 #endif
