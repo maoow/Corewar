@@ -72,19 +72,24 @@ static void		initproccolor(t_cor *core)
 {
 	t_process	*tmp;
 	int			i;
+	int			nb;
 
 	i = 24;
+nb = 1;
 	tmp = core->process;
 	while (tmp)
 	{
 		tmp = tmp->next;
 		i++;
+		nb++;
 	}
 	tmp = core->process;
 	while (tmp)
 	{
 		i--;
+		nb--;
 		tmp->color = i;
+		tmp->registres[0] = nb;
 		tmp = tmp->next;
 	}
 }
