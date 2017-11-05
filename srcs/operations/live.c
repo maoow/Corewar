@@ -12,6 +12,12 @@
 
 #include "operations.h"
 
+/*
+** LIVE
+**
+** take the only param and increase the corresponding champ live rate
+*/
+
 bool	cw_live(t_cor *core, t_process *proc)
 {
 	int	champ;

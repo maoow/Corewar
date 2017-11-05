@@ -12,6 +12,12 @@
 
 #include "operations.h"
 
+/*
+** LDI
+**
+** add first and second param (%IDX) and load it in the first param reg
+*/
+
 static bool		regcheck(t_cor *core, t_process *proc)
 {
 	size_t op;

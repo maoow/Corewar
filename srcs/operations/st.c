@@ -12,6 +12,12 @@
 
 #include "operations.h"
 
+/*
+** ST
+**
+** store the second param reg in the second param (ind or dir)(%IDX)
+*/
+
 bool	cw_st(t_cor *core, t_process *proc)
 {
 	size_t		reg;

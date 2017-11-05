@@ -12,6 +12,13 @@
 
 #include "operations.h"
 
+/*
+** SUB
+**
+** store in the third reg the substraction of the other two, 
+** carry go true if the result is equal to zero
+*/
+
 bool	cw_sub(t_cor *core, t_process *proc)
 {
 	size_t			r1;

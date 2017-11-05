@@ -12,6 +12,12 @@
 
 #include "operations.h"
 
+/*
+** LLD
+**
+** load the second param (ind or dir) in the first param reg
+*/
+
 bool	cw_lld(t_cor *core, t_process *proc)
 {
 	size_t		value;

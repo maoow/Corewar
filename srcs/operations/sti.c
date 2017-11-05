@@ -11,6 +11,13 @@
 /* ************************************************************************** */
 
 #include "operations.h"
+
+/*
+** ST
+**
+** store the third param reg in the addition of first and second param (ind or dir)(%IDX)
+*/
+
 static bool		regcheck(t_cor *core, t_process *proc)
 {
 	size_t op;
