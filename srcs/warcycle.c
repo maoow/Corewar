@@ -68,28 +68,27 @@ static bool		ft_checklives(t_cor *core, t_process *proc, t_process *tproc,
 	return (check_delta(core, lives));
 }
 
-static void		initproccolor(t_cor *core)
+static void		initprocchamp(t_cor *core)
 {
 	t_process	*tmp;
+	t_champ	*ctmp;
 	int			i;
-	int			nb;
 
 	i = 24;
-nb = 1;
 	tmp = core->process;
-	while (tmp)
+	ctmp = core->champs;
+	while (tmp && ctmp)
 	{
+		tmp->registres[0] = ctmp->ID;
 		tmp = tmp->next;
+		ctmp = ctmp->next;
 		i++;
-		nb++;
 	}
 	tmp = core->process;
 	while (tmp)
 	{
 		i--;
-		nb--;
 		tmp->color = i;
-		tmp->registres[0] = nb;
 		tmp = tmp->next;
 	}
 }
@@ -120,7 +119,7 @@ void	dispwinner(t_cor *core)
 */
 void			ft_warcycle(t_cor *core, bool b_alive)
 {
-	initproccolor(core);
+	initprocchamp(core);
 	while (b_alive)
 	{
 		core->tmp_cycle_to_die = 0;
