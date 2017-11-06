@@ -86,7 +86,7 @@ static size_t	color_arena(t_cor *cor, int ac, char **av, size_t moove_champ)
 		i = 0;
 		champ = parse(cor, av[ac], get_optionnal_id(ac, av));
 		check_champ(champ);
-		add_process(cor, decal, get_optionnal_id(ac, av));
+		add_process(cor, decal);
 		while (i + decal < champ[0][0] + decal)
 		{
 			cor->arena[i + decal] = champ[1][i];
