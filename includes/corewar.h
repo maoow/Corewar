@@ -162,7 +162,7 @@ size_t		get_options(t_cor *cor, int ac, char **av, size_t i);
 int			**parse(t_cor *cor, char *av, int optionnal_id);
 bool		is_champ(char *av, size_t *nb_champ, bool test, int j);
 void		add_champ(t_cor *cor, char *name, char *comment, int ID);
-void		add_process(t_cor *cor, size_t startpos, int nb_champ);
+void		add_process(t_cor *cor, size_t startpos);
 void		visu(t_cor *cor);
 void		print_right(WINDOW *right, t_cor *cor, int i, t_champ *tmp);
 void		print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign);

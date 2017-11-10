@@ -12,6 +12,12 @@
 
 #include "operations.h"
 
+/*
+** LLDI
+**
+** add first and second param and load it in the first param reg
+*/
+
 bool	cw_lldi(t_cor *core, t_process *proc)
 {
 	int		adress;
