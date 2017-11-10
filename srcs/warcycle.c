@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 13:38:32 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/10 16:30:23 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 /*
 ** 	check_delat() :
 **
-**  decrease cycle_to_die if executed lives since last check is superior to NBR_LIVE
-**  or if the function has been called MAX_CHEKS time with no cycle_to_die decrease
+**  decrease cycle_to_die if executed lives since last check is superior to
+**	NBR_LIVE or if the function has been called MAX_CHEKS time with no
+**	cycle_to_die decrease
 */
 
 static bool		check_delta(t_cor *core, size_t lives)
@@ -34,16 +35,15 @@ static bool		check_delta(t_cor *core, size_t lives)
 }
 
 /*
+**	ft_checklives() :
+**
+**	count every lives executed since last check, if none, end the game,
+**	else, call check_delta to see if cycle to die need to be decreased
+**
 **	proc et tproc initialises a NULL;
 **	lives initialise a 0;
 */
 
-/*
-**	ft_checklives() :
-**	
-**	count every lives executed since last check, if none, end the game, 
-**	else, call check_delta to see if cycle to die need to be decreased
-*/
 static bool		ft_checklives(t_cor *core, t_process *proc, t_process *tproc,
 		size_t lives)
 {
@@ -55,7 +55,8 @@ static bool		ft_checklives(t_cor *core, t_process *proc, t_process *tproc,
 			tproc = proc->next;
 			ft_delprocess(core, &proc);
 			proc = tproc;
-		} else
+		}
+		else
 		{
 			lives += proc->live;
 			proc->live = 0;
@@ -71,7 +72,7 @@ static bool		ft_checklives(t_cor *core, t_process *proc, t_process *tproc,
 static void		initprocchamp(t_cor *core)
 {
 	t_process	*tmp;
-	t_champ	*ctmp;
+	t_champ		*ctmp;
 	int			i;
 
 	i = 24;
@@ -99,24 +100,26 @@ static void		initprocchamp(t_cor *core)
 ** search for the last alive-declared champ and print its informations
 */
 
-void	dispwinner(t_cor *core)
+void			dispwinner(t_cor *core)
 {
 	t_champ		*tmp;
 
 	tmp = core->champs;
 	while (tmp->ID != core->last_champ_alive)
 		tmp = tmp->next;
-	ft_printf("Contestant %d, \"%s\", has won !\n", core->last_champ_alive, tmp->name);
+	ft_printf("Contestant %d, \"", core->last_champ_alive);
+	ft_printf("%s\", has won !\n", tmp->name);
 }
-/*
-**	b_alive initialise a true;
-*/
 
 /*
 ** ft_warcycle() :
 **
-**	browse process/increase cycle/call visu/check lives... until every process died
+**	browse process/increase cycle/call visu/check lives...
+**	until every process died
+**
+**	b_alive initialise a true;
 */
+
 void			ft_warcycle(t_cor *core, bool b_alive)
 {
 	initprocchamp(core);
@@ -133,7 +136,8 @@ void			ft_warcycle(t_cor *core, bool b_alive)
 				if (core->options->dump)
 					exit(0);
 			}
-			if (core->options->visu && core->total_cycle > core->options->aff_visu)
+			if (core->options->visu &&
+					core->total_cycle > core->options->aff_visu)
 				visu(core);
 			ft_browseprocess(core);
 			ft_increase_cycle(core);
