@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 13:48:25 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 14:19:20 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 **
 ** make a perfect copy of the proc and place it on the given adress
 */
+
 static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 {
 	tmp->next_jump = 0;
@@ -24,7 +25,6 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->next_op = NULL;
 	tmp->just_played = false;
 	tmp->searching = false;
-	//ft_getop(core, tmp, 1);
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
 	tmp->color = proc->color;
