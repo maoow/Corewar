@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 15:51:54 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/18 17:04:07 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/13 16:03:35 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static int		get_nb_process_alive(t_cor *cor)
 static void		print_top(WINDOW *right, t_cor *cor)
 {
 	mvwprintw(right, 2, 3, "** Pause : ESP       Quit : ESC **");
-	mvwprintw(right, 4, 3, "Cycles/second limit : max speed");
+	if (cor->options->fast)
+		mvwprintw(right, 4, 3, "Cycles/second limit : max speed");
+	else
+		mvwprintw(right, 4, 3, "Cycles/second limit : normal speed");
 	mvwprintw(right, 7, 3, "Cycles : %d", cor->total_cycle);
 	mvwprintw(right, 9, 3, "Processes : %d", get_nb_process_alive(cor));
 }
