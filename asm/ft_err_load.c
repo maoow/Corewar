@@ -6,23 +6,11 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:10:19 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 14:35:33 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 12:36:25 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
-
-void			ft_whatzis(char *txt, int i)
-{
-	int			j;
-
-	j = -1;
-	while (ft_strchr(LABEL_CHARS, txt[i + j]) && txt[i + j])
-		;
-	if (txt[i + j] != ':' && txt[i + j] != ',' && txt[i + j] != ' '
-		&& txt[i + j] != '\t' && txt[i + j] != '\n' && txt[i + j] != '\0')
-		(void)j;
-}
 
 int				ft_err_load(int ac, int fd, char *str)
 {

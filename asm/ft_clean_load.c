@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 11:42:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/31 12:36:04 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 11:14:11 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@ int				ft_del_com(t_asm *as)
 {
 	int			i;
 	int			j;
+	int			count;
 	char		*save;
 
+	count = 0;
 	i = -1;
 	while (as->lines[++i])
 	{
 		j = -1;
 		while (as->lines[i][++j])
 		{
-			if (as->lines[i][j] == '#')
+			if (as->lines[i][j] == '"')
+				count++;
+			if (as->lines[i][j] == '#' && (count % 2) == 0)
 			{
 				save = as->lines[i];
 				if (!(as->lines[i] = ft_strsub(as->lines[i], 0, j)))

@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 12:46:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 14:34:22 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 16:00:45 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,57 @@ int					ft_add_bkn(t_asm *as, int ln, int chr)
 	return (count);
 }
 
-int					ft_btw_cmd_qut(t_asm *as, int ln, int chr, char *s_check)
+int				ft_substract_char(t_asm *as, int ln, int chr)
 {
+	int			count;
 	int			j;
-	int			add;
 
-	add = ft_add_bkn(as, ln, chr);
+	count = 0;
+	j = -1;
+	while (as->lines[ln][++j] && j <= chr)
+	{
+		count++;
+		if (as->lines[ln][j] == '\n')
+			count = 0;
+	}
+	return (count);
+}
+
+int				ft_bkz_syntax(t_asm *as, int i, int j)
+{
+	int			k;
+	int				chr;
+
 	if (!(ft_err_str_gnl(as)))
 		return (-1);
-	j = 0;
-	ft_while_space(as->lines[ln], &j);
-	if (!ft_strcmp(s_check, NAME_CMD_STRING) && ft_check_command(as->lines, ln, j, 1) > 0)
-		j += ft_check_command(as->lines, ln, j, 1);
-	if (!ft_strcmp(s_check, COMMENT_CMD_STRING) && ft_check_command(as->lines, ln, j, 2) > 0)
-		j += ft_check_command(as->lines, ln, j, 2);
-	ft_while_space(as->lines[ln], &j);
-	//lex / watzis
-	ft_put_lexerr(as, ln, j);
+	chr = ft_substract_char(as, i, j);
+	k = -1;
+	while (as->lines[i][++k] == ' ' || as->lines[i][k] == '\t')
+		j++;
+	i += ft_add_bkn(as, i, j);
+	ft_putstr("Syntax error at token [TOKEN][");
+	if (i + 1 < 100)
+		ft_putstr("0");
+	if (i + 1 < 10)
+		ft_putstr("0");
+	ft_putnbr(i + 1);
+	ft_putstr(":");
+	if (chr + 1 < 100)
+		ft_putstr("0");
+	if (chr + 1 < 10)
+		ft_putstr("0");
+	ft_putnbr(chr + 1);
+	ft_putstr("] END \"(null)\"\n");
+	return (0);
+}
+
+int				ft_put_syntax(char *txt, int i, char *s_check)
+{
+	int			num;
+
+	if (i < ft_strlen(s_check))
+		return (0);
+	num = ft_watzis(txt, i);
+	printf("NUM : %d\n", num);
 	return (0);
 }

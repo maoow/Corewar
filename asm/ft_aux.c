@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:38:40 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 10:16:47 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 12:12:56 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,26 @@ int				ft_check_lbl(t_asm *as)
 					return (0);
 			}
 		}
+	}
+	return (1);
+}
+
+int			ft_max_len(t_asm *as)
+{
+	if (ft_strlen(as->name) > PROG_NAME_LENGTH)
+	{
+		ft_putstr("Champion name too long (Max length ");
+		ft_putnbr(PROG_NAME_LENGTH);
+		ft_putstr(")\n");
+		return (0);
+	}
+	else if (ft_strlen(as->comment) > COMMENT_LENGTH)
+	{
+		ft_putstr("Champion comment too long (Max length ");
+		ft_putnbr(COMMENT_LENGTH);
+		ft_putstr(")\n");
+
+		return (0);
 	}
 	return (1);
 }

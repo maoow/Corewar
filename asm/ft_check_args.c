@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:03:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/11 11:04:20 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 15:27:34 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int			ft_check_reg(t_asm *as, char *txt, int *i, char *save)
 		as->op[as->n_ln].opc |= (REG_CODE << (6 - (as->ac - 1) * 2));
 	nb_dgts = 1;
 	(*i)++;
-	if (txt[*i] < '0' || txt[*i] > '9')
+	if (!ft_isdigit(txt[*i]))
 		return (0);
-	if (txt[*i + 1] >= '0' && txt[*i + 1] <= '9')
+	if (ft_isdigit(txt[*i + 1]))
 	{
 		nb_dgts++;
-		if (txt[*i + 2] >= '0' && txt[*i + 2] <= '9')
+		if (ft_isdigit(txt[*i + 2]))
 			return (0);
 	}
 	if ((tmp = ft_atoi(txt + *i)) >= 0 && tmp <= 99)

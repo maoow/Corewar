@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 10:10:17 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 15:32:04 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 16:07:47 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@ int				ft_name_check(t_asm *as, int ln, char *s_check, int check)
 			|| (i >= ft_strlen(s_check) && as->lines[ln][i] != ' '
 			&& as->lines[ln][i] != '\t')
 			|| as->lines[ln][i] == '\0')
-			return (0);
+			return (ft_put_syntax(as->lines[ln], i, s_check));
 	j = i + 1;
 	while (as->lines[ln][++i] != '\"')
 		if (as->lines[ln][i] == '\0')
-			return (0);
+			return (ft_bkz_syntax(as, ln, i));
 	if (check == 0)
 	{
-		if (s_check == NAME_CMD_STRING
+		if (!ft_strcmp(s_check, NAME_CMD_STRING)
 			&& !(as->name = ft_strsub(as->lines[ln], j, i - j)))
 				return (0);
-		else if (!(as->comment = ft_strsub(as->lines[ln], j, i - j)))
+		else if (!ft_strcmp(s_check,COMMENT_CMD_STRING)
+				&& !(as->comment = ft_strsub(as->lines[ln], j, i - j)))
 				return (0);
 	}
 	as->lines[ln][0] = '\0';
@@ -63,11 +64,6 @@ void			ft_check_command_kill(t_asm *as, int *i)
 		++*i;
 }
 
-int				ft_check_instr()
-{
-
-}
-
 int				ft_name_comment_check(t_asm *as)
 {
 	int			i;
@@ -84,7 +80,7 @@ int				ft_name_comment_check(t_asm *as)
 	if ((ft_name_check(as, i, COMMENT_CMD_STRING, 0) <= 0))
 		return (0);
 	i++;
-	while (as->lines[i])
-		ft_check_command_kill(as, &i);
+	//while (as->lines[i])
+	//	ft_check_command_kill(as, &i);
 	return (1);
 }

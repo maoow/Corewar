@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 15:05:28 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 15:09:04 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,7 @@ int				main(int ac, char **av)
 		return (1);
 	printf("NAME COMMENT OK\n");
 
-	if (ft_strlen(as->name) > PROG_NAME_LENGTH
-		|| ft_strlen(as->comment) > COMMENT_LENGTH)
+	if (!(ft_max_len(as)))
 		return (1);
 
 	ft_init_struct_ref_1((t_ref *)as->ref);
@@ -151,7 +150,7 @@ int				main(int ac, char **av)
 		return (1);
 	if (!(ft_del_space(as)))
 		return (1);
-/*
+
 	printf("\n\n--\n");
 	i = -1;
 	while (as->lines[++i])
@@ -159,13 +158,23 @@ int				main(int ac, char **av)
 		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
 		//printf("<%s>\n", as->lines[i]);
 	}
-*/
+
 	if (!(ft_instr_check(as)))
 		return (1);
+
+	ft_putstr("INSTR CHECK OK\n");
+
 	if (!(ft_check_var(as)))
 		return (1);
+
+	ft_putstr("VAR CHECK OK\n");
+
+
 	if (!(ft_check_lbl(as)))
 		return (1);
+
+	ft_putstr("LBL CHECK OK\n");
+
 	ft_mem_len(as);
 /*
 	printf("\n\n----\n");

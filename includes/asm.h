@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/03 14:29:29 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/13 16:00:24 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ int					ft_if_label(t_asm *as, int *i);
 int					ft_del_labels(t_asm *as);
 
 /*
-** 4 fonctions - ft_aux.c
+** 5 fonctions - ft_aux.c
 */
 void				ft_while_space(char *txt, int *i);
 int					ft_if_op_ok(t_asm *as, char *op);
 int					ft_check_lbl(t_asm *as);
+int					ft_max_len(t_asm *as);
 
 /*
 **4 fonctions - ft_check_args.c
@@ -119,10 +120,10 @@ int					ft_err_str_gnl(t_asm *as);
 */
 int					ft_put_lexerr(t_asm *as, int i, int j);
 int					ft_lexical_err(t_asm *as, char **lines);
-int				ft_check_command(char **lines, int i, int j, int nb);
+int					ft_check_command(char **lines, int i, int j, int nb);
 
 /*
-** x fonction - ft_is_char.c
+** 4 fonction - ft_is_char.c
 */
 int					ft_is_lblchr(char c);
 int					ft_is_lbl_o_dgt(char c);
@@ -134,4 +135,16 @@ int					ft_is_sep(char c);
 */
 int					ft_btw_cmd_qut(t_asm *as, int ln, int chr, char *s_check);
 int					ft_add_bkn(t_asm *as, int ln, int chr);
+
+
+/*
+** x fonction - ft_name_comm_err.c
+*/
+int				ft_bkz_syntax(t_asm *as, int i, int j);
+int				ft_put_syntax(char *txt, int i, char *s_check);
+
+/*
+** 5 fonctions - ft_watzis.c
+*/
+int				ft_watzis(char *txt, int i);
 #endif
