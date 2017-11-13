@@ -160,6 +160,7 @@ void		write_error(int nb);
 void		ft_init(t_cor *core);
 size_t		get_options(t_cor *cor, int ac, char **av, size_t i);
 int			**parse(t_cor *cor, char *av, int optionnal_id);
+void		get_magic_packet(size_t s, unsigned char *buf, bool *end);
 bool		is_champ(char *av, size_t *nb_champ, bool test, int j);
 void		add_champ(t_cor *cor, char *name, char *comment, int ID);
 void		add_process(t_cor *cor, size_t startpos);
