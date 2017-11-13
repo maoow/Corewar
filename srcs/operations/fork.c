@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 13:48:27 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 14:15:19 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->just_played = false;
 	tmp->searching = false;
 	tmp->buffc = 0;
-	//ft_getop(core, tmp, 1);
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
 	tmp->color = proc->color;
