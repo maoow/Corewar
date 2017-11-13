@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/26 16:06:08 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 13:49:57 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ size_t					g_optime[OPC_NBR] = {
 	1000,
 	2
 };
-static void		ft_executeprocess(t_cor *core, t_process *proc)
+
+static void				ft_executeprocess(t_cor *core, t_process *proc)
 {
 	bool	carry;
 	int		op;
@@ -107,8 +108,11 @@ static void		ft_executeprocess(t_cor *core, t_process *proc)
 	proc->next_op = NULL;
 }
 
-// compare core->arena[proc->PC] with opc_table
-void			ft_getop(t_cor *core, t_process *proc, int first)
+/*
+**	compare core->arena[proc->PC] with opc_table
+*/
+
+void					ft_getop(t_cor *core, t_process *proc, int first)
 {
 	if (ft_checkloadable(core, proc))
 	{
@@ -116,26 +120,24 @@ void			ft_getop(t_cor *core, t_process *proc, int first)
 			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
 		proc->cycles_before_execute =
 			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
-		if ((proc->just_played == false && first == 1))// || proc->just_played) 
+		if ((proc->just_played == false && first == 1))
 			proc->cycles_before_execute--;
 	}
-	else if (proc->just_played == false)
-		if (first == 1)
-			proc->PC++;
+	else if (proc->just_played == false && first == 1)
+		proc->PC++;
 	proc->just_played = false;
 }
 
-void			ft_browseprocess(t_cor *core)
+void					ft_browseprocess(t_cor *core)
 {
 	t_process	*proc;
 
 	proc = core->process;
 	while (proc)
 	{
-		if ( proc->next_op &&
+		if (proc->next_op &&
 revgetop(proc->next_op) != core->arena[(proc->PC + proc->startpos) % MEM_SIZE]
-&&
-g_optime[revgetop(proc->next_op) - 1] == proc->cycles_before_execute + 1)
+	&& g_optime[revgetop(proc->next_op) - 1] == proc->cycles_before_execute + 1)
 		{
 			proc->next_op = NULL;
 		}
@@ -143,7 +145,7 @@ g_optime[revgetop(proc->next_op) - 1] == proc->cycles_before_execute + 1)
 			ft_getop(core, proc, 1);
 		if (proc->cycles_before_execute == 0 && proc->next_op)
 			ft_executeprocess(core, proc);
-		if (!proc->next_op)// && !proc->searching)
+		if (!proc->next_op)
 			ft_getop(core, proc, 0);
 		if (proc->cycles_before_execute > 0)
 			proc->cycles_before_execute--;
@@ -151,7 +153,7 @@ g_optime[revgetop(proc->next_op) - 1] == proc->cycles_before_execute + 1)
 	}
 }
 
-void			ft_delprocess(t_cor *core, t_process **del)
+void					ft_delprocess(t_cor *core, t_process **del)
 {
 	t_process *tmp;
 
