@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/30 15:12:20 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 11:40:22 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ static void		add_special_champ_id(t_cor *cor, t_champ *champ, int id,
 
 static void		fulfill_champ(t_cor *cor, char *name, char *comment, int id)
 {
-	static int	id_fix = 1;
+	static int	id_fix = -1;
 
-	if (id == 1)
+	if (id == -1)
 	{
 		cor->champs->ID = id_fix;
-		id_fix++;
+		id_fix--;
 	}
 	else
 		add_special_champ_id(cor, cor->champs, id, NULL);
