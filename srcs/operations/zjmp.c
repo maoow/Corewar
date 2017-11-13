@@ -6,16 +6,18 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 12:06:49 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 15:37:42 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
+
 /*
 ** ZJMP
 **
 ** if carry is true jump to the specified adress
 */
+
 static void		no_carry(t_cor *core, t_process *proc)
 {
 	if (core->options->v16)
@@ -25,7 +27,6 @@ static void		no_carry(t_cor *core, t_process *proc)
 		proc->next_jump = 0;
 	}
 	proc->PC += 3;
-//	ft_getop(core, proc);
 	if (core->options->v4)
 		ft_printf("FAILED\n");
 }
