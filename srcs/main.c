@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:52:19 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/30 15:10:46 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 12:25:53 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static int		get_optionnal_id(int ac, char **av)
 	{
 		if (ft_strcmp("-n", av[ac - 2]) == 0)
 		{
-			if (ft_atoi(av[ac - 1]) < 0)
+			if (ft_atoi(av[ac - 1]) > 0)
 				return (ft_atoi(av[ac - 1]));
 			else
 			{
-				ft_putendl("Champions selected ID_number must be < 0");
+				ft_putendl("Champions selected ID_number must be > 0");
 				exit(0);
 			}
 		}
 	}
-	return (1);
+	return (-1);
 }
 
 /*
@@ -116,15 +116,19 @@ void			launch_parse(t_cor *cor, int ac, char **av, size_t nb_options)
 {
 	size_t		nb_champ;
 	size_t		moove_champ;
+	size_t		i = 1;
 
 	moove_champ = 0;
 	if (ac > 1 && ac - 1 - nb_options != 0)
 		moove_champ = MEM_SIZE / (ac - 1 - nb_options);
 	ac--;
-	while (ac > 0)
+	//while (ac > 0)
+	while ((int)i <= ac)
 	{
-		nb_champ = color_arena(cor, ac, av, moove_champ);
-		ac--;
+	//	nb_champ = color_arena(cor, ac, av, moove_champ);
+		nb_champ = color_arena(cor, i, av, moove_champ);
+	//	ac--;
+		i++;
 	}
 	cor->nb_champs = nb_champ - 1;
 }
@@ -142,7 +146,7 @@ int				main(int ac, char **av)
 	if (core.options->dump)
 		core.options->visu = false;
 	launch_parse(&core, ac, av, nb_options);
-	intro(core.champs);
+	intro(&core, core.champs);
 	ft_warcycle(&core, true);
 	ft_clean(&core);
 	endwin();
