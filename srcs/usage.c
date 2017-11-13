@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 11:40:42 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/21 15:03:42 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/13 13:42:57 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,26 @@ void		write_error(int nb)
 		exit(ft_printf("Too many players\n"));
 }
 
-void		intro(t_champ *champs)
+void		intro(t_cor *cor, t_champ *champs)
 {
 	t_champ	*tmp;
 	size_t	i;
+	size_t	count;
 
 	i = 1;
-	tmp = champs;
+	count = 1;
 	ft_printf("Introducing contestants...\n");
-	while (tmp)
+	while (count <= cor->nb_champs)
 	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i,
+		i = count;
+		tmp = champs;
+		while (cor->nb_champs - i > 0)
+		{
+			i++;
+			tmp = tmp->next;
+		}
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", count,
 				tmp->weight, tmp->name, tmp->comment);
-		tmp = tmp->next;
-		i++;
+		count ++;
 	}
 }
