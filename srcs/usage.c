@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 11:40:42 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/13 13:42:57 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/13 13:46:02 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void		intro(t_cor *cor, t_champ *champs)
 		}
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", count,
 				tmp->weight, tmp->name, tmp->comment);
-		count ++;
+		count++;
 	}
 }
