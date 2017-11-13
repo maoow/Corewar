@@ -10,7 +10,7 @@ do
 	while [ $diff -lt 1 ]
 	do
 		i=$(($i + $step))
-		./corewar ressources/zaz_champ/$@.cor ressources/zaz_champ/$@.cor -v4 -dump $i > /tmp/2me
+		./corewar -n -1 ressources/zaz_champ/$@.cor -n -2 ressources/zaz_champ/$@.cor -v4 -dump $i > /tmp/2me
 		./ressources/corewar_goinfre ressources/zaz_champ/$@.cor ressources/zaz_champ/$@.cor -v 4 -d $i > /tmp/2you
 		diff /tmp/2me /tmp/2you > /tmp/2diff
 		diff=$(wc -l < /tmp/2diff)
@@ -30,7 +30,7 @@ do
 	while [ $diff -lt 1 ]
 	do
 		i=$(($i + $step))
-		./corewar ressources/zaz_champ/$@.cor ressources/zaz_champ/$@.cor -v16 -dump $i > /tmp/2me
+		./corewar -n -1 ressources/zaz_champ/$@.cor -n -2 ressources/zaz_champ/$@.cor -v16 -dump $i > /tmp/2me
 		./ressources/corewar_goinfre ressources/zaz_champ/$@.cor ressources/zaz_champ/$@.cor -v 16 -d $i > /tmp/2you
 		diff /tmp/2me /tmp/2you > /tmp/2diff
 		diff=$(wc -l < /tmp/2diff)
