@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:10 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 14:55:53 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 15:35:08 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** OR
 **
-** store in the third reg the result of a logical or of the other two, 
+** store in the third reg the result of a logical or of the other two,
 ** carry go true if the result is equal to zero
 */
 
@@ -40,10 +40,12 @@ bool			cw_or(t_cor *core, t_process *proc)
 	size_t	a;
 	size_t	b;
 	size_t	c;
+	int		pos;
 
 	a = getparam(core, proc, 1, 4);
 	b = getparam(core, proc, 2, 4);
-	c = core->arena[(proc->PC + proc->startpos + proc->next_jump - 1) % MEM_SIZE] - 1;
+	pos = proc->PC + proc->startpos;
+	c = core->arena[(pos + proc->next_jump - 1) % MEM_SIZE] - 1;
 	if (c >= REG_NUMBER)
 		return (proc->carry);
 	proc->registres[c] = or(a, b);
