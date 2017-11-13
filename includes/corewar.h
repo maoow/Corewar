@@ -155,7 +155,7 @@ typedef struct			s_cor
 **			START FUNCTIONS
 */
 void		usage(int ac, char **av);
-void		intro(t_champ *champs);
+void		intro(t_cor *cor, t_champ *champs);
 void		write_error(int nb);
 void		ft_init(t_cor *core);
 size_t		get_options(t_cor *cor, int ac, char **av, size_t i);
@@ -176,7 +176,7 @@ size_t					revgetop(bool (*op)());
 void		ft_warcycle(t_cor *core, bool b_alive);
 void		ft_increase_cycle(t_cor *core);
 void		ft_browseprocess(t_cor *core);
-long int		idx(t_process *proc, long int jump);
+long int	idx(t_process *proc, long int jump);
 void		ft_determinejmpdist(t_cor *core, t_process *proc);
 size_t		ind(t_cor *core, t_process *proc, size_t PC);
 size_t		indx(t_cor *core, t_process *proc, size_t PC);
