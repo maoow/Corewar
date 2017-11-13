@@ -6,17 +6,19 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:13 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/29 12:06:00 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 15:37:09 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
+
 /*
 ** XOR
 **
-** store in the third reg the result of a logical xor of the other two, 
+** store in the third reg the result of a logical xor of the other two,
 ** carry go true if the result is equal to zero
 */
+
 static size_t	xor(size_t a, size_t b)
 {
 	size_t		out;
@@ -43,8 +45,8 @@ bool			cw_xor(t_cor *core, t_process *proc)
 	a = getparam(core, proc, 1, 4);
 	b = getparam(core, proc, 2, 4);
 	c = core->arena[(getparamplace(core, proc, 3, 4) - 1) % MEM_SIZE] - 1;
-if (c >= REG_NUMBER)
-return (proc->carry);
+	if (c >= REG_NUMBER)
+		return (proc->carry);
 	proc->registres[c] = xor(a, b);
 	if (core->options->v4)
 		ft_printf("P%5d | xor %d %d r%d\n", proc->ID, a, b, c + 1);
