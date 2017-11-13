@@ -6,14 +6,14 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/18 17:07:18 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/13 15:59:42 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
-**	transforme le unsigned char *champion binaire en int *champion hexa
+**	transforme le unsigned char en hexa (int*)
 */
 
 static int		**get_hexa(unsigned char *champion, size_t size_champ)
@@ -44,60 +44,6 @@ static void		get_info(bool *start, size_t s, unsigned char buf)
 {
 	if (s > 148 && buf && buf > 0 && buf < 17)
 		*start = true;
-}
-
-/*
-**	Assemble l'hexa du magic paquet pour avoir un int (cf get_ram dans
-**	ramfunctions.c) et le compare au define magic packet
-*/
-
-static void		check_magic_packet(unsigned char *magic)
-{
-	size_t		i;
-	int			res;
-
-	i = 0;
-	res = 0;
-	while (i <= EXEC_MAGIC_LENGHT)
-	{
-		res = res + magic[i];
-		if (i < EXEC_MAGIC_LENGHT)
-			res = res * 256;
-		i++;
-	}
-	if (res != MAGIC_PACKET)
-	{
-		ft_putendl("Wrong Magic Packet");
-		exit(0);
-	}
-}
-
-static void		get_magic_packet(size_t s, unsigned char *buf, bool *end)
-{
-	static size_t			i = 0;
-	static unsigned char	*magic = NULL;
-
-	if (s <= EXEC_MAGIC_LENGHT)
-		*end = false;
-	if (!magic && !*end)
-	{
-		if (!(magic = ft_memalloc(EXEC_MAGIC_LENGHT + 1)))
-			write_error(2);
-	}
-	if (s <= EXEC_MAGIC_LENGHT)
-	{
-		magic[i] = buf[0];
-		i++;
-	}
-	else if (!*end)
-	{
-		magic[i] = '\0';
-		check_magic_packet(magic);
-		*end = true;
-		free(magic);
-		magic = NULL;
-		i = 0;
-	}
 }
 
 static size_t	read_loop(unsigned char *buf, char *name, char *comment,
