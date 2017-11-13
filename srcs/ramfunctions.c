@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 13:10:18 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/18 14:47:19 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 15:48:44 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ long int			getram(t_cor *core, size_t address)
 	return (value);
 }
 
-void		setram(t_cor *core, size_t address, int val, int color)
+void				setram(t_cor *core, size_t address, int val, int color)
 {
 	long int value;
 
