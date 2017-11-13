@@ -6,12 +6,13 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/10/30 12:51:03 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/13 14:09:45 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-size_t					g_oplabel[OPC_NBR] = {
+
+size_t			g_oplabel[OPC_NBR] = {
 	4,
 	4,
 	0,
@@ -30,48 +31,46 @@ size_t					g_oplabel[OPC_NBR] = {
 	0
 };
 
-size_t		getlabel(size_t op)
+size_t			getlabel(size_t op)
 {
 	return (g_oplabel[op - 1]);
 }
-long int	idx(t_process *proc, long int jump)
+
+long int		idx(t_process *proc, long int jump)
 {
 	long int	tmp;
 
-	//ft_printf(" %d %d  ", jump, IDX_MOD);
 	if (jump > MEM_SIZE / 2 && jump % IDX_MOD != 0)
 		tmp = (jump % IDX_MOD) + proc->PC - IDX_MOD;
 	else
 		tmp = (jump % IDX_MOD) + proc->PC;
-	//ft_printf(" %d %d  ", tmp, IDX_MOD);
 	return (((tmp + proc->startpos) % MEM_SIZE));
 }
 
-void	dispjump(t_cor *core, t_process *proc)
+void			dispjump(t_cor *core, t_process *proc)
 {
 	size_t		i;
 	size_t		start;
 
 	if (proc->next_jump > 0)
 	{
-	start = (proc->startpos + proc->PC) % MEM_SIZE;
-	i = 0;
-	//ft_printf("%d  ", proc->ID);
-	if (start > 0)
-		ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, start, start + proc->next_jump);
-	else
-		ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump, (proc->startpos + proc->PC + proc->next_jump) % MEM_SIZE);
-	if (proc->next_jump < 1000)
-		while (i < proc->next_jump)
-		{
-			ft_printf(" %02x", core->arena[mod(proc->startpos + proc->PC + i, MEM_SIZE)]);
-			i++;
-		}
-	ft_printf(" \n");
+		start = (proc->startpos + proc->PC) % MEM_SIZE;
+		i = 0;
+		if (start > 0)
+			ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, start, start + proc->next_jump);
+		else
+			ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump, (proc->startpos + proc->PC + proc->next_jump) % MEM_SIZE);
+		if (proc->next_jump < 1000)
+			while (i < proc->next_jump)
+			{
+				ft_printf(" %02x", core->arena[mod(proc->startpos + proc->PC + i, MEM_SIZE)]);
+				i++;
+			}
+		ft_printf(" \n");
 	}
 }
 
-void	ft_determinejmpdist(t_cor *core, t_process *proc)
+void			ft_determinejmpdist(t_cor *core, t_process *proc)
 {
 	unsigned char	tmp;
 	unsigned char	op;
@@ -97,9 +96,7 @@ void	ft_determinejmpdist(t_cor *core, t_process *proc)
 		}
 		else
 			proc->next_jump = 1 + g_oplabel[op - 1];
-		//if (core->arena[(proc->startpos + proc->PC) % MEM_SIZE] == 2 && proc->next_jump >= 8)
-			//proc->next_jump = 6;
 	}
 	else
-		proc->next_jump = 0; // aqui
+		proc->next_jump = 0;
 }
