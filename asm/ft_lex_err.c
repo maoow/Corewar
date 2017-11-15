@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 15:36:11 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 12:50:08 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 10:13:16 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,10 @@
 
 int			ft_put_lexerr(t_asm *as, int i, int j)
 {
-	int			k;
-
 	if (j > 0 && as->lines[i][j] == ':' && as->lines[i][j - 1] == '%')
 		j--;
-	if (!(ft_err_str_gnl(as)))
+	if (ft_real_ln_chr(as, &i, &j) == -1)
 		return (-1);
-	k = -1;
-	while (as->lines[i][++k] == ' ' || as->lines[i][k] == '\t')
-		j++;
-	i += ft_add_bkn(as, i, j);
 	ft_putstr("Lexical error at [");
 	ft_putnbr(i + 1);
 	ft_putstr(":");

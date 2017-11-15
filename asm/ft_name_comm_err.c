@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 12:46:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 16:00:45 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 11:29:45 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,24 @@ int				ft_substract_char(t_asm *as, int ln, int chr)
 
 int				ft_bkz_syntax(t_asm *as, int i, int j)
 {
-	int			k;
-	int				chr;
-
-	if (!(ft_err_str_gnl(as)))
+	if (ft_real_ln_chr(as, &i, &j) == -1)
 		return (-1);
-	chr = ft_substract_char(as, i, j);
-	k = -1;
-	while (as->lines[i][++k] == ' ' || as->lines[i][k] == '\t')
-		j++;
-	i += ft_add_bkn(as, i, j);
-	ft_putstr("Syntax error at token [TOKEN][");
-	if (i + 1 < 100)
-		ft_putstr("0");
-	if (i + 1 < 10)
-		ft_putstr("0");
-	ft_putnbr(i + 1);
-	ft_putstr(":");
-	if (chr + 1 < 100)
-		ft_putstr("0");
-	if (chr + 1 < 10)
-		ft_putstr("0");
-	ft_putnbr(chr + 1);
-	ft_putstr("] END \"(null)\"\n");
+	ft_putstr("Syntax error");
+	ft_putstr_at_token_num(i, j);
+	ft_putstr("END \"(null)\"\n");
 	return (0);
 }
 
-int				ft_put_syntax(char *txt, int i, char *s_check)
+int				ft_put_syntax(t_asm *as, int i, int j, char *s_check)
 {
-	int			num;
-
-	if (i < ft_strlen(s_check))
+	if (j < ft_strlen(s_check))
 		return (0);
-	num = ft_watzis(txt, i);
-	printf("NUM : %d\n", num);
+	if (ft_real_ln_chr(as, &i, &j) == -1)
+		return (-1);
+	as->num_syn = ft_watzis(as->lines[i], j);
+	ft_putstr("Syntax error");
+	ft_putstr_at_token_num(i, j);
+	ft_putstr(as->syn[as->num_syn]);
+	ft_search_syntax(as, i, j);
 	return (0);
 }

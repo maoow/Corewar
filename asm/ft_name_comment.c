@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 10:10:17 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 16:07:47 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 09:48:53 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				ft_name_check(t_asm *as, int ln, char *s_check, int check)
 			|| (i >= ft_strlen(s_check) && as->lines[ln][i] != ' '
 			&& as->lines[ln][i] != '\t')
 			|| as->lines[ln][i] == '\0')
-			return (ft_put_syntax(as->lines[ln], i, s_check));
+			return (ft_put_syntax(as, ln, i, s_check));
 	j = i + 1;
 	while (as->lines[ln][++i] != '\"')
 		if (as->lines[ln][i] == '\0')

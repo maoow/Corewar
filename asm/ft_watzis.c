@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:36:38 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 16:10:11 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 12:35:11 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				ft_is_command(char *txt, int i)
 
 int				ft_is_ind(char *txt, int i)
 {
-	while (txt[i] && (txt[i] >= '0' || txt[i] <= '9'))
+	while (ft_isdigit(txt[i]))
 		i++;
 	if (ft_strchr(LABEL_CHARS, txt[i]) || txt[i] == ':')
 		return (0);
@@ -82,5 +82,5 @@ int				ft_watzis(char *txt, int i)
 	if (ft_is_label(txt, i) == 1)
 		return (11); //LABEL
 	else
-		return (10); //INSTRUCTION
+		return (12); //INSTRUCTION
 }

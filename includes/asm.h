@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 16:00:24 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 11:41:50 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct		s_asm
 	int				strt_mem;
 	int				ac;
 	t_ref			ref[17];
+	char			*syn[13];
+	int				num_syn;
 	char			*load;
 	char			**lines;
 	char			*name;
@@ -87,12 +89,18 @@ int					ft_if_label(t_asm *as, int *i);
 int					ft_del_labels(t_asm *as);
 
 /*
-** 5 fonctions - ft_aux.c
+** 4 fonctions - ft_aux.c
 */
 void				ft_while_space(char *txt, int *i);
 int					ft_if_op_ok(t_asm *as, char *op);
 int					ft_check_lbl(t_asm *as);
+
+/*
+** x fonctions - ft_err_aux.c
+*/
 int					ft_max_len(t_asm *as);
+int					ft_real_ln_chr(t_asm *as, int *i, int *j);
+void				ft_putstr_at_token_num(int i, int j);
 
 /*
 **4 fonctions - ft_check_args.c
@@ -141,10 +149,16 @@ int					ft_add_bkn(t_asm *as, int ln, int chr);
 ** x fonction - ft_name_comm_err.c
 */
 int				ft_bkz_syntax(t_asm *as, int i, int j);
-int				ft_put_syntax(char *txt, int i, char *s_check);
+int				ft_put_syntax(t_asm *as, int i, int j, char *s_check);
+int				ft_substract_char(t_asm *as, int ln, int chr);
 
 /*
 ** 5 fonctions - ft_watzis.c
 */
 int				ft_watzis(char *txt, int i);
+
+/*
+** x fonctions - ft_search_syntax.c
+*/
+void			ft_search_syntax(t_asm *as, int i, int j);
 #endif

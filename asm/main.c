@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 15:09:04 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 09:36:14 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ void			ft_free_end(t_asm **as)
 			free((*as)->comment);
 		free(*as);
 	}
+}
+
+void			ft_init_syn(t_asm *as)
+{
+
+	as->syn[1] = "ENDLINE";
+	as->syn[2] = "STRING";
+	as->syn[3] = "DIRECT_LABEL";
+	as->syn[4] = "DIRECT";
+	as->syn[5] = "INDIRECT_LABEL";
+	as->syn[6] = "SEPARATOR";
+	as->syn[7] = "COMMAND_COMMENT";
+	as->syn[8] = "COMMAND_NAME";
+	as->syn[9] = "INDIRECT";
+	as->syn[10] = "REGISTER";
+	as->syn[11] = "LABEL";
+	as->syn[12] = "INSTRUCTION";
 }
 
 int				ft_init_struct_asm(t_asm **as)
@@ -122,6 +139,7 @@ int				main(int ac, char **av)
 
 	if (!(ft_init_struct_asm(&as)))
 		return (1);
+	ft_init_syn(as);
 	if (!(ft_loading(ac, av, 1, as)))
 		return (1);
 
