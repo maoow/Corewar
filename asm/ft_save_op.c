@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 09:44:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/31 11:56:31 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 13:05:13 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int				ft_instr_check(t_asm *as)
 	while (as->lines[++i])
 	{
 		j = -1;
-		while (as->lines[i][++j] != '%' && as->lines[i][j] != ' '
-			&& as->lines[i][j] != '\t' && as->lines[i][j] != '\0')
+		while (as->lines[i][++j] != '%' && !ft_is_sep(as->lines[i][j])
+			&& as->lines[i][j] != '\0')
 			;
 		if (j != 0)
 		{

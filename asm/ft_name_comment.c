@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 10:10:17 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 09:48:53 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 16:42:58 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				ft_name_check(t_asm *as, int ln, char *s_check, int check)
 			|| (i >= ft_strlen(s_check) && as->lines[ln][i] != ' '
 			&& as->lines[ln][i] != '\t')
 			|| as->lines[ln][i] == '\0')
-			return (ft_put_syntax(as, ln, i, s_check));
+			return (ft_put_syntax(as, ln, i));
 	j = i + 1;
 	while (as->lines[ln][++i] != '\"')
 		if (as->lines[ln][i] == '\0')
@@ -71,12 +71,19 @@ int				ft_name_comment_check(t_asm *as)
 
 	instr = 0;
 	i = 0;
-	while (as->lines[i][0] == '\0')
+	while (as->lines[i] && as->lines[i][0] == '\0')
 		i++;
-	if ((ft_name_check(as, i, NAME_CMD_STRING, 0) <= 0))
-		return (0);
-	while (as->lines[i][0] == '\0')
+	if (!as->lines[i] || (ft_name_check(as, i, NAME_CMD_STRING, 0) <= 0))
+		return (ft_put_syntax(as, i, 0));
+	while (as->lines[i] && as->lines[i][0] == '\0')
 		i++;
+	if (!as->lines[i])
+	{
+		instr = -1;
+		while (as->lines[i - 1][++instr])
+			;
+		return (ft_put_syntax(as, i - 1, instr));
+	}
 	if ((ft_name_check(as, i, COMMENT_CMD_STRING, 0) <= 0))
 		return (0);
 	i++;

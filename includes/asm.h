@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 11:41:50 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 16:18:09 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int					ft_add_bkn(t_asm *as, int ln, int chr);
 ** x fonction - ft_name_comm_err.c
 */
 int				ft_bkz_syntax(t_asm *as, int i, int j);
-int				ft_put_syntax(t_asm *as, int i, int j, char *s_check);
+int				ft_put_syntax(t_asm *as, int i, int j);
 int				ft_substract_char(t_asm *as, int ln, int chr);
 
 /*
@@ -161,4 +161,10 @@ int				ft_watzis(char *txt, int i);
 ** x fonctions - ft_search_syntax.c
 */
 void			ft_search_syntax(t_asm *as, int i, int j);
+
+/*
+** x fonctions - ft_syn_A.c
+*/
+
+int				ft_syn_A(t_asm *as, int i);
 #endif

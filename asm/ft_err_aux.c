@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 09:54:13 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 10:47:24 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 16:30:55 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ int			ft_real_ln_chr(t_asm *as, int *i, int *j)
 	origine = *j;
 	if (!(ft_err_str_gnl(as)))
 		return (-1);
+	if (ft_watzis(as->lines[*i], 0) == 11)
+	{
+		while (as->lines[*i][++(*j)] && as->lines[*i][*j] != ':')
+			;
+		(*j)++;
+		ft_while_space(as->lines[*i], j);
+		origine = *j;
+	}
 	chr = *j;
 	chr = ft_substract_char(as, *i, *j);
 	if (chr < *j)

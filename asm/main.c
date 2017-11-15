@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 09:36:14 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 16:17:35 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int				main(int ac, char **av)
 	printf("\nLOAD OK\n");
 
 	if (!(ft_lexical_err(as, as->lines)))
-		return (0);
+		return (1);
 	printf("LEXICAL ALL OK\n");
 
 	if (!(ft_name_comment_check(as)))
@@ -177,10 +177,19 @@ int				main(int ac, char **av)
 		//printf("<%s>\n", as->lines[i]);
 	}
 
+	i = -1;
+	while (as->lines[++i] && as->lines[i][0] == '\0')
+		;
+	if (!(ft_syn_A(as, i)))
+		return (1);
+	//Check Syntax A-B
+
 	if (!(ft_instr_check(as)))
 		return (1);
 
 	ft_putstr("INSTR CHECK OK\n");
+
+	//Check Syntax C
 
 	if (!(ft_check_var(as)))
 		return (1);
@@ -188,7 +197,7 @@ int				main(int ac, char **av)
 	ft_putstr("VAR CHECK OK\n");
 
 
-	if (!(ft_check_lbl(as)))
+	if (!(ft_check_lbl(as))) //Syntax D
 		return (1);
 
 	ft_putstr("LBL CHECK OK\n");

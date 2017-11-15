@@ -6,7 +6,7 @@
 #    By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/27 12:28:21 by vkim              #+#    #+#              #
-#    Updated: 2017/11/15 11:27:26 by vkim             ###   ########.fr        #
+#    Updated: 2017/11/15 16:15:47 by vkim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ N_SRC=ft_loading.c \
 	  ft_watzis.c \
 	  ft_err_aux.c \
 	  ft_search_syntax.c \
+	  ft_syn_A.c \
 	  main.c \
 
 P_SRC = .

@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 10:56:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 12:40:43 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/15 12:46:39 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,8 @@ void				ft_put_lblbchr_while(t_asm *as, int i, int *j, int count)
 		ft_putchar(as->lines[i][*j]);
 }
 
-void				ft_search_syntax(t_asm *as, int i, int j)
+void				ft_put_simples(t_asm *as, int i, int j)
 {
-	if (as->num_syn == 1)
-		return ;
-	ft_putstr(" \"");
 	if (as->num_syn == 6)
 		ft_putstr(",");
 	else if (as->num_syn == 7)
@@ -55,7 +52,15 @@ void				ft_search_syntax(t_asm *as, int i, int j)
 		ft_putchar_until(as, i, j + 1, '"');
 	else if (as->num_syn == 3)
 		ft_put_lblbchr_while(as, i, &j, 2);
-	else if (as->num_syn == 4)
+}
+
+void				ft_search_syntax(t_asm *as, int i, int j)
+{
+	if (as->num_syn == 1)
+		return ;
+	ft_putstr(" \"");
+	ft_put_simples(as, i, j);
+	if (as->num_syn == 4)
 	{
 		ft_putchar(as->lines[i][j]);
 		while (ft_isdigit(as->lines[i][++j]))
