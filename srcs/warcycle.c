@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 12:17:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/10 16:30:23 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/16 08:08:06 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,16 @@ static void		initprocchamp(t_cor *core)
 void			dispwinner(t_cor *core)
 {
 	t_champ		*tmp;
+	size_t		contestant;
 
 	tmp = core->champs;
+	contestant = core->nb_champs;
 	while (tmp->ID != core->last_champ_alive)
+	{
 		tmp = tmp->next;
-	ft_printf("Contestant %d, \"", core->last_champ_alive);
+		contestant--;
+	}
+	ft_printf("Contestant %d, \"", contestant);
 	ft_printf("%s\", has won !\n", tmp->name);
 }
 
