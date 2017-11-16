@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 12:55:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 14:14:23 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/16 09:05:15 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,14 @@ static int		get_paramsize(size_t opc, size_t op)
 		tmp = opc % 4;
 		if (tmp == 3)
 			tmp++;
-		if (i >= g_opparamnb[op - 1] ||
-				(g_opparams[op - 1][i] & tmp) == tmp
-				|| op == 5 || op == 4)
+		if (i >= g_opparamnb[op - 1] || (g_opparams[op - 1][i] & tmp) == tmp || op == 5 || op == 4)
 		{
-			if (opc % 4 == 2)
-			{
-				if (getlabel(op) == 0)
-					ret += 4;
-				ret += getlabel(op);
-			}
-			else if (opc % 4 == 3)
+			if (opc % 4 == 3)
 				ret += 2;
+			else if (opc % 4 == 2 && getlabel(op) == 0)
+				ret += 4;
+			else if (opc % 4 == 2)
+				ret += getlabel(op);
 			else if (opc % 4 == 1)
 				ret += 1;
 		}

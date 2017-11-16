@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/16 08:25:59 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/16 09:06:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ size_t	get_paramnb(size_t opc)
 }
 
 size_t	indx(t_cor *core, t_process *proc, size_t pc)
-{ size_t value;
+{
+	size_t value;
 
 	pc = ((pc - proc->PC) % IDX_MOD) + proc->PC;
 	value = core->arena[(proc->startpos + pc) % MEM_SIZE];
@@ -67,7 +68,7 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 			value = getram(core, place);
 	}
 	else
-		value = getram(core, ind(core, proc,place));
+		value = getram(core, ind(core, proc, place));
 	return ((size_t)(value % 4294967295));
 }
 
