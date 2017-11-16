@@ -1,5 +1,5 @@
 .name "snuggles"
-.comment "hooow maoow maoooow mamaaaoow"
+.comment "FAT ! HEAVY AS A BRICKAAA !"
 
 start:
 sti		r1, %:retrosecure, %7
