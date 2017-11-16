@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:05 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 14:50:00 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/16 08:41:52 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ bool			cw_ldi(t_cor *core, t_process *proc)
 	int			adress3;
 	size_t		reg;
 
-	reg = core->arena[(getparamplace(core, proc, 3, 2) - 1) % MEM_SIZE];
+	reg = core->arena[(proc->PC + proc->startpos +proc->next_jump - 1)
+		% MEM_SIZE];
 	if (reg - 1 >= REG_NUMBER || !regcheck(core, proc))
 		return (proc->carry);
 	adress = getparam(core, proc, 1, 2);

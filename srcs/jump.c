@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:06:40 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 14:09:45 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/16 08:14:17 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,16 @@ void			dispjump(t_cor *core, t_process *proc)
 		start = (proc->startpos + proc->PC) % MEM_SIZE;
 		i = 0;
 		if (start > 0)
-			ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, start, start + proc->next_jump);
+			ft_printf("ADV %d (%06#x -> %#06x)", proc->next_jump, start,
+					start + proc->next_jump);
 		else
-			ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump, (proc->startpos + proc->PC + proc->next_jump) % MEM_SIZE);
+			ft_printf("ADV %d (0x0000 -> %#06x)", proc->next_jump,
+					(proc->startpos + proc->PC + proc->next_jump) % MEM_SIZE);
 		if (proc->next_jump < 1000)
 			while (i < proc->next_jump)
 			{
-				ft_printf(" %02x", core->arena[mod(proc->startpos + proc->PC + i, MEM_SIZE)]);
+				ft_printf(" %02x", core->arena[mod(proc->startpos + proc->PC +
+							i, MEM_SIZE)]);
 				i++;
 			}
 		ft_printf(" \n");
@@ -75,9 +78,9 @@ void			ft_determinejmpdist(t_cor *core, t_process *proc)
 	unsigned char	tmp;
 	unsigned char	op;
 
-	op = core->arena[(proc->startpos + proc->PC) % MEM_SIZE];
 	op = revgetop(proc->next_op);
 	tmp = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
+	proc->next_jump = 0;
 	if (op != 9 && op < 17 && op > 0)
 	{
 		if (hasopcode(op))
@@ -97,6 +100,4 @@ void			ft_determinejmpdist(t_cor *core, t_process *proc)
 		else
 			proc->next_jump = 1 + g_oplabel[op - 1];
 	}
-	else
-		proc->next_jump = 0;
 }

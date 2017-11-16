@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:09 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 15:10:05 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/16 08:41:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ bool			cw_lldi(t_cor *core, t_process *proc)
 	int			pos;
 
 	pos = proc->PC + proc->startpos;
-	reg = core->arena[(getparamplace(core, proc, 3, 2) - 1) % MEM_SIZE];
+	reg = core->arena[(proc->PC + proc->startpos +proc->next_jump - 1)
+		% MEM_SIZE];
 	if (((core->arena[mod(pos + 1, MEM_SIZE)]) / 16) % 4 == 1 &&
 			reg - 1 >= REG_NUMBER)
 		return (proc->carry);

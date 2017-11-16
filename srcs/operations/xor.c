@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:13 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 15:37:09 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/16 08:42:41 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ bool			cw_xor(t_cor *core, t_process *proc)
 
 	a = getparam(core, proc, 1, 4);
 	b = getparam(core, proc, 2, 4);
-	c = core->arena[(getparamplace(core, proc, 3, 4) - 1) % MEM_SIZE] - 1;
+	c = core->arena[(proc->PC + proc->startpos + proc->next_jump - 1)
+		% MEM_SIZE] - 1;
 	if (c >= REG_NUMBER)
 		return (proc->carry);
 	proc->registres[c] = xor(a, b);

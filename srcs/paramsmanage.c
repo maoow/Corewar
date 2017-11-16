@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 15:43:07 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/16 08:25:59 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ size_t	get_paramnb(size_t opc)
 }
 
 size_t	indx(t_cor *core, t_process *proc, size_t pc)
-{
-	size_t value;
+{ size_t value;
 
 	pc = ((pc - proc->PC) % IDX_MOD) + proc->PC;
 	value = core->arena[(proc->startpos + pc) % MEM_SIZE];
@@ -50,40 +49,25 @@ size_t	ind(t_cor *core, t_process *proc, size_t pc)
 size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 {
 	size_t			op[3];
-	size_t			i;
 	size_t			place;
 	int				value;
-	int				pos;
 
-	i = 0;
-	place = 2;
 	op[0] = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
 	op[2] = (op[0] / 4) % 4;
 	op[1] = (op[0] / 16) % 4;
 	op[0] /= 64;
-	pos = proc->PC + proc->startpos;
-	while (i < param)
+	place = getparamplace(core, proc, param, label);
+	if (op[param - 1] == 1)
+		value = proc->registres[mod(core->arena[place] - 1, 16)];
+	else if (op[param - 1] == 2)
 	{
-		if (op[i] == 1)
-		{
-			value = proc->registres[mod(core->arena[(pos + place) % MEM_SIZE] - 1, 16)];
-			place++;
-		}
-		else if (op[i] == 2)
-		{
-			if (label == 2)
-				value = ind(core, proc, proc->PC + place);
-			else
-				value = getram(core, place + pos);
-			place += label;
-		}
+		if (label == 2)
+			value = ind(core, proc, place - proc->startpos);
 		else
-		{
-			value = getram(core, ind(core, proc, pos + place));
-			place += 2;
-		}
-		i++;
+			value = getram(core, place);
 	}
+	else
+		value = getram(core, ind(core, proc,place));
 	return ((size_t)(value % 4294967295));
 }
 
@@ -99,7 +83,7 @@ size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
 	op[2] = (op[0] / 4) % 4;
 	op[1] = (op[0] / 16) % 4;
 	op[0] /= 64;
-	while (i < param)
+	while (i < param - 1)
 	{
 		if (op[i] == 1)
 			place++;
