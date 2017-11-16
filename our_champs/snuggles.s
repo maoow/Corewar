@@ -7,28 +7,26 @@ sti		r1, %:live, %1
 sti		r1, %:prelive, %1
 sti		r1, %:cpy, %1
 sti		r1, %:cp, %1
-
-stend:
 sti		r1, %:init, %1
 xor		r9, r9, r9
 
 init:
 live %0
-ld		%4, r2
-ld		%32, r11
-ld		%92, r8
-ld		%252645135, r12
+ld		%2, r2 		# count for cpy and retro
+ld		%120, r8	# stop	for cpy
+ld		%32, r11	# stop	for prepost
+ld		%252645135, r12 # 0f 0f 0f 0f
 live %0
 fork	%:feed
 
-ld		%2, r3
+#ld		%2, r3
 
 prepostinit:
 live %2290649224
 ld		%-6, r15
-add		r3, r3, r3
-add		r15, r3, r15
-sub		r3, r11, r7
+add		r2, r2, r2
+add		r15, r2, r15
+sub		r2, r11, r7
 zjmp	%:postinit
 fork	%:prepostinit
 postinit:
@@ -38,7 +36,7 @@ ld		%442, r16
 retrosecure:
 sti		r12, %-490 , r16
 live	%2290649224
-sub		r16, r3, r16
+sub		r16, r2, r16
 xor		r15, r16, r14
 zjmp	%:postinit
 xor		r9, r9, r9
@@ -51,6 +49,8 @@ fork	%:cp
 andfeed:
 live %0
 fork	%:prepostinit
+live %0
+fork	%:init2
 
 autofeed:
 live %0
@@ -62,6 +62,11 @@ zjmp	%:andfeed
 cp:
 live %0
 fork	%:preprelive
+
+icpy:
+add		r2, r2, r2
+sub		r2, r11, r16
+zjmp		%:init3
 
 cpy:
 live %0
@@ -86,9 +91,13 @@ zjmp	%:live
 
 init2:
 add		r8, r8, r8
-fork	%:cpy
-ld		%4, r2
+fork	%:icpy
+live 	%0
+add		r2, r6, r6
+fork	%:icpy
+init3:
+live 	%0
 ld		%0, r6
-ld		%92, r8
+ld		%120, r8
 
 andthen:
