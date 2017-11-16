@@ -13,9 +13,10 @@ xor		r9, r9, r9
 init:
 live %0
 ld		%2, r2 		# count for cpy and retro
-ld		%120, r8	# stop	for cpy
+ld		%128, r8	# stop	for cpy
+ld		%960, r13	# stop	for icpy
 ld		%32, r11	# stop	for prepost
-ld		%252645135, r12 # 0f 0f 0f 0f
+ld		%251662080, r12 # 0f 0f 0f 0f
 live %0
 fork	%:feed
 
@@ -45,19 +46,24 @@ zjmp	%:retrosecure
 feed:
 live %0
 fork	%:cp
+fork	%:feed
+live %0
+fork	%:andfeed
+fork	%:autofeed
 
 andfeed:
 live %0
 fork	%:prepostinit
 live %0
-fork	%:init2
+fork	%:prepostinit
+zjmp	%:andfeed
 
 autofeed:
 live %0
 fork	%:autofeed
 live %0
 fork	%:andfeed
-zjmp	%:andfeed
+zjmp	%:autofeed
 
 cp:
 live %0
@@ -65,7 +71,7 @@ fork	%:preprelive
 
 icpy:
 add		r2, r2, r2
-sub		r2, r11, r16
+sub		r6, r13, r16
 zjmp		%:init3
 
 cpy:
@@ -98,6 +104,7 @@ fork	%:icpy
 init3:
 live 	%0
 ld		%0, r6
-ld		%120, r8
+ld		%128, r8
+ld		%2, r2
 
 andthen:
