@@ -18,7 +18,8 @@ ld		%4, r2
 ld		%32, r11
 ld		%92, r8
 ld		%252645135, r12
-fork	%:cp
+live %0
+fork	%:feed
 
 ld		%2, r3
 
@@ -42,6 +43,21 @@ xor		r15, r16, r14
 zjmp	%:postinit
 xor		r9, r9, r9
 zjmp	%:retrosecure
+
+feed:
+live %0
+fork	%:cp
+
+andfeed:
+live %0
+fork	%:prepostinit
+
+autofeed:
+live %0
+fork	%:autofeed
+live %0
+fork	%:andfeed
+zjmp	%:andfeed
 
 cp:
 live %0
@@ -69,6 +85,7 @@ live %0
 zjmp	%:live
 
 init2:
+add		r8, r8, r8
 fork	%:cpy
 ld		%4, r2
 ld		%0, r6
