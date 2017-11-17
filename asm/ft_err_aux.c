@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 09:54:13 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 16:30:55 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 13:55:21 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,44 @@ int			ft_real_ln_chr(t_asm *as, int *i, int *j)
 	int		chr;
 	int		origine;
 
+	int	t;
 	origine = *j;
 	if (!(ft_err_str_gnl(as)))
 		return (-1);
-	if (ft_watzis(as->lines[*i], 0) == 11)
+
+	printf("IN REAL BEGIN I : %d, J : %d\n", *i, *j);
+	//t = -1;
+	//while (as->lines[++t])
+	//	printf("rline : <%s>\n", as->lines[t]);
+
+	if (as->lines[*i])
+	{
+		k = -1;
+		while (as->lines[*i][++k] == ' ' || as->lines[*i][k] == '\t')
+			(*j)++;
+	}
+	origine = *j;
+	printf("IN REAL AFT ESP I : %d, J : %d\n", *i, *j);
+
+	/*if (ft_watzis(as->lines[*i], *j) == 11)
 	{
 		while (as->lines[*i][++(*j)] && as->lines[*i][*j] != ':')
 			;
 		(*j)++;
 		ft_while_space(as->lines[*i], j);
 		origine = *j;
-	}
-	chr = *j;
-	chr = ft_substract_char(as, *i, *j);
-	if (chr < *j)
-		*j = chr;
-	k = -1;
-	while (as->lines[*i][++k] == ' ' || as->lines[*i][k] == '\t')
-		(*j)++;
+	}*/
+	(void)chr;
+	(void)t;
+	//chr = *j;
+	//chr = ft_substract_char(as, *i, *j);
+	//if (chr < *j)
+	//	*j = chr;
+	if (!as->lines[*i])
+		return (1);
 	*i += ft_add_bkn(as, *i, origine);
+	if (as->lines[*i] == NULL)
+		*j = 0;
 	return (1);
 }
 

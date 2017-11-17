@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 12:46:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 15:16:56 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 13:45:17 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ int				ft_substract_char(t_asm *as, int ln, int chr)
 	int			count;
 	int			j;
 
+	printf("SUBCHR LN : %d, CHR : %d\n", ln, chr);
 	count = 0;
+	j = -1;
+	if (!as->lines[ln])
+		return (0);
+	while (as->lines[ln][++j] == ' ' || as->lines[ln][j] == '\t')
+		chr++;
 	j = -1;
 	while (as->lines[ln][++j] && j <= chr)
 	{
@@ -44,6 +50,7 @@ int				ft_substract_char(t_asm *as, int ln, int chr)
 		if (as->lines[ln][j] == '\n')
 			count = 0;
 	}
+	printf("COUNT : %d\n", count);
 	return (count);
 }
 
@@ -59,12 +66,23 @@ int				ft_bkz_syntax(t_asm *as, int i, int j)
 
 int				ft_put_syntax(t_asm *as, int i, int j)
 {
+	int			k;
+
 	if (ft_real_ln_chr(as, &i, &j) == -1)
 		return (-1);
-	as->num_syn = ft_watzis(as->lines[i], j);
+	//printf("AFTER REAL I :  %d, J : %d\n", i, j);
+	if (as->lines[i] && i > 0)
+		ft_while_space(as->lines[i], &j);
+	//printf("AFT WHILE SPACE I :  %d, J : %d\n", i, j);
 	ft_putstr("Syntax error");
 	ft_putstr_at_token_num(i, j);
+	k = -1;
+	while (as->lines[++k])
+		;
+	i = (i > k) ? k : i;
+	as->num_syn = ft_watzis(as->lines[i], j);
 	ft_putstr(as->syn[as->num_syn]);
-	ft_search_syntax(as, i, j);
+	if (as->num_syn != 13)
+		ft_search_syntax(as, i, j);
 	return (0);
 }

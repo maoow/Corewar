@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 10:10:17 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 16:42:58 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 10:54:33 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,19 @@ int				ft_name_check(t_asm *as, int ln, char *s_check, int check)
 			|| (i >= ft_strlen(s_check) && as->lines[ln][i] != ' '
 			&& as->lines[ln][i] != '\t')
 			|| as->lines[ln][i] == '\0')
-			return (ft_put_syntax(as, ln, i));
+		{
+			//printf("ERR\n");
+			//return (ft_put_syntax(as, ln, i));
+			return (0);
+		}
 	j = i + 1;
 	while (as->lines[ln][++i] != '\"')
 		if (as->lines[ln][i] == '\0')
-			return (ft_bkz_syntax(as, ln, i));
+		{
+			//printf("ERR2\n");
+			//return (ft_bkz_syntax(as, ln, i));
+			return (0);
+		}
 	if (check == 0)
 	{
 		if (!ft_strcmp(s_check, NAME_CMD_STRING)
@@ -41,7 +49,7 @@ int				ft_name_check(t_asm *as, int ln, char *s_check, int check)
 	return (1);
 }
 
-void			ft_check_command_kill(t_asm *as, int *i)
+/*void			ft_check_command_kill(t_asm *as, int *i)
 {
 	int			j;
 	int			k;
@@ -62,7 +70,7 @@ void			ft_check_command_kill(t_asm *as, int *i)
 	}
 	else
 		++*i;
-}
+}*/
 
 int				ft_name_comment_check(t_asm *as)
 {
@@ -73,8 +81,13 @@ int				ft_name_comment_check(t_asm *as)
 	i = 0;
 	while (as->lines[i] && as->lines[i][0] == '\0')
 		i++;
-	if (!as->lines[i] || (ft_name_check(as, i, NAME_CMD_STRING, 0) <= 0))
-		return (ft_put_syntax(as, i, 0));
+	if (!as->lines[i] || ((ft_name_check(as, i, NAME_CMD_STRING, 0) <= 0)
+		&& (ft_name_check(as, i, COMMENT_CMD_STRING, 0) <= 0)))
+	{
+		//printf("ERR3\n");
+		//return (ft_put_syntax(as, i, 0));
+		return (0);
+	}
 	while (as->lines[i] && as->lines[i][0] == '\0')
 		i++;
 	if (!as->lines[i])
@@ -82,9 +95,12 @@ int				ft_name_comment_check(t_asm *as)
 		instr = -1;
 		while (as->lines[i - 1][++instr])
 			;
-		return (ft_put_syntax(as, i - 1, instr));
+		//printf("ERR4\n");
+		//return (ft_bkz_syntax(as, i - 1, instr));
+		return (0);
 	}
-	if ((ft_name_check(as, i, COMMENT_CMD_STRING, 0) <= 0))
+	if ((ft_name_check(as, i, NAME_CMD_STRING, 0) <= 0)
+		&& (ft_name_check(as, i, COMMENT_CMD_STRING, 0) <= 0))
 		return (0);
 	i++;
 	//while (as->lines[i])

@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:36:38 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 12:35:11 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 10:19:57 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int				ft_is_label(char *txt, int i)
 
 int				ft_watzis(char *txt, int i)
 {
+	if (!txt)
+		return (13); //NULL
 	if (txt[i] == '\n' || txt[i] == '\0')
 		return (1); //ENDLINE
 	if (txt[i] == '"')

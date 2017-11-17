@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 16:18:09 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 11:01:38 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct		s_asm
 	int				strt_mem;
 	int				ac;
 	t_ref			ref[17];
-	char			*syn[13];
+	char			*syn[14];
 	int				num_syn;
 	char			*load;
 	char			**lines;
@@ -165,6 +165,11 @@ void			ft_search_syntax(t_asm *as, int i, int j);
 /*
 ** x fonctions - ft_syn_A.c
 */
-
 int				ft_syn_A(t_asm *as, int i);
+
+/*
+** x fonctions - ft_syn_name_comm.c
+*/
+int					ft_syn_name_comm(t_asm *as);
+
 #endif

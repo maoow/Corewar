@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 10:56:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 12:46:39 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 11:28:25 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void				ft_putchar_until(t_asm *as, int i, int j, char c)
 {
 	int				origine;
 
+	ft_putchar(as->lines[i][j++]);
 	origine = j;
 	while (as->lines[i] && as->lines[i][j] != c)
 	{
@@ -27,6 +28,8 @@ void				ft_putchar_until(t_asm *as, int i, int j, char c)
 		i++;
 		j = 0;
 	}
+	if (as->lines[i])
+		ft_putchar(as->lines[i][j]);
 	if (origine == j && as->num_syn == 2)
 		ft_putstr("\"\"");
 }
@@ -49,7 +52,7 @@ void				ft_put_simples(t_asm *as, int i, int j)
 	else if (as->num_syn == 8)
 		ft_putstr(NAME_CMD_STRING);
 	else if (as->num_syn == 2)
-		ft_putchar_until(as, i, j + 1, '"');
+		ft_putchar_until(as, i, j, '"');
 	else if (as->num_syn == 3)
 		ft_put_lblbchr_while(as, i, &j, 2);
 }

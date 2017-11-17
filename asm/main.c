@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 16:17:35 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 11:52:31 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			ft_free_end(t_asm **as)
 void			ft_init_syn(t_asm *as)
 {
 
-	as->syn[1] = "ENDLINE";
+	as->syn[1] = "ENDLINE\n";
 	as->syn[2] = "STRING";
 	as->syn[3] = "DIRECT_LABEL";
 	as->syn[4] = "DIRECT";
@@ -65,6 +65,7 @@ void			ft_init_syn(t_asm *as)
 	as->syn[10] = "REGISTER";
 	as->syn[11] = "LABEL";
 	as->syn[12] = "INSTRUCTION";
+	as->syn[13] = "END \"(null)\"\n";
 }
 
 int				ft_init_struct_asm(t_asm **as)
@@ -143,17 +144,30 @@ int				main(int ac, char **av)
 	if (!(ft_loading(ac, av, 1, as)))
 		return (1);
 
-	//printf("<%s>\n", as->load);
+	printf("<%s>\n", as->load);
 
 	printf("\nLOAD OK\n");
+
+	printf("\n\n--\n");
+	i = -1;
+	while (as->lines[++i])
+	{
+		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
+		//printf("<%s>\n", as->lines[i]);
+	}
 
 	if (!(ft_lexical_err(as, as->lines)))
 		return (1);
 	printf("LEXICAL ALL OK\n");
 
+
+	if (!(ft_syn_name_comm(as)))
+			return (1);
+	printf("SYN NAME COMMENT OK\nName : <%s>\nComment : <%s>\n", as->name, as->comment);
+
 	if (!(ft_name_comment_check(as)))
 		return (1);
-	printf("NAME COMMENT OK\n");
+	printf("NAME COMMENT OK\nName : <%s>\nComment : <%s>\n", as->name, as->comment);
 
 	if (!(ft_max_len(as)))
 		return (1);
@@ -180,8 +194,8 @@ int				main(int ac, char **av)
 	i = -1;
 	while (as->lines[++i] && as->lines[i][0] == '\0')
 		;
-	if (!(ft_syn_A(as, i)))
-		return (1);
+	//if (!(ft_syn_A(as, i)))
+	//	return (1);
 	//Check Syntax A-B
 
 	if (!(ft_instr_check(as)))
