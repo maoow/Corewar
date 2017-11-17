@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:36:38 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 10:19:57 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 17:20:33 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ int				ft_is_command(char *txt, int i)
 
 int				ft_is_ind(char *txt, int i)
 {
+	if (txt[i] == '-')
+		i++;
 	while (ft_isdigit(txt[i]))
 		i++;
+	if (txt[i] == '\0')
+		return (1);
 	if (ft_strchr(LABEL_CHARS, txt[i]) || txt[i] == ':')
 		return (0);
 	return (1);
@@ -43,10 +47,19 @@ int				ft_is_ind(char *txt, int i)
 int				ft_is_reg(char *txt, int i)
 {
 	if (txt[i] == 'r' && (txt[i + 1] >= '0' && txt[i + 1] <= '9'))
-		if (((txt[i + 2] >= '0' && txt[i + 2] <= '9')
+	{
+		if (!txt[i + 2])
+			return (1);
+		else if ((txt[i + 2] >= '0' && txt[i + 2] <= '9') && !txt[i + 3])
+			return (1);
+		else if ((txt[i + 2] >= '0' && txt[i + 2] <= '9')
 			&& !ft_strchr(LABEL_CHARS, txt[i + 3]) && txt[i + 3] != ':')
-			|| (!ft_strchr(LABEL_CHARS, txt[i + 2]) && txt[i + 2] != ':'))
-				return (1);
+			return (1);
+		else if (!ft_strchr(LABEL_CHARS, txt[i + 2]) && txt[i + 2] != ':')
+			return (1);
+		else
+			return (0);
+	}
 	return (0);
 }
 

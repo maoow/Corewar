@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 11:52:31 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 18:30:58 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,30 +144,17 @@ int				main(int ac, char **av)
 	if (!(ft_loading(ac, av, 1, as)))
 		return (1);
 
-	printf("<%s>\n", as->load);
+	//printf("<%s>\n", as->load);
 
 	printf("\nLOAD OK\n");
-
-	printf("\n\n--\n");
-	i = -1;
-	while (as->lines[++i])
-	{
-		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
-		//printf("<%s>\n", as->lines[i]);
-	}
 
 	if (!(ft_lexical_err(as, as->lines)))
 		return (1);
 	printf("LEXICAL ALL OK\n");
 
-
 	if (!(ft_syn_name_comm(as)))
 			return (1);
-	printf("SYN NAME COMMENT OK\nName : <%s>\nComment : <%s>\n", as->name, as->comment);
-
-	if (!(ft_name_comment_check(as)))
-		return (1);
-	printf("NAME COMMENT OK\nName : <%s>\nComment : <%s>\n", as->name, as->comment);
+	printf("SYN NAME COMMENT OK\n");
 
 	if (!(ft_max_len(as)))
 		return (1);
@@ -178,10 +165,6 @@ int				main(int ac, char **av)
 	i = -1;
 	while (as->lines[++i])
 		ft_if_label(as, &i);
-	if (!(ft_del_labels(as)))
-		return (1);
-	if (!(ft_del_space(as)))
-		return (1);
 
 	printf("\n\n--\n");
 	i = -1;
@@ -194,8 +177,17 @@ int				main(int ac, char **av)
 	i = -1;
 	while (as->lines[++i] && as->lines[i][0] == '\0')
 		;
-	//if (!(ft_syn_A(as, i)))
-	//	return (1);
+	if (!(ft_syn_A(as, i)))
+		return (1);
+
+	ft_putstr("SYN A OK\n");
+
+	if (!(ft_del_labels(as)))
+		return (1);
+	if (!(ft_del_space(as)))
+		return (1);
+
+
 	//Check Syntax A-B
 
 	if (!(ft_instr_check(as)))
@@ -217,7 +209,7 @@ int				main(int ac, char **av)
 	ft_putstr("LBL CHECK OK\n");
 
 	ft_mem_len(as);
-/*
+
 	printf("\n\n----\n");
 	count = 0;
 	i = -1;
@@ -323,7 +315,7 @@ int				main(int ac, char **av)
 	}
 	printf("\n");
 	printf("\nLEN MEM : %d\nLEN REF : 2308\n", as->len_mem);
-*/
+
 	ft_free_end(&as);
 	return (0);
 }

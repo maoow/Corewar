@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 15:36:11 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 10:13:16 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/17 17:34:43 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ int				ft_lexical_err(t_asm *as, char **lines)
 		lbl = 0;
 		while (lines[i][++j])
 		{
+			if (lines[i][j] == '-')
+			{
+				lbl = 0;
+				if (!ft_isdigit(lines[i][j + 1]))
+					return (ft_put_lexerr(as, i, j));
+			}
 			if (str == 0 && lines[i][j] == '\"')
 				str = 1;
 			else if (str == 1 && lines[i][j] == '\"')
@@ -99,7 +105,8 @@ int				ft_lexical_err(t_asm *as, char **lines)
 						k = 1;
 					if ((lines[i][j] == ':' && (!ft_is_lblchr(lines[i][j - k])
 						&& !ft_is_lblchr(lines[i][j + 1])))
-					|| (lines[i][j] == '%' && !ft_is_lbl_o_dgt(lines[i][j + 1])))
+					|| (lines[i][j] == '%' && !ft_is_lbl_o_dgt(lines[i][j + 1])
+						&& lines[i][j + 1] != '-'))
 							return (ft_put_lexerr(as, i, j));
 					if (lines[i][j] == ':')
 						lbl = 1;
