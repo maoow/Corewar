@@ -1,46 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_err_load.c                                      :+:      :+:    :+:   */
+/*   ft_syn_low_ac.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/23 15:10:19 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 15:48:16 by vkim             ###   ########.fr       */
+/*   Created: 2017/11/20 11:51:27 by vkim              #+#    #+#             */
+/*   Updated: 2017/11/20 13:47:36 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int				ft_err_load(int ac, int fd, char *str)
+void				ft_check_kills(t_asm *as, int i)
 {
-	if (ac < 2)
+	int				wtz;
+
+	wtz = ft_watzis(as->lines[i], 0);
+	if (wtz != 1 && wtz < 11)
 	{
-		ft_putstr("Usage: ");
-		ft_putstr(str);
-		ft_putstr(" <sourcefile.s>\n");
+		as->lines[i][0] = '\0';
+		while (as->lines[++i])
+			as->lines[i][0] = '\0';
 	}
-	else if (fd == -1)
-	{
-		ft_putstr("Can't read source file ");
-		ft_putstr(str);
-		ft_putstr("\n");
-	}
-	return (0);
 }
 
-int				ft_err_str_gnl(t_asm *as)
+int					ft_syn_low_ac(t_asm *as, int count_args, char *tmp)
 {
-	int			i;
-
-	i = -1;
-	if (as->lines)
+	if (count_args < as->ref[ft_if_op_ok(as, tmp)].ac)
 	{
-		while (as->lines[++i])
-			free(as->lines[i]);
-		as->lines[0] = NULL;
-	}
-	if (!(ft_str_gnl(as)))
+		ft_putstr("Invalid parameter count for instruction ");
+		ft_putstr(tmp);
+		ft_putstr("\n");
+		ft_strdel(&tmp);
 		return (0);
+	}
+	ft_strdel(&tmp);
 	return (1);
 }

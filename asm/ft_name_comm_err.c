@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 12:46:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 16:38:13 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 14:39:43 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,6 @@ int				ft_substract_char(t_asm *as, int ln, int chr)
 	return (count);
 }
 
-/*int				ft_bkz_syntax(t_asm *as, int i, int j)
-{
-	if (ft_real_ln_chr(as, &i, &j) == -1)
-		return (-1);
-	ft_putstr("Syntax error");
-	ft_putstr_at_token_num(i, j);
-	ft_putstr("END \"(null)\"\n");
-	return (0);
-}*/
-
 int				ft_put_syntax(t_asm *as, int i, int j)
 {
 	int			k;
@@ -70,8 +60,8 @@ int				ft_put_syntax(t_asm *as, int i, int j)
 		return (-1);
 	if (as->lines[i] && i > 0)
 		ft_while_space(as->lines[i], &j);
-	ft_putstr("Syntax error");
-	ft_putstr_at_token_num(i, j);
+	ft_putstr("Syntax error at");
+	ft_putstr_token_num(i, j);
 	k = -1;
 	while (as->lines[++k])
 		;

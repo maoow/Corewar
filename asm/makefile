@@ -6,7 +6,7 @@
 #    By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/27 12:28:21 by vkim              #+#    #+#              #
-#    Updated: 2017/11/17 11:03:16 by vkim             ###   ########.fr        #
+#    Updated: 2017/11/20 15:23:47 by vkim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ N_SRC=ft_loading.c \
 	  ft_search_syntax.c \
 	  ft_syn_A.c \
 	  ft_syn_name_comm.c \
+	  ft_syn_op.c \
+	  ft_syn_low_ac.c \
+	  ft_put_syn_lbl.c \
 	  main.c \
 
 P_SRC = .

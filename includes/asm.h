@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 11:01:38 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 16:51:32 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_asm
 	char			*comment;
 	int				len_mem;
 	t_instr			*op;
+	char			*mem;
 }					t_asm;
 
 /*
@@ -100,7 +101,7 @@ int					ft_check_lbl(t_asm *as);
 */
 int					ft_max_len(t_asm *as);
 int					ft_real_ln_chr(t_asm *as, int *i, int *j);
-void				ft_putstr_at_token_num(int i, int j);
+void				ft_putstr_token_num(int i, int j);
 
 /*
 **4 fonctions - ft_check_args.c
@@ -139,16 +140,9 @@ int					ft_is_lex(char c);
 int					ft_is_sep(char c);
 
 /*
-** x fonction - ft_is_char.c
-*/
-int					ft_btw_cmd_qut(t_asm *as, int ln, int chr, char *s_check);
-int					ft_add_bkn(t_asm *as, int ln, int chr);
-
-
-/*
 ** x fonction - ft_name_comm_err.c
 */
-int				ft_bkz_syntax(t_asm *as, int i, int j);
+int				ft_add_bkn(t_asm *as, int ln, int chr);
 int				ft_put_syntax(t_asm *as, int i, int j);
 int				ft_substract_char(t_asm *as, int ln, int chr);
 
@@ -165,6 +159,8 @@ void			ft_search_syntax(t_asm *as, int i, int j);
 /*
 ** x fonctions - ft_syn_A.c
 */
+void			ft_run_types(char *txt, int *j);
+int				ft_jmp_lbl(t_asm *as, int i, int *j, int *lbl);
 int				ft_syn_A(t_asm *as, int i);
 
 /*
@@ -172,4 +168,20 @@ int				ft_syn_A(t_asm *as, int i);
 */
 int					ft_syn_name_comm(t_asm *as);
 
+/*
+** x fonctions - ft_syn_op.c
+*/
+int					ft_syn_op(t_asm *as, int i);
+int					ft_syn_args(t_asm *as, int i);
+
+/*
+** x fonctions - ft_syn_low_ac.c
+*/
+int					ft_syn_low_ac(t_asm *as, int count_args, char *tmp);
+void				ft_check_kills(t_asm *as, int i);
+
+/*
+** x fonctions - ft_put_syn_lbl.c
+*/
+int					ft_put_syn_lbl(t_asm *as, int i, int j);
 #endif

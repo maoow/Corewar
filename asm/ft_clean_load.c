@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 11:42:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 11:14:11 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 14:08:39 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int				ft_del_space(t_asm *as)
 	return (1);
 }
 
-void			ft_del_empty_lines(t_asm *as)
+/*void			ft_del_empty_lines(t_asm *as)
 {
 	int			i;
 	int			j;
@@ -90,4 +90,4 @@ void			ft_del_empty_lines(t_asm *as)
 			i--;
 		}
 	}
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:38:40 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 09:54:06 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 15:17:24 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int				ft_check_lbl(t_asm *as)
 			{
 				ft_lbl2(as, i, j, &find);
 				if (!find)
-					return (0);
+					return (ft_put_syn_lbl(as, i, j));
 			}
 		}
 	}

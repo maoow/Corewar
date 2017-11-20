@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 09:44:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/15 13:05:13 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 09:32:01 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int				ft_instr_check(t_asm *as)
 	int			j;
 	char		*tmp;
 
+	tmp = NULL;
 	i = -1;
 	while (as->lines[++i])
 	{
@@ -30,12 +31,11 @@ int				ft_instr_check(t_asm *as)
 			if (!(tmp = ft_strsub(as->lines[i], 0, j))
 				|| (as->op[i].num = ft_if_op_ok(as, tmp)) == -1)
 			{
-				free(tmp);
+				ft_strdel(&tmp);
 				return (0);
 			}
-			else
-				as->op[i].num += 1;
-			free(tmp);
+			as->op[i].num += 1;
+			ft_strdel(&tmp);
 		}
 	}
 	return (1);

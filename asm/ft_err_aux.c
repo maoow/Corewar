@@ -6,15 +6,15 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 09:54:13 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 15:41:20 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 14:35:57 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void		ft_putstr_at_token_num(int i, int j)
+void		ft_putstr_token_num(int i, int j)
 {
-	ft_putstr(" at token [TOKEN][");
+	ft_putstr(" token [TOKEN][");
 	if (i + 1 < 100)
 		ft_putstr("0");
 	if (i + 1 < 10)

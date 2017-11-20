@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:17:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 17:06:41 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 14:15:15 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				ft_is_lblchr(char c)
 {
-	if (!ft_strchr(LABEL_CHARS, c) && (c < '0' || c > '9'))
+	if (!ft_strchr(LABEL_CHARS, c))
 		return (0);
 	if (c == '\0')
 		return (0);

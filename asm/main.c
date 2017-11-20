@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 18:30:58 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/20 16:41:08 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,6 @@ int				main(int ac, char **av)
 	ft_init_struct_ref_1((t_ref *)as->ref);
 	if (!(ft_malloc_instr(as)))
 		return (1);
-	i = -1;
-	while (as->lines[++i])
-		ft_if_label(as, &i);
 
 	printf("\n\n--\n");
 	i = -1;
@@ -177,10 +174,58 @@ int				main(int ac, char **av)
 	i = -1;
 	while (as->lines[++i] && as->lines[i][0] == '\0')
 		;
-	if (!(ft_syn_A(as, i)))
+	if (!as->lines[i])
+	{
+		ft_put_syntax(as, i, 0);
 		return (1);
+	}
+	if (ft_syn_A(as, i) <= 0)
+		return (1);
+	if (ft_syn_op(as, i) <= 0)
+		return (1);
+	if (ft_syn_args(as, i) <= 0)
+		return (1);
+	ft_putstr("PREM LIGNE OK\n");
+	if (as->lines[i])
+		i++;
+	while (as->lines[i])
+	{
+		ft_check_kills(as, i);
+		i++;
+	}
+	printf("\n\n-AFTER KILLS-\n");
+	i = -1;
+	while (as->lines[++i])
+	{
+		ft_putstr("<");ft_putstr(as->lines[i]);ft_putstr(">\n");
+		//printf("<%s>\n", as->lines[i]);
+	}
 
-	ft_putstr("SYN A OK\n");
+	i = -1;
+	while (as->lines[++i])
+		ft_if_label(as, &i);
+
+	i = -1;
+	while (as->lines[++i])
+	{
+		if (ft_syn_A(as, i) <= 0)
+		return (1);
+	}
+	printf("ALL SYN A OK\n");
+	i = -1;
+	while (as->lines[++i])
+	{
+		if (ft_syn_op(as, i) <= 0)
+		return (1);
+	}
+	printf("ALL SYN OP OK\n");
+	i = -1;
+	while (as->lines[++i])
+	{
+		if (ft_syn_args(as, i) <= 0)
+		return (1);
+	}
+	printf("ALL SYN OK\n");
 
 	if (!(ft_del_labels(as)))
 		return (1);
@@ -314,7 +359,7 @@ int				main(int ac, char **av)
 		}
 	}
 	printf("\n");
-	printf("\nLEN MEM : %d\nLEN REF : 2308\n", as->len_mem);
+	printf("\nLEN MEM : %d\nLEN REF : 2207\n", as->len_mem);
 
 	ft_free_end(&as);
 	return (0);
