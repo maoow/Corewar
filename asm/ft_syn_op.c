@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 08:58:56 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 14:40:16 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/21 10:15:12 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int					ft_syn_op(t_asm *as, int i)
 	int				k;
 	char			*tmp;
 
+	j = 0;
 	if (!ft_jmp_lbl(as, i, &j, &k))
 		return (1);
 	if ((as->num_syn = ft_watzis(as->lines[i], j)) != 12
@@ -113,6 +114,7 @@ int					ft_syn_args(t_asm *as, int i)
 	int				k;
 	int				count_args;
 
+	j = 0;
 	as->n_ln = i;
 	if (!ft_jmp_lbl(as, i, &j, &k))
 		return (1);

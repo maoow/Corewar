@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 16:51:32 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/21 18:35:13 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ typedef struct		s_asm
 	int				len_mem;
 	t_instr			*op;
 	char			*mem;
+	int				opt_a;
+	char			*output;
 }					t_asm;
 
 /*
 ** 3 fonctions - ft_loading.c
 */
-int					ft_loading(int ac, char **av, int index, t_asm *as);
+int					ft_loading(int ac, char **av, int *index, t_asm *as);
 int					ft_str_gnl(t_asm *as);
 
 /*
@@ -140,7 +142,7 @@ int					ft_is_lex(char c);
 int					ft_is_sep(char c);
 
 /*
-** x fonction - ft_name_comm_err.c
+** x fonction - ft_err_aux2.c
 */
 int				ft_add_bkn(t_asm *as, int ln, int chr);
 int				ft_put_syntax(t_asm *as, int i, int j);
@@ -184,4 +186,30 @@ void				ft_check_kills(t_asm *as, int i);
 ** x fonctions - ft_put_syn_lbl.c
 */
 int					ft_put_syn_lbl(t_asm *as, int i, int j);
+
+/*
+** 3 fonctions - ft_put_syn_lbl.c
+*/
+int					ft_write_in_str(t_asm *as);
+
+/*
+** 3 fonctions - ft_complete_space_n_opt2.c
+*/
+void				ft_complete_int_space(int nbr, int nb_esp);
+void				ft_complete_str_space(char *str, int nb_esp);
+void				ft_complete_len_space(int len, int nb_esp);
+void				ft_put_args(t_asm *as, int i);
+void				ft_put_num_opc(t_asm *as, int i, int *count);
+
+/*
+** 5 fonctions - ft_option_a.c
+*/
+void				ft_option_a(t_asm *as);
+
+/*
+** x fonctions - ft_output.c
+*/
+int					ft_write_output(t_asm *as);
+int					ft_output(t_asm *as, char **av, int index);
+void				ft_print_output(t_asm *as);
 #endif

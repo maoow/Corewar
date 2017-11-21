@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 10:57:15 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 15:46:20 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/21 18:33:03 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,26 @@ int				ft_empty_file(t_asm *as)
 	return (1);
 }
 
-int				ft_loading(int ac, char **av, int index, t_asm *as)
+void			ft_opt_a(t_asm *as, char **av, int *index)
+{
+	if (!ft_strcmp(av[*index], "-a"))
+	{
+		(*index)++;
+		as->opt_a = 1;
+	}
+}
+
+int				ft_loading(int ac, char **av, int *index, t_asm *as)
 {
 	int			fd;
 	int			ret;
 	char		buff[5];
 	char		*buff2;
 
+	ft_opt_a(as, av, index);
 	fd = -1;
-	if (ac < 2 || index >= ac || (fd = open(av[index], O_RDWR)) == -1)
-		return (ft_err_load(ac, fd, av[0]));
+	if (ac < 2 || *index >= ac || (fd = open(av[*index], O_RDWR)) == -1)
+		return (ft_err_load(ac, fd, av[*index]));
 	while (((ret = read(fd, buff, 4)) > 0))
 	{
 		buff[ret] = '\0';

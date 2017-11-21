@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 13:31:22 by vkim              #+#    #+#             */
-/*   Updated: 2017/10/12 15:36:38 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/21 15:29:30 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void			ft_clc_lbl(t_asm *as, t_instr *instr, int j)
 {
 	int			k;
+	int			stop;
 
 	k = -1;
+	stop = 0;
 	while (as->lines[++k])
 	{
-		if (as->op[k].label && !ft_strcmp(as->op[k].label, instr->ag_lbl[j]))
+		if (as->op[k].label && !ft_strcmp(as->op[k].label, instr->ag_lbl[j])
+		&& stop == 0)
 		{
-			while (as->op[k].mem_num == -1)
-				k++;
 			if (instr->i_lbl_sz[1][j] == 2
 					&& instr->mem_num > as->op[k].mem_num)
 				instr->ag_i2[j] = 0xFFFF - instr->mem_num
@@ -31,10 +32,11 @@ void			ft_clc_lbl(t_asm *as, t_instr *instr, int j)
 				instr->ag_i2[j] = as->op[k].mem_num - instr->mem_num;
 			else if (instr->i_lbl_sz[1][j] == 4
 				&& instr->mem_num > as->op[k].mem_num)
-				instr->ag_i4[j] = 0xFFFF - instr->mem_num
+				instr->ag_i4[j] = 0xFFFFFFFF - instr->mem_num
 				+ as->op[k].mem_num + 1;
 			else
 				instr->ag_i4[j] = as->op[k].mem_num - instr->mem_num;
+			stop = 1;
 		}
 	}
 }
@@ -91,6 +93,8 @@ void			ft_mem_op(t_asm *as)
 				as->len_mem++;
 			ft_len_args(as, &as->op[i]);
 		}
+		else
+			as->op[i].mem_num = as->len_mem - as->strt_mem;
 	}
 }
 
