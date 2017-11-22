@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/21 18:35:13 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 17:07:16 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,23 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# include <stdio.h> //DEL END
+/*
+** ft_watzis :
+** 01 ENDLINE
+** 02 STRING
+** 03 DIRECT_LABEL
+** 04 DIRECT
+** 05 INDIRECT_LABEL
+** 06 SEPARATOR
+** 07 CMD_COMMENT
+** 08 CMD_NAME
+** 09 INDIRECT
+** 10 REGISTER
+** 11 LABEL
+** 12 INSTR
+** 13 NULL
+*/
+
 typedef struct		s_instr
 {
 	int				mem_num;
@@ -62,22 +78,16 @@ typedef struct		s_asm
 }					t_asm;
 
 /*
-** 3 fonctions - ft_loading.c
+** 5 fonctions - ft_loading.c
 */
 int					ft_loading(int ac, char **av, int *index, t_asm *as);
 int					ft_str_gnl(t_asm *as);
 
 /*
-** 2 fonction - ft_name_comment.c
-*/
-int					ft_name_comment_check(t_asm *as);
-
-/*
-** 4 fonctions - ft_clean_load.c
+** 2 fonctions - ft_clean_load.c
 */
 int					ft_del_com(t_asm *as);
 int					ft_del_space(t_asm *as);
-void				ft_del_empty_lines(t_asm *as);
 
 /*
 ** 5 fonctions - ft_init_ref.c
@@ -88,7 +98,7 @@ void				ft_init_struct_ref_1(t_ref *ref);
 ** 3 fonctions - ft_save_op.c
 */
 int					ft_instr_check(t_asm *as);
-int					ft_if_label(t_asm *as, int *i);
+int					ft_if_label(t_asm *as, int i);
 int					ft_del_labels(t_asm *as);
 
 /*
@@ -99,14 +109,14 @@ int					ft_if_op_ok(t_asm *as, char *op);
 int					ft_check_lbl(t_asm *as);
 
 /*
-** x fonctions - ft_err_aux.c
+** 3 fonctions - ft_err_aux.c
 */
 int					ft_max_len(t_asm *as);
 int					ft_real_ln_chr(t_asm *as, int *i, int *j);
 void				ft_putstr_token_num(int i, int j);
 
 /*
-**4 fonctions - ft_check_args.c
+** 4 fonctions - ft_check_args.c
 */
 int					ft_check_var(t_asm *as);
 
@@ -116,22 +126,21 @@ int					ft_check_var(t_asm *as);
 int					ft_dir_ind(t_asm *as, char *txt, int *i, t_instr *sv);
 
 /*
-** 3 fonctions ft_len_mem.c
+** 5 fonctions ft_len_mem.c
 */
 void				ft_mem_len(t_asm *as);
 
 /*
-** 4 fonction - ft_err_load.c
+** 2 fonction - ft_err_load.c
 */
 int					ft_err_load(int ac, int fd, char *str);
 int					ft_err_str_gnl(t_asm *as);
 
 /*
-** x fonction - ft_lex_err.c
+** 5 fonction - ft_lex_err.c
 */
 int					ft_put_lexerr(t_asm *as, int i, int j);
 int					ft_lexical_err(t_asm *as, char **lines);
-int					ft_check_command(char **lines, int i, int j, int nb);
 
 /*
 ** 4 fonction - ft_is_char.c
@@ -142,58 +151,58 @@ int					ft_is_lex(char c);
 int					ft_is_sep(char c);
 
 /*
-** x fonction - ft_err_aux2.c
+** 5 fonction - ft_err_aux2.c
 */
-int				ft_add_bkn(t_asm *as, int ln, int chr);
-int				ft_put_syntax(t_asm *as, int i, int j);
-int				ft_substract_char(t_asm *as, int ln, int chr);
+int					ft_add_bkn(t_asm *as, int ln, int chr);
+int					ft_put_syntax(t_asm *as, int i, int j);
+int					ft_substract_char(t_asm *as, int ln, int chr);
 
 /*
 ** 5 fonctions - ft_watzis.c
 */
-int				ft_watzis(char *txt, int i);
+int					ft_watzis(char *txt, int i);
 
 /*
-** x fonctions - ft_search_syntax.c
+** 5 fonctions - ft_search_syntax.c
 */
-void			ft_search_syntax(t_asm *as, int i, int j);
+void				ft_search_syntax(t_asm *as, int i, int j);
 
 /*
-** x fonctions - ft_syn_A.c
+** 5 fonctions - ft_syn_a.c
 */
-void			ft_run_types(char *txt, int *j);
-int				ft_jmp_lbl(t_asm *as, int i, int *j, int *lbl);
-int				ft_syn_A(t_asm *as, int i);
+void				ft_run_types(char *txt, int *j);
+int					ft_jmp_lbl(t_asm *as, int i, int *j, int *lbl);
+int					ft_syn_a(t_asm *as, int i);
 
 /*
-** x fonctions - ft_syn_name_comm.c
+** 2 fonctions - ft_syn_name_comm.c
 */
 int					ft_syn_name_comm(t_asm *as);
 
 /*
-** x fonctions - ft_syn_op.c
+** 2 fonctions - ft_syn_op.c
 */
 int					ft_syn_op(t_asm *as, int i);
 int					ft_syn_args(t_asm *as, int i);
 
 /*
-** x fonctions - ft_syn_low_ac.c
+** 2 fonctions - ft_syn_low_ac.c
 */
 int					ft_syn_low_ac(t_asm *as, int count_args, char *tmp);
 void				ft_check_kills(t_asm *as, int i);
 
 /*
-** x fonctions - ft_put_syn_lbl.c
+** 2 fonctions - ft_put_syn_lbl.c
 */
 int					ft_put_syn_lbl(t_asm *as, int i, int j);
 
 /*
-** 3 fonctions - ft_put_syn_lbl.c
+** 4 fonctions - ft_write_in_str.c
 */
 int					ft_write_in_str(t_asm *as);
 
 /*
-** 3 fonctions - ft_complete_space_n_opt2.c
+** 5 fonctions - ft_complete_space_n_opt2.c
 */
 void				ft_complete_int_space(int nbr, int nb_esp);
 void				ft_complete_str_space(char *str, int nb_esp);
@@ -207,9 +216,21 @@ void				ft_put_num_opc(t_asm *as, int i, int *count);
 void				ft_option_a(t_asm *as);
 
 /*
-** x fonctions - ft_output.c
+** 3 fonctions - ft_output.c
 */
 int					ft_write_output(t_asm *as);
 int					ft_output(t_asm *as, char **av, int index);
 void				ft_print_output(t_asm *as);
+
+/*
+** 2 fonctions - ft_free_end.c
+*/
+void				ft_free_end(t_asm **as);
+
+/*
+** 4 fonctions - ft_init_main.c
+*/
+int					ft_malloc_instr(t_asm *as);
+void				ft_init_syn(t_asm *as);
+int					ft_init_struct_asm(t_asm **as);
 #endif

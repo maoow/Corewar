@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 10:57:15 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/21 18:33:03 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 10:44:51 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int				ft_loading(int ac, char **av, int *index, t_asm *as)
 			return (0);
 	}
 	if (!(ft_empty_file(as)))
-			return (1);
+		return (1);
 	if (!(ft_str_gnl(as)))
 		return (0);
 	if (!(ft_del_com(as)))

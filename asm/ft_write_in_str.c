@@ -6,34 +6,48 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 16:49:28 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/21 18:44:05 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 16:06:52 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
+void			ft_until2(t_asm *as, int *i, int mod, int n_chr)
+{
+	int			j;
+
+	j = 4;
+	while (--j >= 0)
+		as->mem[(*i)++] = ((char *)(&n_chr))[j];
+	while (*i - mod - 4 < ft_strlen(as->comment))
+	{
+		as->mem[*i] = as->comment[*i - mod - 4];
+		(*i)++;
+	}
+	while (*i < as->strt_mem)
+		as->mem[(*i)++] = 0;
+}
+
 int				ft_until_comm(t_asm *as)
 {
 	int			i;
 	int			mod;
+	int			n_chr;
 
-	if (!(as->mem = (char *)malloc((as->len_mem) * sizeof(char))))
+	if (!(as->mem = (char *)malloc(as->len_mem * sizeof(char))))
 		return (0);
 	((int *)as->mem)[0] = -209458688;
 	i = 3;
 	while (++i - 4 < ft_strlen(as->name))
-			as->mem[i] = as->name[i - 4];
-	while (++i < PROG_NAME_LENGTH + 4)
-		as->mem[i] = 0;
+		as->mem[i] = as->name[i - 4];
+	while (i < PROG_NAME_LENGTH + 4)
+		as->mem[i++] = 0;
 	mod = (((PROG_NAME_LENGTH + 4) % 8) == 0) ? 8 : (PROG_NAME_LENGTH + 4) % 8;
-	mod = 4 + PROG_NAME_LENGTH + 8 - mod + 3;
+	mod = 4 + PROG_NAME_LENGTH + 8 - mod;
 	while (i < mod)
 		as->mem[i++] = 0;
-	as->mem[i] = ' ';
-	while (++i - mod - 1 < ft_strlen(as->comment))
-			as->mem[i] = as->comment[i - mod - 1];
-	while (++i < as->strt_mem)
-			as->mem[i] = 0;
+	n_chr = as->len_mem - as->strt_mem;
+	ft_until2(as, &i, mod, n_chr);
 	return (1);
 }
 

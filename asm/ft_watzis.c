@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:36:38 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 17:20:33 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 11:53:02 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int				ft_is_command(char *txt, int i)
 	while (txt[i + k] == NAME_CMD_STRING[k] && txt[i + k] && NAME_CMD_STRING[k])
 		k++;
 	if (COMMENT_CMD_STRING[j] == '\0')
-		return (7); //COMMAND_COMMENT
+		return (7);
 	if (NAME_CMD_STRING[k] == '\0')
-		return (8); //COMMAND_NAME
+		return (8);
 	return (0);
 }
 
@@ -75,27 +75,27 @@ int				ft_is_label(char *txt, int i)
 int				ft_watzis(char *txt, int i)
 {
 	if (!txt)
-		return (13); //NULL
+		return (13);
 	if (txt[i] == '\n' || txt[i] == '\0')
-		return (1); //ENDLINE
+		return (1);
 	if (txt[i] == '"')
-		return (2); //STRING
+		return (2);
 	if (txt[i] == '%' && txt[i + 1] == ':')
-		return (3); //DIRECT_LABEL
+		return (3);
 	if (txt[i] == '%')
-		return (4); //DIRECT
+		return (4);
 	if (txt[i] == ':')
-		return (5); //INDIRECT_LABEL
+		return (5);
 	if (txt[i] == ',')
-		return (6); //SEPARATOR
+		return (6);
 	if (ft_is_command(txt, i) > 0)
 		return (ft_is_command(txt, i));
 	if (ft_is_ind(txt, i) == 1)
-		return (9); //INDIRECT
+		return (9);
 	if (ft_is_reg(txt, i) == 1)
-		return (10); //REGISTER
+		return (10);
 	if (ft_is_label(txt, i) == 1)
-		return (11); //LABEL
+		return (11);
 	else
-		return (12); //INSTRUCTION
+		return (12);
 }

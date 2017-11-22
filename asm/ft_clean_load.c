@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 11:42:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 14:08:39 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 10:42:23 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int				ft_del_com(t_asm *as)
 				save = as->lines[i];
 				if (!(as->lines[i] = ft_strsub(as->lines[i], 0, j)))
 					return (0);
-				j = ft_strlen(as->lines[i]);
 				free(save);
 				j--;
 			}
@@ -66,28 +65,3 @@ int				ft_del_space(t_asm *as)
 	}
 	return (1);
 }
-
-/*void			ft_del_empty_lines(t_asm *as)
-{
-	int			i;
-	int			j;
-	char		*save;
-
-	i = -1;
-	while (as->lines[++i])
-	{
-		if (as->lines[i][0] == '\0')
-		{
-			j = i;
-			while (as->lines[++j])
-			{
-				save = as->lines[j];
-				as->lines[j] = as->lines[j - 1];
-				as->lines[j - 1] = save;
-			}
-			free(as->lines[j - 1]);
-			as->lines[j - 1] = NULL;
-			i--;
-		}
-	}
-}*/

@@ -6,16 +6,15 @@
 #    By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/27 12:28:21 by vkim              #+#    #+#              #
-#    Updated: 2017/11/21 17:40:59 by vkim             ###   ########.fr        #
+#    Updated: 2017/11/22 16:54:49 by vkim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=asm
-COMPIL=gcc -g -Wall -Wextra -Werror
+COMPIL=gcc -Wall -Wextra -Werror
 INC= -I ../includes/ -I ../libft/includes -I ../ressources/
 
 N_SRC=ft_loading.c \
-	  ft_name_comment.c \
 	  ft_clean_load.c \
 	  ft_init_ref.c \
 	  ft_save_op.c \
@@ -30,7 +29,7 @@ N_SRC=ft_loading.c \
 	  ft_watzis.c \
 	  ft_err_aux.c \
 	  ft_search_syntax.c \
-	  ft_syn_A.c \
+	  ft_syn_a.c \
 	  ft_syn_name_comm.c \
 	  ft_syn_op.c \
 	  ft_syn_low_ac.c \
@@ -39,6 +38,9 @@ N_SRC=ft_loading.c \
 	  ft_complete_space_n_opt2.c \
 	  ft_option_a.c \
 	  ft_output.c \
+	  ft_syn_args.c \
+	  ft_init_main.c \
+	  ft_free_end.c \
 	  main.c \
 
 P_SRC = .

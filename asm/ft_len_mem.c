@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 13:31:22 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/21 15:29:30 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 15:27:51 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void			ft_mem_len(t_asm *as)
 	mod2 = (COMMENT_LENGTH + 3) % 8;
 	if (mod2 == 0)
 		mod2 = 8;
-	as->len_mem = 4 + PROG_NAME_LENGTH + 8 - mod1 + 3 + COMMENT_LENGTH
-		+ 8 - mod2;
+	as->len_mem = 4 + PROG_NAME_LENGTH + 8 - mod1 + 4 + COMMENT_LENGTH
+		+ 8 - mod2 - 1;
 	as->strt_mem = as->len_mem;
 	ft_mem_op(as);
 	ft_run_lbl(as);

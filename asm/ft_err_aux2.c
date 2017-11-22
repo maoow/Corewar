@@ -6,17 +6,17 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 12:46:42 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 14:39:43 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 11:46:29 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int					ft_add_bkn(t_asm *as, int ln, int chr)
+int			ft_add_bkn(t_asm *as, int ln, int chr)
 {
-	int				i;
-	int				j;
-	int				count;
+	int		i;
+	int		j;
+	int		count;
 
 	count = 0;
 	i = -1;
@@ -31,10 +31,10 @@ int					ft_add_bkn(t_asm *as, int ln, int chr)
 	return (count);
 }
 
-int				ft_substract_char(t_asm *as, int ln, int chr)
+int			ft_substract_char(t_asm *as, int ln, int chr)
 {
-	int			count;
-	int			j;
+	int		count;
+	int		j;
 
 	count = 0;
 	j = -1;
@@ -52,9 +52,9 @@ int				ft_substract_char(t_asm *as, int ln, int chr)
 	return (count);
 }
 
-int				ft_put_syntax(t_asm *as, int i, int j)
+int			ft_put_syntax(t_asm *as, int i, int j)
 {
-	int			k;
+	int		k;
 
 	if (ft_real_ln_chr(as, &i, &j) == -1)
 		return (-1);

@@ -6,11 +6,19 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 14:16:03 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 13:44:26 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 16:02:10 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+void				ft_run2(char *txt, int *j)
+{
+	if (txt[*j] == '-')
+		(*j)++;
+	while (ft_isdigit(txt[*j]))
+		(*j)++;
+}
 
 void				ft_run_types(char *txt, int *j)
 {
@@ -37,12 +45,7 @@ void				ft_run_types(char *txt, int *j)
 			(*j)++;
 	}
 	else
-	{
-		if (txt[*j] == '-')
-			(*j)++;
-		while (ft_isdigit(txt[*j]))
-			(*j)++;
-	}
+		ft_run2(txt, j);
 }
 
 int					ft_jmp_lbl(t_asm *as, int i, int *j, int *lbl)
@@ -64,7 +67,7 @@ int					ft_jmp_lbl(t_asm *as, int i, int *j, int *lbl)
 	return (1);
 }
 
-int					ft_syn_A(t_asm *as, int i)
+int					ft_syn_a(t_asm *as, int i)
 {
 	int				j;
 	int				var;
@@ -84,7 +87,7 @@ int					ft_syn_A(t_asm *as, int i)
 		if (ft_watzis(as->lines[i], j) == 2 || ft_watzis(as->lines[i], j) >= 11
 		|| ft_watzis(as->lines[i], j) == 7 || ft_watzis(as->lines[i], j) == 8)
 			return (ft_put_syntax(as, i, j));
-		if (((ft_watzis(as->lines[i], j) >= 3 && ft_watzis(as->lines[i], j) <= 5)
+		if (((ft_watzis(as->lines[i], j) >= 3 && ft_watzis(as->lines[i], j) < 6)
 			|| ft_watzis(as->lines[i], j) == 9
 			|| ft_watzis(as->lines[i], j) == 10) && var == 0)
 			return (ft_put_syntax(as, i, j));

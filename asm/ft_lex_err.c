@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 15:36:11 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/17 17:34:43 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 15:21:26 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,97 +26,102 @@ int			ft_put_lexerr(t_asm *as, int i, int j)
 	return (0);
 }
 
-int				ft_check_command(char **lines, int i, int j, int nb)
+void		ft_check_command(char **lines, int i, int *j, int *cmd)
 {
-	int			k;
-	int			l;
+	int		k;
 
-	if (nb == 1 || nb == 3)
+	k = 0;
+	while (lines[i][k + *j] == NAME_CMD_STRING[k]
+		&& lines[i][k] && NAME_CMD_STRING[k])
+		k++;
+	if (NAME_CMD_STRING[k] == '\0')
 	{
-		k = 0;
-		while (lines[i][k + j] == NAME_CMD_STRING[k]
-			&& lines[i][k] && NAME_CMD_STRING[k])
-				k++;
-		if (NAME_CMD_STRING[k] == '\0')
-			return (ft_strlen(NAME_CMD_STRING));
+		*j += k;
+		if (!lines[i][*j])
+			(*j)--;
+		*cmd = 1;
 	}
-	if (nb == 2 || nb == 3)
+	k = 0;
+	while (lines[i][k + *j] == COMMENT_CMD_STRING[k]
+		&& lines[i][k] && COMMENT_CMD_STRING[k])
+		k++;
+	if (COMMENT_CMD_STRING[k] == '\0')
 	{
-		l = 0;
-		while (lines[i][l + j] == COMMENT_CMD_STRING[l]
-			&& lines[i][l] && COMMENT_CMD_STRING[l])
-				l++;
-		if (COMMENT_CMD_STRING[l] == '\0')
-			return (ft_strlen(COMMENT_CMD_STRING));
+		*j += k;
+		if (!lines[i][*j])
+			(*j)--;
+		*cmd = 1;
 	}
-	return (0);
 }
 
-int				ft_lexical_err(t_asm *as, char **lines)
+int			ft_lex_spec(t_asm *as, int *cmd, int *lbl)
 {
-	int			i;
-	int			j;
-	int			k;
-	int			cmd;
-	int			lbl;
-	int			str;
+	int		k;
+
+	if (as->lines[as->n_ln][as->n_chr] == ':'
+		|| as->lines[as->n_ln][as->n_chr] == '%')
+	{
+		k = -1;
+		if (as->n_chr > 0 && *cmd != 1
+			&& (as->lines[as->n_ln][as->n_chr] == ':' && *lbl == 0))
+			k = 1;
+		if ((as->lines[as->n_ln][as->n_chr] == ':'
+			&& (!ft_is_lblchr(as->lines[as->n_ln][as->n_chr - k])
+			&& !ft_is_lblchr(as->lines[as->n_ln][as->n_chr + 1])))
+		|| (as->lines[as->n_ln][as->n_chr] == '%'
+			&& !ft_is_lbl_o_dgt(as->lines[as->n_ln][as->n_chr + 1])
+			&& as->lines[as->n_ln][as->n_chr + 1] != '-'))
+			return (ft_put_lexerr(as, as->n_ln, as->n_chr));
+		if (as->lines[as->n_ln][as->n_chr] == ':')
+			*lbl = 1;
+	}
+	return (1);
+}
+
+int			ft_lex_char(t_asm *as, int *cmd, int *lbl, int *str)
+{
+	if (as->lines[as->n_ln][as->n_chr] == '\"')
+		*str = (*str == 0) ? 1 : 0;
+	if (*str == 0)
+	{
+		ft_check_command(as->lines, as->n_ln, &as->n_chr, cmd);
+		if (!ft_is_lex(as->lines[as->n_ln][as->n_chr]))
+			return (ft_put_lexerr(as, as->n_ln, as->n_chr));
+		if (!(ft_lex_spec(as, cmd, lbl)))
+			return (0);
+		if (ft_is_sep(as->lines[as->n_ln][as->n_chr]))
+		{
+			*cmd = 0;
+			*lbl = 0;
+		}
+	}
+	return (1);
+}
+
+int			ft_lexical_err(t_asm *as, char **lines)
+{
+	int		cmd;
+	int		lbl;
+	int		str;
 
 	cmd = 0;
-	i = -1;
+	as->n_ln = -1;
 	str = 0;
-	while (lines[++i])
+	while (lines[++as->n_ln])
 	{
-		j = -1;
+		as->n_chr = -1;
 		cmd = 0;
 		lbl = 0;
-		while (lines[i][++j])
+		while (lines[as->n_ln][++as->n_chr])
 		{
-			if (lines[i][j] == '-')
+			if (lines[as->n_ln][as->n_chr] == '-')
 			{
 				lbl = 0;
-				if (!ft_isdigit(lines[i][j + 1]))
-					return (ft_put_lexerr(as, i, j));
+				if (!ft_isdigit(lines[as->n_ln][as->n_chr + 1]))
+					return (ft_put_lexerr(as, as->n_ln, as->n_chr));
 			}
-			if (str == 0 && lines[i][j] == '\"')
-				str = 1;
-			else if (str == 1 && lines[i][j] == '\"')
-				str = 0;
-			if (str == 0)
-			{
-				if (lines[i][j] == NAME_CMD_STRING[0]
-						|| lines[i][j] == COMMENT_CMD_STRING[0])
-				{
-					if (ft_check_command(as->lines, i, j, 3) > 0)
-					{
-						j += ft_check_command(as->lines, i, j, 3);
-						if (!as->lines[i][j])
-							j--;
-						cmd = 1;
-					}
-				}
-				if (!ft_is_lex(lines[i][j]))
-				{
-					return (ft_put_lexerr(as, i, j));
-				}
-				if (lines[i][j] == ':' || lines[i][j] == '%')
-				{
-					k = -1;
-					if (j > 0 && cmd != 1 && (lines[i][j] == ':' && lbl == 0))
-						k = 1;
-					if ((lines[i][j] == ':' && (!ft_is_lblchr(lines[i][j - k])
-						&& !ft_is_lblchr(lines[i][j + 1])))
-					|| (lines[i][j] == '%' && !ft_is_lbl_o_dgt(lines[i][j + 1])
-						&& lines[i][j + 1] != '-'))
-							return (ft_put_lexerr(as, i, j));
-					if (lines[i][j] == ':')
-						lbl = 1;
-				}
-				if (ft_is_sep(lines[i][j]))
-				{
-					cmd = 0;
-					lbl = 0;
-				}
-			}
+			if (!(ft_lex_char(as, &cmd, &lbl, &str)))
+				return (0);
 		}
 	}
 	return (1);

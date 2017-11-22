@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 17:38:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/21 19:12:49 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 09:08:19 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int					ft_write_output(t_asm *as)
 
 	fd = -1;
 	ret = -1;
-	if ((fd = open(as->output, O_CREAT | O_WRONLY | O_TRUNC)) == -1)
+	if ((fd = open(as->output, O_CREAT | O_WRONLY | O_TRUNC, 00600)) == -1)
 		return (0);
 	if ((ret = write(fd, as->mem, as->len_mem)) == -1)
 		return (0);

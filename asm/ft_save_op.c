@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 09:44:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 09:32:01 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 12:05:31 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ int				ft_del_labels(t_asm *as)
 	return (1);
 }
 
-int				ft_if_label(t_asm *as, int *i)
+int				ft_if_label(t_asm *as, int i)
 {
 	int			k;
 
-	if (ft_strchr(as->lines[*i], ':'))
+	if (ft_strchr(as->lines[i], ':'))
 	{
 		k = -1;
-		while (as->lines[*i][++k] && ft_strchr(LABEL_CHARS, as->lines[*i][k]))
+		while (as->lines[i][++k] && ft_strchr(LABEL_CHARS, as->lines[i][k]))
 			;
-		if (as->lines[*i][k] != ':')
+		if (as->lines[i][k] != ':')
 			return (1);
-		if (!(as->op[*i].label = ft_strsub(as->lines[*i], 0, k)))
+		if (!(as->op[i].label = ft_strsub(as->lines[i], 0, k)))
 			return (0);
 	}
 	return (1);

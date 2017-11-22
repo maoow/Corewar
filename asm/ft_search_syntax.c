@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 10:56:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 15:15:21 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/22 15:43:36 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,26 @@ void				ft_put_simples(t_asm *as, int i, int j)
 		ft_put_lblbchr_while(as, i, &j, 2);
 }
 
+void				ft_search2(t_asm *as, int i, int j)
+{
+	if (as->num_syn == 9)
+	{
+		if (as->lines[i][j] == '-')
+			ft_putchar(as->lines[i][j++]);
+		while (ft_isdigit(as->lines[i][j]))
+			ft_putchar(as->lines[i][j++]);
+	}
+	else if (as->num_syn == 10)
+		ft_put_lblbchr_while(as, i, &j, 2);
+	else if (as->num_syn == 12)
+		ft_put_lblbchr_while(as, i, &j, 0);
+	else if (as->num_syn == 11)
+	{
+		ft_put_lblbchr_while(as, i, &j, 0);
+		ft_putchar(as->lines[i][j]);
+	}
+}
+
 void				ft_search_syntax(t_asm *as, int i, int j)
 {
 	if (as->num_syn == 1)
@@ -70,21 +90,7 @@ void				ft_search_syntax(t_asm *as, int i, int j)
 	}
 	else if (as->num_syn == 5)
 		ft_put_lblbchr_while(as, i, &j, 1);
-	else if (as->num_syn == 9)
-	{
-		if (as->lines[i][j] == '-')
-			ft_putchar(as->lines[i][j++]);
-		while (ft_isdigit(as->lines[i][j]))
-			ft_putchar(as->lines[i][j++]);
-	}
-	else if (as->num_syn == 10)
-		ft_put_lblbchr_while(as, i, &j, 2);
-	else if (as->num_syn == 12)
-		ft_put_lblbchr_while(as, i, &j, 0);
-	else if (as->num_syn == 11)
-	{
-		ft_put_lblbchr_while(as, i, &j, 0);
-		ft_putchar(as->lines[i][j]);
-	}
+	else
+		ft_search2(as, i, j);
 	ft_putstr("\"\n");
 }
