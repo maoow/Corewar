@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 15:17:37 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 13:13:16 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/23 12:01:42 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int			ft_put_syn_lbl(t_asm *as, int i, int j)
 	int		k;
 
 	k = 0;
-	printf("J : %d\n\n", j);
 	ft_putstr("No such label ");
 	ft_putstr(as->op[i].ag_lbl[j]);
 	ft_putstr(" while attempting to dereference");

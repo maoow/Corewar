@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 14:16:03 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 16:02:10 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/23 16:21:05 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int					ft_syn_a(t_asm *as, int i)
 	j = 0;
 	if (!ft_jmp_lbl(as, i, &j, &var))
 		return (1);
-	if (ft_watzis(as->lines[i], j) != 12 && var == 0)
+	if (ft_watzis(as->lines[i], j) != 12 && as->lines[i][j])
 		return (ft_put_syntax(as, i, j));
 	var = 1;
 	while (as->lines[i][j])

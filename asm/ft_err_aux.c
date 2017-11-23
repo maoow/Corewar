@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 09:54:13 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 14:35:57 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/23 15:42:00 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int			ft_real_ln_chr(t_asm *as, int *i, int *j)
 	if (!as->lines[*i])
 		return (1);
 	*i += ft_add_bkn(as, *i, origine);
-	if (as->lines[*i] == NULL)
+	k = -1;
+	while (as->lines[++k])
+		;
+	if (*i >= k)
 		*j = 0;
 	return (1);
 }

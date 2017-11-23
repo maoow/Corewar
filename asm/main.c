@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 13:37:24 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 16:48:25 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/23 17:24:05 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int				main(int ac, char **av)
 	int			ind;
 
 	ind = 0;
-	while (++ind < ac)
+	while (++ind < ac || (ind == 1 && ac == 1))
 	{
 		if (ft_main_load(ac, av, &as, &ind) > 0)
 			ft_main_load4(as, av, &ind);

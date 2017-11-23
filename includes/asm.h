@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 17:07:16 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/23 17:37:51 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void				ft_mem_len(t_asm *as);
 /*
 ** 2 fonction - ft_err_load.c
 */
-int					ft_err_load(int ac, int fd, char *str);
+int					ft_err_load(int ac, int fd, char *src_file, char *path);
 int					ft_err_str_gnl(t_asm *as);
 
 /*
@@ -183,6 +183,10 @@ int					ft_syn_name_comm(t_asm *as);
 ** 2 fonctions - ft_syn_op.c
 */
 int					ft_syn_op(t_asm *as, int i);
+
+/*
+** 3 fonctions - ft_syn_args.c
+*/
 int					ft_syn_args(t_asm *as, int i);
 
 /*

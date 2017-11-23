@@ -6,11 +6,17 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 15:45:41 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 16:49:54 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/23 13:45:53 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+int					ft_int_strdel(char *tmp)
+{
+	ft_strdel(&tmp);
+	return (0);
+}
 
 int					ft_put_bad_arg(int count_args, int type_var, char *tmp)
 {
@@ -40,7 +46,7 @@ int					ft_each_args(t_asm *as, int *j, int *count_args, char *tmp)
 		(*j)++;
 	ft_while_space(as->lines[as->n_ln], j);
 	if ((num_op = ft_if_op_ok(as, tmp)) == -1)
-		return (0);
+		return (ft_int_strdel(tmp));
 	if (ft_watzis(as->lines[as->n_ln], *j) == 3
 		|| ft_watzis(as->lines[as->n_ln], *j) == 4)
 		type_var = T_DIR;
