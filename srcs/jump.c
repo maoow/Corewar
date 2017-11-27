@@ -33,7 +33,7 @@ size_t			g_oplabel[OPC_NBR] = {
 
 size_t			getlabel(size_t op)
 {
-	return (g_oplabel[op - 1]);
+	return (g_oplabel[op]);
 }
 
 long int		idx(t_process *proc, long int jump)

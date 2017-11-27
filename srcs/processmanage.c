@@ -90,6 +90,8 @@ static void				ft_executeprocess(t_cor *core, t_process *proc)
 
 	op = revgetop(proc->next_op);
 	ft_determinejmpdist(core, proc);
+	//if (core->arena[(proc->PC + proc->startpos) % MEM_SIZE] == 26)
+		//ft_printf("%d\n", revgetop(proc->next_op));
 	if ((exec = ft_checkexecutable(core, proc)))
 	{
 		carry = proc->next_op(core, proc);

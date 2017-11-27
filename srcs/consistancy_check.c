@@ -15,8 +15,8 @@
 size_t			g_opparams[OPC_NUMBER][3] =
 {
 	{T_DIR},
-	{T_DIR | T_IND, T_REG},
-	{T_REG, T_IND | T_REG},
+	{0, T_DIR | T_IND, T_REG},
+	{0, T_REG, T_IND | T_REG},
 	{T_REG, T_REG, T_REG},
 	{T_REG, T_REG, T_REG},
 	{T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG},
@@ -26,7 +26,7 @@ size_t			g_opparams[OPC_NUMBER][3] =
 	{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
 	{T_DIR | T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG},
 	{T_DIR},
-	{T_DIR | T_IND, T_REG},
+	{0, T_DIR | T_IND, T_REG},
 	{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
 	{T_DIR},
 	{T_REG}
@@ -111,6 +111,12 @@ static int		get_paramsize(size_t opc, size_t op)
 
 	ret = 0;
 	i = 0;
+	//if (op == 16 && opc != 1)
+	//{
+	//return (4);
+	//}
+	//if (g_opparamnb[op - 1] == 1)
+	//return (opc / 64);
 	while (opc / 4)
 	{
 		opc /= 4;
@@ -135,6 +141,26 @@ static int		get_paramsize(size_t opc, size_t op)
 	return (ret);
 }
 
+bool test(size_t opc, size_t op)
+{
+	size_t	i;
+	size_t	tmp;
+
+	i = 0;
+	while (opc / 4)
+	{
+		opc /= 4;
+		tmp = opc % 4;
+		if (tmp == 3)
+			tmp++;
+		if (i >= 3 - g_opparamnb[op - 1])
+			if ((g_opparams[op - 1][i] & tmp) != tmp)
+				return (true);
+		i++;
+	}
+	return (true);
+}
+
 bool			ft_checkexecutable(t_cor *core, t_process *proc)
 {
 	size_t op;
@@ -144,7 +170,10 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 	if (op >= 1 && op <= OPC_NUMBER && g_ocp[op - 1])
 	{
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-		if (get_paramnb(opc) != g_opparamnb[op - 1] || (g_opparamnb[op - 1] == 2 && opc / 32 == 0))
+		//ft_printf("%x", opc );
+		if (get_paramnb(opc) != g_opparamnb[op - 1] ||
+				(g_opparamnb[op - 1] == 2 && (opc / 64 == 0 || (opc / 16) % 4 == 0)) 
+				|| !test(opc, op))
 		{
 			proc->next_jump = get_paramsize(opc, op) + 2;
 			if (core->options->v16)
@@ -152,17 +181,9 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 			return (false);
 		}
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1])
-			return (false);
-		if (op == 3 && (opc / 4) % 4 == 3)
+		if (g_opparamnb[op - 1] > 1 && proc->next_jump <= 3)
 		{
-			proc->next_jump -= 2;
-			if (core->options->v16)
-				dispjump(core, proc);
-			return (false);
-		}
-		if (core->arena[(proc->PC + proc->startpos) % MEM_SIZE] == 0 && proc->next_jump <= 3)
-		{
+			proc->next_jump = get_paramsize(opc, op) + 2;
 			if (core->options->v16)
 				dispjump(core, proc);
 			return (false);

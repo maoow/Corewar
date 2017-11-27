@@ -49,10 +49,8 @@ bool				cw_lfork(t_cor *core, t_process *proc)
 		i++;
 	}
 	indt = ind(core, proc, proc->PC + 1);
-	if (indt > 65536 / 2)
-		indt -= 65536;
 	tmp->PC = 0;
-	tmp->startpos = (proc->PC + proc->startpos + indt);
+	tmp->startpos = ((proc->PC + proc->startpos) % MEM_SIZE + indt);
 	fulfill_tmp(core, tmp, proc);
 	if (core->options->v4)
 		ft_printf("P%5d | lfork %d (%d)\n", proc->ID, indt, tmp->startpos);
