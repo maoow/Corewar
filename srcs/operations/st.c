@@ -35,12 +35,12 @@ bool			cw_st(t_cor *core, t_process *proc)
 
 	if ((reg = get_reg(core, proc, &pos)) >= REG_NUMBER)
 		return (proc->carry);
-		adress = ind(core, proc, proc->PC + 3);
-		if (adress > 65536 / 2)
-			adress -= 65536;
-		if (core->options->v4)
-			ft_printf("P%5d | st r%d %d\n", proc->ID, reg + 1, adress);
-		adress %= IDX_MOD;
-		setram(core, adress + pos, proc->registres[reg], proc->color);
+	adress = ind(core, proc, proc->PC + 3);
+	if (adress > 65536 / 2)
+		adress -= 65536;
+	if (core->options->v4)
+		ft_printf("P%5d | st r%d %d\n", proc->ID, reg + 1, adress);
+	adress %= IDX_MOD;
+	setram(core, adress + pos, proc->registres[reg], proc->color);
 	return (proc->registres[reg] != 0);
 }

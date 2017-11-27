@@ -32,8 +32,10 @@ bool		cw_add(t_cor *core, t_process *proc)
 	if (r3 < REG_NUMBER && r1 < REG_NUMBER && r2 < REG_NUMBER)
 	{
 		value = ((long)proc->registres[r1] + (long)proc->registres[r2]);//% 2147483647;
-	if (value > 4294967296 / 2)
-		value -= 4294967296;
+		if (value > 4294967296 / 2)
+		{
+			value -= 4294967296;
+		}
 		proc->registres[r3] = value;
 		if (core->options->v4)
 		{
