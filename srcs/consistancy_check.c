@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 12:55:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 11:48:51 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/27 13:47:13 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,6 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 		if (get_paramnb(opc) != g_opparamnb[op - 1])
 		{
 			proc->next_jump = get_paramsize(opc, op) + 2;
-			//if (op == 11 && core->arena[(proc->PC + proc->startpos) % MEM_SIZE] == 11)
-				//proc->next_jump = 4;
 			if (core->options->v16)
 				dispjump(core, proc);
 			return (false);
@@ -156,6 +154,13 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
 		if (hasopcode(op) && get_paramnb(opc) != g_opparamnb[op - 1])
 			return (false);
+		if (op == 3 && (opc / 4) % 4 == 3)
+		{
+			proc->next_jump -= 2;
+			if (core->options->v16)
+				dispjump(core, proc);
+			return (false);
+		}
 		if (core->arena[(proc->PC + proc->startpos) % MEM_SIZE] == 0 && proc->next_jump <= 3)
 		{
 			if (core->options->v16)
