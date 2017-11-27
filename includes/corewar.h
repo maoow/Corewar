@@ -1,11 +1,12 @@
-/* ************************************************************************** */ /*                                                                            */
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/06 16:34:33 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/27 13:48:59 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +44,7 @@
 # define UPDATE 80
 
 /*
-**	structure allouee et remplie si un ou plusieurs champions a un numero 
+**	structure allouee et remplie si un ou plusieurs champions a un numero
 **	assigne au lancement de l'executable
 */
 
@@ -128,7 +129,8 @@ typedef struct			s_process
 **
 **	arena_color :	1 : no color
 **					4 a 9 : color correspondant a COLOR_PAIR du champ
-**					14 a 19 : color correspondant a COLOR_PAIR du champ + fond (new written process)
+**					14 a 19 : color correspondant a COLOR_PAIR du champ +
+**								fond (new written process)
 **					24 a 29 : color d'ecriture des processus. temporaire
 */
 
@@ -153,51 +155,58 @@ typedef struct			s_cor
 }						t_cor;
 
 /*
-**			START FUNCTIONS
+**						START FUNCTIONS
 */
-void		usage(int ac, char **av);
-void		intro(t_cor *cor, t_champ *champs);
-void		write_error(int nb);
-void		ft_init(t_cor *core);
-size_t		get_options(t_cor *cor, int ac, char **av, size_t i);
-int			**parse(t_cor *cor, char *av, int optionnal_id);
-void		get_magic_packet(size_t s, unsigned char *buf, bool *end);
-bool		is_champ(char *av, size_t *nb_champ, bool test, int j);
-void		add_champ(t_cor *cor, char *name, char *comment, int ID);
-void		add_process(t_cor *cor, size_t startpos);
-void		visu(t_cor *cor);
-void		print_right(WINDOW *right, t_cor *cor, int i, t_champ *tmp);
-void		print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign);
-void		ft_dump(t_cor *cor);
-void		ft_clean(t_cor *cor);
+void					usage(int ac, char **av);
+void					intro(t_cor *cor, t_champ *champs);
+void					write_error(int nb);
+void					ft_init(t_cor *core);
+size_t					get_options(t_cor *cor, int ac, char **av, size_t i);
+int						**parse(t_cor *cor, char *av, int optionnal_id);
+void					get_magic_packet(size_t s, unsigned char *buf,
+		bool *end);
+bool					is_champ(char *av, size_t *nb_champ, bool test, int j);
+void					add_champ(t_cor *cor, char *name, char *comment,
+		int ID);
+void					add_process(t_cor *cor, size_t startpos);
+void					visu(t_cor *cor);
+void					print_right(WINDOW *right, t_cor *cor, int i,
+		t_champ *tmp);
+void					print_left(WINDOW *left, t_cor *cor, size_t col,
+		size_t lign);
+void					ft_dump(t_cor *cor);
+void					ft_clean(t_cor *cor);
 /*
-**			GAME FUNCTIONS
+**						GAME FUNCTIONS
 */
 
 size_t					revgetop(bool (*op)());
-void		ft_warcycle(t_cor *core, bool b_alive);
-void		ft_increase_cycle(t_cor *core);
-void		ft_browseprocess(t_cor *core);
-long int	idx(t_process *proc, long int jump);
-void		ft_determinejmpdist(t_cor *core, t_process *proc);
-size_t		ind(t_cor *core, t_process *proc, size_t PC);
-size_t		indx(t_cor *core, t_process *proc, size_t PC);
-int			getparam(t_cor *core, t_process *proc, size_t param, size_t label);
-size_t		getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
-size_t		*ft_getparamstype(t_cor *core, t_process *proc);
-long int	getram(t_cor *core, size_t address);
-void		setram(t_cor *core, size_t address, int value, int color);
-void		free_process(t_process *tmp);
-void		ft_delprocess(t_cor *core, t_process **del);
-void		ft_addprocess(t_cor *core, t_process *new);
-void		ft_getop(t_cor *core, t_process *proc, int first);
-void		dispreg(t_process *proc);
-void		dispjump(t_cor *core, t_process *proc);
-bool		ft_checkexecutable(t_cor *core, t_process *proc);
-bool		ft_checkloadable(t_cor *core, t_process *proc);
-size_t		get_paramnb(size_t opc);
-bool		hasopcode(size_t op);
-size_t		getlabel(size_t op);
-bool		checkopn(t_cor *core, t_process *proc);
+void					ft_warcycle(t_cor *core, bool b_alive);
+void					ft_increase_cycle(t_cor *core);
+void					ft_browseprocess(t_cor *core);
+long int				idx(t_process *proc, long int jump);
+void					ft_determinejmpdist(t_cor *core, t_process *proc);
+size_t					ind(t_cor *core, t_process *proc, size_t PC);
+size_t					indx(t_cor *core, t_process *proc, size_t PC);
+int						getparam(t_cor *core, t_process *proc, size_t param,
+		size_t label);
+size_t					getparamplace(t_cor *core, t_process *proc,
+		size_t param, size_t label);
+size_t					*ft_getparamstype(t_cor *core, t_process *proc);
+long int				getram(t_cor *core, size_t address);
+void					setram(t_cor *core, size_t address, int value,
+		int color);
+void					free_process(t_process *tmp);
+void					ft_delprocess(t_cor *core, t_process **del);
+void					ft_addprocess(t_cor *core, t_process *new);
+void					ft_getop(t_cor *core, t_process *proc, int first);
+void					dispreg(t_process *proc);
+void					dispjump(t_cor *core, t_process *proc);
+bool					ft_checkexecutable(t_cor *core, t_process *proc);
+bool					ft_checkloadable(t_cor *core, t_process *proc);
+size_t					get_paramnb(size_t opc);
+bool					hasopcode(size_t op);
+size_t					getlabel(size_t op);
+bool					checkopn(t_cor *core, t_process *proc);
 
 #endif
