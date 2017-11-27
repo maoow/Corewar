@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/26 13:35:58 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/27 12:16:44 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			ft_init(t_cor *core)
 	core->process = NULL;
 	core->options = NULL;
 	core->id_list = NULL;
+	core->error = false;
 	if (!(core->options = (t_options*)malloc(sizeof(*core->options))))
 		write_error(2);
 	init_options(core->options);

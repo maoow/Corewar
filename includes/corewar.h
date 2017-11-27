@@ -149,6 +149,7 @@ typedef struct			s_cor
 	bool				verbose;
 	size_t				nb_champs;
 	size_t				procnb;
+	bool				error;
 }						t_cor;
 
 /*
@@ -181,7 +182,7 @@ long int	idx(t_process *proc, long int jump);
 void		ft_determinejmpdist(t_cor *core, t_process *proc);
 size_t		ind(t_cor *core, t_process *proc, size_t PC);
 size_t		indx(t_cor *core, t_process *proc, size_t PC);
-size_t		getparam(t_cor *core, t_process *proc, size_t param, size_t label);
+int			getparam(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		getparamplace(t_cor *core, t_process *proc, size_t param, size_t label);
 size_t		*ft_getparamstype(t_cor *core, t_process *proc);
 long int	getram(t_cor *core, size_t address);

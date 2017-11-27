@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 13:10:18 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 15:48:44 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/27 12:00:51 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ long int			getram(t_cor *core, size_t address)
 	value += core->arena[(address + 2) % MEM_SIZE];
 	value *= 256;
 	value += core->arena[(address + 3) % MEM_SIZE];
+	if (value > 4294967296 / 2)
+		value -= 4294967296;
 	return (value);
 }
 

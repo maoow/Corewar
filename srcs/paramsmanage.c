@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/16 09:06:40 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/27 12:16:43 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ size_t	ind(t_cor *core, t_process *proc, size_t pc)
 	value = core->arena[(proc->startpos + pc) % MEM_SIZE];
 	value *= 256;
 	value += core->arena[(proc->startpos + pc + 1) % MEM_SIZE];
+	if (value > 65536 / 2)
+		value -= 65536;
 	return (value);
 }
 
-size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
+int	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 {
 	size_t			op[3];
 	size_t			place;
-	int				value;
+	long int		value;
 
 	op[0] = core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE];
 	op[2] = (op[0] / 4) % 4;
@@ -59,17 +61,23 @@ size_t	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 	op[0] /= 64;
 	place = getparamplace(core, proc, param, label);
 	if (op[param - 1] == 1)
+	{
 		value = proc->registres[mod(core->arena[place] - 1, 16)];
+		if (core->arena[place] <= 0 || core->arena[place] > 16)
+		core->error = true;
+	}
 	else if (op[param - 1] == 2)
 	{
 		if (label == 2)
+		{
 			value = ind(core, proc, place - proc->startpos);
+		}
 		else
 			value = getram(core, place);
 	}
 	else
 		value = getram(core, ind(core, proc, place));
-	return ((size_t)(value % 4294967295));
+	return ((value % 4294967296));
 }
 
 size_t	getparamplace(t_cor *core, t_process *proc, size_t param, size_t label)
