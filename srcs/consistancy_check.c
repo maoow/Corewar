@@ -117,14 +117,14 @@ static int		get_paramsize(size_t opc, size_t op)
 		tmp = opc % 4;
 		if (tmp == 3)
 			tmp++;
-		if (i >= g_opparamnb[op - 1] || (g_opparams[op - 1][i] & tmp) == tmp || op == 5 || op == 4 || op == 11)
+		if (i >= 3 - g_opparamnb[op - 1])// || (g_opparams[op - 1][i] & tmp) == tmp || op == 5 || op == 4 || op == 11)
 		{
 			if (opc % 4 == 3)
 				ret += 2;
-			else if (opc % 4 == 2 && getlabel(op) == 0)
+			else if (opc % 4 == 2 && getlabel(op - 1) == 0)
 				ret += 4;
 			else if (opc % 4 == 2)
-				ret += getlabel(op);
+				ret += getlabel(op - 1);
 			else if (opc % 4 == 1)
 				ret += 1;
 		}
@@ -144,7 +144,7 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 	if (op >= 1 && op <= OPC_NUMBER && g_ocp[op - 1])
 	{
 		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
-		if (get_paramnb(opc) != g_opparamnb[op - 1])
+		if (get_paramnb(opc) != g_opparamnb[op - 1] || (g_opparamnb[op - 1] == 2 && opc / 32 == 0))
 		{
 			proc->next_jump = get_paramsize(opc, op) + 2;
 			if (core->options->v16)
