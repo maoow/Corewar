@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 15:33:34 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/27 10:50:01 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ bool			cw_sti(t_cor *core, t_process *proc)
 	if (reg >= REG_NUMBER || !regcheck(core, proc->PC + proc->startpos))
 		return (proc->carry);
 	adress = getparam(core, proc, 2, 2);
-	if (adress > 34952)
-		adress -= 65536;
+	//if (adress > 34952)
+		//adress -= 65536;
 	adress2 = getparam(core, proc, 3, 2);
-	if (adress2 > 34952)
-		adress2 -= 65536;
+	//if (adress2 > 34952)
+		//adress2 -= 65536;
 	total = adress2 + adress;
 	total %= IDX_MOD;
 	setram(core, proc->PC + proc->startpos + total, proc->registres[reg],
