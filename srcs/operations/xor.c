@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:13 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 12:16:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:53 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ bool			cw_xor(t_cor *core, t_process *proc)
 	}
 	proc->registres[c] = xor(a, b);
 	if (core->options->v4)
-		ft_printf("P%5d | xor %d %d r%d\n", proc->ID, a, b, c + 1);
+		ft_printf("P %4d | xor %d %d r%d\n", proc->ID, a, b, c + 1);
 	return (proc->registres[c] == 0);
 }

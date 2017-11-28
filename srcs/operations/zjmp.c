@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 15:37:42 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool			cw_zjmp(t_cor *core, t_process *proc)
 	if (jump > 65536 / 2)
 		jump -= 65536;
 	if (core->options->v4)
-		ft_printf("P%5d | zjmp %d ", proc->ID, jump);
+		ft_printf("P %4d | zjmp %d ", proc->ID, jump);
 	if (proc->carry)
 	{
 		if (core->options->v4)

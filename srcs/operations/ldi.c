@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:05 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 10:46:17 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static bool		regcheck(t_cor *core, t_process *proc)
 
 static void		print_v4(t_process *proc, int adress, int adress2, size_t reg)
 {
-	ft_printf("P%5d | ldi %d %d r%d\n", proc->ID, adress, adress2, reg);
+	ft_printf("P %4d | ldi %d %d r%d\n", proc->ID, adress, adress2, reg);
 	ft_printf("       | -> load from %d + %d = %d (",
 			adress, adress2, adress + adress2);
 }

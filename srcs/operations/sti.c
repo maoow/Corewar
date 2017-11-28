@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 10:50:01 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:51 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool		regcheck(t_cor *core, int pos)
 
 static void		print_v4(t_process *proc, int adress, int adress2, size_t reg)
 {
-	ft_printf("P%5d | sti r%d %d %d\n", proc->ID, reg + 1, adress, adress2);
+	ft_printf("P %4d | sti r%d %d %d\n", proc->ID, reg + 1, adress, adress2);
 	ft_printf("       | -> store to %d + %d = %d (with pc and mod",
 			adress, adress2, adress + adress2);
 }

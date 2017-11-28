@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 12:05:57 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 14:23:26 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:43 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	cw_live(t_cor *core, t_process *proc)
 		core->last_champ_alive = tmp->ID;
 	}
 	if (core->options->v4)
-		ft_printf("P%5d | live %d\n", proc->ID,
+		ft_printf("P %4d | live %d\n", proc->ID,
 				getram(core, proc->PC + proc->startpos + 1));
 	return (true);
 }

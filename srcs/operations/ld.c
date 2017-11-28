@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 13:40:44 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/13 14:17:12 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:38 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ bool	cw_ld(t_cor *core, t_process *proc)
 		return (proc->carry);
 	proc->registres[reg - 1] = value;
 	if (core->options->v4)
-		ft_printf("P%5d | ld %d r%d\n", proc->ID, value, reg);
+		ft_printf("P %4d | ld %d r%d\n", proc->ID, value, reg);
 	return (value == 0);
 }

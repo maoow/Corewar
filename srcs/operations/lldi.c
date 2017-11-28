@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:09 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 10:45:03 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:47 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		print_v4(t_process *proc, int adress, int adress2, size_t reg)
 	int		adress3;
 
 	adress3 = adress + adress2;
-	ft_printf("P%5d | ldi %d %d r%d\n", proc->ID, adress, adress2, reg);
+	ft_printf("P %4d | ldi %d %d r%d\n", proc->ID, adress, adress2, reg);
 	ft_printf("       | -> load from %d + %d = %d (",
 			adress, adress2, adress3);
 	ft_printf("with pc and mod %d)\n", adress3 + proc->PC + proc->startpos);

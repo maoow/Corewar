@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 13:56:45 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:35 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool				cw_fork(t_cor *core, t_process *proc)
 		indt = ind(core, proc, proc->PC + 1);//% MEM_SIZE;
 		//if (indt > 65536 / 2)
 			//indt -= 65536;
-		ft_printf("P%5d | fork %d (%d)\n", proc->ID, indt,
+		ft_printf("P %4d | fork %d (%d)\n", proc->ID, indt,
 				idx(proc, ind(core, proc, proc->PC + 1)));
 	}
 	return (true);

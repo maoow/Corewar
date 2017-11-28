@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:06 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 10:39:08 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:42 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool				cw_lfork(t_cor *core, t_process *proc)
 	tmp->startpos = ((proc->PC + proc->startpos) % MEM_SIZE + indt);
 	fulfill_tmp(core, tmp, proc);
 	if (core->options->v4)
-		ft_printf("P%5d | lfork %d (%d)\n", proc->ID, indt, tmp->startpos);
+		ft_printf("P %4d | lfork %d (%d)\n", proc->ID, indt, tmp->startpos);
 	tmp->startpos %= MEM_SIZE;
 	return (true);
 }
