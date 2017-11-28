@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:24:58 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 10:51:15 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 11:36:30 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool		cw_add(t_cor *core, t_process *proc)
 	r3 = core->arena[(proc->PC + proc->startpos + 4) % MEM_SIZE] - 1;
 	if (r3 < REG_NUMBER && r1 < REG_NUMBER && r2 < REG_NUMBER)
 	{
-		value = ((long)proc->registres[r1] + (long)proc->registres[r2]);//% 2147483647;
+		value = ((long)proc->registres[r1] + (long)proc->registres[r2]);
 		if (value > 4294967296 / 2)
 		{
 			value -= 4294967296;
