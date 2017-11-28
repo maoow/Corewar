@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/27 12:16:43 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 11:45:20 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ size_t	ind(t_cor *core, t_process *proc, size_t pc)
 	return (value);
 }
 
-int	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
+int		getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 {
 	size_t			op[3];
 	size_t			place;
@@ -64,14 +64,12 @@ int	getparam(t_cor *core, t_process *proc, size_t param, size_t label)
 	{
 		value = proc->registres[mod(core->arena[place] - 1, 16)];
 		if (core->arena[place] <= 0 || core->arena[place] > 16)
-		core->error = true;
+			core->error = true;
 	}
 	else if (op[param - 1] == 2)
 	{
 		if (label == 2)
-		{
 			value = ind(core, proc, place - proc->startpos);
-		}
 		else
 			value = getram(core, place);
 	}

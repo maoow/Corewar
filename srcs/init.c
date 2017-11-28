@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/27 12:16:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 11:46:40 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		init_options(t_options *opt)
 	opt->follow = false;
 	opt->nb_follow = 0;
 	opt->aff_visu = -1;
+	opt->num_champ = NULL;
 }
 
 void			ft_init(t_cor *core)
@@ -54,6 +55,5 @@ void			ft_init(t_cor *core)
 	if (!(core->options = (t_options*)malloc(sizeof(*core->options))))
 		write_error(2);
 	init_options(core->options);
-	core->options->num_champ = NULL;
 	core->last_champ_alive = 0;
 }
