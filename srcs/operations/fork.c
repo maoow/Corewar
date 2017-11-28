@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 11:31:05 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;
 	tmp->color = proc->color;
-	tmp->ID = core->procnb + 1;
+	tmp->id = core->procnb + 1;
 	core->procnb++;
 	tmp->next = core->process;
 	core->process = tmp;
@@ -48,14 +48,14 @@ bool				cw_fork(t_cor *core, t_process *proc)
 		tmp->registres[i] = proc->registres[i];
 		i++;
 	}
-	tmp->PC = 0;
-	tmp->startpos = (idx(proc, ind(core, proc, proc->PC + 1))) % MEM_SIZE;
+	tmp->pc = 0;
+	tmp->startpos = (idx(proc, ind(core, proc, proc->pc + 1))) % MEM_SIZE;
 	fulfill_tmp(core, tmp, proc);
 	if (core->options->v4)
 	{
-		indt = ind(core, proc, proc->PC + 1);
-		ft_printf("P %4d | fork %d (%d)\n", proc->ID, indt,
-				idx(proc, ind(core, proc, proc->PC + 1)));
+		indt = ind(core, proc, proc->pc + 1);
+		ft_printf("P %4d | fork %d (%d)\n", proc->id, indt,
+				idx(proc, ind(core, proc, proc->pc + 1)));
 	}
 	return (true);
 }

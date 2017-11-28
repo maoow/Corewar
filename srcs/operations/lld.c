@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 10:53:46 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ bool	cw_lld(t_cor *core, t_process *proc)
 
 	if (proc->next_jump < 3)
 		return (proc->carry);
-	pc = proc->PC;
-	if ((core->arena[(proc->PC + proc->startpos + 1) % MEM_SIZE] / 64) % 4 == 2)
+	pc = proc->pc;
+	if ((core->arena[(proc->pc + proc->startpos + 1) % MEM_SIZE] / 64) % 4 == 2)
 	{
 		value = getram(core, pc + 2 + proc->startpos);
 		pc += 6;
@@ -42,6 +42,6 @@ bool	cw_lld(t_cor *core, t_process *proc)
 		return (proc->carry);
 	proc->registres[reg - 1] = value;
 	if (core->options->v4)
-		ft_printf("P %4d | lld %d r%d\n", proc->ID, value, reg);
+		ft_printf("P %4d | lld %d r%d\n", proc->id, value, reg);
 	return (value == 0);
 }

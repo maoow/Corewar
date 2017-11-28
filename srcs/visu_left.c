@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 16:05:12 by starrit           #+#    #+#             */
-/*   Updated: 2017/10/21 13:58:27 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void		check_process_to_color(t_cor *cor, size_t col, size_t lign,
 	tmp = cor->process;
 	while (tmp)
 	{
-		if (!cor->options->follow || cor->options->nb_follow == tmp->ID)
-			if (i == (tmp->PC + tmp->startpos) % MEM_SIZE)
+		if (!cor->options->follow || cor->options->nb_follow == tmp->id)
+			if (i == (tmp->pc + tmp->startpos) % MEM_SIZE)
 				mvchgat(lign, col, 2, A_NORMAL, tmp->color - 10, NULL);
 		tmp = tmp->next;
 	}

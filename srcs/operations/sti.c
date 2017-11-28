@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:12 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 11:30:54 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool		regcheck(t_cor *core, int pos)
 
 static void		print_v4(t_process *proc, int adress, int adress2, size_t reg)
 {
-	ft_printf("P %4d | sti r%d %d %d\n", proc->ID, reg + 1, adress, adress2);
+	ft_printf("P %4d | sti r%d %d %d\n", proc->id, reg + 1, adress, adress2);
 	ft_printf("       | -> store to %d + %d = %d (with pc and mod",
 			adress, adress2, adress + adress2);
 }
@@ -61,19 +61,19 @@ bool			cw_sti(t_cor *core, t_process *proc)
 	long int	total;
 	size_t		reg;
 
-	reg = core->arena[(proc->PC + proc->startpos + 2) % MEM_SIZE] - 1;
-	if (reg >= REG_NUMBER || !regcheck(core, proc->PC + proc->startpos))
+	reg = core->arena[(proc->pc + proc->startpos + 2) % MEM_SIZE] - 1;
+	if (reg >= REG_NUMBER || !regcheck(core, proc->pc + proc->startpos))
 		return (proc->carry);
 	adress = getparam(core, proc, 2, 2);
 	adress2 = getparam(core, proc, 3, 2);
 	total = adress2 + adress;
 	total %= IDX_MOD;
-	setram(core, proc->PC + proc->startpos + total, proc->registres[reg],
+	setram(core, proc->pc + proc->startpos + total, proc->registres[reg],
 			proc->color);
 	if (core->options->v4)
 	{
 		print_v4(proc, adress, adress2, reg);
-		ft_printf(" %d)\n", ((proc->PC + proc->startpos) % MEM_SIZE) + total);
+		ft_printf(" %d)\n", ((proc->pc + proc->startpos) % MEM_SIZE) + total);
 	}
 	return (true);
 }

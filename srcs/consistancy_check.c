@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 12:55:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 12:02:48 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ bool			checkopn(t_cor *core, t_process *proc)
 {
 	size_t op;
 
-	op = core->arena[(proc->PC + proc->startpos) % MEM_SIZE];
+	op = core->arena[(proc->pc + proc->startpos) % MEM_SIZE];
 	if (op == 0 || op > OPC_NUMBER)
 		return (false);
 	return (true);
@@ -139,7 +139,7 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 	op = revgetop(proc->next_op);
 	if (op >= 1 && op <= OPC_NUMBER && g_ocp[op - 1])
 	{
-		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
+		opc = core->arena[(proc->startpos + proc->pc + 1) % MEM_SIZE];
 		if (get_paramnb(opc) != g_opparamnb[op - 1] || (g_opparamnb[op - 1] == 2
 					&& (opc / 64 == 0 || (opc / 16) % 4 == 0)))
 		{
@@ -148,7 +148,7 @@ bool			ft_checkexecutable(t_cor *core, t_process *proc)
 				dispjump(core, proc);
 			return (false);
 		}
-		opc = core->arena[(proc->startpos + proc->PC + 1) % MEM_SIZE];
+		opc = core->arena[(proc->startpos + proc->pc + 1) % MEM_SIZE];
 		if (g_opparamnb[op - 1] > 1 && proc->next_jump <= 3)
 		{
 			proc->next_jump = get_paramsize(opc, op) + 2;

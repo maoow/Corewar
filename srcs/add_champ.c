@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 19:37:16 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/13 11:40:22 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void		new_id_list(t_cor *cor, t_champ *champ, int id,
 	if (!(id_list = (t_opt_number*)malloc(sizeof(*id_list))))
 		write_error(2);
 	id_list->num = id;
-	champ->ID = id;
-	id_list->champ = champ->ID;
+	champ->id = id;
+	id_list->champ = champ->id;
 	id_list->next = NULL;
 	cor->id_list = id_list;
 }
@@ -63,8 +63,8 @@ static void		add_special_champ_id(t_cor *cor, t_champ *champ, int id,
 	if (!(id_list->next = (t_opt_number*)malloc(sizeof(*id_list))))
 		write_error(2);
 	id_list->next->num = id;
-	champ->ID = id;
-	id_list->next->champ = champ->ID;
+	champ->id = id;
+	id_list->next->champ = champ->id;
 	id_list->next->next = NULL;
 }
 
@@ -74,7 +74,7 @@ static void		fulfill_champ(t_cor *cor, char *name, char *comment, int id)
 
 	if (id == -1)
 	{
-		cor->champs->ID = id_fix;
+		cor->champs->id = id_fix;
 		id_fix--;
 	}
 	else
@@ -86,7 +86,7 @@ static void		fulfill_champ(t_cor *cor, char *name, char *comment, int id)
 	cor->champs->last_live = 0;
 	cor->champs->lives_in_period = 0;
 	if (!cor->last_champ_alive)
-		cor->last_champ_alive = cor->champs->ID;
+		cor->last_champ_alive = cor->champs->id;
 	add_champ_color(cor);
 }
 

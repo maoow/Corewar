@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:14 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 10:53:54 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		no_carry(t_cor *core, t_process *proc)
 		dispjump(core, proc);
 		proc->next_jump = 0;
 	}
-	proc->PC += 3;
+	proc->pc += 3;
 	if (core->options->v4)
 		ft_printf("FAILED\n");
 }
@@ -35,11 +35,11 @@ bool			cw_zjmp(t_cor *core, t_process *proc)
 {
 	long int jump;
 
-	jump = ind(core, proc, proc->PC + 1);
+	jump = ind(core, proc, proc->pc + 1);
 	if (jump > 65536 / 2)
 		jump -= 65536;
 	if (core->options->v4)
-		ft_printf("P %4d | zjmp %d ", proc->ID, jump);
+		ft_printf("P %4d | zjmp %d ", proc->id, jump);
 	if (proc->carry)
 	{
 		if (core->options->v4)
@@ -47,10 +47,10 @@ bool			cw_zjmp(t_cor *core, t_process *proc)
 		if (jump != 0)
 		{
 			jump %= IDX_MOD;
-			proc->PC += jump;
-			proc->PC += proc->startpos;
-			proc->PC %= MEM_SIZE;
-			proc->PC -= proc->startpos;
+			proc->pc += jump;
+			proc->pc += proc->startpos;
+			proc->pc %= MEM_SIZE;
+			proc->pc -= proc->startpos;
 		}
 	}
 	else

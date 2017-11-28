@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/27 13:48:59 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct			s_champ
 {
 	char				*name;
 	char				*comment;
-	long int			ID;
+	long int			id;
 	struct s_champ		*next;
 	bool				alive;
 	size_t				last_live;
@@ -101,9 +101,9 @@ typedef struct			s_champ
 
 typedef struct			s_process
 {
-	int					ID;
+	int					id;
 	int					registres[REG_NUMBER];
-	size_t				PC;
+	size_t				pc;
 	size_t				startpos;
 	size_t				next_jump;
 	size_t				cycles_before_execute;
@@ -167,7 +167,7 @@ void					get_magic_packet(size_t s, unsigned char *buf,
 		bool *end);
 bool					is_champ(char *av, size_t *nb_champ, bool test, int j);
 void					add_champ(t_cor *cor, char *name, char *comment,
-		int ID);
+		int id);
 void					add_process(t_cor *cor, size_t startpos);
 void					visu(t_cor *cor);
 void					print_right(WINDOW *right, t_cor *cor, int i,
@@ -186,8 +186,8 @@ void					ft_increase_cycle(t_cor *core);
 void					ft_browseprocess(t_cor *core);
 long int				idx(t_process *proc, long int jump);
 void					ft_determinejmpdist(t_cor *core, t_process *proc);
-size_t					ind(t_cor *core, t_process *proc, size_t PC);
-size_t					indx(t_cor *core, t_process *proc, size_t PC);
+size_t					ind(t_cor *core, t_process *proc, size_t pc);
+size_t					indx(t_cor *core, t_process *proc, size_t pc);
 int						getparam(t_cor *core, t_process *proc, size_t param,
 		size_t label);
 size_t					getparamplace(t_cor *core, t_process *proc,

@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 11:37:58 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 12:54:39 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void				ft_executeprocess(t_cor *core, t_process *proc)
 			dispjump(core, proc);
 		proc->just_played = true;
 	}
-	proc->PC += proc->next_jump;
+	proc->pc += proc->next_jump;
 	proc->searching = false;
 	if (ft_checkloadable(core, proc))
 		proc->just_played = false;
@@ -117,14 +117,14 @@ void					ft_getop(t_cor *core, t_process *proc, int first)
 	if (ft_checkloadable(core, proc))
 	{
 		proc->next_op =
-			g_opctable[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+			g_opctable[core->arena[(proc->startpos + proc->pc) % MEM_SIZE] - 1];
 		proc->cycles_before_execute =
-			g_optime[core->arena[(proc->startpos + proc->PC) % MEM_SIZE] - 1];
+			g_optime[core->arena[(proc->startpos + proc->pc) % MEM_SIZE] - 1];
 		if ((proc->just_played == false && first == 1))
 			proc->cycles_before_execute--;
 	}
 	else if (proc->just_played == false && first == 1)
-		proc->PC++;
+		proc->pc++;
 	proc->just_played = false;
 }
 
@@ -136,7 +136,7 @@ void					ft_browseprocess(t_cor *core)
 	while (proc)
 	{
 		if (proc->next_op &&
-revgetop(proc->next_op) != core->arena[(proc->PC + proc->startpos) % MEM_SIZE]
+revgetop(proc->next_op) != core->arena[(proc->pc + proc->startpos) % MEM_SIZE]
 	&& g_optime[revgetop(proc->next_op) - 1] == proc->cycles_before_execute + 1)
 		{
 			proc->next_op = NULL;
