@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 13:08:00 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/28 16:30:44 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void			ft_clean(t_cor *cor)
 			exitfree_options(cor);
 		if (cor->id_list)
 			exitfree_idlist(cor->id_list);
-//		if (cor->last_champ_alive)
-//			ft_strdel(&cor->last_champ_alive);
 		cor = NULL;
 	}
 }
