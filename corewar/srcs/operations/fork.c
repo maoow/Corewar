@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:02 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/29 15:44:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 19:08:35 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void			fulfill_tmp(t_cor *core, t_process *tmp, t_process *proc)
 	tmp->next_jump = 0;
 	tmp->next_op = NULL;
 	tmp->just_played = false;
-	tmp->searching = false;
 	tmp->buffc = 0;
 	tmp->carry = proc->carry;
 	tmp->live = proc->live;

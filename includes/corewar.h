@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/29 11:04:35 by starrit          ###   ########.fr       */
+/*   Updated: 2017/11/29 19:08:29 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct			s_process
 	bool				(*next_op)();
 	bool				carry;
 	bool				just_played;
-	bool				searching;
 	size_t				live;
 	struct s_process	*next;
 	int					color;

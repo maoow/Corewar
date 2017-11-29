@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 13:30:25 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 12:54:39 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 19:08:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ static void				ft_executeprocess(t_cor *core, t_process *proc)
 		proc->just_played = true;
 	}
 	proc->pc += proc->next_jump;
-	proc->searching = false;
 	if (ft_checkloadable(core, proc))
 		proc->just_played = false;
 	proc->next_op = NULL;
