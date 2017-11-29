@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/24 15:15:13 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 11:55:56 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static bool		get_option_3(t_cor *cor, char **av, size_t *i, int ac)
 	}
 	else if (ft_strcmp(av[*i], "-aff") == 0 && ac > (int)(*i + 1))
 	{
-		if (!(cor->options->aff_visu = ft_atoi(av[*i + 1])))
+		if ((cor->options->aff_visu = ft_atoi(av[*i + 1])) <= 0)
 			write_error(3);
 		(*i)++;
 	}
