@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:35:07 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 14:59:28 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,15 @@ int				**parse(t_cor *cor, char *av, int optionnal_id)
 {
 	int				fd;
 	unsigned char	*champion;
+	int				**ret;
 
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putendl("crash open");
-		exit(0);
-	}
+		write_error(3);
 	if (!(champion = (unsigned char*)malloc(sizeof(*champion) *
 					(CHAMP_MAX_SIZE + 1))))
 		write_error(2);
-	return (get_champ(cor, &champion, fd, optionnal_id));
+	ret = get_champ(cor, &champion, fd, optionnal_id);
+	close(fd);
+	return (ret);
 }
