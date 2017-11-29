@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 13:44:48 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 11:04:51 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void			ft_init(t_cor *core)
 	{
 		core->arena[i] = 0;
 		core->arena_color[i] = 3;
-		core->arena_update[i] = true;
 		i++;
 	}
 	core->cycle_to_die = CYCLE_TO_DIE;
