@@ -6,11 +6,11 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:36:38 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 11:53:02 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/29 16:53:38 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "asm.h"
 
 int				ft_is_command(char *txt, int i)
 {

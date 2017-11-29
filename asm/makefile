@@ -6,13 +6,17 @@
 #    By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/27 12:28:21 by vkim              #+#    #+#              #
-#    Updated: 2017/11/29 14:22:35 by vkim             ###   ########.fr        #
+#    Updated: 2017/11/29 17:13:56 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+.SUFFIXES:
+
 NAME=asm
 COMPIL=gcc -Wall -Wextra -Werror
-INC= -I ../includes/ -I ../libft/includes -I ../ressources/
+CC= gcc -Wall -Wextra -Werror
+INC= -I ../includes/ -I ../libft/includes 
+INC2= ../includes/asm.h  ../libft/includes/libft.h ../includes/op.h
 
 N_SRC=ft_loading.c \
 	  ft_clean_load.c \
@@ -51,25 +55,30 @@ SRC=$(addprefix $(P_SRC)/,$(N_SRC))
 OBJ = $(N_SRC:.c=.o)
 
 all: $(NAME)
-$(NAME): $(SRC)
-	@cd ../libft && $(MAKE)
-	@echo "OK LIB"
-	@$(COMPIL) $(INC) -c $(SRC)
+
+$(NAME): $(OBJ)
 	@echo "OK OBJ"
-	@$(COMPIL) $(INC) $(OBJ) -L../libft -lftprintf -o $(NAME)
+	@make -C ../libft
+	@echo "OK LIB"
+	$(COMPIL) $(INC) $(OBJ) -L../libft -lftprintf -o $(NAME)
 	@echo "OK ASM"
 
+%.o: %.c $(INC2)
+	$(CC) $(INC) -c $< -o $@
+
 clean:
-	@cd ../libft/ && make clean
-	@echo "OK FCLEAN LIBFT"
+	@make clean -C ../libft
+	@echo "OK CLEAN LIBFT"
 	@rm -rf $(OBJ)
 	@echo "OK CLEAN OBJ"
 
 fclean: clean
-	@cd ../libft/ && make fclean
+	@make fclean -C ../libft
 	@echo "OK FCLEAN LIBFT"
 	@rm -rf $(NAME)
 	@echo "OK DEL $(NAME)"
 
-re: fclean all
+re: fclean
+	make
+
 .PHONY: all, clean, fclean, re

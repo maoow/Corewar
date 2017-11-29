@@ -1,14 +1,7 @@
-# corewar
-corewar project as 42 project.
-# __________________________________________________________________
-
-
 ##  Name
     corewar
 
-##  Synopsys
-
-##  Description
+##  Operations Description
 
 |Opcode	 |Name	 	|Args 		  												|Bin	 |Hexa		|carry	|OPcode	 |Cycles	|DIR s   |
 | ------ | -------- |:---------------------------------------------------------:| ------ | -------- | ----- | ------ | -------- | ------ |
