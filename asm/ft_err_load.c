@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:10:19 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/23 17:36:41 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/29 14:32:09 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int				ft_err_load(int ac, int fd, char *src_file, char *path)
 	else if (fd == -1)
 	{
 		ft_putstr("Can't read source file ");
+		if (!src_file)
+			ft_putstr("(null)");
 		ft_putstr(src_file);
 		ft_putstr("\n");
 	}

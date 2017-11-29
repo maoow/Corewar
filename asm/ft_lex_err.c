@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 15:36:11 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 15:21:26 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/29 13:30:23 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int			ft_lexical_err(t_asm *as, char **lines)
 			if (lines[as->n_ln][as->n_chr] == '-')
 			{
 				lbl = 0;
-				if (!ft_isdigit(lines[as->n_ln][as->n_chr + 1]))
+				if (!ft_isdigit(lines[as->n_ln][as->n_chr + 1]) && str == 0)
 					return (ft_put_lexerr(as, as->n_ln, as->n_chr));
 			}
 			if (!(ft_lex_char(as, &cmd, &lbl, &str)))

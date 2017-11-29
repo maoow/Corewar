@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 12:26:08 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/29 12:02:07 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/29 14:26:30 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ typedef struct		s_asm
 }					t_asm;
 
 /*
-** 5 fonctions - ft_loading.c
+** 4 fonctions - ft_loading.c
 */
 int					ft_loading(int ac, char **av, int *index, t_asm *as);
 int					ft_str_gnl(t_asm *as);
+int					ft_new_line(t_asm *as, int *nb_l, int i, int j);
 
 /*
 ** 2 fonctions - ft_clean_load.c
@@ -237,4 +238,9 @@ void				ft_free_end(t_asm **as);
 int					ft_malloc_instr(t_asm *as);
 void				ft_init_syn(t_asm *as);
 int					ft_init_struct_asm(t_asm **as);
+
+/*
+** 2 fonctions - ft_close_load_fd.c
+*/
+int					ft_close_load_fd(t_asm *as, int fd);
 #endif

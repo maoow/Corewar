@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:38:40 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/20 15:17:24 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/29 13:34:08 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ void			ft_lbl2(t_asm *as, int i, int j, int *find)
 
 	k = -1;
 	while (as->lines[++k] && !*find)
-	{
-		if (as->op[k].label && k != i
-			&& !ft_strcmp(as->op[k].label, as->op[i].ag_lbl[j]))
+		if (as->op[k].label && !ft_strcmp(as->op[k].label, as->op[i].ag_lbl[j]))
 			*find = 1;
-	}
 }
 
 int				ft_check_lbl(t_asm *as)
