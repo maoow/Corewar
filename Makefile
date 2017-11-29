@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/11/13 15:59:24 by starrit          ###   ########.fr        #
+#    Updated: 2017/11/29 11:24:53 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ HEADER := $(LIB_INCLUDE)						\
 all: lib $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) $(OBJS) $(OPTIONS) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(OPTIONS) $(LIB) -o $(NAME)
 	@echo "\033[32m$(NAME) udpated\033[0m"
 
 .PHONY:lib
@@ -86,7 +86,7 @@ $(OBJ_PATH):
 	@mkdir -p $@/operations
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(LIB)
-	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 .PHONY:clean
 clean:
