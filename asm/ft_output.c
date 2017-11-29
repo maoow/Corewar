@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 17:38:06 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/22 09:08:19 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/29 14:17:56 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int					ft_write_output(t_asm *as)
 		return (0);
 	if ((ret = write(fd, as->mem, as->len_mem)) == -1)
 		return (0);
+	close(fd);
 	return (1);
 }
 
