@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:20:27 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 16:05:06 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ WINDOW			*init(void)
 	if (has_colors() == FALSE)
 	{
 		endwin();
-		printf("Terminal does not support color\n");
+		ft_printf("Terminal does not support color\n");
 		return (NULL);
 	}
 	start_color();
