@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 13:08:00 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 16:30:44 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 11:15:37 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		exitfree_champ(t_cor *cor)
 		ft_strdel(&tmp->name);
 		ft_strdel(&tmp->comment);
 		free(tmp);
+		tmp = NULL;
 		tmp = tmp2;
 	}
 }
@@ -38,6 +39,7 @@ static void		exitfree_process(t_cor *cor)
 	{
 		tmp2 = tmp->next;
 		free(tmp);
+		tmp = NULL;
 		tmp = tmp2;
 	}
 }
@@ -50,6 +52,7 @@ static void		exitfree_idlist(t_opt_number *tmp)
 	{
 		tmp2 = tmp->next;
 		free(tmp);
+		tmp = NULL;
 		tmp = tmp2;
 	}
 }
@@ -59,15 +62,12 @@ static void		exitfree_options(t_cor *cor)
 	t_options	*tmp;
 
 	tmp = cor->options;
-//	exitfree_idlist(tmp->num_champ);
 	free(tmp);
+	tmp = NULL;
 }
 
 void			ft_clean(t_cor *cor)
 {
-	(void)exitfree_process;
-	(void)exitfree_idlist;
-	(void)exitfree_options;
 	if (cor)
 	{
 		if (cor->champs)
