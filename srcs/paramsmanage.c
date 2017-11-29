@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 14:23:04 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 15:49:05 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t	indx(t_cor *core, t_process *proc, size_t pc)
 	value = core->arena[(proc->startpos + pc) % MEM_SIZE];
 	value *= 256;
 	value += core->arena[(proc->startpos + pc + 1) % MEM_SIZE];
-	return (value);
+	return (value % IDX_MOD);
 }
 
 size_t	ind(t_cor *core, t_process *proc, size_t pc)
