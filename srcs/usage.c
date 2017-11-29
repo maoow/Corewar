@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 11:40:42 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 10:48:27 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		usage(int ac, char **av)
 		ft_printf("Usage: ./corewar [-dump N -n N -s N -v2 -v4 -v16 -reg");
 		ft_printf(" -visu -fast -follow N -aff N] ");
 		ft_printf("<champion1.cor> <...>\n");
-		ft_printf("\t-dunmp N \t: dump memory after N cycles then exits\n");
+		ft_printf("\t-dump N \t: dump memory after N cycles then exits\n");
 		ft_printf("\t-n N     \t: set player number\n");
 		ft_printf("\t-s N     \t: runs N cycles, dumps memory, ");
 		ft_printf("pauses, then repeats\n");
