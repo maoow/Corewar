@@ -6,7 +6,7 @@
 /*   By: vkim <vkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:03:10 by vkim              #+#    #+#             */
-/*   Updated: 2017/11/13 15:27:34 by vkim             ###   ########.fr       */
+/*   Updated: 2017/11/29 12:00:58 by vkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int			ft_check_var(t_asm *as)
 		as->n_chr = -1;
 		while (as->lines[as->n_ln][++(as->n_chr)] != '%'
 			&& as->lines[as->n_ln][as->n_chr] != ' '
+			&& as->lines[as->n_ln][as->n_chr] != '\t'
 			&& as->lines[as->n_ln][as->n_chr] != '\0')
 			;
 		if (as->n_chr != 0)
