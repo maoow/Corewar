@@ -6,7 +6,7 @@
 #    By: starrit <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 12:23:50 by starrit           #+#    #+#              #
-#    Updated: 2017/11/29 16:44:47 by starrit          ###   ########.fr        #
+#    Updated: 2017/11/29 17:21:22 by starrit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ LIB_INCLUDE := $(LIB_PATH)$(INC)libft.h			\
 				$(LIB_PATH)$(INC)get_next_line.h\
 				$(LIB_PATH)$(INC)ft_printf.h
 HEADER := $(LIB_INCLUDE)						\
-		 ../$(INC)corewar.h
+		 ../$(INC)corewar.h						\
+		 ../$(INC)operations.h
 
 all: lib $(NAME)
 
