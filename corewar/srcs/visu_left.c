@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 16:05:12 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 19:06:44 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void			print_left(WINDOW *left, t_cor *cor, size_t col, size_t lign)
 		{
 			mvwprintw(left, lign, col, "%02x", cor->arena[i]);
 			mvchgat(lign, col, 2, A_NORMAL, cor->arena_color[i], NULL);
-			check_process_to_color(cor, col, lign, i);
 			check_process_to_color(cor, col, lign, i);
 			i++;
 			col = col + 2;
