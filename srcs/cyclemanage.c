@@ -6,24 +6,11 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 10:12:08 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 11:05:21 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static void			ft_decrease_arena_update(t_cor *cor)
-{
-	size_t		i;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		if (cor->arena_update[i] > 0)
-			cor->arena_update[i]--;
-		i++;
-	}
-}
 
 static void			get_next_ic(t_cor *core)
 {
@@ -62,7 +49,6 @@ void				ft_increase_cycle(t_cor *core)
 	}
 	else
 		get_next_ic(core);
-	ft_decrease_arena_update(core);
 	if (core->options->v2 && core->total_cycle > 0)
 		ft_printf("It is now cycle %d\n", core->total_cycle);
 }
