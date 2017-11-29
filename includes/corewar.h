@@ -6,7 +6,7 @@
 /*   By: starrit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:27:38 by starrit           #+#    #+#             */
-/*   Updated: 2017/11/28 12:53:55 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 11:04:35 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@
 # define COMMENT_NAME 2048 + CHAMP_NAME + 8
 # define EXEC_MAGIC_LENGHT 3
 # define MAGIC_PACKET 0xea83f3
-
-# define UPDATE 80
 
 /*
 **	structure allouee et remplie si un ou plusieurs champions a un numero
@@ -147,7 +145,6 @@ typedef struct			s_cor
 	int					total_cycle;
 	unsigned char		arena[MEM_SIZE];
 	int					arena_color[MEM_SIZE];
-	size_t				arena_update[MEM_SIZE];
 	bool				verbose;
 	size_t				nb_champs;
 	size_t				procnb;
