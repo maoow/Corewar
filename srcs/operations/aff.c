@@ -6,7 +6,7 @@
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 14:25:00 by cbinet            #+#    #+#             */
-/*   Updated: 2017/11/29 16:03:24 by cbinet           ###   ########.fr       */
+/*   Updated: 2017/11/29 16:14:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool			cw_aff(t_cor *core, t_process *proc)
 {
 	int		pos;
 
-	if (!core->options->visu && core->options->v4)
+	if (!core->options->visu && core->options->v2)
 	{
 		pos = (proc->pc + 2) % MEM_SIZE;
 		if (proc->registres[mod(core->arena[pos] - 1, 16)] % 256 == 0)
