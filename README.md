@@ -6,6 +6,7 @@ corewar
 # VM
 
 Usage: ./corewar [-dump N -n N -s N -v2 -v4 -v16 -reg -visu -fast -follow N -aff N] <champion1.cor> <...>
+
 -dump N 	: dump memory after N cycles then exits
 
 -n N     	: set player number
