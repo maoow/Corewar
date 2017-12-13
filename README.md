@@ -19,7 +19,7 @@ Usage: ./corewar [-dump N -n N -s N -v2 -v4 -v16 -reg -visu -fast -follow N -aff
 -aff N   	: If -visu, start ncurse mod on N
 
 <p align="left">
-	<img src="images/1.png" width="700">
+	<img src="images/corewar.png" width="700">
 </p>
 
 # ASM
