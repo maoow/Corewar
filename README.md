@@ -7,16 +7,27 @@ corewar
 
 Usage: ./corewar [-dump N -n N -s N -v2 -v4 -v16 -reg -visu -fast -follow N -aff N] <champion1.cor> <...>
 -dump N 	: dump memory after N cycles then exits
+
 -n N     	: set player number
+
 -s N     	: runs N cycles, dumps memory, pauses, then repeats
+
 -v2      	: show cycles
+
 -v4      	: show operations
+
 -v16     	: show PC movements (Except for jumps)
+
 -reg     	: show registers after new operation
+
 -visu    	: launch ncurse mode
+
 -fast    	: go faster in ncurse mode
+
 -follow N	: follow only process N in ncurse mode
+
 -aff N   	: If -visu, start ncurse mod on N
+
 
 <p align="left">
 	<img src="images/corewar.png" width="700">
