@@ -37,6 +37,7 @@ Usage: ./corewar [-dump N -n N -s N -v2 -v4 -v16 -reg -visu -fast -follow N -aff
 # ASM
 
 Usage: ./asm [-o] source.s
+
 -o			: doesn't output .cor file but display informations on the champion
 
 ##  Operations Description
